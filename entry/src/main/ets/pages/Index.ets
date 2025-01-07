@@ -36,7 +36,8 @@ struct Index {
         Text(this.message)
           .fontSize(50)
           .onClick(() =>{
-            this.chatLib.sendMessage("/session/20250107/230/2/ASSET_KIND_SESSION/4483b9eec2235312a96a093711671c79.jpg", CMessage.api.common.MessageFormat.MSG_IMG, 1)
+            this.chatLib.sendMessage("/session/20250107/230/2/ASSET_KIND_SESSION/390c8bf7c7aafba1517b7c9ab327eff4.mp4", CMessage.api.common.MessageFormat.MSG_VIDEO, 1)
+            //this.chatLib.sendMessage("/session/20250107/230/2/ASSET_KIND_SESSION/4483b9eec2235312a96a093711671c79.jpg", CMessage.api.common.MessageFormat.MSG_IMG, 1)
             //this.chatLib.sendMessage("hello Victor!", CMessage.api.common.MessageFormat.MSG_TEXT, 1);
           })
           .fontWeight(FontWeight.Bold)
