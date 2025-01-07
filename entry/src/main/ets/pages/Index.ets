@@ -106,6 +106,7 @@ struct Index {
 
   // Work change callback
   workChanged(msg: GGateway.gateway.SCWorkerChanged): void{
-
+    const worker = msg.worker_name;
+    console.debug(`客服更换成功：${worker}!`);
   }
 }
