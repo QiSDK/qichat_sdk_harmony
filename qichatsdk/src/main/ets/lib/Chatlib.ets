@@ -219,7 +219,7 @@ export class Chatlib {
       // Handle specific actions based on the received payload
       switch (recvPayload.act) {
         case GAction.gateway.Action.ActionSCRecvMsg:
-          const recvMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(data);
+          const recvMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(msgData);
           if (recvMsg.msg.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
             this.listener?.msgDeleted(recvMsg.msg, recvPayload.id, -1);
             console.log(`收到撤回消息`);
@@ -245,12 +245,12 @@ export class Chatlib {
           break;
 
         case GAction.gateway.Action.ActionForward:
-          const forwardMsg = GGateway.gateway.CSForward.deserializeBinary(data);
+          const forwardMsg = GGateway.gateway.CSForward.deserializeBinary(msgData);
           console.log(`Forward: ${forwardMsg.data}`);
           break;
 
         case GAction.gateway.Action.ActionSCDeleteMsgACK:
-          const deleteMsgAck = GGateway.gateway.SCSendMessage.deserializeBinary(data);
+          const deleteMsgAck = GGateway.gateway.SCSendMessage.deserializeBinary(msgData);
           const msg = new CMessage.api.common.Message();
           msg.msg_id = deleteMsgAck.msg_id;
           msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
@@ -259,7 +259,7 @@ export class Chatlib {
           break;
 
         case GAction.gateway.Action.ActionSCDeleteMsg:
-          const deleteMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(data);
+          const deleteMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(msgData);
           const msgDel = new CMessage.api.common.Message();
           msgDel.msg_id = deleteMsg.msg.chat_id
           msgDel.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
@@ -269,7 +269,7 @@ export class Chatlib {
           break;
 
         case GAction.gateway.Action.ActionSCSendMsgACK:
-          const sendMsgAck = GGateway.gateway.SCSendMessage.deserializeBinary(data);
+          const sendMsgAck = GGateway.gateway.SCSendMessage.deserializeBinary(msgData);
           this.chatId = sendMsgAck.chat_id;
           console.log("Received message acknowledgment: ActionSCSendMsgACK");
 
