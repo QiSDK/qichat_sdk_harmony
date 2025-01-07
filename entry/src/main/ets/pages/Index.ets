@@ -11,6 +11,7 @@ struct Index {
 
   private chatLib!: Chatlib;
   private token: string= "";
+  private isConnected: boolean = false
 
   aboutToAppear() {
     // Initialize chatLib in the constructor
@@ -102,6 +103,13 @@ struct Index {
    */
   systemMsg(msg: Resp<string>): void{
     console.debug(msg.msg)
+    if (msg.code == 1002){
+      //无效token
+    }else if(msg.code == 1010){
+      //在别处登录了
+    }else if(msg.code == 1005){
+      //会话超时
+    }
   }
 
   /**

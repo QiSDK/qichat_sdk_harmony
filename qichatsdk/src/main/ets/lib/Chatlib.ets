@@ -92,6 +92,8 @@ export class Chatlib {
   private beatTimes: number = 0;
   private maxSessionMinutes: number = 9000000; // Set session limits (adjust as needed)
   private withAutoReply: CMessage.api.common.WithAutoReply | null = null;
+  private heartbeatTimer: number | null = null; // Timer ID
+
 
   constructor(cert: string, token: string, baseUrl: string = "", userId: number, sign: string, chatID: number = 0) {
     this.chatId = chatID;
@@ -194,15 +196,15 @@ export class Chatlib {
 
       switch (d) {
         case "\u0000":
-          console.log("Received heartbeat acknowledgment");
+          console.log("收到心跳回执 " + Utils.formatDateNow());
           break;
         case "\u0001":
-          this.disConnected(1010, "Logged in from another location");
-          console.log("Received signal 1: Logged in from another location");
+          this.disConnected(1010, "从别的地方登录了");
+          console.log("从别的地方登录了");
           break;
         case "\u0002":
-          this.disConnected(1002, "Invalid token");
-          console.log("Received signal 2: Invalid token");
+          this.disConnected(1002, "无效的Token");
+          console.log("无效的Token");
           break;
         case "\u0003":
           console.log("Received signal 3: Permission changed");
@@ -241,7 +243,7 @@ export class Chatlib {
 
           this.listener?.connected(hiMsg);
           this.isConnected = true;
-          this.startTimer();
+          this.startHeartbeatTimer();
           break;
 
         case GAction.gateway.Action.ActionForward:
@@ -271,7 +273,6 @@ export class Chatlib {
         case GAction.gateway.Action.ActionSCSendMsgACK:
           const sendMsgAck = GGateway.gateway.SCSendMessage.deserializeBinary(msgData);
           this.chatId = sendMsgAck.chat_id;
-          console.log("Received message acknowledgment: ActionSCSendMsgACK");
 
           const cMsg = this.msgList.get(recvPayload.id);
           console.log(`收到回执 Message ID: ${sendMsgAck.msg_id}`);
@@ -366,7 +367,6 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-
   private sendVideoMessage(txt: string){
     // 第一层
     let content = new CMessage.api.common.MessageVideo()
@@ -436,16 +436,48 @@ export class Chatlib {
   private disConnected(code: number, reason: string): void {
     console.log(`Disconnected: ${code}, Reason: ${reason}`);
     // Add logic for handling disconnection
+    const resp = new Resp<string>();
+    resp.code = code;
+    resp.msg = reason;
+    this.doDisConnect()
+    this.listener?.systemMsg(resp)
   }
 
-  private startTimer(): void {
-    console.log("Starting connection timer...");
-    // Add logic for starting a timer
+  private doDisConnect(): void{
+    this.stopHeartbeatTimer();
+    this.ws.close()
   }
 
+  private startHeartbeatTimer(): void {
+    console.debug("Starting heart beat timer...");
+    // Start the timer if it's not already running
+    if (!this.heartbeatTimer) {
+      this.heartbeatTimer = setInterval(() => {
+        this.sendHeartBeat();
+      }, 60000); // 60 seconds
+    }
+  }
 
+  private stopHeartbeatTimer(): void {
+    // Stop the timer if it's running
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+      this.heartbeatTimer = null; // Reset the timer ID
+    }
+  }
 
-// Function to handle closing the WebSocket
+  /**
+   *  心跳，一般建议每隔60秒调用
+   */
+  private sendHeartBeat(): void{
+    if (!this.isConnected) return;
+    const buffer = new Uint8Array([0]);
+    if (this.ws) {
+      this.ws.send(buffer.buffer);
+    }
+  }
+
+  // Function to handle closing the WebSocket
   private closeWebSocket(ws: webSocket.WebSocket): void {
     this.ws.close((err: BusinessError, value: boolean) => {
       if (err) {
