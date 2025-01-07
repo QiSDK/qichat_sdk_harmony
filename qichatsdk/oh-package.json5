@@ -1,0 +1,19 @@
+{
+  "name": "qichatsdk",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "@pura/harmony-utils": "^1.2.5"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19",
+    "@ohos/hamock": "1.0.0",
+    "protobufjs": "^7.2.4",
+    "google-protobuf": "3.21.2",
+    "js-base64": "3.7.7"
+  }
+}
