@@ -455,33 +455,6 @@ export class Chatlib {
       }
     });
   }
-
-
-  public  connect(): Promise<boolean> {
-    let defaultIpAddress =
-     "wss://csapi.hfxg.xyz/v1/gateway/h5?cert=COYBEAUYASDyASiG2piD9zE.te46qua5ha2r-Caz03Vx2JXH5OLSRRV2GqdYcn9UslwibsxBSP98GhUKSGEI0Z84FRMkp16ZK8eS-y72QVE2AQ&token=&userid=666333&ty=104&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
-
-    //let defaultIpAddress = "wss://echo.websocket.org"
-    return new Promise((resolve, reject) => {
-
-         let socket = webSocket.createWebSocket()
-          let promise = socket.connect(defaultIpAddress,{})
-          promise.then(() => {
-            socket.on('message', (err: BusinessError, value: string | ArrayBuffer) => {
-              if (err) {
-                console.error("Message error: " + JSON.stringify(err));
-                return;
-              }
-              console.log("Received message: " + value);
-
-              // If the message is 'bye', close the WebSocket
-              if (value === 'bye') {
-                this.closeWebSocket(socket);
-              }
-            });
-          })
-    })
-  }
 }
 
 function Int64(timeIntervalSince1970: undefined): number {

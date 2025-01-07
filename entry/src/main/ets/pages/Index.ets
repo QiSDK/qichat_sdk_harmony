@@ -36,7 +36,8 @@ struct Index {
         Text(this.message)
           .fontSize(50)
           .onClick(() =>{
-            this.chatLib.sendMessage("hello Victor!", CMessage.api.common.MessageFormat.MSG_TEXT, 1);
+            this.chatLib.sendMessage("/session/20250107/230/2/ASSET_KIND_SESSION/4483b9eec2235312a96a093711671c79.jpg", CMessage.api.common.MessageFormat.MSG_IMG, 1)
+            //this.chatLib.sendMessage("hello Victor!", CMessage.api.common.MessageFormat.MSG_TEXT, 1);
           })
           .fontWeight(FontWeight.Bold)
       }
@@ -48,7 +49,15 @@ struct Index {
 
   // Received message
   receivedMsg(msg: CMessage.api.common.Message): void{
-    console.debug(msg.content.data)
+    if (msg.image != null){
+      console.debug(msg.image.uri)
+    }else if(msg.content != null){
+      console.debug(msg.content.data)
+    }else if(msg.video != null){
+      console.debug(msg.video.uri)
+    }else{
+      console.debug('收到未知消息')
+    }
   }
 
   /**
