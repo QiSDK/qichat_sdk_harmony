@@ -5,6 +5,9 @@ import * as GGateway from 'qichatsdk/src/main/protots/gateway/g_gateway';
 import * as GPayload from 'qichatsdk/src/main/protots/gateway/g_payload';
 import * as GAction from 'qichatsdk/src/main/protots/gateway/g_action';
 
+import { LineDetectLib, Result } from 'qichatsdk/src/main/ets/lib/LineDetectLib';
+import { Constants } from '../Constants';
+
 @Entry
 @Component
 struct Index {
@@ -14,11 +17,17 @@ struct Index {
   private isConnected: boolean = false
 
   aboutToAppear() {
+   const  lineDetect = new LineDetectLib(Constants.lines, this, 230)
+    lineDetect.getLine()
+  }
+
+
+  initChatSDK(baseUrl: string){
     // Initialize chatLib in the constructor
     this.chatLib = new Chatlib(
       "COYBEAUYASDyASiG2piD9zE.te46qua5ha2r-Caz03Vx2JXH5OLSRRV2GqdYcn9UslwibsxBSP98GhUKSGEI0Z84FRMkp16ZK8eS-y72QVE2AQ",
       "COYBEAIYqtgoIPIBKKm9qvrDMg.Fv93MWdBXnVjagSzUPcmTxV5pMtj20evCjx2xlg09V40hkvzAwPmU6xRGkF3s1bjcLeeOMunPUcTUN62bh1QCg",
-      'wss://csapi.hfxg.xyz/v1/gateway/h5',
+      `wss://${baseUrl}/v1/gateway/h5`,
       666666,
       '9zgd9YUc'
     );
@@ -26,7 +35,6 @@ struct Index {
     this.chatLib.listener = this;
     this.chatLib.connectWebSocket();
   }
-
 
 
   @State message: string = 'Hello World'
@@ -120,5 +128,14 @@ struct Index {
   workChanged(msg: GGateway.gateway.SCWorkerChanged): void{
     const worker = msg.worker_name;
     console.debug(`客服更换成功：${worker}!`);
+  }
+
+  useTheLine(line: string): void{
+      this.initChatSDK(line)
+  }
+  lineError(error: Result): void{
+   if (error.Code == 1008){
+      console.debug(`无可用线路`);
+    }
   }
 }

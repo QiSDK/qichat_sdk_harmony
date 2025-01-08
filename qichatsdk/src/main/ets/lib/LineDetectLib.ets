@@ -5,11 +5,10 @@ import { TestModel } from './TestModel';
 import { ParsedUrl } from './ParsedUrl'
 import { HashMap } from '@kit.ArkTS';
 
-interface LineDetectDelegate {
+export interface LineDetectDelegate {
   useTheLine(line: string): void;
   lineError(error: Result): void;
 }
-
 
 
 interface GeneratedObjectLiteralInterface_1 {
@@ -56,8 +55,8 @@ export class LineDetectLib {
       }
 
       const uuid = this.generateUUID();
-      this.headers["Content-Type"] = "application/json"
-      this.headers["x-trace-id"] = uuid
+      this.headers.set("Content-Type","application/json")
+      this.headers.set("x-trace-id", uuid)
       // const headers: GeneratedObjectLiteralInterface_1 = {
       //   "Content-Type": "application/json",
       //   "x-trace-id": uuid,
