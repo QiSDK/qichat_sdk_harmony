@@ -70,14 +70,8 @@ struct Index {
    * @param errMsg - Error message
    */
   msgReceipt(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number, errMsg: string): void{
-    // Check if msg is null
-    if (msg === null) {
-      console.debug(`Received null message for payloadId: ${payloadId}, msgId: ${msgId}, error: ${errMsg}`);
-      return;
-    }
-
     // Log the message details
-    console.debug(`Message received - msgId: ${msg.msg_id}, payloadId: ${payloadId}, msgId: ${msgId}, error: ${errMsg}`);
+    console.debug(`payloadId: ${payloadId}, msgId: ${msgId}, error: ${errMsg}`);
   };
 
   /**

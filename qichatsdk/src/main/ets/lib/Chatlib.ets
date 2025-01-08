@@ -275,7 +275,7 @@ export class Chatlib {
           this.chatId = sendMsgAck.chat_id;
 
           const cMsg = this.msgList.get(recvPayload.id);
-          console.log(`收到回执 Message ID: ${sendMsgAck.msg_id}`);
+          console.log(`收到回执 Message ID: ${sendMsgAck.msg_id} payload ID: ${recvPayload.id}`);
 
           if (cMsg != null) {
             if (this.sendingMessage?.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
@@ -412,7 +412,7 @@ export class Chatlib {
     //payload_id != 0的时候，可能是重发，重发不需要+1
     if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST){
       this.payloadId += 1
-      this.msgList[this.payloadId] = this.sendingMessage;
+      this.msgList.set(this.payloadId, this.sendingMessage);
     }
 
     if (payload_Id != 0){
@@ -454,7 +454,7 @@ export class Chatlib {
     if (!this.heartbeatTimer) {
       this.heartbeatTimer = setInterval(() => {
         this.sendHeartBeat();
-      }, 60000); // 60 seconds
+      }, 1000 * 30); // 60 seconds
     }
   }
 
