@@ -4,6 +4,7 @@ import JSONUtils from './JsonUtils';
 import { TestModel } from './TestModel';
 import { ParsedUrl } from './ParsedUrl'
 import { HashMap } from '@kit.ArkTS';
+import Utils from './Utils';
 
 export interface LineDetectDelegate {
   useTheLine(line: string): void;
@@ -54,9 +55,8 @@ export class LineDetectLib {
         continue;
       }
 
-      const uuid = this.generateUUID();
       this.headers.set("Content-Type","application/json")
-      this.headers.set("x-trace-id", uuid)
+      this.headers.set("x-trace-id", Utils.generateUUID())
       // const headers: GeneratedObjectLiteralInterface_1 = {
       //   "Content-Type": "application/json",
       //   "x-trace-id": uuid,
@@ -141,14 +141,6 @@ export class LineDetectLib {
     return newStr;
   }
 
-  private generateUUID(): string {
-    // Use a simple UUID generation function
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0;
-      const v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  }
 }
 
 export class Result {
