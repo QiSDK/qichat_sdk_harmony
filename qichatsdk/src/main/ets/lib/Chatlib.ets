@@ -336,6 +336,7 @@ export class Chatlib {
     msg.consult_id = this.consultId
     msg.content = content
     msg.sender = 0
+    msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_POST
     //msg.payload = GPayload.gateway.Payload.Com
     msg.reply_msg_id = this.replyMsgId
     msg.chat_id = this.chatId
@@ -356,6 +357,7 @@ export class Chatlib {
     msg.consult_id = this.consultId
     msg.image = content
     msg.sender = 0
+    msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_POST
     //msg.payload = GPayload.gateway.Payload.Com
     msg.reply_msg_id = this.replyMsgId
     msg.chat_id = this.chatId
@@ -377,6 +379,8 @@ export class Chatlib {
     msg.consult_id = this.consultId
     msg.video = content
     msg.sender = 0
+    msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_POST
+
     //msg.payload = GPayload.gateway.Payload.Com
     msg.reply_msg_id = this.replyMsgId
     msg.chat_id = this.chatId
@@ -388,7 +392,20 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  private doSend(payload_Id: number = 0){
+  /**
+   * 重发消息
+   * @param cMsg: Message
+   * @param payloadId: Long
+   */
+  resendMSg(cMsg: CMessage.api.common.Message, payloadId: number){
+    this.sendingMessage = cMsg;
+    this.doSend(payloadId)
+  }
+
+  /*
+  CMessage.api.common.MessageOperate
+   */
+  private doSend(myPayloadID: number = 0){
 
     if (this.sendingMessage == null){
       return
@@ -410,13 +427,13 @@ export class Chatlib {
     payLoad.act = GAction.gateway.Action.ActionCSSendMsg
 
     //payload_id != 0的时候，可能是重发，重发不需要+1
-    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST){
+    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID > 0){
       this.payloadId += 1
       this.msgList.set(this.payloadId, this.sendingMessage);
     }
 
-    if (payload_Id != 0){
-      payLoad.id = payload_Id
+    if (myPayloadID != 0){
+      payLoad.id = myPayloadID
     }else{
       payLoad.id = this.payloadId
     }
