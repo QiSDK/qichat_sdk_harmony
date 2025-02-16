@@ -19,13 +19,21 @@ export default class  Utils{
     return timestamp;
   }
 
-
   public static  formatDateNow(): string {
-    const date = new Date(Date.now());
-    return new Utils().formatDate(date);
+    //const date = new Date(Date.now());
+    return Utils.formatDate(Date.now());
   }
 
-  public formatDate(date: Date): string {
+  public static dateStringToNumber(msgTime: string): number{
+    //let msgTime: string = "2025-01-17T13:26:14.846804995Z";
+    let timestamp: number = Date.parse(msgTime); // Convert to milliseconds since epoch
+    console.log(timestamp.toString()); // Example output: 1737126374846 (milliseconds)
+    return timestamp;
+  }
+
+
+  public static  formatDate(myDate: number): string {
+    const date = new Date(myDate);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
     const day = String(date.getDate()).padStart(2, '0');
