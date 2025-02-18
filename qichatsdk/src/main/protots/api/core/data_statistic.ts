@@ -7,7 +7,8 @@ import * as dependency_1 from "./../option";
 import * as dependency_2 from "./../../google/protobuf/empty";
 import * as dependency_3 from "./../../validate/validate";
 import * as dependency_4 from "./../common/c_worker";
-import * as dependency_5 from "./../../google/protobuf/timestamp";
+import * as dependency_5 from "./../common/c_tenant";
+import * as dependency_6 from "./../../google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export namespace api.core {
@@ -1137,10 +1138,14 @@ export namespace api.core {
             group_id?: number;
             group_nickname?: string;
             assign_user_num?: number;
+            invaild_session_num?: number;
+            vaild_session_num?: number;
+            reception_user_num?: number;
+            worker_push_message_num?: number;
+            user_push_message_num?: number;
             send_message_num?: number;
             receive_message_num?: number;
             total_message_num?: number;
-            notify_message_num?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1163,6 +1168,21 @@ export namespace api.core {
                 if ("assign_user_num" in data && data.assign_user_num != undefined) {
                     this.assign_user_num = data.assign_user_num;
                 }
+                if ("invaild_session_num" in data && data.invaild_session_num != undefined) {
+                    this.invaild_session_num = data.invaild_session_num;
+                }
+                if ("vaild_session_num" in data && data.vaild_session_num != undefined) {
+                    this.vaild_session_num = data.vaild_session_num;
+                }
+                if ("reception_user_num" in data && data.reception_user_num != undefined) {
+                    this.reception_user_num = data.reception_user_num;
+                }
+                if ("worker_push_message_num" in data && data.worker_push_message_num != undefined) {
+                    this.worker_push_message_num = data.worker_push_message_num;
+                }
+                if ("user_push_message_num" in data && data.user_push_message_num != undefined) {
+                    this.user_push_message_num = data.user_push_message_num;
+                }
                 if ("send_message_num" in data && data.send_message_num != undefined) {
                     this.send_message_num = data.send_message_num;
                 }
@@ -1171,9 +1191,6 @@ export namespace api.core {
                 }
                 if ("total_message_num" in data && data.total_message_num != undefined) {
                     this.total_message_num = data.total_message_num;
-                }
-                if ("notify_message_num" in data && data.notify_message_num != undefined) {
-                    this.notify_message_num = data.notify_message_num;
                 }
             }
         }
@@ -1213,29 +1230,53 @@ export namespace api.core {
         set assign_user_num(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
-        get send_message_num() {
+        get invaild_session_num() {
             return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
         }
-        set send_message_num(value: number) {
+        set invaild_session_num(value: number) {
             pb_1.Message.setField(this, 7, value);
         }
-        get receive_message_num() {
+        get vaild_session_num() {
             return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
         }
-        set receive_message_num(value: number) {
+        set vaild_session_num(value: number) {
             pb_1.Message.setField(this, 8, value);
         }
-        get total_message_num() {
+        get reception_user_num() {
             return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
         }
-        set total_message_num(value: number) {
+        set reception_user_num(value: number) {
             pb_1.Message.setField(this, 9, value);
         }
-        get notify_message_num() {
+        get worker_push_message_num() {
             return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
         }
-        set notify_message_num(value: number) {
+        set worker_push_message_num(value: number) {
             pb_1.Message.setField(this, 10, value);
+        }
+        get user_push_message_num() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set user_push_message_num(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get send_message_num() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set send_message_num(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get receive_message_num() {
+            return pb_1.Message.getFieldWithDefault(this, 13, 0) as number;
+        }
+        set receive_message_num(value: number) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get total_message_num() {
+            return pb_1.Message.getFieldWithDefault(this, 14, 0) as number;
+        }
+        set total_message_num(value: number) {
+            pb_1.Message.setField(this, 14, value);
         }
         static fromObject(data: {
             worker_id?: number;
@@ -1244,10 +1285,14 @@ export namespace api.core {
             group_id?: number;
             group_nickname?: string;
             assign_user_num?: number;
+            invaild_session_num?: number;
+            vaild_session_num?: number;
+            reception_user_num?: number;
+            worker_push_message_num?: number;
+            user_push_message_num?: number;
             send_message_num?: number;
             receive_message_num?: number;
             total_message_num?: number;
-            notify_message_num?: number;
         }): WorkerReceptionLog {
             const message = new WorkerReceptionLog({});
             if (data.worker_id != null) {
@@ -1268,6 +1313,21 @@ export namespace api.core {
             if (data.assign_user_num != null) {
                 message.assign_user_num = data.assign_user_num;
             }
+            if (data.invaild_session_num != null) {
+                message.invaild_session_num = data.invaild_session_num;
+            }
+            if (data.vaild_session_num != null) {
+                message.vaild_session_num = data.vaild_session_num;
+            }
+            if (data.reception_user_num != null) {
+                message.reception_user_num = data.reception_user_num;
+            }
+            if (data.worker_push_message_num != null) {
+                message.worker_push_message_num = data.worker_push_message_num;
+            }
+            if (data.user_push_message_num != null) {
+                message.user_push_message_num = data.user_push_message_num;
+            }
             if (data.send_message_num != null) {
                 message.send_message_num = data.send_message_num;
             }
@@ -1276,9 +1336,6 @@ export namespace api.core {
             }
             if (data.total_message_num != null) {
                 message.total_message_num = data.total_message_num;
-            }
-            if (data.notify_message_num != null) {
-                message.notify_message_num = data.notify_message_num;
             }
             return message;
         }
@@ -1290,10 +1347,14 @@ export namespace api.core {
                 group_id?: number;
                 group_nickname?: string;
                 assign_user_num?: number;
+                invaild_session_num?: number;
+                vaild_session_num?: number;
+                reception_user_num?: number;
+                worker_push_message_num?: number;
+                user_push_message_num?: number;
                 send_message_num?: number;
                 receive_message_num?: number;
                 total_message_num?: number;
-                notify_message_num?: number;
             } = {};
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
@@ -1313,6 +1374,21 @@ export namespace api.core {
             if (this.assign_user_num != null) {
                 data.assign_user_num = this.assign_user_num;
             }
+            if (this.invaild_session_num != null) {
+                data.invaild_session_num = this.invaild_session_num;
+            }
+            if (this.vaild_session_num != null) {
+                data.vaild_session_num = this.vaild_session_num;
+            }
+            if (this.reception_user_num != null) {
+                data.reception_user_num = this.reception_user_num;
+            }
+            if (this.worker_push_message_num != null) {
+                data.worker_push_message_num = this.worker_push_message_num;
+            }
+            if (this.user_push_message_num != null) {
+                data.user_push_message_num = this.user_push_message_num;
+            }
             if (this.send_message_num != null) {
                 data.send_message_num = this.send_message_num;
             }
@@ -1321,9 +1397,6 @@ export namespace api.core {
             }
             if (this.total_message_num != null) {
                 data.total_message_num = this.total_message_num;
-            }
-            if (this.notify_message_num != null) {
-                data.notify_message_num = this.notify_message_num;
             }
             return data;
         }
@@ -1343,14 +1416,22 @@ export namespace api.core {
                 writer.writeString(5, this.group_nickname);
             if (this.assign_user_num != 0)
                 writer.writeInt32(6, this.assign_user_num);
+            if (this.invaild_session_num != 0)
+                writer.writeInt32(7, this.invaild_session_num);
+            if (this.vaild_session_num != 0)
+                writer.writeInt32(8, this.vaild_session_num);
+            if (this.reception_user_num != 0)
+                writer.writeInt32(9, this.reception_user_num);
+            if (this.worker_push_message_num != 0)
+                writer.writeInt32(10, this.worker_push_message_num);
+            if (this.user_push_message_num != 0)
+                writer.writeInt32(11, this.user_push_message_num);
             if (this.send_message_num != 0)
-                writer.writeInt32(7, this.send_message_num);
+                writer.writeInt32(12, this.send_message_num);
             if (this.receive_message_num != 0)
-                writer.writeInt32(8, this.receive_message_num);
+                writer.writeInt32(13, this.receive_message_num);
             if (this.total_message_num != 0)
-                writer.writeInt32(9, this.total_message_num);
-            if (this.notify_message_num != 0)
-                writer.writeInt32(10, this.notify_message_num);
+                writer.writeInt32(14, this.total_message_num);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1379,16 +1460,28 @@ export namespace api.core {
                         message.assign_user_num = reader.readInt32();
                         break;
                     case 7:
-                        message.send_message_num = reader.readInt32();
+                        message.invaild_session_num = reader.readInt32();
                         break;
                     case 8:
-                        message.receive_message_num = reader.readInt32();
+                        message.vaild_session_num = reader.readInt32();
                         break;
                     case 9:
-                        message.total_message_num = reader.readInt32();
+                        message.reception_user_num = reader.readInt32();
                         break;
                     case 10:
-                        message.notify_message_num = reader.readInt32();
+                        message.worker_push_message_num = reader.readInt32();
+                        break;
+                    case 11:
+                        message.user_push_message_num = reader.readInt32();
+                        break;
+                    case 12:
+                        message.send_message_num = reader.readInt32();
+                        break;
+                    case 13:
+                        message.receive_message_num = reader.readInt32();
+                        break;
+                    case 14:
+                        message.total_message_num = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -1746,8 +1839,11 @@ export namespace api.core {
         constructor(data?: any[] | {
             id?: number;
             title?: string;
-            created_at?: dependency_5.google.protobuf.Timestamp;
-            updated_at?: dependency_5.google.protobuf.Timestamp;
+            font_color?: string;
+            background_color?: string;
+            status?: dependency_5.api.common.CommonConfigStatus;
+            created_at?: dependency_6.google.protobuf.Timestamp;
+            updated_at?: dependency_6.google.protobuf.Timestamp;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1757,6 +1853,15 @@ export namespace api.core {
                 }
                 if ("title" in data && data.title != undefined) {
                     this.title = data.title;
+                }
+                if ("font_color" in data && data.font_color != undefined) {
+                    this.font_color = data.font_color;
+                }
+                if ("background_color" in data && data.background_color != undefined) {
+                    this.background_color = data.background_color;
+                }
+                if ("status" in data && data.status != undefined) {
+                    this.status = data.status;
                 }
                 if ("created_at" in data && data.created_at != undefined) {
                     this.created_at = data.created_at;
@@ -1778,29 +1883,50 @@ export namespace api.core {
         set title(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get created_at() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 3) as dependency_5.google.protobuf.Timestamp;
+        get font_color() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set created_at(value: dependency_5.google.protobuf.Timestamp) {
-            pb_1.Message.setWrapperField(this, 3, value);
+        set font_color(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get background_color() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set background_color(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get status() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_5.api.common.CommonConfigStatus.VCS_UNKNOWN) as dependency_5.api.common.CommonConfigStatus;
+        }
+        set status(value: dependency_5.api.common.CommonConfigStatus) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get created_at() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
+        }
+        set created_at(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
         }
         get has_created_at() {
-            return pb_1.Message.getField(this, 3) != null;
+            return pb_1.Message.getField(this, 6) != null;
         }
         get updated_at() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 4) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 7) as dependency_6.google.protobuf.Timestamp;
         }
-        set updated_at(value: dependency_5.google.protobuf.Timestamp) {
-            pb_1.Message.setWrapperField(this, 4, value);
+        set updated_at(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
         }
         get has_updated_at() {
-            return pb_1.Message.getField(this, 4) != null;
+            return pb_1.Message.getField(this, 7) != null;
         }
         static fromObject(data: {
             id?: number;
             title?: string;
-            created_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-            updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            font_color?: string;
+            background_color?: string;
+            status?: dependency_5.api.common.CommonConfigStatus;
+            created_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
         }): QuestionType {
             const message = new QuestionType({});
             if (data.id != null) {
@@ -1809,11 +1935,20 @@ export namespace api.core {
             if (data.title != null) {
                 message.title = data.title;
             }
+            if (data.font_color != null) {
+                message.font_color = data.font_color;
+            }
+            if (data.background_color != null) {
+                message.background_color = data.background_color;
+            }
+            if (data.status != null) {
+                message.status = data.status;
+            }
             if (data.created_at != null) {
-                message.created_at = dependency_5.google.protobuf.Timestamp.fromObject(data.created_at);
+                message.created_at = dependency_6.google.protobuf.Timestamp.fromObject(data.created_at);
             }
             if (data.updated_at != null) {
-                message.updated_at = dependency_5.google.protobuf.Timestamp.fromObject(data.updated_at);
+                message.updated_at = dependency_6.google.protobuf.Timestamp.fromObject(data.updated_at);
             }
             return message;
         }
@@ -1821,14 +1956,26 @@ export namespace api.core {
             const data: {
                 id?: number;
                 title?: string;
-                created_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-                updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                font_color?: string;
+                background_color?: string;
+                status?: dependency_5.api.common.CommonConfigStatus;
+                created_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
             }
             if (this.title != null) {
                 data.title = this.title;
+            }
+            if (this.font_color != null) {
+                data.font_color = this.font_color;
+            }
+            if (this.background_color != null) {
+                data.background_color = this.background_color;
+            }
+            if (this.status != null) {
+                data.status = this.status;
             }
             if (this.created_at != null) {
                 data.created_at = this.created_at.toObject();
@@ -1846,10 +1993,16 @@ export namespace api.core {
                 writer.writeInt32(1, this.id);
             if (this.title.length)
                 writer.writeString(2, this.title);
+            if (this.font_color.length)
+                writer.writeString(3, this.font_color);
+            if (this.background_color.length)
+                writer.writeString(4, this.background_color);
+            if (this.status != dependency_5.api.common.CommonConfigStatus.VCS_UNKNOWN)
+                writer.writeEnum(5, this.status);
             if (this.has_created_at)
-                writer.writeMessage(3, this.created_at, () => this.created_at.serialize(writer));
+                writer.writeMessage(6, this.created_at, () => this.created_at.serialize(writer));
             if (this.has_updated_at)
-                writer.writeMessage(4, this.updated_at, () => this.updated_at.serialize(writer));
+                writer.writeMessage(7, this.updated_at, () => this.updated_at.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1866,10 +2019,19 @@ export namespace api.core {
                         message.title = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.created_at, () => message.created_at = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        message.font_color = reader.readString();
                         break;
                     case 4:
-                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        message.background_color = reader.readString();
+                        break;
+                    case 5:
+                        message.status = reader.readEnum();
+                        break;
+                    case 6:
+                        reader.readMessage(message.created_at, () => message.created_at = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -2093,7 +2255,7 @@ export namespace api.core {
             consult_type_name?: string;
             question_type_count?: number;
             operator_name?: string;
-            updated_at?: dependency_5.google.protobuf.Timestamp;
+            updated_at?: dependency_6.google.protobuf.Timestamp;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -2140,9 +2302,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 5, value);
         }
         get updated_at() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 6) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
         }
-        set updated_at(value: dependency_5.google.protobuf.Timestamp) {
+        set updated_at(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 6, value);
         }
         get has_updated_at() {
@@ -2153,7 +2315,7 @@ export namespace api.core {
             consult_type_name?: string;
             question_type_count?: number;
             operator_name?: string;
-            updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
         }): ConsultTypeQuestionStat {
             const message = new ConsultTypeQuestionStat({});
             if (data.consult_type_id != null) {
@@ -2169,7 +2331,7 @@ export namespace api.core {
                 message.operator_name = data.operator_name;
             }
             if (data.updated_at != null) {
-                message.updated_at = dependency_5.google.protobuf.Timestamp.fromObject(data.updated_at);
+                message.updated_at = dependency_6.google.protobuf.Timestamp.fromObject(data.updated_at);
             }
             return message;
         }
@@ -2179,7 +2341,7 @@ export namespace api.core {
                 consult_type_name?: string;
                 question_type_count?: number;
                 operator_name?: string;
-                updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             } = {};
             if (this.consult_type_id != null) {
                 data.consult_type_id = this.consult_type_id;
@@ -2234,7 +2396,7 @@ export namespace api.core {
                         message.operator_name = reader.readString();
                         break;
                     case 6:
-                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -2252,6 +2414,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             id?: number;
+            is_view_disabled?: boolean;
             page?: number;
             pageSize?: number;
         }) {
@@ -2260,6 +2423,9 @@ export namespace api.core {
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("id" in data && data.id != undefined) {
                     this.id = data.id;
+                }
+                if ("is_view_disabled" in data && data.is_view_disabled != undefined) {
+                    this.is_view_disabled = data.is_view_disabled;
                 }
                 if ("page" in data && data.page != undefined) {
                     this.page = data.page;
@@ -2275,26 +2441,36 @@ export namespace api.core {
         set id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
-        get page() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        get is_view_disabled() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
         }
-        set page(value: number) {
+        set is_view_disabled(value: boolean) {
             pb_1.Message.setField(this, 2, value);
         }
-        get pageSize() {
+        get page() {
             return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
-        set pageSize(value: number) {
+        set page(value: number) {
             pb_1.Message.setField(this, 3, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
             id?: number;
+            is_view_disabled?: boolean;
             page?: number;
             pageSize?: number;
         }): ConsultTypeQuestionsRequest {
             const message = new ConsultTypeQuestionsRequest({});
             if (data.id != null) {
                 message.id = data.id;
+            }
+            if (data.is_view_disabled != null) {
+                message.is_view_disabled = data.is_view_disabled;
             }
             if (data.page != null) {
                 message.page = data.page;
@@ -2307,11 +2483,15 @@ export namespace api.core {
         toObject() {
             const data: {
                 id?: number;
+                is_view_disabled?: boolean;
                 page?: number;
                 pageSize?: number;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
+            }
+            if (this.is_view_disabled != null) {
+                data.is_view_disabled = this.is_view_disabled;
             }
             if (this.page != null) {
                 data.page = this.page;
@@ -2327,10 +2507,12 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.id != 0)
                 writer.writeInt32(1, this.id);
+            if (this.is_view_disabled != false)
+                writer.writeBool(2, this.is_view_disabled);
             if (this.page != 0)
-                writer.writeUint32(2, this.page);
+                writer.writeUint32(3, this.page);
             if (this.pageSize != 0)
-                writer.writeUint32(3, this.pageSize);
+                writer.writeUint32(4, this.pageSize);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2344,9 +2526,12 @@ export namespace api.core {
                         message.id = reader.readInt32();
                         break;
                     case 2:
-                        message.page = reader.readUint32();
+                        message.is_view_disabled = reader.readBool();
                         break;
                     case 3:
+                        message.page = reader.readUint32();
+                        break;
+                    case 4:
                         message.pageSize = reader.readUint32();
                         break;
                     default: reader.skipField();
@@ -2461,7 +2646,10 @@ export namespace api.core {
             question_type_title?: string;
             sort_value?: number;
             operator_name?: string;
-            updated_at?: dependency_5.google.protobuf.Timestamp;
+            updated_at?: dependency_6.google.protobuf.Timestamp;
+            font_color?: string;
+            background_color?: string;
+            add_count?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -2489,6 +2677,15 @@ export namespace api.core {
                 }
                 if ("updated_at" in data && data.updated_at != undefined) {
                     this.updated_at = data.updated_at;
+                }
+                if ("font_color" in data && data.font_color != undefined) {
+                    this.font_color = data.font_color;
+                }
+                if ("background_color" in data && data.background_color != undefined) {
+                    this.background_color = data.background_color;
+                }
+                if ("add_count" in data && data.add_count != undefined) {
+                    this.add_count = data.add_count;
                 }
             }
         }
@@ -2535,13 +2732,31 @@ export namespace api.core {
             pb_1.Message.setField(this, 7, value);
         }
         get updated_at() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 8) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 8) as dependency_6.google.protobuf.Timestamp;
         }
-        set updated_at(value: dependency_5.google.protobuf.Timestamp) {
+        set updated_at(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 8, value);
         }
         get has_updated_at() {
             return pb_1.Message.getField(this, 8) != null;
+        }
+        get font_color() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set font_color(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get background_color() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set background_color(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get add_count() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set add_count(value: number) {
+            pb_1.Message.setField(this, 11, value);
         }
         static fromObject(data: {
             id?: number;
@@ -2551,7 +2766,10 @@ export namespace api.core {
             question_type_title?: string;
             sort_value?: number;
             operator_name?: string;
-            updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            font_color?: string;
+            background_color?: string;
+            add_count?: number;
         }): ConsultTypeQuestion {
             const message = new ConsultTypeQuestion({});
             if (data.id != null) {
@@ -2576,7 +2794,16 @@ export namespace api.core {
                 message.operator_name = data.operator_name;
             }
             if (data.updated_at != null) {
-                message.updated_at = dependency_5.google.protobuf.Timestamp.fromObject(data.updated_at);
+                message.updated_at = dependency_6.google.protobuf.Timestamp.fromObject(data.updated_at);
+            }
+            if (data.font_color != null) {
+                message.font_color = data.font_color;
+            }
+            if (data.background_color != null) {
+                message.background_color = data.background_color;
+            }
+            if (data.add_count != null) {
+                message.add_count = data.add_count;
             }
             return message;
         }
@@ -2589,7 +2816,10 @@ export namespace api.core {
                 question_type_title?: string;
                 sort_value?: number;
                 operator_name?: string;
-                updated_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                updated_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                font_color?: string;
+                background_color?: string;
+                add_count?: number;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
@@ -2615,6 +2845,15 @@ export namespace api.core {
             if (this.updated_at != null) {
                 data.updated_at = this.updated_at.toObject();
             }
+            if (this.font_color != null) {
+                data.font_color = this.font_color;
+            }
+            if (this.background_color != null) {
+                data.background_color = this.background_color;
+            }
+            if (this.add_count != null) {
+                data.add_count = this.add_count;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -2637,6 +2876,12 @@ export namespace api.core {
                 writer.writeString(7, this.operator_name);
             if (this.has_updated_at)
                 writer.writeMessage(8, this.updated_at, () => this.updated_at.serialize(writer));
+            if (this.font_color.length)
+                writer.writeString(9, this.font_color);
+            if (this.background_color.length)
+                writer.writeString(10, this.background_color);
+            if (this.add_count != 0)
+                writer.writeInt32(11, this.add_count);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2668,7 +2913,16 @@ export namespace api.core {
                         message.operator_name = reader.readString();
                         break;
                     case 8:
-                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        message.font_color = reader.readString();
+                        break;
+                    case 10:
+                        message.background_color = reader.readString();
+                        break;
+                    case 11:
+                        message.add_count = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -3027,6 +3281,7 @@ export namespace api.core {
             consult_type_id?: number;
             remark?: string;
             question_type_ids?: number[];
+            chat_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.#one_of_decls);
@@ -3039,6 +3294,9 @@ export namespace api.core {
                 }
                 if ("question_type_ids" in data && data.question_type_ids != undefined) {
                     this.question_type_ids = data.question_type_ids;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
                 }
             }
         }
@@ -3060,10 +3318,17 @@ export namespace api.core {
         set question_type_ids(value: number[]) {
             pb_1.Message.setField(this, 3, value);
         }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
         static fromObject(data: {
             consult_type_id?: number;
             remark?: string;
             question_type_ids?: number[];
+            chat_id?: number;
         }): AddQuestionTypeRemarkRequest {
             const message = new AddQuestionTypeRemarkRequest({});
             if (data.consult_type_id != null) {
@@ -3075,6 +3340,9 @@ export namespace api.core {
             if (data.question_type_ids != null) {
                 message.question_type_ids = data.question_type_ids;
             }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
             return message;
         }
         toObject() {
@@ -3082,6 +3350,7 @@ export namespace api.core {
                 consult_type_id?: number;
                 remark?: string;
                 question_type_ids?: number[];
+                chat_id?: number;
             } = {};
             if (this.consult_type_id != null) {
                 data.consult_type_id = this.consult_type_id;
@@ -3091,6 +3360,9 @@ export namespace api.core {
             }
             if (this.question_type_ids != null) {
                 data.question_type_ids = this.question_type_ids;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
             }
             return data;
         }
@@ -3104,6 +3376,8 @@ export namespace api.core {
                 writer.writeString(2, this.remark);
             if (this.question_type_ids.length)
                 writer.writePackedInt32(3, this.question_type_ids);
+            if (this.chat_id != 0)
+                writer.writeInt64(4, this.chat_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -3122,6 +3396,9 @@ export namespace api.core {
                     case 3:
                         message.question_type_ids = reader.readPackedInt32();
                         break;
+                    case 4:
+                        message.chat_id = reader.readInt64();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -3139,8 +3416,8 @@ export namespace api.core {
         constructor(data?: any[] | {
             consult_type_id?: number;
             worker_account?: string;
-            start_time?: dependency_5.google.protobuf.Timestamp;
-            end_time?: dependency_5.google.protobuf.Timestamp;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
@@ -3180,18 +3457,18 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get start_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 3) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
         }
-        set start_time(value: dependency_5.google.protobuf.Timestamp) {
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 3, value);
         }
         get has_start_time() {
             return pb_1.Message.getField(this, 3) != null;
         }
         get end_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 4) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
         }
-        set end_time(value: dependency_5.google.protobuf.Timestamp) {
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 4, value);
         }
         get has_end_time() {
@@ -3212,8 +3489,8 @@ export namespace api.core {
         static fromObject(data: {
             consult_type_id?: number;
             worker_account?: string;
-            start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-            end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): QuestionTypeRemarksRequest {
@@ -3225,10 +3502,10 @@ export namespace api.core {
                 message.worker_account = data.worker_account;
             }
             if (data.start_time != null) {
-                message.start_time = dependency_5.google.protobuf.Timestamp.fromObject(data.start_time);
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
             }
             if (data.end_time != null) {
-                message.end_time = dependency_5.google.protobuf.Timestamp.fromObject(data.end_time);
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
             }
             if (data.page != null) {
                 message.page = data.page;
@@ -3242,8 +3519,8 @@ export namespace api.core {
             const data: {
                 consult_type_id?: number;
                 worker_account?: string;
-                start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-                end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
@@ -3299,10 +3576,10 @@ export namespace api.core {
                         message.worker_account = reader.readString();
                         break;
                     case 3:
-                        reader.readMessage(message.start_time, () => message.start_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 4:
-                        reader.readMessage(message.end_time, () => message.end_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 5:
                         message.page = reader.readUint32();
@@ -3423,7 +3700,7 @@ export namespace api.core {
             remark?: string;
             question_type_count?: number;
             question_types?: QuestionType[];
-            created_at?: dependency_5.google.protobuf.Timestamp;
+            created_at?: dependency_6.google.protobuf.Timestamp;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [8], this.#one_of_decls);
@@ -3506,9 +3783,9 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 8, value);
         }
         get created_at() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 9) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 9) as dependency_6.google.protobuf.Timestamp;
         }
-        set created_at(value: dependency_5.google.protobuf.Timestamp) {
+        set created_at(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 9, value);
         }
         get has_created_at() {
@@ -3523,7 +3800,7 @@ export namespace api.core {
             remark?: string;
             question_type_count?: number;
             question_types?: ReturnType<typeof QuestionType.prototype.toObject>[];
-            created_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            created_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
         }): QuestionTypeRemark {
             const message = new QuestionTypeRemark({});
             if (data.consult_type_id != null) {
@@ -3551,7 +3828,7 @@ export namespace api.core {
                 message.question_types = data.question_types.map(item => QuestionType.fromObject(item));
             }
             if (data.created_at != null) {
-                message.created_at = dependency_5.google.protobuf.Timestamp.fromObject(data.created_at);
+                message.created_at = dependency_6.google.protobuf.Timestamp.fromObject(data.created_at);
             }
             return message;
         }
@@ -3565,7 +3842,7 @@ export namespace api.core {
                 remark?: string;
                 question_type_count?: number;
                 question_types?: ReturnType<typeof QuestionType.prototype.toObject>[];
-                created_at?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                created_at?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             } = {};
             if (this.consult_type_id != null) {
                 data.consult_type_id = this.consult_type_id;
@@ -3652,7 +3929,7 @@ export namespace api.core {
                         reader.readMessage(message.question_types, () => pb_1.Message.addToRepeatedWrapperField(message, 8, QuestionType.deserialize(reader), QuestionType));
                         break;
                     case 9:
-                        reader.readMessage(message.created_at, () => message.created_at = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.created_at, () => message.created_at = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -3666,15 +3943,158 @@ export namespace api.core {
             return QuestionTypeRemark.deserialize(bytes);
         }
     }
+    export class ExportQuestionTypeRemarksRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            worker_account?: string;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            worker_account?: string;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportQuestionTypeRemarksRequest {
+            const message = new ExportQuestionTypeRemarksRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                worker_account?: string;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.has_start_time)
+                writer.writeMessage(3, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(4, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQuestionTypeRemarksRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQuestionTypeRemarksRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQuestionTypeRemarksRequest {
+            return ExportQuestionTypeRemarksRequest.deserialize(bytes);
+        }
+    }
     export class QuestionTypeWithWorkerStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             consult_type_id?: number;
             question_type_id?: number;
-            worker_account?: string;
-            worker_nickname?: string;
-            start_time?: dependency_5.google.protobuf.Timestamp;
-            end_time?: dependency_5.google.protobuf.Timestamp;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
@@ -3687,11 +4107,14 @@ export namespace api.core {
                 if ("question_type_id" in data && data.question_type_id != undefined) {
                     this.question_type_id = data.question_type_id;
                 }
-                if ("worker_account" in data && data.worker_account != undefined) {
-                    this.worker_account = data.worker_account;
+                if ("worker_namekey" in data && data.worker_namekey != undefined) {
+                    this.worker_namekey = data.worker_namekey;
                 }
-                if ("worker_nickname" in data && data.worker_nickname != undefined) {
-                    this.worker_nickname = data.worker_nickname;
+                if ("groupPid" in data && data.groupPid != undefined) {
+                    this.groupPid = data.groupPid;
+                }
+                if ("groupCid" in data && data.groupCid != undefined) {
+                    this.groupCid = data.groupCid;
                 }
                 if ("start_time" in data && data.start_time != undefined) {
                     this.start_time = data.start_time;
@@ -3719,55 +4142,62 @@ export namespace api.core {
         set question_type_id(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
-        get worker_account() {
+        get worker_namekey() {
             return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set worker_account(value: string) {
+        set worker_namekey(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
-        get worker_nickname() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        get groupPid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
-        set worker_nickname(value: string) {
+        set groupPid(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
+        get groupCid() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set groupCid(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
         get start_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 5) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
         }
-        set start_time(value: dependency_5.google.protobuf.Timestamp) {
-            pb_1.Message.setWrapperField(this, 5, value);
-        }
-        get has_start_time() {
-            return pb_1.Message.getField(this, 5) != null;
-        }
-        get end_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 6) as dependency_5.google.protobuf.Timestamp;
-        }
-        set end_time(value: dependency_5.google.protobuf.Timestamp) {
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 6, value);
         }
-        get has_end_time() {
+        get has_start_time() {
             return pb_1.Message.getField(this, 6) != null;
         }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 7) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
         get page() {
-            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
-        }
-        set page(value: number) {
-            pb_1.Message.setField(this, 7, value);
-        }
-        get pageSize() {
             return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
         }
-        set pageSize(value: number) {
+        set page(value: number) {
             pb_1.Message.setField(this, 8, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 9, value);
         }
         static fromObject(data: {
             consult_type_id?: number;
             question_type_id?: number;
-            worker_account?: string;
-            worker_nickname?: string;
-            start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-            end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): QuestionTypeWithWorkerStatsRequest {
@@ -3778,17 +4208,20 @@ export namespace api.core {
             if (data.question_type_id != null) {
                 message.question_type_id = data.question_type_id;
             }
-            if (data.worker_account != null) {
-                message.worker_account = data.worker_account;
+            if (data.worker_namekey != null) {
+                message.worker_namekey = data.worker_namekey;
             }
-            if (data.worker_nickname != null) {
-                message.worker_nickname = data.worker_nickname;
+            if (data.groupPid != null) {
+                message.groupPid = data.groupPid;
+            }
+            if (data.groupCid != null) {
+                message.groupCid = data.groupCid;
             }
             if (data.start_time != null) {
-                message.start_time = dependency_5.google.protobuf.Timestamp.fromObject(data.start_time);
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
             }
             if (data.end_time != null) {
-                message.end_time = dependency_5.google.protobuf.Timestamp.fromObject(data.end_time);
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
             }
             if (data.page != null) {
                 message.page = data.page;
@@ -3802,10 +4235,11 @@ export namespace api.core {
             const data: {
                 consult_type_id?: number;
                 question_type_id?: number;
-                worker_account?: string;
-                worker_nickname?: string;
-                start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-                end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                worker_namekey?: string;
+                groupPid?: number;
+                groupCid?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
@@ -3815,11 +4249,14 @@ export namespace api.core {
             if (this.question_type_id != null) {
                 data.question_type_id = this.question_type_id;
             }
-            if (this.worker_account != null) {
-                data.worker_account = this.worker_account;
+            if (this.worker_namekey != null) {
+                data.worker_namekey = this.worker_namekey;
             }
-            if (this.worker_nickname != null) {
-                data.worker_nickname = this.worker_nickname;
+            if (this.groupPid != null) {
+                data.groupPid = this.groupPid;
+            }
+            if (this.groupCid != null) {
+                data.groupCid = this.groupCid;
             }
             if (this.start_time != null) {
                 data.start_time = this.start_time.toObject();
@@ -3843,18 +4280,20 @@ export namespace api.core {
                 writer.writeInt32(1, this.consult_type_id);
             if (this.question_type_id != 0)
                 writer.writeInt32(2, this.question_type_id);
-            if (this.worker_account.length)
-                writer.writeString(3, this.worker_account);
-            if (this.worker_nickname.length)
-                writer.writeString(4, this.worker_nickname);
+            if (this.worker_namekey.length)
+                writer.writeString(3, this.worker_namekey);
+            if (this.groupPid != 0)
+                writer.writeInt64(4, this.groupPid);
+            if (this.groupCid != 0)
+                writer.writeInt64(5, this.groupCid);
             if (this.has_start_time)
-                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+                writer.writeMessage(6, this.start_time, () => this.start_time.serialize(writer));
             if (this.has_end_time)
-                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+                writer.writeMessage(7, this.end_time, () => this.end_time.serialize(writer));
             if (this.page != 0)
-                writer.writeUint32(7, this.page);
+                writer.writeUint32(8, this.page);
             if (this.pageSize != 0)
-                writer.writeUint32(8, this.pageSize);
+                writer.writeUint32(9, this.pageSize);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -3871,21 +4310,24 @@ export namespace api.core {
                         message.question_type_id = reader.readInt32();
                         break;
                     case 3:
-                        message.worker_account = reader.readString();
+                        message.worker_namekey = reader.readString();
                         break;
                     case 4:
-                        message.worker_nickname = reader.readString();
+                        message.groupPid = reader.readInt64();
                         break;
                     case 5:
-                        reader.readMessage(message.start_time, () => message.start_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        message.groupCid = reader.readInt64();
                         break;
                     case 6:
-                        reader.readMessage(message.end_time, () => message.end_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 7:
-                        message.page = reader.readUint32();
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 8:
+                        message.page = reader.readUint32();
+                        break;
+                    case 9:
                         message.pageSize = reader.readUint32();
                         break;
                     default: reader.skipField();
@@ -3993,10 +4435,6 @@ export namespace api.core {
     export class QuestionTypeWithWorkerStat extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            question_type_id?: number;
-            question_type_title?: string;
-            consult_type_id?: number;
-            consult_type_name?: string;
             worker_id?: number;
             worker_account?: string;
             worker_nickname?: string;
@@ -4010,18 +4448,6 @@ export namespace api.core {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("question_type_id" in data && data.question_type_id != undefined) {
-                    this.question_type_id = data.question_type_id;
-                }
-                if ("question_type_title" in data && data.question_type_title != undefined) {
-                    this.question_type_title = data.question_type_title;
-                }
-                if ("consult_type_id" in data && data.consult_type_id != undefined) {
-                    this.consult_type_id = data.consult_type_id;
-                }
-                if ("consult_type_name" in data && data.consult_type_name != undefined) {
-                    this.consult_type_name = data.consult_type_name;
-                }
                 if ("worker_id" in data && data.worker_id != undefined) {
                     this.worker_id = data.worker_id;
                 }
@@ -4051,89 +4477,61 @@ export namespace api.core {
                 }
             }
         }
-        get question_type_id() {
+        get worker_id() {
             return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set question_type_id(value: number) {
+        set worker_id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
-        get question_type_title() {
+        get worker_account() {
             return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set question_type_title(value: string) {
+        set worker_account(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get consult_type_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
-        }
-        set consult_type_id(value: number) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get consult_type_name() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
-        }
-        set consult_type_name(value: string) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get worker_id() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
-        }
-        set worker_id(value: number) {
-            pb_1.Message.setField(this, 5, value);
-        }
-        get worker_account() {
-            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
-        }
-        set worker_account(value: string) {
-            pb_1.Message.setField(this, 6, value);
-        }
         get worker_nickname() {
-            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
         set worker_nickname(value: string) {
-            pb_1.Message.setField(this, 7, value);
+            pb_1.Message.setField(this, 3, value);
         }
         get group_id() {
-            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set group_id(value: number) {
-            pb_1.Message.setField(this, 8, value);
+            pb_1.Message.setField(this, 4, value);
         }
         get group_nickname() {
-            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
         }
         set group_nickname(value: string) {
-            pb_1.Message.setField(this, 9, value);
+            pb_1.Message.setField(this, 5, value);
         }
         get sub_group_id() {
-            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
         }
         set sub_group_id(value: number) {
-            pb_1.Message.setField(this, 10, value);
+            pb_1.Message.setField(this, 6, value);
         }
         get sub_group_nickname() {
-            return pb_1.Message.getFieldWithDefault(this, 11, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
         }
         set sub_group_nickname(value: string) {
-            pb_1.Message.setField(this, 11, value);
+            pb_1.Message.setField(this, 7, value);
         }
         get add_remark_num() {
-            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
         }
         set add_remark_num(value: number) {
-            pb_1.Message.setField(this, 12, value);
+            pb_1.Message.setField(this, 8, value);
         }
         get reception_user_num() {
-            return pb_1.Message.getFieldWithDefault(this, 13, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
         }
         set reception_user_num(value: number) {
-            pb_1.Message.setField(this, 13, value);
+            pb_1.Message.setField(this, 9, value);
         }
         static fromObject(data: {
-            question_type_id?: number;
-            question_type_title?: string;
-            consult_type_id?: number;
-            consult_type_name?: string;
             worker_id?: number;
             worker_account?: string;
             worker_nickname?: string;
@@ -4145,18 +4543,6 @@ export namespace api.core {
             reception_user_num?: number;
         }): QuestionTypeWithWorkerStat {
             const message = new QuestionTypeWithWorkerStat({});
-            if (data.question_type_id != null) {
-                message.question_type_id = data.question_type_id;
-            }
-            if (data.question_type_title != null) {
-                message.question_type_title = data.question_type_title;
-            }
-            if (data.consult_type_id != null) {
-                message.consult_type_id = data.consult_type_id;
-            }
-            if (data.consult_type_name != null) {
-                message.consult_type_name = data.consult_type_name;
-            }
             if (data.worker_id != null) {
                 message.worker_id = data.worker_id;
             }
@@ -4188,10 +4574,6 @@ export namespace api.core {
         }
         toObject() {
             const data: {
-                question_type_id?: number;
-                question_type_title?: string;
-                consult_type_id?: number;
-                consult_type_name?: string;
                 worker_id?: number;
                 worker_account?: string;
                 worker_nickname?: string;
@@ -4202,18 +4584,6 @@ export namespace api.core {
                 add_remark_num?: number;
                 reception_user_num?: number;
             } = {};
-            if (this.question_type_id != null) {
-                data.question_type_id = this.question_type_id;
-            }
-            if (this.question_type_title != null) {
-                data.question_type_title = this.question_type_title;
-            }
-            if (this.consult_type_id != null) {
-                data.consult_type_id = this.consult_type_id;
-            }
-            if (this.consult_type_name != null) {
-                data.consult_type_name = this.consult_type_name;
-            }
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
             }
@@ -4247,32 +4617,24 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.question_type_id != 0)
-                writer.writeInt32(1, this.question_type_id);
-            if (this.question_type_title.length)
-                writer.writeString(2, this.question_type_title);
-            if (this.consult_type_id != 0)
-                writer.writeInt32(3, this.consult_type_id);
-            if (this.consult_type_name.length)
-                writer.writeString(4, this.consult_type_name);
             if (this.worker_id != 0)
-                writer.writeInt32(5, this.worker_id);
+                writer.writeInt32(1, this.worker_id);
             if (this.worker_account.length)
-                writer.writeString(6, this.worker_account);
+                writer.writeString(2, this.worker_account);
             if (this.worker_nickname.length)
-                writer.writeString(7, this.worker_nickname);
+                writer.writeString(3, this.worker_nickname);
             if (this.group_id != 0)
-                writer.writeInt32(8, this.group_id);
+                writer.writeInt32(4, this.group_id);
             if (this.group_nickname.length)
-                writer.writeString(9, this.group_nickname);
+                writer.writeString(5, this.group_nickname);
             if (this.sub_group_id != 0)
-                writer.writeInt32(10, this.sub_group_id);
+                writer.writeInt32(6, this.sub_group_id);
             if (this.sub_group_nickname.length)
-                writer.writeString(11, this.sub_group_nickname);
+                writer.writeString(7, this.sub_group_nickname);
             if (this.add_remark_num != 0)
-                writer.writeInt32(12, this.add_remark_num);
+                writer.writeInt32(8, this.add_remark_num);
             if (this.reception_user_num != 0)
-                writer.writeInt32(13, this.reception_user_num);
+                writer.writeInt32(9, this.reception_user_num);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -4283,42 +4645,30 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.question_type_id = reader.readInt32();
-                        break;
-                    case 2:
-                        message.question_type_title = reader.readString();
-                        break;
-                    case 3:
-                        message.consult_type_id = reader.readInt32();
-                        break;
-                    case 4:
-                        message.consult_type_name = reader.readString();
-                        break;
-                    case 5:
                         message.worker_id = reader.readInt32();
                         break;
-                    case 6:
+                    case 2:
                         message.worker_account = reader.readString();
                         break;
-                    case 7:
+                    case 3:
                         message.worker_nickname = reader.readString();
                         break;
-                    case 8:
+                    case 4:
                         message.group_id = reader.readInt32();
                         break;
-                    case 9:
+                    case 5:
                         message.group_nickname = reader.readString();
                         break;
-                    case 10:
+                    case 6:
                         message.sub_group_id = reader.readInt32();
                         break;
-                    case 11:
+                    case 7:
                         message.sub_group_nickname = reader.readString();
                         break;
-                    case 12:
+                    case 8:
                         message.add_remark_num = reader.readInt32();
                         break;
-                    case 13:
+                    case 9:
                         message.reception_user_num = reader.readInt32();
                         break;
                     default: reader.skipField();
@@ -4333,14 +4683,225 @@ export namespace api.core {
             return QuestionTypeWithWorkerStat.deserialize(bytes);
         }
     }
+    export class ExportQuestionTypeWithWorkerStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            question_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("question_type_id" in data && data.question_type_id != undefined) {
+                    this.question_type_id = data.question_type_id;
+                }
+                if ("worker_namekey" in data && data.worker_namekey != undefined) {
+                    this.worker_namekey = data.worker_namekey;
+                }
+                if ("groupPid" in data && data.groupPid != undefined) {
+                    this.groupPid = data.groupPid;
+                }
+                if ("groupCid" in data && data.groupCid != undefined) {
+                    this.groupCid = data.groupCid;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get question_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set question_type_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_namekey() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_namekey(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get groupPid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set groupPid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get groupCid() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set groupCid(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 7) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            question_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportQuestionTypeWithWorkerStatsRequest {
+            const message = new ExportQuestionTypeWithWorkerStatsRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.question_type_id != null) {
+                message.question_type_id = data.question_type_id;
+            }
+            if (data.worker_namekey != null) {
+                message.worker_namekey = data.worker_namekey;
+            }
+            if (data.groupPid != null) {
+                message.groupPid = data.groupPid;
+            }
+            if (data.groupCid != null) {
+                message.groupCid = data.groupCid;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                question_type_id?: number;
+                worker_namekey?: string;
+                groupPid?: number;
+                groupCid?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.question_type_id != null) {
+                data.question_type_id = this.question_type_id;
+            }
+            if (this.worker_namekey != null) {
+                data.worker_namekey = this.worker_namekey;
+            }
+            if (this.groupPid != null) {
+                data.groupPid = this.groupPid;
+            }
+            if (this.groupCid != null) {
+                data.groupCid = this.groupCid;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.question_type_id != 0)
+                writer.writeInt32(2, this.question_type_id);
+            if (this.worker_namekey.length)
+                writer.writeString(3, this.worker_namekey);
+            if (this.groupPid != 0)
+                writer.writeInt64(4, this.groupPid);
+            if (this.groupCid != 0)
+                writer.writeInt64(5, this.groupCid);
+            if (this.has_start_time)
+                writer.writeMessage(6, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(7, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQuestionTypeWithWorkerStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQuestionTypeWithWorkerStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.question_type_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_namekey = reader.readString();
+                        break;
+                    case 4:
+                        message.groupPid = reader.readInt64();
+                        break;
+                    case 5:
+                        message.groupCid = reader.readInt64();
+                        break;
+                    case 6:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQuestionTypeWithWorkerStatsRequest {
+            return ExportQuestionTypeWithWorkerStatsRequest.deserialize(bytes);
+        }
+    }
     export class QuestionTypeRemarkStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             group_id?: number;
             worker_account?: string;
             worker_nickname?: string;
-            start_time?: dependency_5.google.protobuf.Timestamp;
-            end_time?: dependency_5.google.protobuf.Timestamp;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
@@ -4389,18 +4950,18 @@ export namespace api.core {
             pb_1.Message.setField(this, 3, value);
         }
         get start_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 4) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
         }
-        set start_time(value: dependency_5.google.protobuf.Timestamp) {
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 4, value);
         }
         get has_start_time() {
             return pb_1.Message.getField(this, 4) != null;
         }
         get end_time() {
-            return pb_1.Message.getWrapperField(this, dependency_5.google.protobuf.Timestamp, 5) as dependency_5.google.protobuf.Timestamp;
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
         }
-        set end_time(value: dependency_5.google.protobuf.Timestamp) {
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
             pb_1.Message.setWrapperField(this, 5, value);
         }
         get has_end_time() {
@@ -4422,8 +4983,8 @@ export namespace api.core {
             group_id?: number;
             worker_account?: string;
             worker_nickname?: string;
-            start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-            end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): QuestionTypeRemarkStatsRequest {
@@ -4438,10 +4999,10 @@ export namespace api.core {
                 message.worker_nickname = data.worker_nickname;
             }
             if (data.start_time != null) {
-                message.start_time = dependency_5.google.protobuf.Timestamp.fromObject(data.start_time);
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
             }
             if (data.end_time != null) {
-                message.end_time = dependency_5.google.protobuf.Timestamp.fromObject(data.end_time);
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
             }
             if (data.page != null) {
                 message.page = data.page;
@@ -4456,8 +5017,8 @@ export namespace api.core {
                 group_id?: number;
                 worker_account?: string;
                 worker_nickname?: string;
-                start_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
-                end_time?: ReturnType<typeof dependency_5.google.protobuf.Timestamp.prototype.toObject>;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
@@ -4521,10 +5082,10 @@ export namespace api.core {
                         message.worker_nickname = reader.readString();
                         break;
                     case 4:
-                        reader.readMessage(message.start_time, () => message.start_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 5:
-                        reader.readMessage(message.end_time, () => message.end_time = dependency_5.google.protobuf.Timestamp.deserialize(reader));
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 6:
                         message.page = reader.readUint32();
@@ -4908,6 +5469,171 @@ export namespace api.core {
             return QuestionTypeRemarkStat.deserialize(bytes);
         }
     }
+    export class ExportQuestionTypeRemarkStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportQuestionTypeRemarkStatsRequest {
+            const message = new ExportQuestionTypeRemarkStatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(3, this.worker_nickname);
+            if (this.has_start_time)
+                writer.writeMessage(4, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(5, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQuestionTypeRemarkStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQuestionTypeRemarkStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 4:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQuestionTypeRemarkStatsRequest {
+            return ExportQuestionTypeRemarkStatsRequest.deserialize(bytes);
+        }
+    }
     export class QuestionTypeWorkerRemarkStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -5201,15 +5927,113 @@ export namespace api.core {
             return QuestionTypeWorkerRemarkStat.deserialize(bytes);
         }
     }
+    export class ExportQuestionTypeWorkerRemarkStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            day_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("day_id" in data && data.day_id != undefined) {
+                    this.day_id = data.day_id;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get day_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set day_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            day_id?: number;
+        }): ExportQuestionTypeWorkerRemarkStatsRequest {
+            const message = new ExportQuestionTypeWorkerRemarkStatsRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.day_id != null) {
+                message.day_id = data.day_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                day_id?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.day_id != null) {
+                data.day_id = this.day_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.day_id != 0)
+                writer.writeInt32(2, this.day_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQuestionTypeWorkerRemarkStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQuestionTypeWorkerRemarkStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.day_id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQuestionTypeWorkerRemarkStatsRequest {
+            return ExportQuestionTypeWorkerRemarkStatsRequest.deserialize(bytes);
+        }
+    }
     export class ConsultTypeRemarkStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
                 if ("page" in data && data.page != undefined) {
                     this.page = data.page;
                 }
@@ -5218,23 +6042,49 @@ export namespace api.core {
                 }
             }
         }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 1) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
         get page() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
         set page(value: number) {
-            pb_1.Message.setField(this, 1, value);
+            pb_1.Message.setField(this, 3, value);
         }
         get pageSize() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set pageSize(value: number) {
-            pb_1.Message.setField(this, 2, value);
+            pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): ConsultTypeRemarkStatsRequest {
             const message = new ConsultTypeRemarkStatsRequest({});
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
             if (data.page != null) {
                 message.page = data.page;
             }
@@ -5245,9 +6095,17 @@ export namespace api.core {
         }
         toObject() {
             const data: {
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
             if (this.page != null) {
                 data.page = this.page;
             }
@@ -5260,10 +6118,14 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.has_start_time)
+                writer.writeMessage(1, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(2, this.end_time, () => this.end_time.serialize(writer));
             if (this.page != 0)
-                writer.writeUint32(1, this.page);
+                writer.writeUint32(3, this.page);
             if (this.pageSize != 0)
-                writer.writeUint32(2, this.pageSize);
+                writer.writeUint32(4, this.pageSize);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -5274,9 +6136,15 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.page = reader.readUint32();
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 2:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 3:
+                        message.page = reader.readUint32();
+                        break;
+                    case 4:
                         message.pageSize = reader.readUint32();
                         break;
                     default: reader.skipField();
@@ -5289,6 +6157,1229 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): ConsultTypeRemarkStatsRequest {
             return ConsultTypeRemarkStatsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRelConsultTypeStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("worker_namekey" in data && data.worker_namekey != undefined) {
+                    this.worker_namekey = data.worker_namekey;
+                }
+                if ("groupPid" in data && data.groupPid != undefined) {
+                    this.groupPid = data.groupPid;
+                }
+                if ("groupCid" in data && data.groupCid != undefined) {
+                    this.groupCid = data.groupCid;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_namekey() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_namekey(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get groupPid() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set groupPid(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get groupCid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set groupCid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): WorkerRelConsultTypeStatsRequest {
+            const message = new WorkerRelConsultTypeStatsRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.worker_namekey != null) {
+                message.worker_namekey = data.worker_namekey;
+            }
+            if (data.groupPid != null) {
+                message.groupPid = data.groupPid;
+            }
+            if (data.groupCid != null) {
+                message.groupCid = data.groupCid;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                worker_namekey?: string;
+                groupPid?: number;
+                groupCid?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.worker_namekey != null) {
+                data.worker_namekey = this.worker_namekey;
+            }
+            if (this.groupPid != null) {
+                data.groupPid = this.groupPid;
+            }
+            if (this.groupCid != null) {
+                data.groupCid = this.groupCid;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.worker_namekey.length)
+                writer.writeString(2, this.worker_namekey);
+            if (this.groupPid != 0)
+                writer.writeInt64(3, this.groupPid);
+            if (this.groupCid != 0)
+                writer.writeInt64(4, this.groupCid);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(7, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(8, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRelConsultTypeStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRelConsultTypeStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_namekey = reader.readString();
+                        break;
+                    case 3:
+                        message.groupPid = reader.readInt64();
+                        break;
+                    case 4:
+                        message.groupCid = reader.readInt64();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        message.page = reader.readUint32();
+                        break;
+                    case 8:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRelConsultTypeStatsRequest {
+            return WorkerRelConsultTypeStatsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRelConsultTypeStatsDetailRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            worker_id?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            worker_id?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): WorkerRelConsultTypeStatsDetailRequest {
+            const message = new WorkerRelConsultTypeStatsDetailRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                worker_id?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.has_start_time)
+                writer.writeMessage(3, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(4, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(5, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(6, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRelConsultTypeStatsDetailRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRelConsultTypeStatsDetailRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        message.page = reader.readUint32();
+                        break;
+                    case 6:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRelConsultTypeStatsDetailRequest {
+            return WorkerRelConsultTypeStatsDetailRequest.deserialize(bytes);
+        }
+    }
+    export class ExportWorkerRelConsultTypeStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("worker_namekey" in data && data.worker_namekey != undefined) {
+                    this.worker_namekey = data.worker_namekey;
+                }
+                if ("groupPid" in data && data.groupPid != undefined) {
+                    this.groupPid = data.groupPid;
+                }
+                if ("groupCid" in data && data.groupCid != undefined) {
+                    this.groupCid = data.groupCid;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_namekey() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_namekey(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get groupPid() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set groupPid(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get groupCid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set groupCid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 6) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            worker_namekey?: string;
+            groupPid?: number;
+            groupCid?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportWorkerRelConsultTypeStatsRequest {
+            const message = new ExportWorkerRelConsultTypeStatsRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.worker_namekey != null) {
+                message.worker_namekey = data.worker_namekey;
+            }
+            if (data.groupPid != null) {
+                message.groupPid = data.groupPid;
+            }
+            if (data.groupCid != null) {
+                message.groupCid = data.groupCid;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                worker_namekey?: string;
+                groupPid?: number;
+                groupCid?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.worker_namekey != null) {
+                data.worker_namekey = this.worker_namekey;
+            }
+            if (this.groupPid != null) {
+                data.groupPid = this.groupPid;
+            }
+            if (this.groupCid != null) {
+                data.groupCid = this.groupCid;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.worker_namekey.length)
+                writer.writeString(2, this.worker_namekey);
+            if (this.groupPid != 0)
+                writer.writeInt64(3, this.groupPid);
+            if (this.groupCid != 0)
+                writer.writeInt64(4, this.groupCid);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportWorkerRelConsultTypeStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportWorkerRelConsultTypeStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_namekey = reader.readString();
+                        break;
+                    case 3:
+                        message.groupPid = reader.readInt64();
+                        break;
+                    case 4:
+                        message.groupCid = reader.readInt64();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportWorkerRelConsultTypeStatsRequest {
+            return ExportWorkerRelConsultTypeStatsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRelConsultTypeStatResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_rel_consult_stats?: WorkerRelConsultTypeStat[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_rel_consult_stats" in data && data.worker_rel_consult_stats != undefined) {
+                    this.worker_rel_consult_stats = data.worker_rel_consult_stats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get worker_rel_consult_stats() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerRelConsultTypeStat, 1) as WorkerRelConsultTypeStat[];
+        }
+        set worker_rel_consult_stats(value: WorkerRelConsultTypeStat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            worker_rel_consult_stats?: ReturnType<typeof WorkerRelConsultTypeStat.prototype.toObject>[];
+            total?: number;
+        }): WorkerRelConsultTypeStatResponse {
+            const message = new WorkerRelConsultTypeStatResponse({});
+            if (data.worker_rel_consult_stats != null) {
+                message.worker_rel_consult_stats = data.worker_rel_consult_stats.map(item => WorkerRelConsultTypeStat.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_rel_consult_stats?: ReturnType<typeof WorkerRelConsultTypeStat.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.worker_rel_consult_stats != null) {
+                data.worker_rel_consult_stats = this.worker_rel_consult_stats.map((item: WorkerRelConsultTypeStat) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_rel_consult_stats.length)
+                writer.writeRepeatedMessage(1, this.worker_rel_consult_stats, (item: WorkerRelConsultTypeStat) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt64(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRelConsultTypeStatResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRelConsultTypeStatResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.worker_rel_consult_stats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerRelConsultTypeStat.deserialize(reader), WorkerRelConsultTypeStat));
+                        break;
+                    case 2:
+                        message.total = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRelConsultTypeStatResponse {
+            return WorkerRelConsultTypeStatResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerRelConsultTypeStat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            consult_type_name?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            group_id?: number;
+            group_nickname?: string;
+            sub_group_id?: number;
+            sub_group_nickname?: string;
+            reception_user_num?: number;
+            add_remark_num?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("consult_type_name" in data && data.consult_type_name != undefined) {
+                    this.consult_type_name = data.consult_type_name;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("group_nickname" in data && data.group_nickname != undefined) {
+                    this.group_nickname = data.group_nickname;
+                }
+                if ("sub_group_id" in data && data.sub_group_id != undefined) {
+                    this.sub_group_id = data.sub_group_id;
+                }
+                if ("sub_group_nickname" in data && data.sub_group_nickname != undefined) {
+                    this.sub_group_nickname = data.sub_group_nickname;
+                }
+                if ("reception_user_num" in data && data.reception_user_num != undefined) {
+                    this.reception_user_num = data.reception_user_num;
+                }
+                if ("add_remark_num" in data && data.add_remark_num != undefined) {
+                    this.add_remark_num = data.add_remark_num;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get consult_type_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set consult_type_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get group_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set group_nickname(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get sub_group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set sub_group_id(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get sub_group_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set sub_group_nickname(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get reception_user_num() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set reception_user_num(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get add_remark_num() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set add_remark_num(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            consult_type_name?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            group_id?: number;
+            group_nickname?: string;
+            sub_group_id?: number;
+            sub_group_nickname?: string;
+            reception_user_num?: number;
+            add_remark_num?: number;
+        }): WorkerRelConsultTypeStat {
+            const message = new WorkerRelConsultTypeStat({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.consult_type_name != null) {
+                message.consult_type_name = data.consult_type_name;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.group_nickname != null) {
+                message.group_nickname = data.group_nickname;
+            }
+            if (data.sub_group_id != null) {
+                message.sub_group_id = data.sub_group_id;
+            }
+            if (data.sub_group_nickname != null) {
+                message.sub_group_nickname = data.sub_group_nickname;
+            }
+            if (data.reception_user_num != null) {
+                message.reception_user_num = data.reception_user_num;
+            }
+            if (data.add_remark_num != null) {
+                message.add_remark_num = data.add_remark_num;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                consult_type_name?: string;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                group_id?: number;
+                group_nickname?: string;
+                sub_group_id?: number;
+                sub_group_nickname?: string;
+                reception_user_num?: number;
+                add_remark_num?: number;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.consult_type_name != null) {
+                data.consult_type_name = this.consult_type_name;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.group_nickname != null) {
+                data.group_nickname = this.group_nickname;
+            }
+            if (this.sub_group_id != null) {
+                data.sub_group_id = this.sub_group_id;
+            }
+            if (this.sub_group_nickname != null) {
+                data.sub_group_nickname = this.sub_group_nickname;
+            }
+            if (this.reception_user_num != null) {
+                data.reception_user_num = this.reception_user_num;
+            }
+            if (this.add_remark_num != null) {
+                data.add_remark_num = this.add_remark_num;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.consult_type_name.length)
+                writer.writeString(2, this.consult_type_name);
+            if (this.worker_id != 0)
+                writer.writeInt32(3, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(4, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(5, this.worker_nickname);
+            if (this.group_id != 0)
+                writer.writeInt32(6, this.group_id);
+            if (this.group_nickname.length)
+                writer.writeString(7, this.group_nickname);
+            if (this.sub_group_id != 0)
+                writer.writeInt32(8, this.sub_group_id);
+            if (this.sub_group_nickname.length)
+                writer.writeString(9, this.sub_group_nickname);
+            if (this.reception_user_num != 0)
+                writer.writeInt32(10, this.reception_user_num);
+            if (this.add_remark_num != 0)
+                writer.writeInt32(11, this.add_remark_num);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRelConsultTypeStat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRelConsultTypeStat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.consult_type_name = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 5:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 6:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 7:
+                        message.group_nickname = reader.readString();
+                        break;
+                    case 8:
+                        message.sub_group_id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.sub_group_nickname = reader.readString();
+                        break;
+                    case 10:
+                        message.reception_user_num = reader.readInt32();
+                        break;
+                    case 11:
+                        message.add_remark_num = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRelConsultTypeStat {
+            return WorkerRelConsultTypeStat.deserialize(bytes);
+        }
+    }
+    export class ConsultRelQuestionStatResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_rel_question_stats?: ConsultRelQuestionStat[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_rel_question_stats" in data && data.consult_rel_question_stats != undefined) {
+                    this.consult_rel_question_stats = data.consult_rel_question_stats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get consult_rel_question_stats() {
+            return pb_1.Message.getRepeatedWrapperField(this, ConsultRelQuestionStat, 1) as ConsultRelQuestionStat[];
+        }
+        set consult_rel_question_stats(value: ConsultRelQuestionStat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            consult_rel_question_stats?: ReturnType<typeof ConsultRelQuestionStat.prototype.toObject>[];
+            total?: number;
+        }): ConsultRelQuestionStatResponse {
+            const message = new ConsultRelQuestionStatResponse({});
+            if (data.consult_rel_question_stats != null) {
+                message.consult_rel_question_stats = data.consult_rel_question_stats.map(item => ConsultRelQuestionStat.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_rel_question_stats?: ReturnType<typeof ConsultRelQuestionStat.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.consult_rel_question_stats != null) {
+                data.consult_rel_question_stats = this.consult_rel_question_stats.map((item: ConsultRelQuestionStat) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_rel_question_stats.length)
+                writer.writeRepeatedMessage(1, this.consult_rel_question_stats, (item: ConsultRelQuestionStat) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt64(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ConsultRelQuestionStatResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ConsultRelQuestionStatResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.consult_rel_question_stats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, ConsultRelQuestionStat.deserialize(reader), ConsultRelQuestionStat));
+                        break;
+                    case 2:
+                        message.total = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ConsultRelQuestionStatResponse {
+            return ConsultRelQuestionStatResponse.deserialize(bytes);
+        }
+    }
+    export class ConsultRelQuestionStat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            question_type_id?: number;
+            question_type_name?: string;
+            reception_user_num?: number;
+            add_remark_num?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("question_type_id" in data && data.question_type_id != undefined) {
+                    this.question_type_id = data.question_type_id;
+                }
+                if ("question_type_name" in data && data.question_type_name != undefined) {
+                    this.question_type_name = data.question_type_name;
+                }
+                if ("reception_user_num" in data && data.reception_user_num != undefined) {
+                    this.reception_user_num = data.reception_user_num;
+                }
+                if ("add_remark_num" in data && data.add_remark_num != undefined) {
+                    this.add_remark_num = data.add_remark_num;
+                }
+            }
+        }
+        get question_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set question_type_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get question_type_name() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set question_type_name(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get reception_user_num() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set reception_user_num(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get add_remark_num() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set add_remark_num(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            question_type_id?: number;
+            question_type_name?: string;
+            reception_user_num?: number;
+            add_remark_num?: number;
+        }): ConsultRelQuestionStat {
+            const message = new ConsultRelQuestionStat({});
+            if (data.question_type_id != null) {
+                message.question_type_id = data.question_type_id;
+            }
+            if (data.question_type_name != null) {
+                message.question_type_name = data.question_type_name;
+            }
+            if (data.reception_user_num != null) {
+                message.reception_user_num = data.reception_user_num;
+            }
+            if (data.add_remark_num != null) {
+                message.add_remark_num = data.add_remark_num;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                question_type_id?: number;
+                question_type_name?: string;
+                reception_user_num?: number;
+                add_remark_num?: number;
+            } = {};
+            if (this.question_type_id != null) {
+                data.question_type_id = this.question_type_id;
+            }
+            if (this.question_type_name != null) {
+                data.question_type_name = this.question_type_name;
+            }
+            if (this.reception_user_num != null) {
+                data.reception_user_num = this.reception_user_num;
+            }
+            if (this.add_remark_num != null) {
+                data.add_remark_num = this.add_remark_num;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.question_type_id != 0)
+                writer.writeInt32(3, this.question_type_id);
+            if (this.question_type_name.length)
+                writer.writeString(4, this.question_type_name);
+            if (this.reception_user_num != 0)
+                writer.writeInt32(5, this.reception_user_num);
+            if (this.add_remark_num != 0)
+                writer.writeInt32(6, this.add_remark_num);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ConsultRelQuestionStat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ConsultRelQuestionStat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 3:
+                        message.question_type_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.question_type_name = reader.readString();
+                        break;
+                    case 5:
+                        message.reception_user_num = reader.readInt32();
+                        break;
+                    case 6:
+                        message.add_remark_num = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ConsultRelQuestionStat {
+            return ConsultRelQuestionStat.deserialize(bytes);
         }
     }
     export class ConsultTypeRemarkStatsResponse extends pb_1.Message {
@@ -5517,10 +7608,108 @@ export namespace api.core {
             return ConsultTypeRemarkStat.deserialize(bytes);
         }
     }
+    export class ExportConsultTypeRemarkStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 1) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportConsultTypeRemarkStatsRequest {
+            const message = new ExportConsultTypeRemarkStatsRequest({});
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_start_time)
+                writer.writeMessage(1, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(2, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportConsultTypeRemarkStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportConsultTypeRemarkStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportConsultTypeRemarkStatsRequest {
+            return ExportConsultTypeRemarkStatsRequest.deserialize(bytes);
+        }
+    }
     export class ConsultTypeWorkerRemarkStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             consult_type_id?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
@@ -5529,6 +7718,12 @@ export namespace api.core {
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("consult_type_id" in data && data.consult_type_id != undefined) {
                     this.consult_type_id = data.consult_type_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
                 }
                 if ("page" in data && data.page != undefined) {
                     this.page = data.page;
@@ -5544,26 +7739,52 @@ export namespace api.core {
         set consult_type_id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         get page() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set page(value: number) {
-            pb_1.Message.setField(this, 2, value);
+            pb_1.Message.setField(this, 4, value);
         }
         get pageSize() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set pageSize(value: number) {
-            pb_1.Message.setField(this, 3, value);
+            pb_1.Message.setField(this, 5, value);
         }
         static fromObject(data: {
             consult_type_id?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): ConsultTypeWorkerRemarkStatsRequest {
             const message = new ConsultTypeWorkerRemarkStatsRequest({});
             if (data.consult_type_id != null) {
                 message.consult_type_id = data.consult_type_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
             }
             if (data.page != null) {
                 message.page = data.page;
@@ -5576,11 +7797,19 @@ export namespace api.core {
         toObject() {
             const data: {
                 consult_type_id?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
             if (this.consult_type_id != null) {
                 data.consult_type_id = this.consult_type_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
             }
             if (this.page != null) {
                 data.page = this.page;
@@ -5596,10 +7825,14 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.consult_type_id != 0)
                 writer.writeInt32(1, this.consult_type_id);
+            if (this.has_start_time)
+                writer.writeMessage(2, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(3, this.end_time, () => this.end_time.serialize(writer));
             if (this.page != 0)
-                writer.writeUint32(2, this.page);
+                writer.writeUint32(4, this.page);
             if (this.pageSize != 0)
-                writer.writeUint32(3, this.pageSize);
+                writer.writeUint32(5, this.pageSize);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -5613,9 +7846,15 @@ export namespace api.core {
                         message.consult_type_id = reader.readInt32();
                         break;
                     case 2:
-                        message.page = reader.readUint32();
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 3:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 4:
+                        message.page = reader.readUint32();
+                        break;
+                    case 5:
                         message.pageSize = reader.readUint32();
                         break;
                     default: reader.skipField();
@@ -5902,15 +8141,142 @@ export namespace api.core {
             return ConsultTypeWorkerRemarkStat.deserialize(bytes);
         }
     }
+    export class ExportConsultTypeWorkerRemarkStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_type_id?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_type_id" in data && data.consult_type_id != undefined) {
+                    this.consult_type_id = data.consult_type_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get consult_type_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_type_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        static fromObject(data: {
+            consult_type_id?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportConsultTypeWorkerRemarkStatsRequest {
+            const message = new ExportConsultTypeWorkerRemarkStatsRequest({});
+            if (data.consult_type_id != null) {
+                message.consult_type_id = data.consult_type_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_type_id?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.consult_type_id != null) {
+                data.consult_type_id = this.consult_type_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_type_id != 0)
+                writer.writeInt32(1, this.consult_type_id);
+            if (this.has_start_time)
+                writer.writeMessage(2, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(3, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportConsultTypeWorkerRemarkStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportConsultTypeWorkerRemarkStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_type_id = reader.readInt32();
+                        break;
+                    case 2:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 3:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportConsultTypeWorkerRemarkStatsRequest {
+            return ExportConsultTypeWorkerRemarkStatsRequest.deserialize(bytes);
+        }
+    }
     export class QuestionTypeStatsRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
             page?: number;
             pageSize?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
                 if ("page" in data && data.page != undefined) {
                     this.page = data.page;
                 }
@@ -5919,23 +8285,49 @@ export namespace api.core {
                 }
             }
         }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 1) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
         get page() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
         set page(value: number) {
-            pb_1.Message.setField(this, 1, value);
+            pb_1.Message.setField(this, 3, value);
         }
         get pageSize() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set pageSize(value: number) {
-            pb_1.Message.setField(this, 2, value);
+            pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
             page?: number;
             pageSize?: number;
         }): QuestionTypeStatsRequest {
             const message = new QuestionTypeStatsRequest({});
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
             if (data.page != null) {
                 message.page = data.page;
             }
@@ -5946,9 +8338,17 @@ export namespace api.core {
         }
         toObject() {
             const data: {
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
                 page?: number;
                 pageSize?: number;
             } = {};
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
             if (this.page != null) {
                 data.page = this.page;
             }
@@ -5961,10 +8361,14 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.has_start_time)
+                writer.writeMessage(1, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(2, this.end_time, () => this.end_time.serialize(writer));
             if (this.page != 0)
-                writer.writeUint32(1, this.page);
+                writer.writeUint32(3, this.page);
             if (this.pageSize != 0)
-                writer.writeUint32(2, this.pageSize);
+                writer.writeUint32(4, this.pageSize);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -5975,9 +8379,15 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.page = reader.readUint32();
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
                         break;
                     case 2:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 3:
+                        message.page = reader.readUint32();
+                        break;
+                    case 4:
                         message.pageSize = reader.readUint32();
                         break;
                     default: reader.skipField();
@@ -6087,25 +8497,17 @@ export namespace api.core {
         constructor(data?: any[] | {
             question_type_id?: number;
             question_type_title?: string;
-            with_consult_type_count?: number;
-            with_consult_types?: ConsultTypeQuestion[];
             add_remark_num?: number;
             reception_user_num?: number;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("question_type_id" in data && data.question_type_id != undefined) {
                     this.question_type_id = data.question_type_id;
                 }
                 if ("question_type_title" in data && data.question_type_title != undefined) {
                     this.question_type_title = data.question_type_title;
-                }
-                if ("with_consult_type_count" in data && data.with_consult_type_count != undefined) {
-                    this.with_consult_type_count = data.with_consult_type_count;
-                }
-                if ("with_consult_types" in data && data.with_consult_types != undefined) {
-                    this.with_consult_types = data.with_consult_types;
                 }
                 if ("add_remark_num" in data && data.add_remark_num != undefined) {
                     this.add_remark_num = data.add_remark_num;
@@ -6127,35 +8529,21 @@ export namespace api.core {
         set question_type_title(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get with_consult_type_count() {
+        get add_remark_num() {
             return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
-        set with_consult_type_count(value: number) {
+        set add_remark_num(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
-        get with_consult_types() {
-            return pb_1.Message.getRepeatedWrapperField(this, ConsultTypeQuestion, 4) as ConsultTypeQuestion[];
-        }
-        set with_consult_types(value: ConsultTypeQuestion[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 4, value);
-        }
-        get add_remark_num() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
-        }
-        set add_remark_num(value: number) {
-            pb_1.Message.setField(this, 5, value);
-        }
         get reception_user_num() {
-            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
         set reception_user_num(value: number) {
-            pb_1.Message.setField(this, 6, value);
+            pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
             question_type_id?: number;
             question_type_title?: string;
-            with_consult_type_count?: number;
-            with_consult_types?: ReturnType<typeof ConsultTypeQuestion.prototype.toObject>[];
             add_remark_num?: number;
             reception_user_num?: number;
         }): QuestionTypeStat {
@@ -6165,12 +8553,6 @@ export namespace api.core {
             }
             if (data.question_type_title != null) {
                 message.question_type_title = data.question_type_title;
-            }
-            if (data.with_consult_type_count != null) {
-                message.with_consult_type_count = data.with_consult_type_count;
-            }
-            if (data.with_consult_types != null) {
-                message.with_consult_types = data.with_consult_types.map(item => ConsultTypeQuestion.fromObject(item));
             }
             if (data.add_remark_num != null) {
                 message.add_remark_num = data.add_remark_num;
@@ -6184,8 +8566,6 @@ export namespace api.core {
             const data: {
                 question_type_id?: number;
                 question_type_title?: string;
-                with_consult_type_count?: number;
-                with_consult_types?: ReturnType<typeof ConsultTypeQuestion.prototype.toObject>[];
                 add_remark_num?: number;
                 reception_user_num?: number;
             } = {};
@@ -6194,12 +8574,6 @@ export namespace api.core {
             }
             if (this.question_type_title != null) {
                 data.question_type_title = this.question_type_title;
-            }
-            if (this.with_consult_type_count != null) {
-                data.with_consult_type_count = this.with_consult_type_count;
-            }
-            if (this.with_consult_types != null) {
-                data.with_consult_types = this.with_consult_types.map((item: ConsultTypeQuestion) => item.toObject());
             }
             if (this.add_remark_num != null) {
                 data.add_remark_num = this.add_remark_num;
@@ -6217,14 +8591,10 @@ export namespace api.core {
                 writer.writeInt32(1, this.question_type_id);
             if (this.question_type_title.length)
                 writer.writeString(2, this.question_type_title);
-            if (this.with_consult_type_count != 0)
-                writer.writeInt32(3, this.with_consult_type_count);
-            if (this.with_consult_types.length)
-                writer.writeRepeatedMessage(4, this.with_consult_types, (item: ConsultTypeQuestion) => item.serialize(writer));
             if (this.add_remark_num != 0)
-                writer.writeInt32(5, this.add_remark_num);
+                writer.writeInt32(3, this.add_remark_num);
             if (this.reception_user_num != 0)
-                writer.writeInt32(6, this.reception_user_num);
+                writer.writeInt32(4, this.reception_user_num);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -6241,15 +8611,9 @@ export namespace api.core {
                         message.question_type_title = reader.readString();
                         break;
                     case 3:
-                        message.with_consult_type_count = reader.readInt32();
-                        break;
-                    case 4:
-                        reader.readMessage(message.with_consult_types, () => pb_1.Message.addToRepeatedWrapperField(message, 4, ConsultTypeQuestion.deserialize(reader), ConsultTypeQuestion));
-                        break;
-                    case 5:
                         message.add_remark_num = reader.readInt32();
                         break;
-                    case 6:
+                    case 4:
                         message.reception_user_num = reader.readInt32();
                         break;
                     default: reader.skipField();
@@ -6264,11 +8628,110 @@ export namespace api.core {
             return QuestionTypeStat.deserialize(bytes);
         }
     }
+    export class ExportQuestionTypeStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 1) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 2) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportQuestionTypeStatsRequest {
+            const message = new ExportQuestionTypeStatsRequest({});
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_start_time)
+                writer.writeMessage(1, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(2, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQuestionTypeStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQuestionTypeStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQuestionTypeStatsRequest {
+            return ExportQuestionTypeStatsRequest.deserialize(bytes);
+        }
+    }
     export class UpdateQuestionTypeRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             question_type_id?: number;
             question_type_title?: string;
+            font_color?: string;
+            background_color?: string;
+            status?: dependency_5.api.common.CommonConfigStatus;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -6278,6 +8741,15 @@ export namespace api.core {
                 }
                 if ("question_type_title" in data && data.question_type_title != undefined) {
                     this.question_type_title = data.question_type_title;
+                }
+                if ("font_color" in data && data.font_color != undefined) {
+                    this.font_color = data.font_color;
+                }
+                if ("background_color" in data && data.background_color != undefined) {
+                    this.background_color = data.background_color;
+                }
+                if ("status" in data && data.status != undefined) {
+                    this.status = data.status;
                 }
             }
         }
@@ -6293,9 +8765,30 @@ export namespace api.core {
         set question_type_title(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
+        get font_color() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set font_color(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get background_color() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set background_color(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get status() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_5.api.common.CommonConfigStatus.VCS_UNKNOWN) as dependency_5.api.common.CommonConfigStatus;
+        }
+        set status(value: dependency_5.api.common.CommonConfigStatus) {
+            pb_1.Message.setField(this, 5, value);
+        }
         static fromObject(data: {
             question_type_id?: number;
             question_type_title?: string;
+            font_color?: string;
+            background_color?: string;
+            status?: dependency_5.api.common.CommonConfigStatus;
         }): UpdateQuestionTypeRequest {
             const message = new UpdateQuestionTypeRequest({});
             if (data.question_type_id != null) {
@@ -6304,18 +8797,39 @@ export namespace api.core {
             if (data.question_type_title != null) {
                 message.question_type_title = data.question_type_title;
             }
+            if (data.font_color != null) {
+                message.font_color = data.font_color;
+            }
+            if (data.background_color != null) {
+                message.background_color = data.background_color;
+            }
+            if (data.status != null) {
+                message.status = data.status;
+            }
             return message;
         }
         toObject() {
             const data: {
                 question_type_id?: number;
                 question_type_title?: string;
+                font_color?: string;
+                background_color?: string;
+                status?: dependency_5.api.common.CommonConfigStatus;
             } = {};
             if (this.question_type_id != null) {
                 data.question_type_id = this.question_type_id;
             }
             if (this.question_type_title != null) {
                 data.question_type_title = this.question_type_title;
+            }
+            if (this.font_color != null) {
+                data.font_color = this.font_color;
+            }
+            if (this.background_color != null) {
+                data.background_color = this.background_color;
+            }
+            if (this.status != null) {
+                data.status = this.status;
             }
             return data;
         }
@@ -6327,6 +8841,12 @@ export namespace api.core {
                 writer.writeInt32(1, this.question_type_id);
             if (this.question_type_title.length)
                 writer.writeString(2, this.question_type_title);
+            if (this.font_color.length)
+                writer.writeString(3, this.font_color);
+            if (this.background_color.length)
+                writer.writeString(4, this.background_color);
+            if (this.status != dependency_5.api.common.CommonConfigStatus.VCS_UNKNOWN)
+                writer.writeEnum(5, this.status);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -6341,6 +8861,15 @@ export namespace api.core {
                         break;
                     case 2:
                         message.question_type_title = reader.readString();
+                        break;
+                    case 3:
+                        message.font_color = reader.readString();
+                        break;
+                    case 4:
+                        message.background_color = reader.readString();
+                        break;
+                    case 5:
+                        message.status = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }
@@ -6425,12 +8954,20 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             question_type_title?: string;
+            font_color?: string;
+            background_color?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("question_type_title" in data && data.question_type_title != undefined) {
                     this.question_type_title = data.question_type_title;
+                }
+                if ("font_color" in data && data.font_color != undefined) {
+                    this.font_color = data.font_color;
+                }
+                if ("background_color" in data && data.background_color != undefined) {
+                    this.background_color = data.background_color;
                 }
             }
         }
@@ -6440,21 +8977,49 @@ export namespace api.core {
         set question_type_title(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
+        get font_color() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set font_color(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get background_color() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set background_color(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
         static fromObject(data: {
             question_type_title?: string;
+            font_color?: string;
+            background_color?: string;
         }): AddQuestionTypeRequest {
             const message = new AddQuestionTypeRequest({});
             if (data.question_type_title != null) {
                 message.question_type_title = data.question_type_title;
+            }
+            if (data.font_color != null) {
+                message.font_color = data.font_color;
+            }
+            if (data.background_color != null) {
+                message.background_color = data.background_color;
             }
             return message;
         }
         toObject() {
             const data: {
                 question_type_title?: string;
+                font_color?: string;
+                background_color?: string;
             } = {};
             if (this.question_type_title != null) {
                 data.question_type_title = this.question_type_title;
+            }
+            if (this.font_color != null) {
+                data.font_color = this.font_color;
+            }
+            if (this.background_color != null) {
+                data.background_color = this.background_color;
             }
             return data;
         }
@@ -6464,6 +9029,10 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.question_type_title.length)
                 writer.writeString(1, this.question_type_title);
+            if (this.font_color.length)
+                writer.writeString(2, this.font_color);
+            if (this.background_color.length)
+                writer.writeString(3, this.background_color);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -6476,6 +9045,12 @@ export namespace api.core {
                     case 1:
                         message.question_type_title = reader.readString();
                         break;
+                    case 2:
+                        message.font_color = reader.readString();
+                        break;
+                    case 3:
+                        message.background_color = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -6486,6 +9061,2429 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): AddQuestionTypeRequest {
             return AddQuestionTypeRequest.deserialize(bytes);
+        }
+    }
+    export class MsgServiceDurationStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): MsgServiceDurationStatsRequest {
+            const message = new MsgServiceDurationStatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(3, this.worker_nickname);
+            if (this.has_start_time)
+                writer.writeMessage(4, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(5, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(6, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(7, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MsgServiceDurationStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MsgServiceDurationStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 4:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        message.page = reader.readUint32();
+                        break;
+                    case 7:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MsgServiceDurationStatsRequest {
+            return MsgServiceDurationStatsRequest.deserialize(bytes);
+        }
+    }
+    export class MsgServiceDurationStatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            msg_service_duration_stats?: MsgServiceDurationStat[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("msg_service_duration_stats" in data && data.msg_service_duration_stats != undefined) {
+                    this.msg_service_duration_stats = data.msg_service_duration_stats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get msg_service_duration_stats() {
+            return pb_1.Message.getRepeatedWrapperField(this, MsgServiceDurationStat, 1) as MsgServiceDurationStat[];
+        }
+        set msg_service_duration_stats(value: MsgServiceDurationStat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            msg_service_duration_stats?: ReturnType<typeof MsgServiceDurationStat.prototype.toObject>[];
+            total?: number;
+        }): MsgServiceDurationStatsResponse {
+            const message = new MsgServiceDurationStatsResponse({});
+            if (data.msg_service_duration_stats != null) {
+                message.msg_service_duration_stats = data.msg_service_duration_stats.map(item => MsgServiceDurationStat.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                msg_service_duration_stats?: ReturnType<typeof MsgServiceDurationStat.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.msg_service_duration_stats != null) {
+                data.msg_service_duration_stats = this.msg_service_duration_stats.map((item: MsgServiceDurationStat) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.msg_service_duration_stats.length)
+                writer.writeRepeatedMessage(1, this.msg_service_duration_stats, (item: MsgServiceDurationStat) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MsgServiceDurationStatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MsgServiceDurationStatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.msg_service_duration_stats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, MsgServiceDurationStat.deserialize(reader), MsgServiceDurationStat));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MsgServiceDurationStatsResponse {
+            return MsgServiceDurationStatsResponse.deserialize(bytes);
+        }
+    }
+    export class MsgServiceDurationStat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            group_id?: number;
+            group_nickname?: string;
+            user_send_count?: number;
+            worker_send_count?: number;
+            quick_response_count?: number;
+            short_response_count?: number;
+            medium_response_count?: number;
+            long_response_count?: number;
+            delayed_response_count?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("group_nickname" in data && data.group_nickname != undefined) {
+                    this.group_nickname = data.group_nickname;
+                }
+                if ("user_send_count" in data && data.user_send_count != undefined) {
+                    this.user_send_count = data.user_send_count;
+                }
+                if ("worker_send_count" in data && data.worker_send_count != undefined) {
+                    this.worker_send_count = data.worker_send_count;
+                }
+                if ("quick_response_count" in data && data.quick_response_count != undefined) {
+                    this.quick_response_count = data.quick_response_count;
+                }
+                if ("short_response_count" in data && data.short_response_count != undefined) {
+                    this.short_response_count = data.short_response_count;
+                }
+                if ("medium_response_count" in data && data.medium_response_count != undefined) {
+                    this.medium_response_count = data.medium_response_count;
+                }
+                if ("long_response_count" in data && data.long_response_count != undefined) {
+                    this.long_response_count = data.long_response_count;
+                }
+                if ("delayed_response_count" in data && data.delayed_response_count != undefined) {
+                    this.delayed_response_count = data.delayed_response_count;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get group_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set group_nickname(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get user_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set user_send_count(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get worker_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set worker_send_count(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get quick_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set quick_response_count(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get short_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set short_response_count(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get medium_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set medium_response_count(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get long_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set long_response_count(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get delayed_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set delayed_response_count(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            group_id?: number;
+            group_nickname?: string;
+            user_send_count?: number;
+            worker_send_count?: number;
+            quick_response_count?: number;
+            short_response_count?: number;
+            medium_response_count?: number;
+            long_response_count?: number;
+            delayed_response_count?: number;
+        }): MsgServiceDurationStat {
+            const message = new MsgServiceDurationStat({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.group_nickname != null) {
+                message.group_nickname = data.group_nickname;
+            }
+            if (data.user_send_count != null) {
+                message.user_send_count = data.user_send_count;
+            }
+            if (data.worker_send_count != null) {
+                message.worker_send_count = data.worker_send_count;
+            }
+            if (data.quick_response_count != null) {
+                message.quick_response_count = data.quick_response_count;
+            }
+            if (data.short_response_count != null) {
+                message.short_response_count = data.short_response_count;
+            }
+            if (data.medium_response_count != null) {
+                message.medium_response_count = data.medium_response_count;
+            }
+            if (data.long_response_count != null) {
+                message.long_response_count = data.long_response_count;
+            }
+            if (data.delayed_response_count != null) {
+                message.delayed_response_count = data.delayed_response_count;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                group_id?: number;
+                group_nickname?: string;
+                user_send_count?: number;
+                worker_send_count?: number;
+                quick_response_count?: number;
+                short_response_count?: number;
+                medium_response_count?: number;
+                long_response_count?: number;
+                delayed_response_count?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.group_nickname != null) {
+                data.group_nickname = this.group_nickname;
+            }
+            if (this.user_send_count != null) {
+                data.user_send_count = this.user_send_count;
+            }
+            if (this.worker_send_count != null) {
+                data.worker_send_count = this.worker_send_count;
+            }
+            if (this.quick_response_count != null) {
+                data.quick_response_count = this.quick_response_count;
+            }
+            if (this.short_response_count != null) {
+                data.short_response_count = this.short_response_count;
+            }
+            if (this.medium_response_count != null) {
+                data.medium_response_count = this.medium_response_count;
+            }
+            if (this.long_response_count != null) {
+                data.long_response_count = this.long_response_count;
+            }
+            if (this.delayed_response_count != null) {
+                data.delayed_response_count = this.delayed_response_count;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(3, this.worker_nickname);
+            if (this.group_id != 0)
+                writer.writeInt32(4, this.group_id);
+            if (this.group_nickname.length)
+                writer.writeString(5, this.group_nickname);
+            if (this.user_send_count != 0)
+                writer.writeInt32(6, this.user_send_count);
+            if (this.worker_send_count != 0)
+                writer.writeInt32(7, this.worker_send_count);
+            if (this.quick_response_count != 0)
+                writer.writeInt32(8, this.quick_response_count);
+            if (this.short_response_count != 0)
+                writer.writeInt32(9, this.short_response_count);
+            if (this.medium_response_count != 0)
+                writer.writeInt32(10, this.medium_response_count);
+            if (this.long_response_count != 0)
+                writer.writeInt32(11, this.long_response_count);
+            if (this.delayed_response_count != 0)
+                writer.writeInt32(12, this.delayed_response_count);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MsgServiceDurationStat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MsgServiceDurationStat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 4:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.group_nickname = reader.readString();
+                        break;
+                    case 6:
+                        message.user_send_count = reader.readInt32();
+                        break;
+                    case 7:
+                        message.worker_send_count = reader.readInt32();
+                        break;
+                    case 8:
+                        message.quick_response_count = reader.readInt32();
+                        break;
+                    case 9:
+                        message.short_response_count = reader.readInt32();
+                        break;
+                    case 10:
+                        message.medium_response_count = reader.readInt32();
+                        break;
+                    case 11:
+                        message.long_response_count = reader.readInt32();
+                        break;
+                    case 12:
+                        message.delayed_response_count = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MsgServiceDurationStat {
+            return MsgServiceDurationStat.deserialize(bytes);
+        }
+    }
+    export class ExportMsgServiceDurationStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 5) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+        }): ExportMsgServiceDurationStatsRequest {
+            const message = new ExportMsgServiceDurationStatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(3, this.worker_nickname);
+            if (this.has_start_time)
+                writer.writeMessage(4, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(5, this.end_time, () => this.end_time.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportMsgServiceDurationStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportMsgServiceDurationStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 4:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportMsgServiceDurationStatsRequest {
+            return ExportMsgServiceDurationStatsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerSessionStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_id?: number;
+            search?: string;
+            worker_state?: dependency_4.api.common.WorkerState;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_identity" in data && data.worker_identity != undefined) {
+                    this.worker_identity = data.worker_identity;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("search" in data && data.search != undefined) {
+                    this.search = data.search;
+                }
+                if ("worker_state" in data && data.worker_state != undefined) {
+                    this.worker_state = data.worker_state;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_identity() {
+            return pb_1.Message.getFieldWithDefault(this, 2, dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE) as dependency_4.api.common.WorkerPermission;
+        }
+        set worker_identity(value: dependency_4.api.common.WorkerPermission) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get search() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set search(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_state() {
+            return pb_1.Message.getFieldWithDefault(this, 6, dependency_4.api.common.WorkerState.WORKER_OFFLINE) as dependency_4.api.common.WorkerState;
+        }
+        set worker_state(value: dependency_4.api.common.WorkerState) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 7) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 8) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 8, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_id?: number;
+            search?: string;
+            worker_state?: dependency_4.api.common.WorkerState;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): WorkerSessionStatsRequest {
+            const message = new WorkerSessionStatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_identity != null) {
+                message.worker_identity = data.worker_identity;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.search != null) {
+                message.search = data.search;
+            }
+            if (data.worker_state != null) {
+                message.worker_state = data.worker_state;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_identity?: dependency_4.api.common.WorkerPermission;
+                worker_id?: number;
+                search?: string;
+                worker_state?: dependency_4.api.common.WorkerState;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_identity != null) {
+                data.worker_identity = this.worker_identity;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.search != null) {
+                data.search = this.search;
+            }
+            if (this.worker_state != null) {
+                data.worker_state = this.worker_state;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_identity != dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE)
+                writer.writeEnum(2, this.worker_identity);
+            if (this.worker_id != 0)
+                writer.writeInt32(3, this.worker_id);
+            if (this.search.length)
+                writer.writeString(4, this.search);
+            if (this.worker_state != dependency_4.api.common.WorkerState.WORKER_OFFLINE)
+                writer.writeEnum(6, this.worker_state);
+            if (this.has_start_time)
+                writer.writeMessage(7, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(8, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(9, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(10, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerSessionStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerSessionStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_identity = reader.readEnum();
+                        break;
+                    case 3:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.search = reader.readString();
+                        break;
+                    case 6:
+                        message.worker_state = reader.readEnum();
+                        break;
+                    case 7:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        message.page = reader.readUint32();
+                        break;
+                    case 10:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerSessionStatsRequest {
+            return WorkerSessionStatsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerSessionStatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            max_worker_count?: number;
+            current_worker_count?: number;
+            assigned_people_count?: number;
+            first_quick_reply_rate?: number;
+            average_first_response_duration?: string;
+            average_response_duration?: string;
+            transferred_task_count?: number;
+            received_task_count?: number;
+            effective_session_count?: number;
+            auto_pushed_session_count?: number;
+            sent_message_count?: number;
+            received_message_count?: number;
+            average_reception_duration?: string;
+            actual_reception_count?: number;
+            worker_session_stats?: WorkerSessionStat[];
+            count?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [22], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("max_worker_count" in data && data.max_worker_count != undefined) {
+                    this.max_worker_count = data.max_worker_count;
+                }
+                if ("current_worker_count" in data && data.current_worker_count != undefined) {
+                    this.current_worker_count = data.current_worker_count;
+                }
+                if ("assigned_people_count" in data && data.assigned_people_count != undefined) {
+                    this.assigned_people_count = data.assigned_people_count;
+                }
+                if ("first_quick_reply_rate" in data && data.first_quick_reply_rate != undefined) {
+                    this.first_quick_reply_rate = data.first_quick_reply_rate;
+                }
+                if ("average_first_response_duration" in data && data.average_first_response_duration != undefined) {
+                    this.average_first_response_duration = data.average_first_response_duration;
+                }
+                if ("average_response_duration" in data && data.average_response_duration != undefined) {
+                    this.average_response_duration = data.average_response_duration;
+                }
+                if ("transferred_task_count" in data && data.transferred_task_count != undefined) {
+                    this.transferred_task_count = data.transferred_task_count;
+                }
+                if ("received_task_count" in data && data.received_task_count != undefined) {
+                    this.received_task_count = data.received_task_count;
+                }
+                if ("effective_session_count" in data && data.effective_session_count != undefined) {
+                    this.effective_session_count = data.effective_session_count;
+                }
+                if ("auto_pushed_session_count" in data && data.auto_pushed_session_count != undefined) {
+                    this.auto_pushed_session_count = data.auto_pushed_session_count;
+                }
+                if ("sent_message_count" in data && data.sent_message_count != undefined) {
+                    this.sent_message_count = data.sent_message_count;
+                }
+                if ("received_message_count" in data && data.received_message_count != undefined) {
+                    this.received_message_count = data.received_message_count;
+                }
+                if ("average_reception_duration" in data && data.average_reception_duration != undefined) {
+                    this.average_reception_duration = data.average_reception_duration;
+                }
+                if ("actual_reception_count" in data && data.actual_reception_count != undefined) {
+                    this.actual_reception_count = data.actual_reception_count;
+                }
+                if ("worker_session_stats" in data && data.worker_session_stats != undefined) {
+                    this.worker_session_stats = data.worker_session_stats;
+                }
+                if ("count" in data && data.count != undefined) {
+                    this.count = data.count;
+                }
+            }
+        }
+        get max_worker_count() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set max_worker_count(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get current_worker_count() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set current_worker_count(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get assigned_people_count() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set assigned_people_count(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get first_quick_reply_rate() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set first_quick_reply_rate(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get average_first_response_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set average_first_response_duration(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get average_response_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set average_response_duration(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get transferred_task_count() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set transferred_task_count(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get received_task_count() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set received_task_count(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get effective_session_count() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set effective_session_count(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get auto_pushed_session_count() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set auto_pushed_session_count(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get sent_message_count() {
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
+        }
+        set sent_message_count(value: number) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get received_message_count() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as number;
+        }
+        set received_message_count(value: number) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get average_reception_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 17, "") as string;
+        }
+        set average_reception_duration(value: string) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get actual_reception_count() {
+            return pb_1.Message.getFieldWithDefault(this, 18, 0) as number;
+        }
+        set actual_reception_count(value: number) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        get worker_session_stats() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerSessionStat, 22) as WorkerSessionStat[];
+        }
+        set worker_session_stats(value: WorkerSessionStat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 22, value);
+        }
+        get count() {
+            return pb_1.Message.getFieldWithDefault(this, 23, 0) as number;
+        }
+        set count(value: number) {
+            pb_1.Message.setField(this, 23, value);
+        }
+        static fromObject(data: {
+            max_worker_count?: number;
+            current_worker_count?: number;
+            assigned_people_count?: number;
+            first_quick_reply_rate?: number;
+            average_first_response_duration?: string;
+            average_response_duration?: string;
+            transferred_task_count?: number;
+            received_task_count?: number;
+            effective_session_count?: number;
+            auto_pushed_session_count?: number;
+            sent_message_count?: number;
+            received_message_count?: number;
+            average_reception_duration?: string;
+            actual_reception_count?: number;
+            worker_session_stats?: ReturnType<typeof WorkerSessionStat.prototype.toObject>[];
+            count?: number;
+        }): WorkerSessionStatsResponse {
+            const message = new WorkerSessionStatsResponse({});
+            if (data.max_worker_count != null) {
+                message.max_worker_count = data.max_worker_count;
+            }
+            if (data.current_worker_count != null) {
+                message.current_worker_count = data.current_worker_count;
+            }
+            if (data.assigned_people_count != null) {
+                message.assigned_people_count = data.assigned_people_count;
+            }
+            if (data.first_quick_reply_rate != null) {
+                message.first_quick_reply_rate = data.first_quick_reply_rate;
+            }
+            if (data.average_first_response_duration != null) {
+                message.average_first_response_duration = data.average_first_response_duration;
+            }
+            if (data.average_response_duration != null) {
+                message.average_response_duration = data.average_response_duration;
+            }
+            if (data.transferred_task_count != null) {
+                message.transferred_task_count = data.transferred_task_count;
+            }
+            if (data.received_task_count != null) {
+                message.received_task_count = data.received_task_count;
+            }
+            if (data.effective_session_count != null) {
+                message.effective_session_count = data.effective_session_count;
+            }
+            if (data.auto_pushed_session_count != null) {
+                message.auto_pushed_session_count = data.auto_pushed_session_count;
+            }
+            if (data.sent_message_count != null) {
+                message.sent_message_count = data.sent_message_count;
+            }
+            if (data.received_message_count != null) {
+                message.received_message_count = data.received_message_count;
+            }
+            if (data.average_reception_duration != null) {
+                message.average_reception_duration = data.average_reception_duration;
+            }
+            if (data.actual_reception_count != null) {
+                message.actual_reception_count = data.actual_reception_count;
+            }
+            if (data.worker_session_stats != null) {
+                message.worker_session_stats = data.worker_session_stats.map(item => WorkerSessionStat.fromObject(item));
+            }
+            if (data.count != null) {
+                message.count = data.count;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                max_worker_count?: number;
+                current_worker_count?: number;
+                assigned_people_count?: number;
+                first_quick_reply_rate?: number;
+                average_first_response_duration?: string;
+                average_response_duration?: string;
+                transferred_task_count?: number;
+                received_task_count?: number;
+                effective_session_count?: number;
+                auto_pushed_session_count?: number;
+                sent_message_count?: number;
+                received_message_count?: number;
+                average_reception_duration?: string;
+                actual_reception_count?: number;
+                worker_session_stats?: ReturnType<typeof WorkerSessionStat.prototype.toObject>[];
+                count?: number;
+            } = {};
+            if (this.max_worker_count != null) {
+                data.max_worker_count = this.max_worker_count;
+            }
+            if (this.current_worker_count != null) {
+                data.current_worker_count = this.current_worker_count;
+            }
+            if (this.assigned_people_count != null) {
+                data.assigned_people_count = this.assigned_people_count;
+            }
+            if (this.first_quick_reply_rate != null) {
+                data.first_quick_reply_rate = this.first_quick_reply_rate;
+            }
+            if (this.average_first_response_duration != null) {
+                data.average_first_response_duration = this.average_first_response_duration;
+            }
+            if (this.average_response_duration != null) {
+                data.average_response_duration = this.average_response_duration;
+            }
+            if (this.transferred_task_count != null) {
+                data.transferred_task_count = this.transferred_task_count;
+            }
+            if (this.received_task_count != null) {
+                data.received_task_count = this.received_task_count;
+            }
+            if (this.effective_session_count != null) {
+                data.effective_session_count = this.effective_session_count;
+            }
+            if (this.auto_pushed_session_count != null) {
+                data.auto_pushed_session_count = this.auto_pushed_session_count;
+            }
+            if (this.sent_message_count != null) {
+                data.sent_message_count = this.sent_message_count;
+            }
+            if (this.received_message_count != null) {
+                data.received_message_count = this.received_message_count;
+            }
+            if (this.average_reception_duration != null) {
+                data.average_reception_duration = this.average_reception_duration;
+            }
+            if (this.actual_reception_count != null) {
+                data.actual_reception_count = this.actual_reception_count;
+            }
+            if (this.worker_session_stats != null) {
+                data.worker_session_stats = this.worker_session_stats.map((item: WorkerSessionStat) => item.toObject());
+            }
+            if (this.count != null) {
+                data.count = this.count;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.max_worker_count != 0)
+                writer.writeInt32(1, this.max_worker_count);
+            if (this.current_worker_count != 0)
+                writer.writeInt32(2, this.current_worker_count);
+            if (this.assigned_people_count != 0)
+                writer.writeInt32(3, this.assigned_people_count);
+            if (this.first_quick_reply_rate != 0)
+                writer.writeFloat(4, this.first_quick_reply_rate);
+            if (this.average_first_response_duration.length)
+                writer.writeString(5, this.average_first_response_duration);
+            if (this.average_response_duration.length)
+                writer.writeString(6, this.average_response_duration);
+            if (this.transferred_task_count != 0)
+                writer.writeInt32(8, this.transferred_task_count);
+            if (this.received_task_count != 0)
+                writer.writeInt32(9, this.received_task_count);
+            if (this.effective_session_count != 0)
+                writer.writeInt32(10, this.effective_session_count);
+            if (this.auto_pushed_session_count != 0)
+                writer.writeInt32(12, this.auto_pushed_session_count);
+            if (this.sent_message_count != 0)
+                writer.writeInt32(15, this.sent_message_count);
+            if (this.received_message_count != 0)
+                writer.writeInt32(16, this.received_message_count);
+            if (this.average_reception_duration.length)
+                writer.writeString(17, this.average_reception_duration);
+            if (this.actual_reception_count != 0)
+                writer.writeInt32(18, this.actual_reception_count);
+            if (this.worker_session_stats.length)
+                writer.writeRepeatedMessage(22, this.worker_session_stats, (item: WorkerSessionStat) => item.serialize(writer));
+            if (this.count != 0)
+                writer.writeInt32(23, this.count);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerSessionStatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerSessionStatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.max_worker_count = reader.readInt32();
+                        break;
+                    case 2:
+                        message.current_worker_count = reader.readInt32();
+                        break;
+                    case 3:
+                        message.assigned_people_count = reader.readInt32();
+                        break;
+                    case 4:
+                        message.first_quick_reply_rate = reader.readFloat();
+                        break;
+                    case 5:
+                        message.average_first_response_duration = reader.readString();
+                        break;
+                    case 6:
+                        message.average_response_duration = reader.readString();
+                        break;
+                    case 8:
+                        message.transferred_task_count = reader.readInt32();
+                        break;
+                    case 9:
+                        message.received_task_count = reader.readInt32();
+                        break;
+                    case 10:
+                        message.effective_session_count = reader.readInt32();
+                        break;
+                    case 12:
+                        message.auto_pushed_session_count = reader.readInt32();
+                        break;
+                    case 15:
+                        message.sent_message_count = reader.readInt32();
+                        break;
+                    case 16:
+                        message.received_message_count = reader.readInt32();
+                        break;
+                    case 17:
+                        message.average_reception_duration = reader.readString();
+                        break;
+                    case 18:
+                        message.actual_reception_count = reader.readInt32();
+                        break;
+                    case 22:
+                        reader.readMessage(message.worker_session_stats, () => pb_1.Message.addToRepeatedWrapperField(message, 22, WorkerSessionStat.deserialize(reader), WorkerSessionStat));
+                        break;
+                    case 23:
+                        message.count = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerSessionStatsResponse {
+            return WorkerSessionStatsResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerSessionStat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_state?: dependency_4.api.common.WorkerState;
+            group_id?: number;
+            group_nickname?: string;
+            sub_group_id?: number;
+            sub_group_nickname?: string;
+            assigned_people_count?: number;
+            transferred_task_count?: number;
+            received_task_count?: number;
+            effective_session_count?: number;
+            auto_pushed_session_count?: number;
+            actual_reception_count?: number;
+            sent_message_count?: number;
+            received_message_count?: number;
+            average_reception_duration?: string;
+            first_quick_reply_rate?: number;
+            average_first_response_duration?: string;
+            frist_quick_response_count?: number;
+            frist_short_response_count?: number;
+            frist_medium_response_count?: number;
+            average_response_duration?: string;
+            quick_response_count?: number;
+            short_response_count?: number;
+            medium_response_count?: number;
+            long_response_count?: number;
+            delayed_response_count?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("worker_identity" in data && data.worker_identity != undefined) {
+                    this.worker_identity = data.worker_identity;
+                }
+                if ("worker_state" in data && data.worker_state != undefined) {
+                    this.worker_state = data.worker_state;
+                }
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("group_nickname" in data && data.group_nickname != undefined) {
+                    this.group_nickname = data.group_nickname;
+                }
+                if ("sub_group_id" in data && data.sub_group_id != undefined) {
+                    this.sub_group_id = data.sub_group_id;
+                }
+                if ("sub_group_nickname" in data && data.sub_group_nickname != undefined) {
+                    this.sub_group_nickname = data.sub_group_nickname;
+                }
+                if ("assigned_people_count" in data && data.assigned_people_count != undefined) {
+                    this.assigned_people_count = data.assigned_people_count;
+                }
+                if ("transferred_task_count" in data && data.transferred_task_count != undefined) {
+                    this.transferred_task_count = data.transferred_task_count;
+                }
+                if ("received_task_count" in data && data.received_task_count != undefined) {
+                    this.received_task_count = data.received_task_count;
+                }
+                if ("effective_session_count" in data && data.effective_session_count != undefined) {
+                    this.effective_session_count = data.effective_session_count;
+                }
+                if ("auto_pushed_session_count" in data && data.auto_pushed_session_count != undefined) {
+                    this.auto_pushed_session_count = data.auto_pushed_session_count;
+                }
+                if ("actual_reception_count" in data && data.actual_reception_count != undefined) {
+                    this.actual_reception_count = data.actual_reception_count;
+                }
+                if ("sent_message_count" in data && data.sent_message_count != undefined) {
+                    this.sent_message_count = data.sent_message_count;
+                }
+                if ("received_message_count" in data && data.received_message_count != undefined) {
+                    this.received_message_count = data.received_message_count;
+                }
+                if ("average_reception_duration" in data && data.average_reception_duration != undefined) {
+                    this.average_reception_duration = data.average_reception_duration;
+                }
+                if ("first_quick_reply_rate" in data && data.first_quick_reply_rate != undefined) {
+                    this.first_quick_reply_rate = data.first_quick_reply_rate;
+                }
+                if ("average_first_response_duration" in data && data.average_first_response_duration != undefined) {
+                    this.average_first_response_duration = data.average_first_response_duration;
+                }
+                if ("frist_quick_response_count" in data && data.frist_quick_response_count != undefined) {
+                    this.frist_quick_response_count = data.frist_quick_response_count;
+                }
+                if ("frist_short_response_count" in data && data.frist_short_response_count != undefined) {
+                    this.frist_short_response_count = data.frist_short_response_count;
+                }
+                if ("frist_medium_response_count" in data && data.frist_medium_response_count != undefined) {
+                    this.frist_medium_response_count = data.frist_medium_response_count;
+                }
+                if ("average_response_duration" in data && data.average_response_duration != undefined) {
+                    this.average_response_duration = data.average_response_duration;
+                }
+                if ("quick_response_count" in data && data.quick_response_count != undefined) {
+                    this.quick_response_count = data.quick_response_count;
+                }
+                if ("short_response_count" in data && data.short_response_count != undefined) {
+                    this.short_response_count = data.short_response_count;
+                }
+                if ("medium_response_count" in data && data.medium_response_count != undefined) {
+                    this.medium_response_count = data.medium_response_count;
+                }
+                if ("long_response_count" in data && data.long_response_count != undefined) {
+                    this.long_response_count = data.long_response_count;
+                }
+                if ("delayed_response_count" in data && data.delayed_response_count != undefined) {
+                    this.delayed_response_count = data.delayed_response_count;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_identity() {
+            return pb_1.Message.getFieldWithDefault(this, 4, dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE) as dependency_4.api.common.WorkerPermission;
+        }
+        set worker_identity(value: dependency_4.api.common.WorkerPermission) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_state() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_4.api.common.WorkerState.WORKER_OFFLINE) as dependency_4.api.common.WorkerState;
+        }
+        set worker_state(value: dependency_4.api.common.WorkerState) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get group_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set group_nickname(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get sub_group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set sub_group_id(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get sub_group_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set sub_group_nickname(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get assigned_people_count() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set assigned_people_count(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get transferred_task_count() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set transferred_task_count(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get received_task_count() {
+            return pb_1.Message.getFieldWithDefault(this, 13, 0) as number;
+        }
+        set received_task_count(value: number) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get effective_session_count() {
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
+        }
+        set effective_session_count(value: number) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get auto_pushed_session_count() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as number;
+        }
+        set auto_pushed_session_count(value: number) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get actual_reception_count() {
+            return pb_1.Message.getFieldWithDefault(this, 17, 0) as number;
+        }
+        set actual_reception_count(value: number) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get sent_message_count() {
+            return pb_1.Message.getFieldWithDefault(this, 18, 0) as number;
+        }
+        set sent_message_count(value: number) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        get received_message_count() {
+            return pb_1.Message.getFieldWithDefault(this, 20, 0) as number;
+        }
+        set received_message_count(value: number) {
+            pb_1.Message.setField(this, 20, value);
+        }
+        get average_reception_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 22, "") as string;
+        }
+        set average_reception_duration(value: string) {
+            pb_1.Message.setField(this, 22, value);
+        }
+        get first_quick_reply_rate() {
+            return pb_1.Message.getFieldWithDefault(this, 23, 0) as number;
+        }
+        set first_quick_reply_rate(value: number) {
+            pb_1.Message.setField(this, 23, value);
+        }
+        get average_first_response_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 24, "") as string;
+        }
+        set average_first_response_duration(value: string) {
+            pb_1.Message.setField(this, 24, value);
+        }
+        get frist_quick_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 25, 0) as number;
+        }
+        set frist_quick_response_count(value: number) {
+            pb_1.Message.setField(this, 25, value);
+        }
+        get frist_short_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 26, 0) as number;
+        }
+        set frist_short_response_count(value: number) {
+            pb_1.Message.setField(this, 26, value);
+        }
+        get frist_medium_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 27, 0) as number;
+        }
+        set frist_medium_response_count(value: number) {
+            pb_1.Message.setField(this, 27, value);
+        }
+        get average_response_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 28, "") as string;
+        }
+        set average_response_duration(value: string) {
+            pb_1.Message.setField(this, 28, value);
+        }
+        get quick_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 29, 0) as number;
+        }
+        set quick_response_count(value: number) {
+            pb_1.Message.setField(this, 29, value);
+        }
+        get short_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 30, 0) as number;
+        }
+        set short_response_count(value: number) {
+            pb_1.Message.setField(this, 30, value);
+        }
+        get medium_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 32, 0) as number;
+        }
+        set medium_response_count(value: number) {
+            pb_1.Message.setField(this, 32, value);
+        }
+        get long_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 33, 0) as number;
+        }
+        set long_response_count(value: number) {
+            pb_1.Message.setField(this, 33, value);
+        }
+        get delayed_response_count() {
+            return pb_1.Message.getFieldWithDefault(this, 35, 0) as number;
+        }
+        set delayed_response_count(value: number) {
+            pb_1.Message.setField(this, 35, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_state?: dependency_4.api.common.WorkerState;
+            group_id?: number;
+            group_nickname?: string;
+            sub_group_id?: number;
+            sub_group_nickname?: string;
+            assigned_people_count?: number;
+            transferred_task_count?: number;
+            received_task_count?: number;
+            effective_session_count?: number;
+            auto_pushed_session_count?: number;
+            actual_reception_count?: number;
+            sent_message_count?: number;
+            received_message_count?: number;
+            average_reception_duration?: string;
+            first_quick_reply_rate?: number;
+            average_first_response_duration?: string;
+            frist_quick_response_count?: number;
+            frist_short_response_count?: number;
+            frist_medium_response_count?: number;
+            average_response_duration?: string;
+            quick_response_count?: number;
+            short_response_count?: number;
+            medium_response_count?: number;
+            long_response_count?: number;
+            delayed_response_count?: number;
+        }): WorkerSessionStat {
+            const message = new WorkerSessionStat({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.worker_identity != null) {
+                message.worker_identity = data.worker_identity;
+            }
+            if (data.worker_state != null) {
+                message.worker_state = data.worker_state;
+            }
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.group_nickname != null) {
+                message.group_nickname = data.group_nickname;
+            }
+            if (data.sub_group_id != null) {
+                message.sub_group_id = data.sub_group_id;
+            }
+            if (data.sub_group_nickname != null) {
+                message.sub_group_nickname = data.sub_group_nickname;
+            }
+            if (data.assigned_people_count != null) {
+                message.assigned_people_count = data.assigned_people_count;
+            }
+            if (data.transferred_task_count != null) {
+                message.transferred_task_count = data.transferred_task_count;
+            }
+            if (data.received_task_count != null) {
+                message.received_task_count = data.received_task_count;
+            }
+            if (data.effective_session_count != null) {
+                message.effective_session_count = data.effective_session_count;
+            }
+            if (data.auto_pushed_session_count != null) {
+                message.auto_pushed_session_count = data.auto_pushed_session_count;
+            }
+            if (data.actual_reception_count != null) {
+                message.actual_reception_count = data.actual_reception_count;
+            }
+            if (data.sent_message_count != null) {
+                message.sent_message_count = data.sent_message_count;
+            }
+            if (data.received_message_count != null) {
+                message.received_message_count = data.received_message_count;
+            }
+            if (data.average_reception_duration != null) {
+                message.average_reception_duration = data.average_reception_duration;
+            }
+            if (data.first_quick_reply_rate != null) {
+                message.first_quick_reply_rate = data.first_quick_reply_rate;
+            }
+            if (data.average_first_response_duration != null) {
+                message.average_first_response_duration = data.average_first_response_duration;
+            }
+            if (data.frist_quick_response_count != null) {
+                message.frist_quick_response_count = data.frist_quick_response_count;
+            }
+            if (data.frist_short_response_count != null) {
+                message.frist_short_response_count = data.frist_short_response_count;
+            }
+            if (data.frist_medium_response_count != null) {
+                message.frist_medium_response_count = data.frist_medium_response_count;
+            }
+            if (data.average_response_duration != null) {
+                message.average_response_duration = data.average_response_duration;
+            }
+            if (data.quick_response_count != null) {
+                message.quick_response_count = data.quick_response_count;
+            }
+            if (data.short_response_count != null) {
+                message.short_response_count = data.short_response_count;
+            }
+            if (data.medium_response_count != null) {
+                message.medium_response_count = data.medium_response_count;
+            }
+            if (data.long_response_count != null) {
+                message.long_response_count = data.long_response_count;
+            }
+            if (data.delayed_response_count != null) {
+                message.delayed_response_count = data.delayed_response_count;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                worker_identity?: dependency_4.api.common.WorkerPermission;
+                worker_state?: dependency_4.api.common.WorkerState;
+                group_id?: number;
+                group_nickname?: string;
+                sub_group_id?: number;
+                sub_group_nickname?: string;
+                assigned_people_count?: number;
+                transferred_task_count?: number;
+                received_task_count?: number;
+                effective_session_count?: number;
+                auto_pushed_session_count?: number;
+                actual_reception_count?: number;
+                sent_message_count?: number;
+                received_message_count?: number;
+                average_reception_duration?: string;
+                first_quick_reply_rate?: number;
+                average_first_response_duration?: string;
+                frist_quick_response_count?: number;
+                frist_short_response_count?: number;
+                frist_medium_response_count?: number;
+                average_response_duration?: string;
+                quick_response_count?: number;
+                short_response_count?: number;
+                medium_response_count?: number;
+                long_response_count?: number;
+                delayed_response_count?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.worker_identity != null) {
+                data.worker_identity = this.worker_identity;
+            }
+            if (this.worker_state != null) {
+                data.worker_state = this.worker_state;
+            }
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.group_nickname != null) {
+                data.group_nickname = this.group_nickname;
+            }
+            if (this.sub_group_id != null) {
+                data.sub_group_id = this.sub_group_id;
+            }
+            if (this.sub_group_nickname != null) {
+                data.sub_group_nickname = this.sub_group_nickname;
+            }
+            if (this.assigned_people_count != null) {
+                data.assigned_people_count = this.assigned_people_count;
+            }
+            if (this.transferred_task_count != null) {
+                data.transferred_task_count = this.transferred_task_count;
+            }
+            if (this.received_task_count != null) {
+                data.received_task_count = this.received_task_count;
+            }
+            if (this.effective_session_count != null) {
+                data.effective_session_count = this.effective_session_count;
+            }
+            if (this.auto_pushed_session_count != null) {
+                data.auto_pushed_session_count = this.auto_pushed_session_count;
+            }
+            if (this.actual_reception_count != null) {
+                data.actual_reception_count = this.actual_reception_count;
+            }
+            if (this.sent_message_count != null) {
+                data.sent_message_count = this.sent_message_count;
+            }
+            if (this.received_message_count != null) {
+                data.received_message_count = this.received_message_count;
+            }
+            if (this.average_reception_duration != null) {
+                data.average_reception_duration = this.average_reception_duration;
+            }
+            if (this.first_quick_reply_rate != null) {
+                data.first_quick_reply_rate = this.first_quick_reply_rate;
+            }
+            if (this.average_first_response_duration != null) {
+                data.average_first_response_duration = this.average_first_response_duration;
+            }
+            if (this.frist_quick_response_count != null) {
+                data.frist_quick_response_count = this.frist_quick_response_count;
+            }
+            if (this.frist_short_response_count != null) {
+                data.frist_short_response_count = this.frist_short_response_count;
+            }
+            if (this.frist_medium_response_count != null) {
+                data.frist_medium_response_count = this.frist_medium_response_count;
+            }
+            if (this.average_response_duration != null) {
+                data.average_response_duration = this.average_response_duration;
+            }
+            if (this.quick_response_count != null) {
+                data.quick_response_count = this.quick_response_count;
+            }
+            if (this.short_response_count != null) {
+                data.short_response_count = this.short_response_count;
+            }
+            if (this.medium_response_count != null) {
+                data.medium_response_count = this.medium_response_count;
+            }
+            if (this.long_response_count != null) {
+                data.long_response_count = this.long_response_count;
+            }
+            if (this.delayed_response_count != null) {
+                data.delayed_response_count = this.delayed_response_count;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(2, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(3, this.worker_nickname);
+            if (this.worker_identity != dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE)
+                writer.writeEnum(4, this.worker_identity);
+            if (this.worker_state != dependency_4.api.common.WorkerState.WORKER_OFFLINE)
+                writer.writeEnum(5, this.worker_state);
+            if (this.group_id != 0)
+                writer.writeInt32(6, this.group_id);
+            if (this.group_nickname.length)
+                writer.writeString(7, this.group_nickname);
+            if (this.sub_group_id != 0)
+                writer.writeInt32(8, this.sub_group_id);
+            if (this.sub_group_nickname.length)
+                writer.writeString(9, this.sub_group_nickname);
+            if (this.assigned_people_count != 0)
+                writer.writeInt32(10, this.assigned_people_count);
+            if (this.transferred_task_count != 0)
+                writer.writeInt32(12, this.transferred_task_count);
+            if (this.received_task_count != 0)
+                writer.writeInt32(13, this.received_task_count);
+            if (this.effective_session_count != 0)
+                writer.writeInt32(15, this.effective_session_count);
+            if (this.auto_pushed_session_count != 0)
+                writer.writeInt32(16, this.auto_pushed_session_count);
+            if (this.actual_reception_count != 0)
+                writer.writeInt32(17, this.actual_reception_count);
+            if (this.sent_message_count != 0)
+                writer.writeInt32(18, this.sent_message_count);
+            if (this.received_message_count != 0)
+                writer.writeInt32(20, this.received_message_count);
+            if (this.average_reception_duration.length)
+                writer.writeString(22, this.average_reception_duration);
+            if (this.first_quick_reply_rate != 0)
+                writer.writeFloat(23, this.first_quick_reply_rate);
+            if (this.average_first_response_duration.length)
+                writer.writeString(24, this.average_first_response_duration);
+            if (this.frist_quick_response_count != 0)
+                writer.writeInt32(25, this.frist_quick_response_count);
+            if (this.frist_short_response_count != 0)
+                writer.writeInt32(26, this.frist_short_response_count);
+            if (this.frist_medium_response_count != 0)
+                writer.writeInt32(27, this.frist_medium_response_count);
+            if (this.average_response_duration.length)
+                writer.writeString(28, this.average_response_duration);
+            if (this.quick_response_count != 0)
+                writer.writeInt32(29, this.quick_response_count);
+            if (this.short_response_count != 0)
+                writer.writeInt32(30, this.short_response_count);
+            if (this.medium_response_count != 0)
+                writer.writeInt32(32, this.medium_response_count);
+            if (this.long_response_count != 0)
+                writer.writeInt32(33, this.long_response_count);
+            if (this.delayed_response_count != 0)
+                writer.writeInt32(35, this.delayed_response_count);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerSessionStat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerSessionStat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 4:
+                        message.worker_identity = reader.readEnum();
+                        break;
+                    case 5:
+                        message.worker_state = reader.readEnum();
+                        break;
+                    case 6:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 7:
+                        message.group_nickname = reader.readString();
+                        break;
+                    case 8:
+                        message.sub_group_id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.sub_group_nickname = reader.readString();
+                        break;
+                    case 10:
+                        message.assigned_people_count = reader.readInt32();
+                        break;
+                    case 12:
+                        message.transferred_task_count = reader.readInt32();
+                        break;
+                    case 13:
+                        message.received_task_count = reader.readInt32();
+                        break;
+                    case 15:
+                        message.effective_session_count = reader.readInt32();
+                        break;
+                    case 16:
+                        message.auto_pushed_session_count = reader.readInt32();
+                        break;
+                    case 17:
+                        message.actual_reception_count = reader.readInt32();
+                        break;
+                    case 18:
+                        message.sent_message_count = reader.readInt32();
+                        break;
+                    case 20:
+                        message.received_message_count = reader.readInt32();
+                        break;
+                    case 22:
+                        message.average_reception_duration = reader.readString();
+                        break;
+                    case 23:
+                        message.first_quick_reply_rate = reader.readFloat();
+                        break;
+                    case 24:
+                        message.average_first_response_duration = reader.readString();
+                        break;
+                    case 25:
+                        message.frist_quick_response_count = reader.readInt32();
+                        break;
+                    case 26:
+                        message.frist_short_response_count = reader.readInt32();
+                        break;
+                    case 27:
+                        message.frist_medium_response_count = reader.readInt32();
+                        break;
+                    case 28:
+                        message.average_response_duration = reader.readString();
+                        break;
+                    case 29:
+                        message.quick_response_count = reader.readInt32();
+                        break;
+                    case 30:
+                        message.short_response_count = reader.readInt32();
+                        break;
+                    case 32:
+                        message.medium_response_count = reader.readInt32();
+                        break;
+                    case 33:
+                        message.long_response_count = reader.readInt32();
+                        break;
+                    case 35:
+                        message.delayed_response_count = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerSessionStat {
+            return WorkerSessionStat.deserialize(bytes);
+        }
+    }
+    export class ExportWorkerSessionStatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_id?: number;
+            search?: string;
+            worker_state?: dependency_4.api.common.WorkerState;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_identity" in data && data.worker_identity != undefined) {
+                    this.worker_identity = data.worker_identity;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("search" in data && data.search != undefined) {
+                    this.search = data.search;
+                }
+                if ("worker_state" in data && data.worker_state != undefined) {
+                    this.worker_state = data.worker_state;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_identity() {
+            return pb_1.Message.getFieldWithDefault(this, 2, dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE) as dependency_4.api.common.WorkerPermission;
+        }
+        set worker_identity(value: dependency_4.api.common.WorkerPermission) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get search() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set search(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_state() {
+            return pb_1.Message.getFieldWithDefault(this, 6, dependency_4.api.common.WorkerState.WORKER_OFFLINE) as dependency_4.api.common.WorkerState;
+        }
+        set worker_state(value: dependency_4.api.common.WorkerState) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 7) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 8) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 8, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_identity?: dependency_4.api.common.WorkerPermission;
+            worker_id?: number;
+            search?: string;
+            worker_state?: dependency_4.api.common.WorkerState;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): ExportWorkerSessionStatsRequest {
+            const message = new ExportWorkerSessionStatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_identity != null) {
+                message.worker_identity = data.worker_identity;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.search != null) {
+                message.search = data.search;
+            }
+            if (data.worker_state != null) {
+                message.worker_state = data.worker_state;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_identity?: dependency_4.api.common.WorkerPermission;
+                worker_id?: number;
+                search?: string;
+                worker_state?: dependency_4.api.common.WorkerState;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_identity != null) {
+                data.worker_identity = this.worker_identity;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.search != null) {
+                data.search = this.search;
+            }
+            if (this.worker_state != null) {
+                data.worker_state = this.worker_state;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_identity != dependency_4.api.common.WorkerPermission.WORKER_PERM_NONE)
+                writer.writeEnum(2, this.worker_identity);
+            if (this.worker_id != 0)
+                writer.writeInt32(3, this.worker_id);
+            if (this.search.length)
+                writer.writeString(4, this.search);
+            if (this.worker_state != dependency_4.api.common.WorkerState.WORKER_OFFLINE)
+                writer.writeEnum(6, this.worker_state);
+            if (this.has_start_time)
+                writer.writeMessage(7, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(8, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(9, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(10, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportWorkerSessionStatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportWorkerSessionStatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_identity = reader.readEnum();
+                        break;
+                    case 3:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.search = reader.readString();
+                        break;
+                    case 6:
+                        message.worker_state = reader.readEnum();
+                        break;
+                    case 7:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        message.page = reader.readUint32();
+                        break;
+                    case 10:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportWorkerSessionStatsRequest {
+            return ExportWorkerSessionStatsRequest.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {
@@ -6613,6 +11611,15 @@ export namespace api.core {
                 responseSerialize: (message: QuestionTypeRemarksResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => QuestionTypeRemarksResponse.deserialize(new Uint8Array(bytes))
             },
+            ExportQuestionTypeRemarks: {
+                path: "/api.core.DataStatistic/ExportQuestionTypeRemarks",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQuestionTypeRemarksRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQuestionTypeRemarksRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             QuestionTypeWithWorkerStats: {
                 path: "/api.core.DataStatistic/QuestionTypeWithWorkerStats",
                 requestStream: false,
@@ -6621,6 +11628,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => QuestionTypeWithWorkerStatsRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: QuestionTypeWithWorkerStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => QuestionTypeWithWorkerStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportQuestionTypeWithWorkerStats: {
+                path: "/api.core.DataStatistic/ExportQuestionTypeWithWorkerStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQuestionTypeWithWorkerStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQuestionTypeWithWorkerStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             },
             QuestionTypeRemarkStats: {
                 path: "/api.core.DataStatistic/QuestionTypeRemarkStats",
@@ -6631,6 +11647,15 @@ export namespace api.core {
                 responseSerialize: (message: QuestionTypeRemarkStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => QuestionTypeRemarkStatsResponse.deserialize(new Uint8Array(bytes))
             },
+            ExportQuestionTypeRemarkStats: {
+                path: "/api.core.DataStatistic/ExportQuestionTypeRemarkStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQuestionTypeRemarkStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQuestionTypeRemarkStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             QuestionTypeWorkerRemarkStats: {
                 path: "/api.core.DataStatistic/QuestionTypeWorkerRemarkStats",
                 requestStream: false,
@@ -6639,6 +11664,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => QuestionTypeWorkerRemarkStatsRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: QuestionTypeWorkerRemarkStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => QuestionTypeWorkerRemarkStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportQuestionTypeWorkerRemarkStats: {
+                path: "/api.core.DataStatistic/ExportQuestionTypeWorkerRemarkStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQuestionTypeWorkerRemarkStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQuestionTypeWorkerRemarkStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             },
             ConsultTypeRemarkStats: {
                 path: "/api.core.DataStatistic/ConsultTypeRemarkStats",
@@ -6649,6 +11683,15 @@ export namespace api.core {
                 responseSerialize: (message: ConsultTypeRemarkStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => ConsultTypeRemarkStatsResponse.deserialize(new Uint8Array(bytes))
             },
+            ExportConsultTypeRemarkStats: {
+                path: "/api.core.DataStatistic/ExportConsultTypeRemarkStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportConsultTypeRemarkStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportConsultTypeRemarkStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             ConsultTypeWorkerRemarkStats: {
                 path: "/api.core.DataStatistic/ConsultTypeWorkerRemarkStats",
                 requestStream: false,
@@ -6658,6 +11701,15 @@ export namespace api.core {
                 responseSerialize: (message: ConsultTypeWorkerRemarkStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => ConsultTypeWorkerRemarkStatsResponse.deserialize(new Uint8Array(bytes))
             },
+            ExportConsultTypeWorkerRemarkStats: {
+                path: "/api.core.DataStatistic/ExportConsultTypeWorkerRemarkStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportConsultTypeWorkerRemarkStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportConsultTypeWorkerRemarkStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             QuestionTypeStats: {
                 path: "/api.core.DataStatistic/QuestionTypeStats",
                 requestStream: false,
@@ -6666,6 +11718,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => QuestionTypeStatsRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: QuestionTypeStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => QuestionTypeStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportQuestionTypeStats: {
+                path: "/api.core.DataStatistic/ExportQuestionTypeStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQuestionTypeStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQuestionTypeStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             },
             UpdateQuestionType: {
                 path: "/api.core.DataStatistic/UpdateQuestionType",
@@ -6693,6 +11754,78 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => AddQuestionTypeRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            MsgServiceDurationStats: {
+                path: "/api.core.DataStatistic/MsgServiceDurationStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: MsgServiceDurationStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => MsgServiceDurationStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: MsgServiceDurationStatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => MsgServiceDurationStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportMsgServiceDurationStats: {
+                path: "/api.core.DataStatistic/ExportMsgServiceDurationStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportMsgServiceDurationStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportMsgServiceDurationStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerSessionStats: {
+                path: "/api.core.DataStatistic/WorkerSessionStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerSessionStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerSessionStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerSessionStatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerSessionStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportWorkerSessionStats: {
+                path: "/api.core.DataStatistic/ExportWorkerSessionStats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportWorkerSessionStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportWorkerSessionStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRelConsultTypeQuestions: {
+                path: "/api.core.DataStatistic/WorkerRelConsultTypeQuestions",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRelConsultTypeStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRelConsultTypeStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerRelConsultTypeStatResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerRelConsultTypeStatResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportWorkerRelConsultTypeQuestions: {
+                path: "/api.core.DataStatistic/ExportWorkerRelConsultTypeQuestions",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportWorkerRelConsultTypeStatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportWorkerRelConsultTypeStatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            ConsultTypeRelQuestionsList: {
+                path: "/api.core.DataStatistic/ConsultTypeRelQuestionsList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRelConsultTypeStatsDetailRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRelConsultTypeStatsDetailRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: ConsultRelQuestionStatResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => ConsultRelQuestionStatResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportConsultTypeRelQuestionsList: {
+                path: "/api.core.DataStatistic/ExportConsultTypeRelQuestionsList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRelConsultTypeStatsDetailRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRelConsultTypeStatsDetailRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -6707,15 +11840,30 @@ export namespace api.core {
         abstract UpdateConsultTypeQuestion(call: grpc_1.ServerUnaryCall<UpdateConsultTypeQuestionRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract AddQuestionTypeRemark(call: grpc_1.ServerUnaryCall<AddQuestionTypeRemarkRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract QuestionTypeRemarks(call: grpc_1.ServerUnaryCall<QuestionTypeRemarksRequest, QuestionTypeRemarksResponse>, callback: grpc_1.sendUnaryData<QuestionTypeRemarksResponse>): void;
+        abstract ExportQuestionTypeRemarks(call: grpc_1.ServerUnaryCall<ExportQuestionTypeRemarksRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract QuestionTypeWithWorkerStats(call: grpc_1.ServerUnaryCall<QuestionTypeWithWorkerStatsRequest, QuestionTypeWithWorkerStatsResponse>, callback: grpc_1.sendUnaryData<QuestionTypeWithWorkerStatsResponse>): void;
+        abstract ExportQuestionTypeWithWorkerStats(call: grpc_1.ServerUnaryCall<ExportQuestionTypeWithWorkerStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract QuestionTypeRemarkStats(call: grpc_1.ServerUnaryCall<QuestionTypeRemarkStatsRequest, QuestionTypeRemarkStatsResponse>, callback: grpc_1.sendUnaryData<QuestionTypeRemarkStatsResponse>): void;
+        abstract ExportQuestionTypeRemarkStats(call: grpc_1.ServerUnaryCall<ExportQuestionTypeRemarkStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract QuestionTypeWorkerRemarkStats(call: grpc_1.ServerUnaryCall<QuestionTypeWorkerRemarkStatsRequest, QuestionTypeWorkerRemarkStatsResponse>, callback: grpc_1.sendUnaryData<QuestionTypeWorkerRemarkStatsResponse>): void;
+        abstract ExportQuestionTypeWorkerRemarkStats(call: grpc_1.ServerUnaryCall<ExportQuestionTypeWorkerRemarkStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract ConsultTypeRemarkStats(call: grpc_1.ServerUnaryCall<ConsultTypeRemarkStatsRequest, ConsultTypeRemarkStatsResponse>, callback: grpc_1.sendUnaryData<ConsultTypeRemarkStatsResponse>): void;
+        abstract ExportConsultTypeRemarkStats(call: grpc_1.ServerUnaryCall<ExportConsultTypeRemarkStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract ConsultTypeWorkerRemarkStats(call: grpc_1.ServerUnaryCall<ConsultTypeWorkerRemarkStatsRequest, ConsultTypeWorkerRemarkStatsResponse>, callback: grpc_1.sendUnaryData<ConsultTypeWorkerRemarkStatsResponse>): void;
+        abstract ExportConsultTypeWorkerRemarkStats(call: grpc_1.ServerUnaryCall<ExportConsultTypeWorkerRemarkStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract QuestionTypeStats(call: grpc_1.ServerUnaryCall<QuestionTypeStatsRequest, QuestionTypeStatsResponse>, callback: grpc_1.sendUnaryData<QuestionTypeStatsResponse>): void;
+        abstract ExportQuestionTypeStats(call: grpc_1.ServerUnaryCall<ExportQuestionTypeStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract UpdateQuestionType(call: grpc_1.ServerUnaryCall<UpdateQuestionTypeRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract DeleteQuestionType(call: grpc_1.ServerUnaryCall<DeleteQuestionTypeRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract AddQuestionType(call: grpc_1.ServerUnaryCall<AddQuestionTypeRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract MsgServiceDurationStats(call: grpc_1.ServerUnaryCall<MsgServiceDurationStatsRequest, MsgServiceDurationStatsResponse>, callback: grpc_1.sendUnaryData<MsgServiceDurationStatsResponse>): void;
+        abstract ExportMsgServiceDurationStats(call: grpc_1.ServerUnaryCall<ExportMsgServiceDurationStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract WorkerSessionStats(call: grpc_1.ServerUnaryCall<WorkerSessionStatsRequest, WorkerSessionStatsResponse>, callback: grpc_1.sendUnaryData<WorkerSessionStatsResponse>): void;
+        abstract ExportWorkerSessionStats(call: grpc_1.ServerUnaryCall<ExportWorkerSessionStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract WorkerRelConsultTypeQuestions(call: grpc_1.ServerUnaryCall<WorkerRelConsultTypeStatsRequest, WorkerRelConsultTypeStatResponse>, callback: grpc_1.sendUnaryData<WorkerRelConsultTypeStatResponse>): void;
+        abstract ExportWorkerRelConsultTypeQuestions(call: grpc_1.ServerUnaryCall<ExportWorkerRelConsultTypeStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract ConsultTypeRelQuestionsList(call: grpc_1.ServerUnaryCall<WorkerRelConsultTypeStatsDetailRequest, ConsultRelQuestionStatResponse>, callback: grpc_1.sendUnaryData<ConsultRelQuestionStatResponse>): void;
+        abstract ExportConsultTypeRelQuestionsList(call: grpc_1.ServerUnaryCall<WorkerRelConsultTypeStatsDetailRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
     }
     export class DataStatisticClient extends grpc_1.makeGenericClientConstructor(UnimplementedDataStatisticService.definition, "DataStatistic", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -6754,23 +11902,44 @@ export namespace api.core {
         QuestionTypeRemarks: GrpcUnaryServiceInterface<QuestionTypeRemarksRequest, QuestionTypeRemarksResponse> = (message: QuestionTypeRemarksRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeRemarksResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeRemarksResponse>, callback?: grpc_1.requestCallback<QuestionTypeRemarksResponse>): grpc_1.ClientUnaryCall => {
             return super.QuestionTypeRemarks(message, metadata, options, callback);
         };
+        ExportQuestionTypeRemarks: GrpcUnaryServiceInterface<ExportQuestionTypeRemarksRequest, dependency_2.google.protobuf.Empty> = (message: ExportQuestionTypeRemarksRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQuestionTypeRemarks(message, metadata, options, callback);
+        };
         QuestionTypeWithWorkerStats: GrpcUnaryServiceInterface<QuestionTypeWithWorkerStatsRequest, QuestionTypeWithWorkerStatsResponse> = (message: QuestionTypeWithWorkerStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeWithWorkerStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeWithWorkerStatsResponse>, callback?: grpc_1.requestCallback<QuestionTypeWithWorkerStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.QuestionTypeWithWorkerStats(message, metadata, options, callback);
+        };
+        ExportQuestionTypeWithWorkerStats: GrpcUnaryServiceInterface<ExportQuestionTypeWithWorkerStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportQuestionTypeWithWorkerStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQuestionTypeWithWorkerStats(message, metadata, options, callback);
         };
         QuestionTypeRemarkStats: GrpcUnaryServiceInterface<QuestionTypeRemarkStatsRequest, QuestionTypeRemarkStatsResponse> = (message: QuestionTypeRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeRemarkStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeRemarkStatsResponse>, callback?: grpc_1.requestCallback<QuestionTypeRemarkStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.QuestionTypeRemarkStats(message, metadata, options, callback);
         };
+        ExportQuestionTypeRemarkStats: GrpcUnaryServiceInterface<ExportQuestionTypeRemarkStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportQuestionTypeRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQuestionTypeRemarkStats(message, metadata, options, callback);
+        };
         QuestionTypeWorkerRemarkStats: GrpcUnaryServiceInterface<QuestionTypeWorkerRemarkStatsRequest, QuestionTypeWorkerRemarkStatsResponse> = (message: QuestionTypeWorkerRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeWorkerRemarkStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeWorkerRemarkStatsResponse>, callback?: grpc_1.requestCallback<QuestionTypeWorkerRemarkStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.QuestionTypeWorkerRemarkStats(message, metadata, options, callback);
+        };
+        ExportQuestionTypeWorkerRemarkStats: GrpcUnaryServiceInterface<ExportQuestionTypeWorkerRemarkStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportQuestionTypeWorkerRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQuestionTypeWorkerRemarkStats(message, metadata, options, callback);
         };
         ConsultTypeRemarkStats: GrpcUnaryServiceInterface<ConsultTypeRemarkStatsRequest, ConsultTypeRemarkStatsResponse> = (message: ConsultTypeRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ConsultTypeRemarkStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ConsultTypeRemarkStatsResponse>, callback?: grpc_1.requestCallback<ConsultTypeRemarkStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.ConsultTypeRemarkStats(message, metadata, options, callback);
         };
+        ExportConsultTypeRemarkStats: GrpcUnaryServiceInterface<ExportConsultTypeRemarkStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportConsultTypeRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportConsultTypeRemarkStats(message, metadata, options, callback);
+        };
         ConsultTypeWorkerRemarkStats: GrpcUnaryServiceInterface<ConsultTypeWorkerRemarkStatsRequest, ConsultTypeWorkerRemarkStatsResponse> = (message: ConsultTypeWorkerRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ConsultTypeWorkerRemarkStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ConsultTypeWorkerRemarkStatsResponse>, callback?: grpc_1.requestCallback<ConsultTypeWorkerRemarkStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.ConsultTypeWorkerRemarkStats(message, metadata, options, callback);
         };
+        ExportConsultTypeWorkerRemarkStats: GrpcUnaryServiceInterface<ExportConsultTypeWorkerRemarkStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportConsultTypeWorkerRemarkStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportConsultTypeWorkerRemarkStats(message, metadata, options, callback);
+        };
         QuestionTypeStats: GrpcUnaryServiceInterface<QuestionTypeStatsRequest, QuestionTypeStatsResponse> = (message: QuestionTypeStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QuestionTypeStatsResponse>, callback?: grpc_1.requestCallback<QuestionTypeStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.QuestionTypeStats(message, metadata, options, callback);
+        };
+        ExportQuestionTypeStats: GrpcUnaryServiceInterface<ExportQuestionTypeStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportQuestionTypeStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQuestionTypeStats(message, metadata, options, callback);
         };
         UpdateQuestionType: GrpcUnaryServiceInterface<UpdateQuestionTypeRequest, dependency_2.google.protobuf.Empty> = (message: UpdateQuestionTypeRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.UpdateQuestionType(message, metadata, options, callback);
@@ -6780,6 +11949,30 @@ export namespace api.core {
         };
         AddQuestionType: GrpcUnaryServiceInterface<AddQuestionTypeRequest, dependency_2.google.protobuf.Empty> = (message: AddQuestionTypeRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.AddQuestionType(message, metadata, options, callback);
+        };
+        MsgServiceDurationStats: GrpcUnaryServiceInterface<MsgServiceDurationStatsRequest, MsgServiceDurationStatsResponse> = (message: MsgServiceDurationStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<MsgServiceDurationStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<MsgServiceDurationStatsResponse>, callback?: grpc_1.requestCallback<MsgServiceDurationStatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.MsgServiceDurationStats(message, metadata, options, callback);
+        };
+        ExportMsgServiceDurationStats: GrpcUnaryServiceInterface<ExportMsgServiceDurationStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportMsgServiceDurationStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportMsgServiceDurationStats(message, metadata, options, callback);
+        };
+        WorkerSessionStats: GrpcUnaryServiceInterface<WorkerSessionStatsRequest, WorkerSessionStatsResponse> = (message: WorkerSessionStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerSessionStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerSessionStatsResponse>, callback?: grpc_1.requestCallback<WorkerSessionStatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerSessionStats(message, metadata, options, callback);
+        };
+        ExportWorkerSessionStats: GrpcUnaryServiceInterface<ExportWorkerSessionStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportWorkerSessionStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportWorkerSessionStats(message, metadata, options, callback);
+        };
+        WorkerRelConsultTypeQuestions: GrpcUnaryServiceInterface<WorkerRelConsultTypeStatsRequest, WorkerRelConsultTypeStatResponse> = (message: WorkerRelConsultTypeStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerRelConsultTypeStatResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerRelConsultTypeStatResponse>, callback?: grpc_1.requestCallback<WorkerRelConsultTypeStatResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRelConsultTypeQuestions(message, metadata, options, callback);
+        };
+        ExportWorkerRelConsultTypeQuestions: GrpcUnaryServiceInterface<ExportWorkerRelConsultTypeStatsRequest, dependency_2.google.protobuf.Empty> = (message: ExportWorkerRelConsultTypeStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportWorkerRelConsultTypeQuestions(message, metadata, options, callback);
+        };
+        ConsultTypeRelQuestionsList: GrpcUnaryServiceInterface<WorkerRelConsultTypeStatsDetailRequest, ConsultRelQuestionStatResponse> = (message: WorkerRelConsultTypeStatsDetailRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ConsultRelQuestionStatResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ConsultRelQuestionStatResponse>, callback?: grpc_1.requestCallback<ConsultRelQuestionStatResponse>): grpc_1.ClientUnaryCall => {
+            return super.ConsultTypeRelQuestionsList(message, metadata, options, callback);
+        };
+        ExportConsultTypeRelQuestionsList: GrpcUnaryServiceInterface<WorkerRelConsultTypeStatsDetailRequest, dependency_2.google.protobuf.Empty> = (message: WorkerRelConsultTypeStatsDetailRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportConsultTypeRelQuestionsList(message, metadata, options, callback);
         };
     }
 }

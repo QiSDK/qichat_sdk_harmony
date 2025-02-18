@@ -11,10 +11,29 @@ export namespace api.common {
         ENABLE = 1,
         DISABLE = 2
     }
+    export enum BoolStatus {
+        Bool_DEFAULT = 0,
+        Bool_ENABLE = 1,
+        Bool_DISABLE = 2
+    }
     export enum PageUpDown {
         PUD_DEFAULT = 0,
         PUD_UP = 1,
         PUD_DOWN = 2
+    }
+    export enum BindStatus {
+        BIND_STATUS_DEFAULT = 0,
+        BIND_STATUS_BOUND = 1,
+        BIND_STATUS_UNBOUND = 2
+    }
+    export enum SortType {
+        DESCEND = 0,
+        ASCEND = 1
+    }
+    export enum SortOrder {
+        SORT_ORDER_DEFAULT = 0,
+        SORT_ORDER_ASC = 1,
+        SORT_ORDER_DESC = 2
     }
     export class BaseResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];

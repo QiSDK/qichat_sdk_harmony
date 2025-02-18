@@ -77,7 +77,7 @@ struct Index {
    * @param msgId - If 0, it means the server didn't generate a message ID, meaning sending failed
    * @param errMsg - Error message
    */
-  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number, errMsg: string): void{
+  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string, errMsg: string): void{
     // Log the message details
     console.debug(`payloadId: ${payloadId}, msgId: ${msgId}, error: ${errMsg}`);
   };
@@ -88,7 +88,7 @@ struct Index {
    * @param payloadId
    * @param msgId
    */
-  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number): void{
+  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string): void{
     // Check if msg is null
     if (msg === null) {
       console.debug(`Received null message for payloadId: ${payloadId}, msgId: ${msgId}`);

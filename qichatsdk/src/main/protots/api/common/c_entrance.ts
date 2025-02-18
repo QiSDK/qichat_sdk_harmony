@@ -25,6 +25,12 @@ export namespace api.common {
         CLIENT_TYPE_USER_H5 = 102,
         CLIENT_TYPE_USER_WEB = 103,
         CLIENT_TYPE_USER_APP = 104,
+        CLIENT_TYPE_USER_WEB_IOS = 105,
+        CLIENT_TYPE_USER_WEB_WINDOWS = 106,
+        CLIENT_TYPE_USER_APP_IOS = 107,
+        CLIENT_TYPE_USER_APP_ANDROID = 108,
+        CLIENT_TYPE_USER_WINDOWS = 109,
+        CLIENT_TYPE_USER_MAC = 110,
         CLIENT_TYPE_USER_END = 200
     }
     export class Entrance extends pb_1.Message {

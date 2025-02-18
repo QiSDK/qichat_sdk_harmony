@@ -8,6 +8,368 @@ import * as dependency_2 from "./../../validate/validate";
 import * as dependency_3 from "./../../google/protobuf/timestamp";
 import * as pb_1 from "google-protobuf";
 export namespace api.common {
+    export enum CommonConfigStatus {
+        VCS_UNKNOWN = 0,
+        VCS_ENABLE = 1,
+        VCS_DISABLE = 2
+    }
+    export enum TenantIsSuper {
+        IS_SUPER_DEFAULT = 0,
+        IS_SUPER_NO = 1,
+        IS_SUPER_YES = 2
+    }
+    export enum TenantCopyType {
+        TCT_UNKNOWN = 0,
+        TCT_UID = 1,
+        TCT_ACCOUNT = 2
+    }
+    export enum TenantWarnEventType {
+        Warn_Unknown = 0,
+        Warn_Leave_Time = 1,
+        Warn_leave_Count = 2,
+        Warn_Wait_Reply = 3
+    }
+    export class WarnInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            warn_type?: TenantWarnEventType;
+            name?: string;
+            account?: string;
+            tenant_id?: number;
+            worker_id?: number;
+            threshold?: number;
+            times?: number;
+            create_time?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("warn_type" in data && data.warn_type != undefined) {
+                    this.warn_type = data.warn_type;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("threshold" in data && data.threshold != undefined) {
+                    this.threshold = data.threshold;
+                }
+                if ("times" in data && data.times != undefined) {
+                    this.times = data.times;
+                }
+                if ("create_time" in data && data.create_time != undefined) {
+                    this.create_time = data.create_time;
+                }
+            }
+        }
+        get warn_type() {
+            return pb_1.Message.getFieldWithDefault(this, 1, TenantWarnEventType.Warn_Unknown) as TenantWarnEventType;
+        }
+        set warn_type(value: TenantWarnEventType) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get threshold() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set threshold(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get times() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set times(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get create_time() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set create_time(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            warn_type?: TenantWarnEventType;
+            name?: string;
+            account?: string;
+            tenant_id?: number;
+            worker_id?: number;
+            threshold?: number;
+            times?: number;
+            create_time?: string;
+        }): WarnInfo {
+            const message = new WarnInfo({});
+            if (data.warn_type != null) {
+                message.warn_type = data.warn_type;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.threshold != null) {
+                message.threshold = data.threshold;
+            }
+            if (data.times != null) {
+                message.times = data.times;
+            }
+            if (data.create_time != null) {
+                message.create_time = data.create_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                warn_type?: TenantWarnEventType;
+                name?: string;
+                account?: string;
+                tenant_id?: number;
+                worker_id?: number;
+                threshold?: number;
+                times?: number;
+                create_time?: string;
+            } = {};
+            if (this.warn_type != null) {
+                data.warn_type = this.warn_type;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.threshold != null) {
+                data.threshold = this.threshold;
+            }
+            if (this.times != null) {
+                data.times = this.times;
+            }
+            if (this.create_time != null) {
+                data.create_time = this.create_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.warn_type != TenantWarnEventType.Warn_Unknown)
+                writer.writeEnum(1, this.warn_type);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.account.length)
+                writer.writeString(3, this.account);
+            if (this.tenant_id != 0)
+                writer.writeInt32(4, this.tenant_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(5, this.worker_id);
+            if (this.threshold != 0)
+                writer.writeInt32(7, this.threshold);
+            if (this.times != 0)
+                writer.writeInt32(8, this.times);
+            if (this.create_time.length)
+                writer.writeString(9, this.create_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WarnInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WarnInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.warn_type = reader.readEnum();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.account = reader.readString();
+                        break;
+                    case 4:
+                        message.tenant_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 7:
+                        message.threshold = reader.readInt32();
+                        break;
+                    case 8:
+                        message.times = reader.readInt32();
+                        break;
+                    case 9:
+                        message.create_time = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WarnInfo {
+            return WarnInfo.deserialize(bytes);
+        }
+    }
+    export class WSConnCustom extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            username?: string;
+            platform?: number;
+            userlevel?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("username" in data && data.username != undefined) {
+                    this.username = data.username;
+                }
+                if ("platform" in data && data.platform != undefined) {
+                    this.platform = data.platform;
+                }
+                if ("userlevel" in data && data.userlevel != undefined) {
+                    this.userlevel = data.userlevel;
+                }
+            }
+        }
+        get username() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set username(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get platform() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set platform(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get userlevel() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set userlevel(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            username?: string;
+            platform?: number;
+            userlevel?: number;
+        }): WSConnCustom {
+            const message = new WSConnCustom({});
+            if (data.username != null) {
+                message.username = data.username;
+            }
+            if (data.platform != null) {
+                message.platform = data.platform;
+            }
+            if (data.userlevel != null) {
+                message.userlevel = data.userlevel;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                username?: string;
+                platform?: number;
+                userlevel?: number;
+            } = {};
+            if (this.username != null) {
+                data.username = this.username;
+            }
+            if (this.platform != null) {
+                data.platform = this.platform;
+            }
+            if (this.userlevel != null) {
+                data.userlevel = this.userlevel;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.username.length)
+                writer.writeString(1, this.username);
+            if (this.platform != 0)
+                writer.writeInt32(2, this.platform);
+            if (this.userlevel != 0)
+                writer.writeUint32(3, this.userlevel);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WSConnCustom {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WSConnCustom();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.username = reader.readString();
+                        break;
+                    case 2:
+                        message.platform = reader.readInt32();
+                        break;
+                    case 3:
+                        message.userlevel = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WSConnCustom {
+            return WSConnCustom.deserialize(bytes);
+        }
+    }
     export class TenantsLineGroup extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -295,6 +657,963 @@ export namespace api.common {
         }
         static deserializeBinary(bytes: Uint8Array): TenantsLineGroup {
             return TenantsLineGroup.deserialize(bytes);
+        }
+    }
+    export class TenantRoute extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            create_at?: dependency_3.google.protobuf.Timestamp;
+            update_at?: dependency_3.google.protobuf.Timestamp;
+            bindingStatus?: dependency_1.api.common.BindStatus;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("pid" in data && data.pid != undefined) {
+                    this.pid = data.pid;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("create_at" in data && data.create_at != undefined) {
+                    this.create_at = data.create_at;
+                }
+                if ("update_at" in data && data.update_at != undefined) {
+                    this.update_at = data.update_at;
+                }
+                if ("bindingStatus" in data && data.bindingStatus != undefined) {
+                    this.bindingStatus = data.bindingStatus;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get pid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set pid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get create_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 6) as dependency_3.google.protobuf.Timestamp;
+        }
+        set create_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_create_at() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get update_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 7) as dependency_3.google.protobuf.Timestamp;
+        }
+        set update_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_update_at() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get bindingStatus() {
+            return pb_1.Message.getFieldWithDefault(this, 8, dependency_1.api.common.BindStatus.BIND_STATUS_DEFAULT) as dependency_1.api.common.BindStatus;
+        }
+        set bindingStatus(value: dependency_1.api.common.BindStatus) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            bindingStatus?: dependency_1.api.common.BindStatus;
+        }): TenantRoute {
+            const message = new TenantRoute({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.pid != null) {
+                message.pid = data.pid;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.create_at != null) {
+                message.create_at = dependency_3.google.protobuf.Timestamp.fromObject(data.create_at);
+            }
+            if (data.update_at != null) {
+                message.update_at = dependency_3.google.protobuf.Timestamp.fromObject(data.update_at);
+            }
+            if (data.bindingStatus != null) {
+                message.bindingStatus = data.bindingStatus;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                url?: string;
+                pid?: number;
+                sort?: number;
+                create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                bindingStatus?: dependency_1.api.common.BindStatus;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.pid != null) {
+                data.pid = this.pid;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.create_at != null) {
+                data.create_at = this.create_at.toObject();
+            }
+            if (this.update_at != null) {
+                data.update_at = this.update_at.toObject();
+            }
+            if (this.bindingStatus != null) {
+                data.bindingStatus = this.bindingStatus;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.url.length)
+                writer.writeString(3, this.url);
+            if (this.pid != 0)
+                writer.writeInt32(4, this.pid);
+            if (this.sort != 0)
+                writer.writeInt32(5, this.sort);
+            if (this.has_create_at)
+                writer.writeMessage(6, this.create_at, () => this.create_at.serialize(writer));
+            if (this.has_update_at)
+                writer.writeMessage(7, this.update_at, () => this.update_at.serialize(writer));
+            if (this.bindingStatus != dependency_1.api.common.BindStatus.BIND_STATUS_DEFAULT)
+                writer.writeEnum(8, this.bindingStatus);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantRoute {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantRoute();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.url = reader.readString();
+                        break;
+                    case 4:
+                        message.pid = reader.readInt32();
+                        break;
+                    case 5:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 6:
+                        reader.readMessage(message.create_at, () => message.create_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.update_at, () => message.update_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 8:
+                        message.bindingStatus = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantRoute {
+            return TenantRoute.deserialize(bytes);
+        }
+    }
+    export class TenantRouteWithItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            create_at?: dependency_3.google.protobuf.Timestamp;
+            update_at?: dependency_3.google.protobuf.Timestamp;
+            items?: TenantRoute[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [9], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("pid" in data && data.pid != undefined) {
+                    this.pid = data.pid;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("create_at" in data && data.create_at != undefined) {
+                    this.create_at = data.create_at;
+                }
+                if ("update_at" in data && data.update_at != undefined) {
+                    this.update_at = data.update_at;
+                }
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get pid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set pid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get create_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 6) as dependency_3.google.protobuf.Timestamp;
+        }
+        set create_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_create_at() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get update_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 7) as dependency_3.google.protobuf.Timestamp;
+        }
+        set update_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_update_at() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, TenantRoute, 9) as TenantRoute[];
+        }
+        set items(value: TenantRoute[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 9, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            items?: ReturnType<typeof TenantRoute.prototype.toObject>[];
+        }): TenantRouteWithItem {
+            const message = new TenantRouteWithItem({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.pid != null) {
+                message.pid = data.pid;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.create_at != null) {
+                message.create_at = dependency_3.google.protobuf.Timestamp.fromObject(data.create_at);
+            }
+            if (data.update_at != null) {
+                message.update_at = dependency_3.google.protobuf.Timestamp.fromObject(data.update_at);
+            }
+            if (data.items != null) {
+                message.items = data.items.map(item => TenantRoute.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                url?: string;
+                pid?: number;
+                sort?: number;
+                create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                items?: ReturnType<typeof TenantRoute.prototype.toObject>[];
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.pid != null) {
+                data.pid = this.pid;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.create_at != null) {
+                data.create_at = this.create_at.toObject();
+            }
+            if (this.update_at != null) {
+                data.update_at = this.update_at.toObject();
+            }
+            if (this.items != null) {
+                data.items = this.items.map((item: TenantRoute) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.url.length)
+                writer.writeString(3, this.url);
+            if (this.pid != 0)
+                writer.writeInt32(4, this.pid);
+            if (this.sort != 0)
+                writer.writeInt32(5, this.sort);
+            if (this.has_create_at)
+                writer.writeMessage(6, this.create_at, () => this.create_at.serialize(writer));
+            if (this.has_update_at)
+                writer.writeMessage(7, this.update_at, () => this.update_at.serialize(writer));
+            if (this.items.length)
+                writer.writeRepeatedMessage(9, this.items, (item: TenantRoute) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantRouteWithItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantRouteWithItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.url = reader.readString();
+                        break;
+                    case 4:
+                        message.pid = reader.readInt32();
+                        break;
+                    case 5:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 6:
+                        reader.readMessage(message.create_at, () => message.create_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.update_at, () => message.update_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 9, TenantRoute.deserialize(reader), TenantRoute));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantRouteWithItem {
+            return TenantRouteWithItem.deserialize(bytes);
+        }
+    }
+    export class TenantRole extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            is_super?: TenantIsSuper;
+            create_at?: dependency_3.google.protobuf.Timestamp;
+            update_at?: dependency_3.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("is_super" in data && data.is_super != undefined) {
+                    this.is_super = data.is_super;
+                }
+                if ("create_at" in data && data.create_at != undefined) {
+                    this.create_at = data.create_at;
+                }
+                if ("update_at" in data && data.update_at != undefined) {
+                    this.update_at = data.update_at;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get is_super() {
+            return pb_1.Message.getFieldWithDefault(this, 3, TenantIsSuper.IS_SUPER_DEFAULT) as TenantIsSuper;
+        }
+        set is_super(value: TenantIsSuper) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get create_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 4) as dependency_3.google.protobuf.Timestamp;
+        }
+        set create_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_create_at() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get update_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 5) as dependency_3.google.protobuf.Timestamp;
+        }
+        set update_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_update_at() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            is_super?: TenantIsSuper;
+            create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+        }): TenantRole {
+            const message = new TenantRole({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.is_super != null) {
+                message.is_super = data.is_super;
+            }
+            if (data.create_at != null) {
+                message.create_at = dependency_3.google.protobuf.Timestamp.fromObject(data.create_at);
+            }
+            if (data.update_at != null) {
+                message.update_at = dependency_3.google.protobuf.Timestamp.fromObject(data.update_at);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                is_super?: TenantIsSuper;
+                create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.is_super != null) {
+                data.is_super = this.is_super;
+            }
+            if (this.create_at != null) {
+                data.create_at = this.create_at.toObject();
+            }
+            if (this.update_at != null) {
+                data.update_at = this.update_at.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.is_super != TenantIsSuper.IS_SUPER_DEFAULT)
+                writer.writeEnum(3, this.is_super);
+            if (this.has_create_at)
+                writer.writeMessage(4, this.create_at, () => this.create_at.serialize(writer));
+            if (this.has_update_at)
+                writer.writeMessage(5, this.update_at, () => this.update_at.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantRole {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantRole();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.is_super = reader.readEnum();
+                        break;
+                    case 4:
+                        reader.readMessage(message.create_at, () => message.create_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        reader.readMessage(message.update_at, () => message.update_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantRole {
+            return TenantRole.deserialize(bytes);
+        }
+    }
+    export class TenantRoleRoute extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            role_id?: number;
+            route_id?: number;
+            route_url?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
+                }
+                if ("route_id" in data && data.route_id != undefined) {
+                    this.route_id = data.route_id;
+                }
+                if ("route_url" in data && data.route_url != undefined) {
+                    this.route_url = data.route_url;
+                }
+            }
+        }
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set role_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get route_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set route_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get route_url() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set route_url(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            role_id?: number;
+            route_id?: number;
+            route_url?: string;
+        }): TenantRoleRoute {
+            const message = new TenantRoleRoute({});
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
+            }
+            if (data.route_id != null) {
+                message.route_id = data.route_id;
+            }
+            if (data.route_url != null) {
+                message.route_url = data.route_url;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                role_id?: number;
+                route_id?: number;
+                route_url?: string;
+            } = {};
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
+            }
+            if (this.route_id != null) {
+                data.route_id = this.route_id;
+            }
+            if (this.route_url != null) {
+                data.route_url = this.route_url;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.role_id != 0)
+                writer.writeInt32(1, this.role_id);
+            if (this.route_id != 0)
+                writer.writeInt32(2, this.route_id);
+            if (this.route_url.length)
+                writer.writeString(3, this.route_url);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantRoleRoute {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantRoleRoute();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.role_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.route_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.route_url = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantRoleRoute {
+            return TenantRoleRoute.deserialize(bytes);
+        }
+    }
+    export class TenantManager extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            account?: string;
+            password?: string;
+            role_id?: number;
+            status?: dependency_1.api.common.DisableStatus;
+            create_at?: dependency_3.google.protobuf.Timestamp;
+            update_at?: dependency_3.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("password" in data && data.password != undefined) {
+                    this.password = data.password;
+                }
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
+                }
+                if ("status" in data && data.status != undefined) {
+                    this.status = data.status;
+                }
+                if ("create_at" in data && data.create_at != undefined) {
+                    this.create_at = data.create_at;
+                }
+                if ("update_at" in data && data.update_at != undefined) {
+                    this.update_at = data.update_at;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get password() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set password(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set role_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get status() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_1.api.common.DisableStatus.DEFAULT) as dependency_1.api.common.DisableStatus;
+        }
+        set status(value: dependency_1.api.common.DisableStatus) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get create_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 6) as dependency_3.google.protobuf.Timestamp;
+        }
+        set create_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_create_at() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get update_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 7) as dependency_3.google.protobuf.Timestamp;
+        }
+        set update_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_update_at() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        static fromObject(data: {
+            id?: number;
+            account?: string;
+            password?: string;
+            role_id?: number;
+            status?: dependency_1.api.common.DisableStatus;
+            create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+        }): TenantManager {
+            const message = new TenantManager({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.password != null) {
+                message.password = data.password;
+            }
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
+            }
+            if (data.status != null) {
+                message.status = data.status;
+            }
+            if (data.create_at != null) {
+                message.create_at = dependency_3.google.protobuf.Timestamp.fromObject(data.create_at);
+            }
+            if (data.update_at != null) {
+                message.update_at = dependency_3.google.protobuf.Timestamp.fromObject(data.update_at);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                account?: string;
+                password?: string;
+                role_id?: number;
+                status?: dependency_1.api.common.DisableStatus;
+                create_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.password != null) {
+                data.password = this.password;
+            }
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
+            }
+            if (this.status != null) {
+                data.status = this.status;
+            }
+            if (this.create_at != null) {
+                data.create_at = this.create_at.toObject();
+            }
+            if (this.update_at != null) {
+                data.update_at = this.update_at.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.account.length)
+                writer.writeString(2, this.account);
+            if (this.password.length)
+                writer.writeString(3, this.password);
+            if (this.role_id != 0)
+                writer.writeInt32(4, this.role_id);
+            if (this.status != dependency_1.api.common.DisableStatus.DEFAULT)
+                writer.writeEnum(5, this.status);
+            if (this.has_create_at)
+                writer.writeMessage(6, this.create_at, () => this.create_at.serialize(writer));
+            if (this.has_update_at)
+                writer.writeMessage(7, this.update_at, () => this.update_at.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantManager {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantManager();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.account = reader.readString();
+                        break;
+                    case 3:
+                        message.password = reader.readString();
+                        break;
+                    case 4:
+                        message.role_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.status = reader.readEnum();
+                        break;
+                    case 6:
+                        reader.readMessage(message.create_at, () => message.create_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        reader.readMessage(message.update_at, () => message.update_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantManager {
+            return TenantManager.deserialize(bytes);
         }
     }
 }

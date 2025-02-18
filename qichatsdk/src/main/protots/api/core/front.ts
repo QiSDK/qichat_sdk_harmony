@@ -1198,6 +1198,7 @@ export namespace api.core {
             Works?: AssignWorkerItem[];
             unread?: number;
             priority?: number;
+            binding_worker_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [4], this.#one_of_decls);
@@ -1219,6 +1220,9 @@ export namespace api.core {
                 }
                 if ("priority" in data && data.priority != undefined) {
                     this.priority = data.priority;
+                }
+                if ("binding_worker_id" in data && data.binding_worker_id != undefined) {
+                    this.binding_worker_id = data.binding_worker_id;
                 }
             }
         }
@@ -1258,6 +1262,12 @@ export namespace api.core {
         set priority(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
+        get binding_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set binding_worker_id(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
         static fromObject(data: {
             consult_id?: number;
             name?: string;
@@ -1265,6 +1275,7 @@ export namespace api.core {
             Works?: ReturnType<typeof AssignWorkerItem.prototype.toObject>[];
             unread?: number;
             priority?: number;
+            binding_worker_id?: number;
         }): ConsultItem {
             const message = new ConsultItem({});
             if (data.consult_id != null) {
@@ -1285,6 +1296,9 @@ export namespace api.core {
             if (data.priority != null) {
                 message.priority = data.priority;
             }
+            if (data.binding_worker_id != null) {
+                message.binding_worker_id = data.binding_worker_id;
+            }
             return message;
         }
         toObject() {
@@ -1295,6 +1309,7 @@ export namespace api.core {
                 Works?: ReturnType<typeof AssignWorkerItem.prototype.toObject>[];
                 unread?: number;
                 priority?: number;
+                binding_worker_id?: number;
             } = {};
             if (this.consult_id != null) {
                 data.consult_id = this.consult_id;
@@ -1314,6 +1329,9 @@ export namespace api.core {
             if (this.priority != null) {
                 data.priority = this.priority;
             }
+            if (this.binding_worker_id != null) {
+                data.binding_worker_id = this.binding_worker_id;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1332,6 +1350,8 @@ export namespace api.core {
                 writer.writeInt32(5, this.unread);
             if (this.priority != 0)
                 writer.writeInt32(6, this.priority);
+            if (this.binding_worker_id != 0)
+                writer.writeInt32(7, this.binding_worker_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1358,6 +1378,9 @@ export namespace api.core {
                         break;
                     case 6:
                         message.priority = reader.readInt32();
+                        break;
+                    case 7:
+                        message.binding_worker_id = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -2533,7 +2556,7 @@ export namespace api.core {
     export class ReplyRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -2544,13 +2567,13 @@ export namespace api.core {
             }
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            msg_id?: number;
+            msg_id?: string;
         }): ReplyRequest {
             const message = new ReplyRequest({});
             if (data.msg_id != null) {
@@ -2560,7 +2583,7 @@ export namespace api.core {
         }
         toObject() {
             const data: {
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.msg_id != null) {
                 data.msg_id = this.msg_id;
@@ -2571,8 +2594,8 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.msg_id != 0)
-                writer.writeInt64(1, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(1, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2583,7 +2606,7 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

@@ -867,6 +867,253 @@ export namespace api.core {
             return EntranceExistsRequest.deserialize(bytes);
         }
     }
+    export class GetUnreadWorkerMessageCountRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            tenant_id?: number;
+            uid?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
+                }
+                if ("uid" in data && data.uid != undefined) {
+                    this.uid = data.uid;
+                }
+            }
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get uid() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set uid(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            tenant_id?: number;
+            uid?: number;
+        }): GetUnreadWorkerMessageCountRequest {
+            const message = new GetUnreadWorkerMessageCountRequest({});
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
+            }
+            if (data.uid != null) {
+                message.uid = data.uid;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                tenant_id?: number;
+                uid?: number;
+            } = {};
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
+            }
+            if (this.uid != null) {
+                data.uid = this.uid;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.tenant_id != 0)
+                writer.writeInt64(1, this.tenant_id);
+            if (this.uid != 0)
+                writer.writeInt32(2, this.uid);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetUnreadWorkerMessageCountRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetUnreadWorkerMessageCountRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.tenant_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.uid = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetUnreadWorkerMessageCountRequest {
+            return GetUnreadWorkerMessageCountRequest.deserialize(bytes);
+        }
+    }
+    export class GetUnreadWorkerMessageCountResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_unreads?: ConsultUnread[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_unreads" in data && data.consult_unreads != undefined) {
+                    this.consult_unreads = data.consult_unreads;
+                }
+            }
+        }
+        get consult_unreads() {
+            return pb_1.Message.getRepeatedWrapperField(this, ConsultUnread, 1) as ConsultUnread[];
+        }
+        set consult_unreads(value: ConsultUnread[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            consult_unreads?: ReturnType<typeof ConsultUnread.prototype.toObject>[];
+        }): GetUnreadWorkerMessageCountResponse {
+            const message = new GetUnreadWorkerMessageCountResponse({});
+            if (data.consult_unreads != null) {
+                message.consult_unreads = data.consult_unreads.map(item => ConsultUnread.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_unreads?: ReturnType<typeof ConsultUnread.prototype.toObject>[];
+            } = {};
+            if (this.consult_unreads != null) {
+                data.consult_unreads = this.consult_unreads.map((item: ConsultUnread) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_unreads.length)
+                writer.writeRepeatedMessage(1, this.consult_unreads, (item: ConsultUnread) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetUnreadWorkerMessageCountResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetUnreadWorkerMessageCountResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.consult_unreads, () => pb_1.Message.addToRepeatedWrapperField(message, 1, ConsultUnread.deserialize(reader), ConsultUnread));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetUnreadWorkerMessageCountResponse {
+            return GetUnreadWorkerMessageCountResponse.deserialize(bytes);
+        }
+    }
+    export class ConsultUnread extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_id?: number;
+            unread_message_count?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("unread_message_count" in data && data.unread_message_count != undefined) {
+                    this.unread_message_count = data.unread_message_count;
+                }
+            }
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get unread_message_count() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set unread_message_count(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            consult_id?: number;
+            unread_message_count?: number;
+        }): ConsultUnread {
+            const message = new ConsultUnread({});
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.unread_message_count != null) {
+                message.unread_message_count = data.unread_message_count;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_id?: number;
+                unread_message_count?: number;
+            } = {};
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.unread_message_count != null) {
+                data.unread_message_count = this.unread_message_count;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_id != 0)
+                writer.writeUint32(1, this.consult_id);
+            if (this.unread_message_count != 0)
+                writer.writeInt32(2, this.unread_message_count);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ConsultUnread {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ConsultUnread();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.unread_message_count = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ConsultUnread {
+            return ConsultUnread.deserialize(bytes);
+        }
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -982,6 +1229,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => DisableEntranceRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            GetUnreadWorkerMessageCount: {
+                path: "/api.core.Entrance/GetUnreadWorkerMessageCount",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GetUnreadWorkerMessageCountRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GetUnreadWorkerMessageCountRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GetUnreadWorkerMessageCountResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GetUnreadWorkerMessageCountResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -995,6 +1251,7 @@ export namespace api.core {
         abstract DeleteEntrance(call: grpc_1.ServerUnaryCall<DeleteEntranceRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract Exists(call: grpc_1.ServerUnaryCall<EntranceExistsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract DisableEntrance(call: grpc_1.ServerUnaryCall<DisableEntranceRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract GetUnreadWorkerMessageCount(call: grpc_1.ServerUnaryCall<GetUnreadWorkerMessageCountRequest, GetUnreadWorkerMessageCountResponse>, callback: grpc_1.sendUnaryData<GetUnreadWorkerMessageCountResponse>): void;
     }
     export class EntranceClient extends grpc_1.makeGenericClientConstructor(UnimplementedEntranceService.definition, "Entrance", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -1029,6 +1286,9 @@ export namespace api.core {
         };
         DisableEntrance: GrpcUnaryServiceInterface<DisableEntranceRequest, dependency_2.google.protobuf.Empty> = (message: DisableEntranceRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.DisableEntrance(message, metadata, options, callback);
+        };
+        GetUnreadWorkerMessageCount: GrpcUnaryServiceInterface<GetUnreadWorkerMessageCountRequest, GetUnreadWorkerMessageCountResponse> = (message: GetUnreadWorkerMessageCountRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetUnreadWorkerMessageCountResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetUnreadWorkerMessageCountResponse>, callback?: grpc_1.requestCallback<GetUnreadWorkerMessageCountResponse>): grpc_1.ClientUnaryCall => {
+            return super.GetUnreadWorkerMessageCount(message, metadata, options, callback);
         };
     }
 }

@@ -7,6 +7,7 @@ import * as dependency_1 from "./../../validate/validate";
 import * as dependency_2 from "./../../google/protobuf/timestamp";
 import * as dependency_3 from "./c_worker";
 import * as dependency_4 from "./c_message";
+import * as dependency_5 from "./c_tenant";
 import * as pb_1 from "google-protobuf";
 export namespace api.common {
     export class ChatDetail extends pb_1.Message {
@@ -27,6 +28,9 @@ export namespace api.common {
             owner_role?: dependency_4.api.common.MessageRole;
             userid?: number;
             state?: dependency_4.api.common.ChatState;
+            copy_type?: dependency_5.api.common.TenantCopyType;
+            account?: string;
+            chat_remark?: string;
         } & (({
             nimName?: string;
         })))) {
@@ -80,6 +84,15 @@ export namespace api.common {
                 }
                 if ("state" in data && data.state != undefined) {
                     this.state = data.state;
+                }
+                if ("copy_type" in data && data.copy_type != undefined) {
+                    this.copy_type = data.copy_type;
+                }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("chat_remark" in data && data.chat_remark != undefined) {
+                    this.chat_remark = data.chat_remark;
                 }
             }
         }
@@ -191,6 +204,24 @@ export namespace api.common {
         set state(value: dependency_4.api.common.ChatState) {
             pb_1.Message.setField(this, 16, value);
         }
+        get copy_type() {
+            return pb_1.Message.getFieldWithDefault(this, 17, dependency_5.api.common.TenantCopyType.TCT_UNKNOWN) as dependency_5.api.common.TenantCopyType;
+        }
+        set copy_type(value: dependency_5.api.common.TenantCopyType) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 18, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        get chat_remark() {
+            return pb_1.Message.getFieldWithDefault(this, 19, "") as string;
+        }
+        set chat_remark(value: string) {
+            pb_1.Message.setField(this, 19, value);
+        }
         get _nimName() {
             const cases: {
                 [index: number]: "none" | "nimName";
@@ -217,6 +248,9 @@ export namespace api.common {
             nimName?: string;
             userid?: number;
             state?: dependency_4.api.common.ChatState;
+            copy_type?: dependency_5.api.common.TenantCopyType;
+            account?: string;
+            chat_remark?: string;
         }): ChatDetail {
             const message = new ChatDetail({});
             if (data.chat_id != null) {
@@ -267,6 +301,15 @@ export namespace api.common {
             if (data.state != null) {
                 message.state = data.state;
             }
+            if (data.copy_type != null) {
+                message.copy_type = data.copy_type;
+            }
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.chat_remark != null) {
+                message.chat_remark = data.chat_remark;
+            }
             return message;
         }
         toObject() {
@@ -287,6 +330,9 @@ export namespace api.common {
                 nimName?: string;
                 userid?: number;
                 state?: dependency_4.api.common.ChatState;
+                copy_type?: dependency_5.api.common.TenantCopyType;
+                account?: string;
+                chat_remark?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -336,6 +382,15 @@ export namespace api.common {
             if (this.state != null) {
                 data.state = this.state;
             }
+            if (this.copy_type != null) {
+                data.copy_type = this.copy_type;
+            }
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.chat_remark != null) {
+                data.chat_remark = this.chat_remark;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -374,6 +429,12 @@ export namespace api.common {
                 writer.writeInt32(15, this.userid);
             if (this.state != dependency_4.api.common.ChatState.CHAT_STATE_COMMON)
                 writer.writeEnum(16, this.state);
+            if (this.copy_type != dependency_5.api.common.TenantCopyType.TCT_UNKNOWN)
+                writer.writeEnum(17, this.copy_type);
+            if (this.account.length)
+                writer.writeString(18, this.account);
+            if (this.chat_remark.length)
+                writer.writeString(19, this.chat_remark);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -430,6 +491,15 @@ export namespace api.common {
                         break;
                     case 16:
                         message.state = reader.readEnum();
+                        break;
+                    case 17:
+                        message.copy_type = reader.readEnum();
+                        break;
+                    case 18:
+                        message.account = reader.readString();
+                        break;
+                    case 19:
+                        message.chat_remark = reader.readString();
                         break;
                     default: reader.skipField();
                 }

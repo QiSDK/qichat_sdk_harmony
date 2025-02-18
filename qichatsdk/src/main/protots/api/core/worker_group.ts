@@ -13,7 +13,9 @@ import * as grpc_1 from "@grpc/grpc-js";
 export namespace api.core {
     export class WorkerGroupQueryByPermRequest extends pb_1.Message {
         #one_of_decls: number[][] = [[1]];
-        constructor(data?: any[] | ({} & (({
+        constructor(data?: any[] | ({
+            skip?: number;
+        } & (({
             disable_status?: dependency_3.api.common.DisableStatus;
         })))) {
             super();
@@ -21,6 +23,9 @@ export namespace api.core {
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("disable_status" in data && data.disable_status != undefined) {
                     this.disable_status = data.disable_status;
+                }
+                if ("skip" in data && data.skip != undefined) {
+                    this.skip = data.skip;
                 }
             }
         }
@@ -33,6 +38,12 @@ export namespace api.core {
         get has_disable_status() {
             return pb_1.Message.getField(this, 1) != null;
         }
+        get skip() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set skip(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
         get _disable_status() {
             const cases: {
                 [index: number]: "none" | "disable_status";
@@ -44,19 +55,27 @@ export namespace api.core {
         }
         static fromObject(data: {
             disable_status?: dependency_3.api.common.DisableStatus;
+            skip?: number;
         }): WorkerGroupQueryByPermRequest {
             const message = new WorkerGroupQueryByPermRequest({});
             if (data.disable_status != null) {
                 message.disable_status = data.disable_status;
+            }
+            if (data.skip != null) {
+                message.skip = data.skip;
             }
             return message;
         }
         toObject() {
             const data: {
                 disable_status?: dependency_3.api.common.DisableStatus;
+                skip?: number;
             } = {};
             if (this.disable_status != null) {
                 data.disable_status = this.disable_status;
+            }
+            if (this.skip != null) {
+                data.skip = this.skip;
             }
             return data;
         }
@@ -66,6 +85,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.has_disable_status)
                 writer.writeEnum(1, this.disable_status);
+            if (this.skip != 0)
+                writer.writeInt32(2, this.skip);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -77,6 +98,9 @@ export namespace api.core {
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.disable_status = reader.readEnum();
+                        break;
+                    case 2:
+                        message.skip = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }

@@ -162,6 +162,7 @@ export namespace gateway {
             url?: string;
             verb?: string;
             data?: Uint8Array;
+            headers?: Map<string, string>;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -178,7 +179,12 @@ export namespace gateway {
                 if ("data" in data && data.data != undefined) {
                     this.data = data.data;
                 }
+                if ("headers" in data && data.headers != undefined) {
+                    this.headers = data.headers;
+                }
             }
+            if (!this.headers)
+                this.headers = new Map();
         }
         get appId() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
@@ -204,11 +210,20 @@ export namespace gateway {
         set data(value: Uint8Array) {
             pb_1.Message.setField(this, 4, value);
         }
+        get headers() {
+            return pb_1.Message.getField(this, 5) as any as Map<string, string>;
+        }
+        set headers(value: Map<string, string>) {
+            pb_1.Message.setField(this, 5, value as any);
+        }
         static fromObject(data: {
             appId?: string;
             url?: string;
             verb?: string;
             data?: Uint8Array;
+            headers?: {
+                [key: string]: string;
+            };
         }): CSForward {
             const message = new CSForward({});
             if (data.appId != null) {
@@ -223,6 +238,9 @@ export namespace gateway {
             if (data.data != null) {
                 message.data = data.data;
             }
+            if (typeof data.headers == "object") {
+                message.headers = new Map(Object.entries(data.headers));
+            }
             return message;
         }
         toObject() {
@@ -231,6 +249,9 @@ export namespace gateway {
                 url?: string;
                 verb?: string;
                 data?: Uint8Array;
+                headers?: {
+                    [key: string]: string;
+                };
             } = {};
             if (this.appId != null) {
                 data.appId = this.appId;
@@ -243,6 +264,9 @@ export namespace gateway {
             }
             if (this.data != null) {
                 data.data = this.data;
+            }
+            if (this.headers != null) {
+                data.headers = (Object.fromEntries)(this.headers);
             }
             return data;
         }
@@ -258,6 +282,12 @@ export namespace gateway {
                 writer.writeString(3, this.verb);
             if (this.data.length)
                 writer.writeBytes(4, this.data);
+            for (const [key, value] of this.headers) {
+                writer.writeMessage(5, this.headers, () => {
+                    writer.writeString(1, key);
+                    writer.writeString(2, value);
+                });
+            }
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -278,6 +308,9 @@ export namespace gateway {
                         break;
                     case 4:
                         message.data = reader.readBytes();
+                        break;
+                    case 5:
+                        reader.readMessage(message, () => pb_1.Map.deserializeBinary(message.headers as any, reader, reader.readString, reader.readString));
                         break;
                     default: reader.skipField();
                 }
@@ -455,7 +488,7 @@ export namespace gateway {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             msg_time?: dependency_1.google.protobuf.Timestamp;
             err_msg?: string;
         }) {
@@ -483,9 +516,9 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_time() {
@@ -505,7 +538,7 @@ export namespace gateway {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             err_msg?: string;
         }): SCSendMessage {
@@ -527,7 +560,7 @@ export namespace gateway {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
                 err_msg?: string;
             } = {};
@@ -551,8 +584,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (this.has_msg_time)
                 writer.writeMessage(3, this.msg_time, () => this.msg_time.serialize(writer));
             if (this.err_msg.length)
@@ -570,7 +603,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 3:
                         reader.readMessage(message.msg_time, () => message.msg_time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
@@ -687,7 +720,7 @@ export namespace gateway {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -707,14 +740,14 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }): CSRecvMessage {
             const message = new CSRecvMessage({});
             if (data.chat_id != null) {
@@ -728,7 +761,7 @@ export namespace gateway {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -744,8 +777,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -759,7 +792,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -777,7 +810,7 @@ export namespace gateway {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -797,14 +830,14 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }): CSReadMessage {
             const message = new CSReadMessage({});
             if (data.chat_id != null) {
@@ -818,7 +851,7 @@ export namespace gateway {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -834,8 +867,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -849,7 +882,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -867,7 +900,7 @@ export namespace gateway {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -887,14 +920,14 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }): SCReadMessage {
             const message = new SCReadMessage({});
             if (data.chat_id != null) {
@@ -908,7 +941,7 @@ export namespace gateway {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -924,8 +957,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -939,7 +972,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }

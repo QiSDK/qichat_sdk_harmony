@@ -40,7 +40,7 @@ export interface TeneasySDKDelegate {
    * @param msgId - If 0, it means the server didn't generate a message ID, meaning sending failed
    * @param errMsg - Error message
    */
-  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number, errMsg: string): void;
+  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string, errMsg: string): void;
 
   /**
    * Message deletion receipt
@@ -48,7 +48,7 @@ export interface TeneasySDKDelegate {
    * @param payloadId
    * @param msgId
    */
-  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number): void;
+  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string): void;
 
   /**
    * System message for displaying a tip
@@ -82,10 +82,10 @@ export class Chatlib {
   //private socket: WebSocketClient | null = null;
   private ws = webSocket.createWebSocket()
   public listener: TeneasySDKDelegate | null = null;
-  public payloadId: number = 0;
-  private msgList: Map<number, CMessage.api.common.Message> = new Map();
+  public payloadId: string = '0';
+  private msgList: Map<string, CMessage.api.common.Message> = new Map();
 
-  public replyMsgId: number = 0;
+  public replyMsgId: string = '0';
   public consultId: number = 0;
   //private heartTimer: any | null = null; // You can replace with a suitable Timer in ArkTS
   private sessionTime: number = 0;
@@ -175,7 +175,7 @@ export class Chatlib {
       header: {
         'x-trace-id': traceId
       }
-      }, (err: BusinessError, value: boolean) => {
+    }, (err: BusinessError, value: boolean) => {
       const resp = new Resp<string>();
 
       if (err) {
@@ -223,7 +223,7 @@ export class Chatlib {
         case GAction.gateway.Action.ActionSCRecvMsg:
           const recvMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(msgData);
           if (recvMsg.msg.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
-            this.listener?.msgDeleted(recvMsg.msg, recvPayload.id, -1);
+            this.listener?.msgDeleted(recvMsg.msg, recvPayload.id, '-1');
             console.log(`收到撤回消息`);
           } else {
             console.log(`收到消息`);
@@ -257,16 +257,16 @@ export class Chatlib {
           msg.msg_id = deleteMsgAck.msg_id;
           msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
           console.log(`Delete acknowledgment received: message ID: ${msg.msg_id}`);
-          this.listener?.msgDeleted(msg, recvPayload.id, -1);
+          this.listener?.msgDeleted(msg, recvPayload.id, '-1');
           break;
 
         case GAction.gateway.Action.ActionSCDeleteMsg:
           const deleteMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(msgData);
           const msgDel = new CMessage.api.common.Message();
-          msgDel.msg_id = deleteMsg.msg.chat_id
+          msgDel.msg_id = deleteMsg.msg.msg_id
           msgDel.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
 
-          this.listener?.msgDeleted(msgDel, recvPayload.id, -1);
+          this.listener?.msgDeleted(msgDel, recvPayload.id, '-1');
           console.log(`Message deleted by the other party: payload ID ${recvPayload.id}`);
           break;
 
@@ -279,7 +279,7 @@ export class Chatlib {
 
           if (cMsg != null) {
             if (this.sendingMessage?.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
-              this.listener?.msgDeleted(cMsg, recvPayload.id, -1);
+              this.listener?.msgDeleted(cMsg, recvPayload.id, '-1');
               console.log("Message deleted successfully");
             } else {
               this.listener?.msgReceipt(cMsg, recvPayload.id, sendMsgAck.msg_id, sendMsgAck.err_msg);
@@ -303,8 +303,8 @@ export class Chatlib {
     }
   }
 
-  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: number = 0, withAutoReply: CMessage.api.common.WithAutoReply | null = null): void {
-    this.replyMsgId = replyMsgId || 0;
+  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null): void {
+    this.replyMsgId = replyMsgId;
     this.consultId = consultId;
     this.withAutoReply = withAutoReply;
     // Message sending encapsulation, four layers
@@ -397,7 +397,7 @@ export class Chatlib {
    * @param cMsg: Message
    * @param payloadId: Long
    */
-  resendMSg(cMsg: CMessage.api.common.Message, payloadId: number){
+  resendMSg(cMsg: CMessage.api.common.Message, payloadId: string){
     this.sendingMessage = cMsg;
     this.doSend(payloadId)
   }
@@ -405,7 +405,7 @@ export class Chatlib {
   /*
   CMessage.api.common.MessageOperate
    */
-  private doSend(myPayloadID: number = 0){
+  private doSend(myPayloadID: string = '0'){
 
     if (this.sendingMessage == null){
       return
@@ -427,15 +427,12 @@ export class Chatlib {
     payLoad.act = GAction.gateway.Action.ActionCSSendMsg
 
     //payload_id != 0的时候，可能是重发，重发不需要+1
-    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == 0){
+    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID != '0'){
       this.payloadId += 1
-      console.log("new payloadId = " + this.payloadId)
       this.msgList.set(this.payloadId, this.sendingMessage);
-    }else{
-      console.log("payloadId not added = " + this.payloadId)
     }
 
-    if (myPayloadID != 0){
+    if (myPayloadID != '0'){
       payLoad.id = myPayloadID
     }else{
       payLoad.id = this.payloadId

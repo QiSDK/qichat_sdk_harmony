@@ -30,7 +30,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             worker_id?: number;
@@ -70,9 +70,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get count() {
@@ -107,7 +107,7 @@ export namespace api.core {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             worker_id?: number;
@@ -141,7 +141,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 count?: number;
                 with_last_one?: boolean;
                 worker_id?: number;
@@ -177,8 +177,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -202,7 +202,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -236,7 +236,7 @@ export namespace api.core {
         constructor(data?: any[] | {
             request?: MessageSyncRequest;
             list?: dependency_5.api.common.Message[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             nick?: string;
             replyList?: dependency_5.api.common.Message[];
         }) {
@@ -276,9 +276,9 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get nick() {
@@ -296,7 +296,7 @@ export namespace api.core {
         static fromObject(data: {
             request?: ReturnType<typeof MessageSyncRequest.prototype.toObject>;
             list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             nick?: string;
             replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
         }): MessageSyncResponse {
@@ -322,7 +322,7 @@ export namespace api.core {
             const data: {
                 request?: ReturnType<typeof MessageSyncRequest.prototype.toObject>;
                 list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-                last_msg_id?: number;
+                last_msg_id?: string;
                 nick?: string;
                 replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
             } = {};
@@ -351,8 +351,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(3, this.last_msg_id);
+            if (this.last_msg_id.length)
+                writer.writeString(3, this.last_msg_id);
             if (this.nick.length)
                 writer.writeString(4, this.nick);
             if (this.replyList.length)
@@ -373,7 +373,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 4:
                         message.nick = reader.readString();
@@ -397,7 +397,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             worker_id?: number;
@@ -449,9 +449,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get count() {
@@ -504,7 +504,7 @@ export namespace api.core {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             worker_id?: number;
@@ -550,7 +550,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 count?: number;
                 with_last_one?: boolean;
                 worker_id?: number;
@@ -598,8 +598,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -629,7 +629,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -671,9 +671,9 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             request?: MessageSyncV2Request;
-            list?: dependency_5.api.common.Message[];
-            last_msg_id?: number;
-            replyList?: dependency_5.api.common.Message[];
+            list?: MessageWithSenderInfo[];
+            last_msg_id?: string;
+            replyList?: MessageWithSenderInfo[];
             uid?: number;
             nick?: string;
             avatar?: string;
@@ -714,21 +714,21 @@ export namespace api.core {
             return pb_1.Message.getField(this, 1) != null;
         }
         get list() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_5.api.common.Message, 2) as dependency_5.api.common.Message[];
+            return pb_1.Message.getRepeatedWrapperField(this, MessageWithSenderInfo, 2) as MessageWithSenderInfo[];
         }
-        set list(value: dependency_5.api.common.Message[]) {
+        set list(value: MessageWithSenderInfo[]) {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get replyList() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_5.api.common.Message, 4) as dependency_5.api.common.Message[];
+            return pb_1.Message.getRepeatedWrapperField(this, MessageWithSenderInfo, 4) as MessageWithSenderInfo[];
         }
-        set replyList(value: dependency_5.api.common.Message[]) {
+        set replyList(value: MessageWithSenderInfo[]) {
             pb_1.Message.setRepeatedWrapperField(this, 4, value);
         }
         get uid() {
@@ -751,9 +751,9 @@ export namespace api.core {
         }
         static fromObject(data: {
             request?: ReturnType<typeof MessageSyncV2Request.prototype.toObject>;
-            list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-            last_msg_id?: number;
-            replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
+            list?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+            last_msg_id?: string;
+            replyList?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
             uid?: number;
             nick?: string;
             avatar?: string;
@@ -763,13 +763,13 @@ export namespace api.core {
                 message.request = MessageSyncV2Request.fromObject(data.request);
             }
             if (data.list != null) {
-                message.list = data.list.map(item => dependency_5.api.common.Message.fromObject(item));
+                message.list = data.list.map(item => MessageWithSenderInfo.fromObject(item));
             }
             if (data.last_msg_id != null) {
                 message.last_msg_id = data.last_msg_id;
             }
             if (data.replyList != null) {
-                message.replyList = data.replyList.map(item => dependency_5.api.common.Message.fromObject(item));
+                message.replyList = data.replyList.map(item => MessageWithSenderInfo.fromObject(item));
             }
             if (data.uid != null) {
                 message.uid = data.uid;
@@ -785,9 +785,9 @@ export namespace api.core {
         toObject() {
             const data: {
                 request?: ReturnType<typeof MessageSyncV2Request.prototype.toObject>;
-                list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-                last_msg_id?: number;
-                replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
+                list?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+                last_msg_id?: string;
+                replyList?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
                 uid?: number;
                 nick?: string;
                 avatar?: string;
@@ -796,13 +796,13 @@ export namespace api.core {
                 data.request = this.request.toObject();
             }
             if (this.list != null) {
-                data.list = this.list.map((item: dependency_5.api.common.Message) => item.toObject());
+                data.list = this.list.map((item: MessageWithSenderInfo) => item.toObject());
             }
             if (this.last_msg_id != null) {
                 data.last_msg_id = this.last_msg_id;
             }
             if (this.replyList != null) {
-                data.replyList = this.replyList.map((item: dependency_5.api.common.Message) => item.toObject());
+                data.replyList = this.replyList.map((item: MessageWithSenderInfo) => item.toObject());
             }
             if (this.uid != null) {
                 data.uid = this.uid;
@@ -822,11 +822,11 @@ export namespace api.core {
             if (this.has_request)
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
-                writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(3, this.last_msg_id);
+                writer.writeRepeatedMessage(2, this.list, (item: MessageWithSenderInfo) => item.serialize(writer));
+            if (this.last_msg_id.length)
+                writer.writeString(3, this.last_msg_id);
             if (this.replyList.length)
-                writer.writeRepeatedMessage(4, this.replyList, (item: dependency_5.api.common.Message) => item.serialize(writer));
+                writer.writeRepeatedMessage(4, this.replyList, (item: MessageWithSenderInfo) => item.serialize(writer));
             if (this.uid != 0)
                 writer.writeInt32(5, this.uid);
             if (this.nick.length)
@@ -846,13 +846,13 @@ export namespace api.core {
                         reader.readMessage(message.request, () => message.request = MessageSyncV2Request.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 4:
-                        reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 4, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
+                        reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 4, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 5:
                         message.uid = reader.readInt32();
@@ -875,11 +875,264 @@ export namespace api.core {
             return MessageSyncV2Response.deserialize(bytes);
         }
     }
+    export class HisVersionMessageSyncRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_id?: number;
+            msg_id?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("msg_id" in data && data.msg_id != undefined) {
+                    this.msg_id = data.msg_id;
+                }
+            }
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get msg_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set msg_id(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            chat_id?: number;
+            msg_id?: string;
+        }): HisVersionMessageSyncRequest {
+            const message = new HisVersionMessageSyncRequest({});
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.msg_id != null) {
+                message.msg_id = data.msg_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_id?: number;
+                msg_id?: string;
+            } = {};
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.msg_id != null) {
+                data.msg_id = this.msg_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_id != 0)
+                writer.writeInt64(1, this.chat_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): HisVersionMessageSyncRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new HisVersionMessageSyncRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.msg_id = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): HisVersionMessageSyncRequest {
+            return HisVersionMessageSyncRequest.deserialize(bytes);
+        }
+    }
+    export class HisVersionMessageSyncResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            hisMessages?: dependency_5.api.common.Message[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("hisMessages" in data && data.hisMessages != undefined) {
+                    this.hisMessages = data.hisMessages;
+                }
+            }
+        }
+        get hisMessages() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_5.api.common.Message, 1) as dependency_5.api.common.Message[];
+        }
+        set hisMessages(value: dependency_5.api.common.Message[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            hisMessages?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
+        }): HisVersionMessageSyncResponse {
+            const message = new HisVersionMessageSyncResponse({});
+            if (data.hisMessages != null) {
+                message.hisMessages = data.hisMessages.map(item => dependency_5.api.common.Message.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                hisMessages?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
+            } = {};
+            if (this.hisMessages != null) {
+                data.hisMessages = this.hisMessages.map((item: dependency_5.api.common.Message) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.hisMessages.length)
+                writer.writeRepeatedMessage(1, this.hisMessages, (item: dependency_5.api.common.Message) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): HisVersionMessageSyncResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new HisVersionMessageSyncResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.hisMessages, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): HisVersionMessageSyncResponse {
+            return HisVersionMessageSyncResponse.deserialize(bytes);
+        }
+    }
+    export class MessageWithSenderInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            msg?: dependency_5.api.common.Message;
+            sender?: MessageSenderInfo;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("msg" in data && data.msg != undefined) {
+                    this.msg = data.msg;
+                }
+                if ("sender" in data && data.sender != undefined) {
+                    this.sender = data.sender;
+                }
+            }
+        }
+        get msg() {
+            return pb_1.Message.getWrapperField(this, dependency_5.api.common.Message, 1) as dependency_5.api.common.Message;
+        }
+        set msg(value: dependency_5.api.common.Message) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_msg() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get sender() {
+            return pb_1.Message.getWrapperField(this, MessageSenderInfo, 2) as MessageSenderInfo;
+        }
+        set sender(value: MessageSenderInfo) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_sender() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            msg?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>;
+            sender?: ReturnType<typeof MessageSenderInfo.prototype.toObject>;
+        }): MessageWithSenderInfo {
+            const message = new MessageWithSenderInfo({});
+            if (data.msg != null) {
+                message.msg = dependency_5.api.common.Message.fromObject(data.msg);
+            }
+            if (data.sender != null) {
+                message.sender = MessageSenderInfo.fromObject(data.sender);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                msg?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>;
+                sender?: ReturnType<typeof MessageSenderInfo.prototype.toObject>;
+            } = {};
+            if (this.msg != null) {
+                data.msg = this.msg.toObject();
+            }
+            if (this.sender != null) {
+                data.sender = this.sender.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_msg)
+                writer.writeMessage(1, this.msg, () => this.msg.serialize(writer));
+            if (this.has_sender)
+                writer.writeMessage(2, this.sender, () => this.sender.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MessageWithSenderInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MessageWithSenderInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.msg, () => message.msg = dependency_5.api.common.Message.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.sender, () => message.sender = MessageSenderInfo.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MessageWithSenderInfo {
+            return MessageWithSenderInfo.deserialize(bytes);
+        }
+    }
     export class MessageSyncManagerRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             consult_id?: number;
@@ -931,9 +1184,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get count() {
@@ -986,7 +1239,7 @@ export namespace api.core {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             count?: number;
             with_last_one?: boolean;
             consult_id?: number;
@@ -1032,7 +1285,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 count?: number;
                 with_last_one?: boolean;
                 consult_id?: number;
@@ -1080,8 +1333,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -1111,7 +1364,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -1153,9 +1406,9 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             request?: MessageSyncV2Request;
-            list?: MessageWithWorker[];
-            replyList?: dependency_5.api.common.Message[];
-            last_msg_id?: number;
+            list?: MessageWithSenderInfo[];
+            replyList?: MessageWithSenderInfo[];
+            last_msg_id?: string;
             uid?: number;
             nick?: string;
             avatar?: string;
@@ -1196,21 +1449,21 @@ export namespace api.core {
             return pb_1.Message.getField(this, 1) != null;
         }
         get list() {
-            return pb_1.Message.getRepeatedWrapperField(this, MessageWithWorker, 2) as MessageWithWorker[];
+            return pb_1.Message.getRepeatedWrapperField(this, MessageWithSenderInfo, 2) as MessageWithSenderInfo[];
         }
-        set list(value: MessageWithWorker[]) {
+        set list(value: MessageWithSenderInfo[]) {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get replyList() {
-            return pb_1.Message.getRepeatedWrapperField(this, dependency_5.api.common.Message, 3) as dependency_5.api.common.Message[];
+            return pb_1.Message.getRepeatedWrapperField(this, MessageWithSenderInfo, 3) as MessageWithSenderInfo[];
         }
-        set replyList(value: dependency_5.api.common.Message[]) {
+        set replyList(value: MessageWithSenderInfo[]) {
             pb_1.Message.setRepeatedWrapperField(this, 3, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
         get uid() {
@@ -1233,9 +1486,9 @@ export namespace api.core {
         }
         static fromObject(data: {
             request?: ReturnType<typeof MessageSyncV2Request.prototype.toObject>;
-            list?: ReturnType<typeof MessageWithWorker.prototype.toObject>[];
-            replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-            last_msg_id?: number;
+            list?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+            replyList?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+            last_msg_id?: string;
             uid?: number;
             nick?: string;
             avatar?: string;
@@ -1245,10 +1498,10 @@ export namespace api.core {
                 message.request = MessageSyncV2Request.fromObject(data.request);
             }
             if (data.list != null) {
-                message.list = data.list.map(item => MessageWithWorker.fromObject(item));
+                message.list = data.list.map(item => MessageWithSenderInfo.fromObject(item));
             }
             if (data.replyList != null) {
-                message.replyList = data.replyList.map(item => dependency_5.api.common.Message.fromObject(item));
+                message.replyList = data.replyList.map(item => MessageWithSenderInfo.fromObject(item));
             }
             if (data.last_msg_id != null) {
                 message.last_msg_id = data.last_msg_id;
@@ -1267,9 +1520,9 @@ export namespace api.core {
         toObject() {
             const data: {
                 request?: ReturnType<typeof MessageSyncV2Request.prototype.toObject>;
-                list?: ReturnType<typeof MessageWithWorker.prototype.toObject>[];
-                replyList?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-                last_msg_id?: number;
+                list?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+                replyList?: ReturnType<typeof MessageWithSenderInfo.prototype.toObject>[];
+                last_msg_id?: string;
                 uid?: number;
                 nick?: string;
                 avatar?: string;
@@ -1278,10 +1531,10 @@ export namespace api.core {
                 data.request = this.request.toObject();
             }
             if (this.list != null) {
-                data.list = this.list.map((item: MessageWithWorker) => item.toObject());
+                data.list = this.list.map((item: MessageWithSenderInfo) => item.toObject());
             }
             if (this.replyList != null) {
-                data.replyList = this.replyList.map((item: dependency_5.api.common.Message) => item.toObject());
+                data.replyList = this.replyList.map((item: MessageWithSenderInfo) => item.toObject());
             }
             if (this.last_msg_id != null) {
                 data.last_msg_id = this.last_msg_id;
@@ -1304,11 +1557,11 @@ export namespace api.core {
             if (this.has_request)
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
-                writer.writeRepeatedMessage(2, this.list, (item: MessageWithWorker) => item.serialize(writer));
+                writer.writeRepeatedMessage(2, this.list, (item: MessageWithSenderInfo) => item.serialize(writer));
             if (this.replyList.length)
-                writer.writeRepeatedMessage(3, this.replyList, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(4, this.last_msg_id);
+                writer.writeRepeatedMessage(3, this.replyList, (item: MessageWithSenderInfo) => item.serialize(writer));
+            if (this.last_msg_id.length)
+                writer.writeString(4, this.last_msg_id);
             if (this.uid != 0)
                 writer.writeInt32(5, this.uid);
             if (this.nick.length)
@@ -1328,13 +1581,13 @@ export namespace api.core {
                         reader.readMessage(message.request, () => message.request = MessageSyncV2Request.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithWorker.deserialize(reader), MessageWithWorker));
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 3:
-                        reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 3, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
+                        reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 3, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 4:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 5:
                         message.uid = reader.readInt32();
@@ -1363,6 +1616,7 @@ export namespace api.core {
             msg?: dependency_5.api.common.Message;
             sender_uid?: number;
             sender_name?: string;
+            sender_nick?: string;
             sender_avatar?: string;
         }) {
             super();
@@ -1376,6 +1630,9 @@ export namespace api.core {
                 }
                 if ("sender_name" in data && data.sender_name != undefined) {
                     this.sender_name = data.sender_name;
+                }
+                if ("sender_nick" in data && data.sender_nick != undefined) {
+                    this.sender_nick = data.sender_nick;
                 }
                 if ("sender_avatar" in data && data.sender_avatar != undefined) {
                     this.sender_avatar = data.sender_avatar;
@@ -1403,16 +1660,23 @@ export namespace api.core {
         set sender_name(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
-        get sender_avatar() {
+        get sender_nick() {
             return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
-        set sender_avatar(value: string) {
+        set sender_nick(value: string) {
             pb_1.Message.setField(this, 4, value);
+        }
+        get sender_avatar() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set sender_avatar(value: string) {
+            pb_1.Message.setField(this, 5, value);
         }
         static fromObject(data: {
             msg?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>;
             sender_uid?: number;
             sender_name?: string;
+            sender_nick?: string;
             sender_avatar?: string;
         }): MessageWithWorker {
             const message = new MessageWithWorker({});
@@ -1425,6 +1689,9 @@ export namespace api.core {
             if (data.sender_name != null) {
                 message.sender_name = data.sender_name;
             }
+            if (data.sender_nick != null) {
+                message.sender_nick = data.sender_nick;
+            }
             if (data.sender_avatar != null) {
                 message.sender_avatar = data.sender_avatar;
             }
@@ -1435,6 +1702,7 @@ export namespace api.core {
                 msg?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>;
                 sender_uid?: number;
                 sender_name?: string;
+                sender_nick?: string;
                 sender_avatar?: string;
             } = {};
             if (this.msg != null) {
@@ -1445,6 +1713,9 @@ export namespace api.core {
             }
             if (this.sender_name != null) {
                 data.sender_name = this.sender_name;
+            }
+            if (this.sender_nick != null) {
+                data.sender_nick = this.sender_nick;
             }
             if (this.sender_avatar != null) {
                 data.sender_avatar = this.sender_avatar;
@@ -1461,8 +1732,10 @@ export namespace api.core {
                 writer.writeInt32(2, this.sender_uid);
             if (this.sender_name.length)
                 writer.writeString(3, this.sender_name);
+            if (this.sender_nick.length)
+                writer.writeString(4, this.sender_nick);
             if (this.sender_avatar.length)
-                writer.writeString(4, this.sender_avatar);
+                writer.writeString(5, this.sender_avatar);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1482,6 +1755,9 @@ export namespace api.core {
                         message.sender_name = reader.readString();
                         break;
                     case 4:
+                        message.sender_nick = reader.readString();
+                        break;
+                    case 5:
                         message.sender_avatar = reader.readString();
                         break;
                     default: reader.skipField();
@@ -1507,8 +1783,9 @@ export namespace api.core {
             start_at?: number;
             end_at?: number;
             sender_type?: MessageSenderType;
-            last_msg_id?: number;
+            last_msg_id?: string;
             last_msg_created_at?: number;
+            keyword?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1542,6 +1819,9 @@ export namespace api.core {
                 }
                 if ("last_msg_created_at" in data && data.last_msg_created_at != undefined) {
                     this.last_msg_created_at = data.last_msg_created_at;
+                }
+                if ("keyword" in data && data.keyword != undefined) {
+                    this.keyword = data.keyword;
                 }
             }
         }
@@ -1594,9 +1874,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 9, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 10, value);
         }
         get last_msg_created_at() {
@@ -1604,6 +1884,12 @@ export namespace api.core {
         }
         set last_msg_created_at(value: number) {
             pb_1.Message.setField(this, 11, value);
+        }
+        get keyword() {
+            return pb_1.Message.getFieldWithDefault(this, 12, "") as string;
+        }
+        set keyword(value: string) {
+            pb_1.Message.setField(this, 12, value);
         }
         static fromObject(data: {
             chat_id?: number;
@@ -1614,8 +1900,9 @@ export namespace api.core {
             start_at?: number;
             end_at?: number;
             sender_type?: MessageSenderType;
-            last_msg_id?: number;
+            last_msg_id?: string;
             last_msg_created_at?: number;
+            keyword?: string;
         }): MessageSyncManagerPageRequest {
             const message = new MessageSyncManagerPageRequest({});
             if (data.chat_id != null) {
@@ -1648,6 +1935,9 @@ export namespace api.core {
             if (data.last_msg_created_at != null) {
                 message.last_msg_created_at = data.last_msg_created_at;
             }
+            if (data.keyword != null) {
+                message.keyword = data.keyword;
+            }
             return message;
         }
         toObject() {
@@ -1660,8 +1950,9 @@ export namespace api.core {
                 start_at?: number;
                 end_at?: number;
                 sender_type?: MessageSenderType;
-                last_msg_id?: number;
+                last_msg_id?: string;
                 last_msg_created_at?: number;
+                keyword?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -1693,6 +1984,9 @@ export namespace api.core {
             if (this.last_msg_created_at != null) {
                 data.last_msg_created_at = this.last_msg_created_at;
             }
+            if (this.keyword != null) {
+                data.keyword = this.keyword;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1715,10 +2009,12 @@ export namespace api.core {
                 writer.writeInt64(8, this.end_at);
             if (this.sender_type != MessageSenderType.SENDER_TYPE_ALL)
                 writer.writeEnum(9, this.sender_type);
-            if (this.last_msg_id != 0)
-                writer.writeInt64(10, this.last_msg_id);
+            if (this.last_msg_id.length)
+                writer.writeString(10, this.last_msg_id);
             if (this.last_msg_created_at != 0)
                 writer.writeInt64(11, this.last_msg_created_at);
+            if (this.keyword.length)
+                writer.writeString(12, this.keyword);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1753,10 +2049,13 @@ export namespace api.core {
                         message.sender_type = reader.readEnum();
                         break;
                     case 10:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 11:
                         message.last_msg_created_at = reader.readInt64();
+                        break;
+                    case 12:
+                        message.keyword = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -1774,7 +2073,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             list?: MessageWithInfo[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             total?: number;
         }) {
             super();
@@ -1798,9 +2097,9 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
         get total() {
@@ -1811,7 +2110,7 @@ export namespace api.core {
         }
         static fromObject(data: {
             list?: ReturnType<typeof MessageWithInfo.prototype.toObject>[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             total?: number;
         }): MessageSyncManagerPageResponse {
             const message = new MessageSyncManagerPageResponse({});
@@ -1829,7 +2128,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 list?: ReturnType<typeof MessageWithInfo.prototype.toObject>[];
-                last_msg_id?: number;
+                last_msg_id?: string;
                 total?: number;
             } = {};
             if (this.list != null) {
@@ -1849,8 +2148,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: MessageWithInfo) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(4, this.last_msg_id);
+            if (this.last_msg_id.length)
+                writer.writeString(4, this.last_msg_id);
             if (this.total != 0)
                 writer.writeInt32(5, this.total);
             if (!w)
@@ -1866,7 +2165,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithInfo.deserialize(reader), MessageWithInfo));
                         break;
                     case 4:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 5:
                         message.total = reader.readInt32();
@@ -2612,6 +2911,7 @@ export namespace api.core {
             consult_name?: string;
             assign_time?: dependency_4.google.protobuf.Timestamp;
             chat_id?: number;
+            worker_account?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -2639,6 +2939,9 @@ export namespace api.core {
                 }
                 if ("chat_id" in data && data.chat_id != undefined) {
                     this.chat_id = data.chat_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
                 }
             }
         }
@@ -2693,6 +2996,12 @@ export namespace api.core {
         set chat_id(value: number) {
             pb_1.Message.setField(this, 8, value);
         }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
         static fromObject(data: {
             user_id?: number;
             user_name?: string;
@@ -2702,6 +3011,7 @@ export namespace api.core {
             consult_name?: string;
             assign_time?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
             chat_id?: number;
+            worker_account?: string;
         }): MessageSyncManagerSession {
             const message = new MessageSyncManagerSession({});
             if (data.user_id != null) {
@@ -2728,6 +3038,9 @@ export namespace api.core {
             if (data.chat_id != null) {
                 message.chat_id = data.chat_id;
             }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
             return message;
         }
         toObject() {
@@ -2740,6 +3053,7 @@ export namespace api.core {
                 consult_name?: string;
                 assign_time?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
                 chat_id?: number;
+                worker_account?: string;
             } = {};
             if (this.user_id != null) {
                 data.user_id = this.user_id;
@@ -2765,6 +3079,9 @@ export namespace api.core {
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
             }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -2787,6 +3104,8 @@ export namespace api.core {
                 writer.writeMessage(7, this.assign_time, () => this.assign_time.serialize(writer));
             if (this.chat_id != 0)
                 writer.writeInt64(8, this.chat_id);
+            if (this.worker_account.length)
+                writer.writeString(9, this.worker_account);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2819,6 +3138,9 @@ export namespace api.core {
                         break;
                     case 8:
                         message.chat_id = reader.readInt64();
+                        break;
+                    case 9:
+                        message.worker_account = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -3365,7 +3687,7 @@ export namespace api.core {
         constructor(data?: any[] | {
             content?: string;
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             start?: dependency_4.google.protobuf.Timestamp;
             end?: dependency_4.google.protobuf.Timestamp;
             count?: number;
@@ -3406,9 +3728,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get start() {
@@ -3438,7 +3760,7 @@ export namespace api.core {
         static fromObject(data: {
             content?: string;
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             start?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
             end?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
             count?: number;
@@ -3468,7 +3790,7 @@ export namespace api.core {
             const data: {
                 content?: string;
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 start?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
                 end?: ReturnType<typeof dependency_4.google.protobuf.Timestamp.prototype.toObject>;
                 count?: number;
@@ -3501,8 +3823,8 @@ export namespace api.core {
                 writer.writeString(1, this.content);
             if (this.chat_id != 0)
                 writer.writeInt64(2, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(3, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(3, this.msg_id);
             if (this.has_start)
                 writer.writeMessage(4, this.start, () => this.start.serialize(writer));
             if (this.has_end)
@@ -3525,7 +3847,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 4:
                         reader.readMessage(message.start, () => message.start = dependency_4.google.protobuf.Timestamp.deserialize(reader));
@@ -3553,7 +3875,7 @@ export namespace api.core {
         constructor(data?: any[] | {
             request?: MessageSearchRequest;
             list?: dependency_5.api.common.Message[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             detail?: Map<number, dependency_6.api.common.ChatDetail>;
         }) {
             super();
@@ -3591,9 +3913,9 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get detail() {
@@ -3605,7 +3927,7 @@ export namespace api.core {
         static fromObject(data: {
             request?: ReturnType<typeof MessageSearchRequest.prototype.toObject>;
             list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-            last_msg_id?: number;
+            last_msg_id?: string;
             detail?: {
                 [key: number]: ReturnType<typeof dependency_6.api.common.ChatDetail.prototype.toObject>;
             };
@@ -3629,7 +3951,7 @@ export namespace api.core {
             const data: {
                 request?: ReturnType<typeof MessageSearchRequest.prototype.toObject>;
                 list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-                last_msg_id?: number;
+                last_msg_id?: string;
                 detail?: {
                     [key: number]: ReturnType<typeof dependency_6.api.common.ChatDetail.prototype.toObject>;
                 };
@@ -3656,8 +3978,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(3, this.last_msg_id);
+            if (this.last_msg_id.length)
+                writer.writeString(3, this.last_msg_id);
             for (const [key, value] of this.detail) {
                 writer.writeMessage(4, this.detail, () => {
                     writer.writeInt64(1, key);
@@ -3680,7 +4002,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     case 4:
                         reader.readMessage(message, () => pb_1.Map.deserializeBinary(message.detail as any, reader, reader.readInt64, () => {
@@ -3705,7 +4027,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -3725,14 +4047,14 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }): QuerySpecMsgRequest {
             const message = new QuerySpecMsgRequest({});
             if (data.chat_id != null) {
@@ -3746,7 +4068,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -3762,8 +4084,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -3777,7 +4099,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -3865,7 +4187,7 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             start?: number;
             end?: number;
             count?: number;
@@ -3897,9 +4219,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get start() {
@@ -3922,7 +4244,7 @@ export namespace api.core {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             start?: number;
             end?: number;
             count?: number;
@@ -3948,7 +4270,7 @@ export namespace api.core {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 start?: number;
                 end?: number;
                 count?: number;
@@ -3976,8 +4298,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(2, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(3, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(3, this.msg_id);
             if (this.start != 0)
                 writer.writeInt64(4, this.start);
             if (this.end != 0)
@@ -3997,7 +4319,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 4:
                         message.start = reader.readInt64();
@@ -4025,7 +4347,7 @@ export namespace api.core {
         constructor(data?: any[] | {
             request?: QuerySyncRequest;
             list?: dependency_5.api.common.Message[];
-            last_msg_id?: number;
+            last_msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
@@ -4057,15 +4379,15 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set last_msg_id(value: number) {
+        set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         static fromObject(data: {
             request?: ReturnType<typeof QuerySyncRequest.prototype.toObject>;
             list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-            last_msg_id?: number;
+            last_msg_id?: string;
         }): QuerySyncResponse {
             const message = new QuerySyncResponse({});
             if (data.request != null) {
@@ -4083,7 +4405,7 @@ export namespace api.core {
             const data: {
                 request?: ReturnType<typeof QuerySyncRequest.prototype.toObject>;
                 list?: ReturnType<typeof dependency_5.api.common.Message.prototype.toObject>[];
-                last_msg_id?: number;
+                last_msg_id?: string;
             } = {};
             if (this.request != null) {
                 data.request = this.request.toObject();
@@ -4104,8 +4426,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id != 0)
-                writer.writeInt64(3, this.last_msg_id);
+            if (this.last_msg_id.length)
+                writer.writeString(3, this.last_msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -4122,7 +4444,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readInt64();
+                        message.last_msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -4292,6 +4614,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => MessageSyncManagerPageRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: MessageSyncManagerTotalResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => MessageSyncManagerTotalResponse.deserialize(new Uint8Array(bytes))
+            },
+            hisMessageSync: {
+                path: "/api.core.MessageTenantService/hisMessageSync",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: HisVersionMessageSyncRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => HisVersionMessageSyncRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: HisVersionMessageSyncResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => HisVersionMessageSyncResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -4307,6 +4638,7 @@ export namespace api.core {
         abstract syncManagerSessionPage(call: grpc_1.ServerUnaryCall<MessageSyncManagerSessionPageRequest, MessageSyncManagerSessionPageResponse>, callback: grpc_1.sendUnaryData<MessageSyncManagerSessionPageResponse>): void;
         abstract syncManagerMessageExport(call: grpc_1.ServerUnaryCall<MessageSyncManagerPageRequest, dependency_3.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_3.google.protobuf.Empty>): void;
         abstract syncManagerMessageTotal(call: grpc_1.ServerUnaryCall<MessageSyncManagerPageRequest, MessageSyncManagerTotalResponse>, callback: grpc_1.sendUnaryData<MessageSyncManagerTotalResponse>): void;
+        abstract hisMessageSync(call: grpc_1.ServerUnaryCall<HisVersionMessageSyncRequest, HisVersionMessageSyncResponse>, callback: grpc_1.sendUnaryData<HisVersionMessageSyncResponse>): void;
     }
     export class MessageTenantServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedMessageTenantServiceService.definition, "MessageTenantService", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -4347,6 +4679,9 @@ export namespace api.core {
         };
         syncManagerMessageTotal: GrpcUnaryServiceInterface<MessageSyncManagerPageRequest, MessageSyncManagerTotalResponse> = (message: MessageSyncManagerPageRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<MessageSyncManagerTotalResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<MessageSyncManagerTotalResponse>, callback?: grpc_1.requestCallback<MessageSyncManagerTotalResponse>): grpc_1.ClientUnaryCall => {
             return super.syncManagerMessageTotal(message, metadata, options, callback);
+        };
+        hisMessageSync: GrpcUnaryServiceInterface<HisVersionMessageSyncRequest, HisVersionMessageSyncResponse> = (message: HisVersionMessageSyncRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<HisVersionMessageSyncResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<HisVersionMessageSyncResponse>, callback?: grpc_1.requestCallback<HisVersionMessageSyncResponse>): grpc_1.ClientUnaryCall => {
+            return super.hisMessageSync(message, metadata, options, callback);
         };
     }
 }

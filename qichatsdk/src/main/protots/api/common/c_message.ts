@@ -39,7 +39,9 @@ export namespace api.common {
         MST_WORKER = 1,
         MST_CUSTOMER = 2,
         MST_SYSTEM_WORKER = 3,
-        MST_SYSTEM_CUSTOMER = 4
+        MST_SYSTEM_CUSTOMER = 4,
+        MST_SYSTEM_TRANSFER = 5,
+        MST_SYSTEM_AUTO_TRANSFER = 6
     }
     export enum MessageOperate {
         MSG_OP_POST = 0,
@@ -251,12 +253,20 @@ export namespace api.common {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             uri?: string;
+            hls_uri?: string;
+            thumbnail_uri?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("uri" in data && data.uri != undefined) {
                     this.uri = data.uri;
+                }
+                if ("hls_uri" in data && data.hls_uri != undefined) {
+                    this.hls_uri = data.hls_uri;
+                }
+                if ("thumbnail_uri" in data && data.thumbnail_uri != undefined) {
+                    this.thumbnail_uri = data.thumbnail_uri;
                 }
             }
         }
@@ -266,21 +276,49 @@ export namespace api.common {
         set uri(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
+        get hls_uri() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set hls_uri(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get thumbnail_uri() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set thumbnail_uri(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
         static fromObject(data: {
             uri?: string;
+            hls_uri?: string;
+            thumbnail_uri?: string;
         }): MessageVideo {
             const message = new MessageVideo({});
             if (data.uri != null) {
                 message.uri = data.uri;
+            }
+            if (data.hls_uri != null) {
+                message.hls_uri = data.hls_uri;
+            }
+            if (data.thumbnail_uri != null) {
+                message.thumbnail_uri = data.thumbnail_uri;
             }
             return message;
         }
         toObject() {
             const data: {
                 uri?: string;
+                hls_uri?: string;
+                thumbnail_uri?: string;
             } = {};
             if (this.uri != null) {
                 data.uri = this.uri;
+            }
+            if (this.hls_uri != null) {
+                data.hls_uri = this.hls_uri;
+            }
+            if (this.thumbnail_uri != null) {
+                data.thumbnail_uri = this.thumbnail_uri;
             }
             return data;
         }
@@ -290,6 +328,10 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.uri.length)
                 writer.writeString(1, this.uri);
+            if (this.hls_uri.length)
+                writer.writeString(2, this.hls_uri);
+            if (this.thumbnail_uri.length)
+                writer.writeString(3, this.thumbnail_uri);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -301,6 +343,12 @@ export namespace api.common {
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.uri = reader.readString();
+                        break;
+                    case 2:
+                        message.hls_uri = reader.readString();
+                        break;
+                    case 3:
+                        message.thumbnail_uri = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -1022,7 +1070,7 @@ export namespace api.common {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1042,14 +1090,14 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
         }): MessageKey {
             const message = new MessageKey({});
             if (data.chat_id != null) {
@@ -1063,7 +1111,7 @@ export namespace api.common {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -1079,8 +1127,8 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1094,7 +1142,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -1407,10 +1455,10 @@ export namespace api.common {
         #one_of_decls: number[][] = [[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110]];
         constructor(data?: any[] | ({
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             msg_time?: dependency_1.google.protobuf.Timestamp;
             sender?: number;
-            reply_msg_id?: number;
+            reply_msg_id?: string;
             msg_op?: MessageOperate;
             worker?: number;
             auto_reply_flag?: MessageAutoReplyFlag;
@@ -1418,6 +1466,7 @@ export namespace api.common {
             consult_id?: number;
             with_auto_replies?: WithAutoReply[];
             msg_source_type?: MsgSourceType;
+            payload_id?: string;
         } & (({
             content?: MessageContent;
             image?: never;
@@ -1590,6 +1639,9 @@ export namespace api.common {
                 if ("msg_source_type" in data && data.msg_source_type != undefined) {
                     this.msg_source_type = data.msg_source_type;
                 }
+                if ("payload_id" in data && data.payload_id != undefined) {
+                    this.payload_id = data.payload_id;
+                }
                 if ("content" in data && data.content != undefined) {
                     this.content = data.content;
                 }
@@ -1632,9 +1684,9 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set msg_id(value: number) {
+        set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_time() {
@@ -1653,9 +1705,9 @@ export namespace api.common {
             pb_1.Message.setField(this, 4, value);
         }
         get reply_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
         }
-        set reply_msg_id(value: number) {
+        set reply_msg_id(value: string) {
             pb_1.Message.setField(this, 5, value);
         }
         get msg_op() {
@@ -1702,6 +1754,12 @@ export namespace api.common {
         }
         set msg_source_type(value: MsgSourceType) {
             pb_1.Message.setField(this, 12, value);
+        }
+        get payload_id() {
+            return pb_1.Message.getFieldWithDefault(this, 99, "") as string;
+        }
+        set payload_id(value: string) {
+            pb_1.Message.setField(this, 99, value);
         }
         get content() {
             return pb_1.Message.getWrapperField(this, MessageContent, 100) as MessageContent;
@@ -1823,10 +1881,10 @@ export namespace api.common {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: number;
+            msg_id?: string;
             msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             sender?: number;
-            reply_msg_id?: number;
+            reply_msg_id?: string;
             msg_op?: MessageOperate;
             worker?: number;
             auto_reply_flag?: ReturnType<typeof MessageAutoReplyFlag.prototype.toObject>;
@@ -1834,6 +1892,7 @@ export namespace api.common {
             consult_id?: number;
             with_auto_replies?: ReturnType<typeof WithAutoReply.prototype.toObject>[];
             msg_source_type?: MsgSourceType;
+            payload_id?: string;
             content?: ReturnType<typeof MessageContent.prototype.toObject>;
             image?: ReturnType<typeof MessageImage.prototype.toObject>;
             audio?: ReturnType<typeof MessageAudio.prototype.toObject>;
@@ -1883,6 +1942,9 @@ export namespace api.common {
             if (data.msg_source_type != null) {
                 message.msg_source_type = data.msg_source_type;
             }
+            if (data.payload_id != null) {
+                message.payload_id = data.payload_id;
+            }
             if (data.content != null) {
                 message.content = MessageContent.fromObject(data.content);
             }
@@ -1921,10 +1983,10 @@ export namespace api.common {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: number;
+                msg_id?: string;
                 msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
                 sender?: number;
-                reply_msg_id?: number;
+                reply_msg_id?: string;
                 msg_op?: MessageOperate;
                 worker?: number;
                 auto_reply_flag?: ReturnType<typeof MessageAutoReplyFlag.prototype.toObject>;
@@ -1932,6 +1994,7 @@ export namespace api.common {
                 consult_id?: number;
                 with_auto_replies?: ReturnType<typeof WithAutoReply.prototype.toObject>[];
                 msg_source_type?: MsgSourceType;
+                payload_id?: string;
                 content?: ReturnType<typeof MessageContent.prototype.toObject>;
                 image?: ReturnType<typeof MessageImage.prototype.toObject>;
                 audio?: ReturnType<typeof MessageAudio.prototype.toObject>;
@@ -1980,6 +2043,9 @@ export namespace api.common {
             if (this.msg_source_type != null) {
                 data.msg_source_type = this.msg_source_type;
             }
+            if (this.payload_id != null) {
+                data.payload_id = this.payload_id;
+            }
             if (this.content != null) {
                 data.content = this.content.toObject();
             }
@@ -2021,14 +2087,14 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != 0)
-                writer.writeInt64(2, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(2, this.msg_id);
             if (this.has_msg_time)
                 writer.writeMessage(3, this.msg_time, () => this.msg_time.serialize(writer));
             if (this.sender != 0)
                 writer.writeInt64(4, this.sender);
-            if (this.reply_msg_id != 0)
-                writer.writeInt64(5, this.reply_msg_id);
+            if (this.reply_msg_id.length)
+                writer.writeString(5, this.reply_msg_id);
             if (this.msg_op != MessageOperate.MSG_OP_POST)
                 writer.writeEnum(6, this.msg_op);
             if (this.worker != 0)
@@ -2043,6 +2109,8 @@ export namespace api.common {
                 writer.writeRepeatedMessage(11, this.with_auto_replies, (item: WithAutoReply) => item.serialize(writer));
             if (this.msg_source_type != MsgSourceType.MST_DEFAULT)
                 writer.writeEnum(12, this.msg_source_type);
+            if (this.payload_id.length)
+                writer.writeString(99, this.payload_id);
             if (this.has_content)
                 writer.writeMessage(100, this.content, () => this.content.serialize(writer));
             if (this.has_image)
@@ -2078,7 +2146,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readInt64();
+                        message.msg_id = reader.readString();
                         break;
                     case 3:
                         reader.readMessage(message.msg_time, () => message.msg_time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
@@ -2087,7 +2155,7 @@ export namespace api.common {
                         message.sender = reader.readInt64();
                         break;
                     case 5:
-                        message.reply_msg_id = reader.readInt64();
+                        message.reply_msg_id = reader.readString();
                         break;
                     case 6:
                         message.msg_op = reader.readEnum();
@@ -2109,6 +2177,9 @@ export namespace api.common {
                         break;
                     case 12:
                         message.msg_source_type = reader.readEnum();
+                        break;
+                    case 99:
+                        message.payload_id = reader.readString();
                         break;
                     case 100:
                         reader.readMessage(message.content, () => message.content = MessageContent.deserialize(reader));

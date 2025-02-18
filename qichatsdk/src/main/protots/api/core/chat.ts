@@ -1482,6 +1482,7 @@ export namespace api.core {
             owner_id?: number;
             owner_role?: number;
             chat_id?: number;
+            msg_id?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1500,6 +1501,9 @@ export namespace api.core {
                 }
                 if ("chat_id" in data && data.chat_id != undefined) {
                     this.chat_id = data.chat_id;
+                }
+                if ("msg_id" in data && data.msg_id != undefined) {
+                    this.msg_id = data.msg_id;
                 }
             }
         }
@@ -1533,12 +1537,19 @@ export namespace api.core {
         set chat_id(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
+        get msg_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set msg_id(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
         static fromObject(data: {
             tenant_id?: number;
             consult_id?: number;
             owner_id?: number;
             owner_role?: number;
             chat_id?: number;
+            msg_id?: string;
         }): GetChatSessionStateRequest {
             const message = new GetChatSessionStateRequest({});
             if (data.tenant_id != null) {
@@ -1556,6 +1567,9 @@ export namespace api.core {
             if (data.chat_id != null) {
                 message.chat_id = data.chat_id;
             }
+            if (data.msg_id != null) {
+                message.msg_id = data.msg_id;
+            }
             return message;
         }
         toObject() {
@@ -1565,6 +1579,7 @@ export namespace api.core {
                 owner_id?: number;
                 owner_role?: number;
                 chat_id?: number;
+                msg_id?: string;
             } = {};
             if (this.tenant_id != null) {
                 data.tenant_id = this.tenant_id;
@@ -1580,6 +1595,9 @@ export namespace api.core {
             }
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
+            }
+            if (this.msg_id != null) {
+                data.msg_id = this.msg_id;
             }
             return data;
         }
@@ -1597,6 +1615,8 @@ export namespace api.core {
                 writer.writeInt32(4, this.owner_role);
             if (this.chat_id != 0)
                 writer.writeInt64(5, this.chat_id);
+            if (this.msg_id.length)
+                writer.writeString(6, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1621,6 +1641,9 @@ export namespace api.core {
                     case 5:
                         message.chat_id = reader.readInt64();
                         break;
+                    case 6:
+                        message.msg_id = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -1634,8 +1657,8 @@ export namespace api.core {
         }
     }
     export class GetChatSessionStateResponse extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
+        #one_of_decls: number[][] = [[22]];
+        constructor(data?: any[] | ({
             tenant_id?: number;
             consult_id?: number;
             owner_id?: number;
@@ -1661,7 +1684,9 @@ export namespace api.core {
             visible?: number;
             state?: dependency_6.api.common.ChatState;
             worker_state?: dependency_5.api.common.WorkerState;
-        }) {
+        } & (({
+            last_message?: dependency_6.api.common.Message;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -1739,6 +1764,9 @@ export namespace api.core {
                 }
                 if ("worker_state" in data && data.worker_state != undefined) {
                     this.worker_state = data.worker_state;
+                }
+                if ("last_message" in data && data.last_message != undefined) {
+                    this.last_message = data.last_message;
                 }
             }
         }
@@ -1892,6 +1920,24 @@ export namespace api.core {
         set worker_state(value: dependency_5.api.common.WorkerState) {
             pb_1.Message.setField(this, 21, value);
         }
+        get last_message() {
+            return pb_1.Message.getWrapperField(this, dependency_6.api.common.Message, 22) as dependency_6.api.common.Message;
+        }
+        set last_message(value: dependency_6.api.common.Message) {
+            pb_1.Message.setOneofWrapperField(this, 22, this.#one_of_decls[0], value);
+        }
+        get has_last_message() {
+            return pb_1.Message.getField(this, 22) != null;
+        }
+        get _last_message() {
+            const cases: {
+                [index: number]: "none" | "last_message";
+            } = {
+                0: "none",
+                22: "last_message"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [22])];
+        }
         static fromObject(data: {
             tenant_id?: number;
             consult_id?: number;
@@ -1918,6 +1964,7 @@ export namespace api.core {
             visible?: number;
             state?: dependency_6.api.common.ChatState;
             worker_state?: dependency_5.api.common.WorkerState;
+            last_message?: ReturnType<typeof dependency_6.api.common.Message.prototype.toObject>;
         }): GetChatSessionStateResponse {
             const message = new GetChatSessionStateResponse({});
             if (data.tenant_id != null) {
@@ -1995,6 +2042,9 @@ export namespace api.core {
             if (data.worker_state != null) {
                 message.worker_state = data.worker_state;
             }
+            if (data.last_message != null) {
+                message.last_message = dependency_6.api.common.Message.fromObject(data.last_message);
+            }
             return message;
         }
         toObject() {
@@ -2024,6 +2074,7 @@ export namespace api.core {
                 visible?: number;
                 state?: dependency_6.api.common.ChatState;
                 worker_state?: dependency_5.api.common.WorkerState;
+                last_message?: ReturnType<typeof dependency_6.api.common.Message.prototype.toObject>;
             } = {};
             if (this.tenant_id != null) {
                 data.tenant_id = this.tenant_id;
@@ -2100,6 +2151,9 @@ export namespace api.core {
             if (this.worker_state != null) {
                 data.worker_state = this.worker_state;
             }
+            if (this.last_message != null) {
+                data.last_message = this.last_message.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -2156,6 +2210,8 @@ export namespace api.core {
                 writer.writeEnum(20, this.state);
             if (this.worker_state != dependency_5.api.common.WorkerState.WORKER_OFFLINE)
                 writer.writeEnum(21, this.worker_state);
+            if (this.has_last_message)
+                writer.writeMessage(22, this.last_message, () => this.last_message.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2240,6 +2296,9 @@ export namespace api.core {
                     case 21:
                         message.worker_state = reader.readEnum();
                         break;
+                    case 22:
+                        reader.readMessage(message.last_message, () => message.last_message = dependency_6.api.common.Message.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -2250,6 +2309,550 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): GetChatSessionStateResponse {
             return GetChatSessionStateResponse.deserialize(bytes);
+        }
+    }
+    export class GetChatStateReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_id?: number;
+            chat_ids?: number[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_ids" in data && data.chat_ids != undefined) {
+                    this.chat_ids = data.chat_ids;
+                }
+            }
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_ids() {
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as number[];
+        }
+        set chat_ids(value: number[]) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            consult_id?: number;
+            chat_ids?: number[];
+        }): GetChatStateReq {
+            const message = new GetChatStateReq({});
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_ids != null) {
+                message.chat_ids = data.chat_ids;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_id?: number;
+                chat_ids?: number[];
+            } = {};
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_ids != null) {
+                data.chat_ids = this.chat_ids;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_id != 0)
+                writer.writeInt64(1, this.consult_id);
+            if (this.chat_ids.length)
+                writer.writePackedInt64(2, this.chat_ids);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetChatStateReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetChatStateReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.chat_ids = reader.readPackedInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetChatStateReq {
+            return GetChatStateReq.deserialize(bytes);
+        }
+    }
+    export class StateItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_id?: number;
+            user_id?: number;
+            is_time_out?: boolean;
+            expire_seconds?: number;
+            now_time?: number;
+            worker_id?: number;
+            last_msg_time?: number;
+            assign_time?: number;
+            transfer_in_time?: number;
+            transfer_out_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("is_time_out" in data && data.is_time_out != undefined) {
+                    this.is_time_out = data.is_time_out;
+                }
+                if ("expire_seconds" in data && data.expire_seconds != undefined) {
+                    this.expire_seconds = data.expire_seconds;
+                }
+                if ("now_time" in data && data.now_time != undefined) {
+                    this.now_time = data.now_time;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("last_msg_time" in data && data.last_msg_time != undefined) {
+                    this.last_msg_time = data.last_msg_time;
+                }
+                if ("assign_time" in data && data.assign_time != undefined) {
+                    this.assign_time = data.assign_time;
+                }
+                if ("transfer_in_time" in data && data.transfer_in_time != undefined) {
+                    this.transfer_in_time = data.transfer_in_time;
+                }
+                if ("transfer_out_time" in data && data.transfer_out_time != undefined) {
+                    this.transfer_out_time = data.transfer_out_time;
+                }
+            }
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get is_time_out() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set is_time_out(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get expire_seconds() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set expire_seconds(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get now_time() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set now_time(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get last_msg_time() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set last_msg_time(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get assign_time() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set assign_time(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get transfer_in_time() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set transfer_in_time(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get transfer_out_time() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set transfer_out_time(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        static fromObject(data: {
+            chat_id?: number;
+            user_id?: number;
+            is_time_out?: boolean;
+            expire_seconds?: number;
+            now_time?: number;
+            worker_id?: number;
+            last_msg_time?: number;
+            assign_time?: number;
+            transfer_in_time?: number;
+            transfer_out_time?: number;
+        }): StateItem {
+            const message = new StateItem({});
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.is_time_out != null) {
+                message.is_time_out = data.is_time_out;
+            }
+            if (data.expire_seconds != null) {
+                message.expire_seconds = data.expire_seconds;
+            }
+            if (data.now_time != null) {
+                message.now_time = data.now_time;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.last_msg_time != null) {
+                message.last_msg_time = data.last_msg_time;
+            }
+            if (data.assign_time != null) {
+                message.assign_time = data.assign_time;
+            }
+            if (data.transfer_in_time != null) {
+                message.transfer_in_time = data.transfer_in_time;
+            }
+            if (data.transfer_out_time != null) {
+                message.transfer_out_time = data.transfer_out_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_id?: number;
+                user_id?: number;
+                is_time_out?: boolean;
+                expire_seconds?: number;
+                now_time?: number;
+                worker_id?: number;
+                last_msg_time?: number;
+                assign_time?: number;
+                transfer_in_time?: number;
+                transfer_out_time?: number;
+            } = {};
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.is_time_out != null) {
+                data.is_time_out = this.is_time_out;
+            }
+            if (this.expire_seconds != null) {
+                data.expire_seconds = this.expire_seconds;
+            }
+            if (this.now_time != null) {
+                data.now_time = this.now_time;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.last_msg_time != null) {
+                data.last_msg_time = this.last_msg_time;
+            }
+            if (this.assign_time != null) {
+                data.assign_time = this.assign_time;
+            }
+            if (this.transfer_in_time != null) {
+                data.transfer_in_time = this.transfer_in_time;
+            }
+            if (this.transfer_out_time != null) {
+                data.transfer_out_time = this.transfer_out_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_id != 0)
+                writer.writeInt64(1, this.chat_id);
+            if (this.user_id != 0)
+                writer.writeInt32(2, this.user_id);
+            if (this.is_time_out != false)
+                writer.writeBool(3, this.is_time_out);
+            if (this.expire_seconds != 0)
+                writer.writeInt64(4, this.expire_seconds);
+            if (this.now_time != 0)
+                writer.writeInt64(5, this.now_time);
+            if (this.worker_id != 0)
+                writer.writeInt32(6, this.worker_id);
+            if (this.last_msg_time != 0)
+                writer.writeInt64(7, this.last_msg_time);
+            if (this.assign_time != 0)
+                writer.writeInt64(8, this.assign_time);
+            if (this.transfer_in_time != 0)
+                writer.writeInt64(9, this.transfer_in_time);
+            if (this.transfer_out_time != 0)
+                writer.writeInt64(10, this.transfer_out_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): StateItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new StateItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.is_time_out = reader.readBool();
+                        break;
+                    case 4:
+                        message.expire_seconds = reader.readInt64();
+                        break;
+                    case 5:
+                        message.now_time = reader.readInt64();
+                        break;
+                    case 6:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 7:
+                        message.last_msg_time = reader.readInt64();
+                        break;
+                    case 8:
+                        message.assign_time = reader.readInt64();
+                        break;
+                    case 9:
+                        message.transfer_in_time = reader.readInt64();
+                        break;
+                    case 10:
+                        message.transfer_out_time = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): StateItem {
+            return StateItem.deserialize(bytes);
+        }
+    }
+    export class GetChatStateResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_id?: number;
+            items?: StateItem[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, StateItem, 2) as StateItem[];
+        }
+        set items(value: StateItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 2, value);
+        }
+        static fromObject(data: {
+            consult_id?: number;
+            items?: ReturnType<typeof StateItem.prototype.toObject>[];
+        }): GetChatStateResp {
+            const message = new GetChatStateResp({});
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.items != null) {
+                message.items = data.items.map(item => StateItem.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_id?: number;
+                items?: ReturnType<typeof StateItem.prototype.toObject>[];
+            } = {};
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.items != null) {
+                data.items = this.items.map((item: StateItem) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_id != 0)
+                writer.writeInt64(1, this.consult_id);
+            if (this.items.length)
+                writer.writeRepeatedMessage(2, this.items, (item: StateItem) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetChatStateResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetChatStateResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_id = reader.readInt64();
+                        break;
+                    case 2:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 2, StateItem.deserialize(reader), StateItem));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetChatStateResp {
+            return GetChatStateResp.deserialize(bytes);
+        }
+    }
+    export class GetChatStateRespV1 extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_id?: number;
+            chat_ids?: number[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_ids" in data && data.chat_ids != undefined) {
+                    this.chat_ids = data.chat_ids;
+                }
+            }
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_ids() {
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as number[];
+        }
+        set chat_ids(value: number[]) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            consult_id?: number;
+            chat_ids?: number[];
+        }): GetChatStateRespV1 {
+            const message = new GetChatStateRespV1({});
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_ids != null) {
+                message.chat_ids = data.chat_ids;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_id?: number;
+                chat_ids?: number[];
+            } = {};
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_ids != null) {
+                data.chat_ids = this.chat_ids;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_id != 0)
+                writer.writeInt64(1, this.consult_id);
+            if (this.chat_ids.length)
+                writer.writePackedInt64(2, this.chat_ids);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GetChatStateRespV1 {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GetChatStateRespV1();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.chat_ids = reader.readPackedInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GetChatStateRespV1 {
+            return GetChatStateRespV1.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {
@@ -2367,6 +2970,24 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => GetChatSessionStateRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: GetChatSessionStateResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => GetChatSessionStateResponse.deserialize(new Uint8Array(bytes))
+            },
+            GetChatState: {
+                path: "/api.core.Chat/GetChatState",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GetChatStateReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GetChatStateReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GetChatStateResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GetChatStateResp.deserialize(new Uint8Array(bytes))
+            },
+            GetChatStateV1: {
+                path: "/api.core.Chat/GetChatStateV1",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GetChatStateReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GetChatStateReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GetChatStateRespV1) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GetChatStateRespV1.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -2380,6 +3001,8 @@ export namespace api.core {
         abstract HistoryClientSessions(call: grpc_1.ServerUnaryCall<HistoryClientSessionsRequest, HistoryClientSessionsResponse>, callback: grpc_1.sendUnaryData<HistoryClientSessionsResponse>): void;
         abstract IndexClientSessions(call: grpc_1.ServerUnaryCall<IndexClientSessionsRequest, IndexClientSessionsResponse>, callback: grpc_1.sendUnaryData<IndexClientSessionsResponse>): void;
         abstract GetChatSessionState(call: grpc_1.ServerUnaryCall<GetChatSessionStateRequest, GetChatSessionStateResponse>, callback: grpc_1.sendUnaryData<GetChatSessionStateResponse>): void;
+        abstract GetChatState(call: grpc_1.ServerUnaryCall<GetChatStateReq, GetChatStateResp>, callback: grpc_1.sendUnaryData<GetChatStateResp>): void;
+        abstract GetChatStateV1(call: grpc_1.ServerUnaryCall<GetChatStateReq, GetChatStateRespV1>, callback: grpc_1.sendUnaryData<GetChatStateRespV1>): void;
     }
     export class ChatClient extends grpc_1.makeGenericClientConstructor(UnimplementedChatService.definition, "Chat", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -2414,6 +3037,12 @@ export namespace api.core {
         };
         GetChatSessionState: GrpcUnaryServiceInterface<GetChatSessionStateRequest, GetChatSessionStateResponse> = (message: GetChatSessionStateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetChatSessionStateResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetChatSessionStateResponse>, callback?: grpc_1.requestCallback<GetChatSessionStateResponse>): grpc_1.ClientUnaryCall => {
             return super.GetChatSessionState(message, metadata, options, callback);
+        };
+        GetChatState: GrpcUnaryServiceInterface<GetChatStateReq, GetChatStateResp> = (message: GetChatStateReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateResp>, callback?: grpc_1.requestCallback<GetChatStateResp>): grpc_1.ClientUnaryCall => {
+            return super.GetChatState(message, metadata, options, callback);
+        };
+        GetChatStateV1: GrpcUnaryServiceInterface<GetChatStateReq, GetChatStateRespV1> = (message: GetChatStateReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateRespV1>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateRespV1>, callback?: grpc_1.requestCallback<GetChatStateRespV1>): grpc_1.ClientUnaryCall => {
+            return super.GetChatStateV1(message, metadata, options, callback);
         };
     }
 }

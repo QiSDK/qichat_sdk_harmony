@@ -11,6 +11,7 @@ import * as dependency_5 from "./../common/c_base";
 import * as dependency_6 from "./../common/c_chat";
 import * as dependency_7 from "./../common/c_message";
 import * as dependency_8 from "./../../google/protobuf/timestamp";
+import * as dependency_9 from "./../../google/protobuf/any";
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export namespace api.core {
@@ -228,6 +229,73 @@ export namespace api.core {
             return WorkerQueryRequest.deserialize(bytes);
         }
     }
+    export class BaseWorkerInfoListResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: dependency_4.api.common.WorkerBaseInfo[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.WorkerBaseInfo, 1) as dependency_4.api.common.WorkerBaseInfo[];
+        }
+        set items(value: dependency_4.api.common.WorkerBaseInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof dependency_4.api.common.WorkerBaseInfo.prototype.toObject>[];
+        }): BaseWorkerInfoListResponse {
+            const message = new BaseWorkerInfoListResponse({});
+            if (data.items != null) {
+                message.items = data.items.map(item => dependency_4.api.common.WorkerBaseInfo.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof dependency_4.api.common.WorkerBaseInfo.prototype.toObject>[];
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: dependency_4.api.common.WorkerBaseInfo) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: dependency_4.api.common.WorkerBaseInfo) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): BaseWorkerInfoListResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new BaseWorkerInfoListResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_4.api.common.WorkerBaseInfo.deserialize(reader), dependency_4.api.common.WorkerBaseInfo));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): BaseWorkerInfoListResponse {
+            return BaseWorkerInfoListResponse.deserialize(bytes);
+        }
+    }
     export class WorkerQueryResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -344,6 +412,73 @@ export namespace api.core {
             return WorkerQueryResponse.deserialize(bytes);
         }
     }
+    export class WorkerQueryAllResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: dependency_4.api.common.Worker[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.Worker, 1) as dependency_4.api.common.Worker[];
+        }
+        set items(value: dependency_4.api.common.Worker[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof dependency_4.api.common.Worker.prototype.toObject>[];
+        }): WorkerQueryAllResponse {
+            const message = new WorkerQueryAllResponse({});
+            if (data.items != null) {
+                message.items = data.items.map(item => dependency_4.api.common.Worker.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof dependency_4.api.common.Worker.prototype.toObject>[];
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: dependency_4.api.common.Worker) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: dependency_4.api.common.Worker) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQueryAllResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQueryAllResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_4.api.common.Worker.deserialize(reader), dependency_4.api.common.Worker));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQueryAllResponse {
+            return WorkerQueryAllResponse.deserialize(bytes);
+        }
+    }
     export class WorkerQuerySelfResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -412,6 +547,389 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): WorkerQuerySelfResponse {
             return WorkerQuerySelfResponse.deserialize(bytes);
+        }
+    }
+    export class GroupRelWorkersInfoRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            open_filter?: boolean;
+            group_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("open_filter" in data && data.open_filter != undefined) {
+                    this.open_filter = data.open_filter;
+                }
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+            }
+        }
+        get open_filter() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set open_filter(value: boolean) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            open_filter?: boolean;
+            group_id?: number;
+        }): GroupRelWorkersInfoRequest {
+            const message = new GroupRelWorkersInfoRequest({});
+            if (data.open_filter != null) {
+                message.open_filter = data.open_filter;
+            }
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                open_filter?: boolean;
+                group_id?: number;
+            } = {};
+            if (this.open_filter != null) {
+                data.open_filter = this.open_filter;
+            }
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.open_filter != false)
+                writer.writeBool(1, this.open_filter);
+            if (this.group_id != 0)
+                writer.writeInt32(2, this.group_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GroupRelWorkersInfoRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GroupRelWorkersInfoRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.open_filter = reader.readBool();
+                        break;
+                    case 2:
+                        message.group_id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GroupRelWorkersInfoRequest {
+            return GroupRelWorkersInfoRequest.deserialize(bytes);
+        }
+    }
+    export class GroupRelWorkersInfoResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: WorkerGroupInfo[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerGroupInfo, 1) as WorkerGroupInfo[];
+        }
+        set items(value: WorkerGroupInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof WorkerGroupInfo.prototype.toObject>[];
+        }): GroupRelWorkersInfoResponse {
+            const message = new GroupRelWorkersInfoResponse({});
+            if (data.items != null) {
+                message.items = data.items.map(item => WorkerGroupInfo.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof WorkerGroupInfo.prototype.toObject>[];
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: WorkerGroupInfo) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: WorkerGroupInfo) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): GroupRelWorkersInfoResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new GroupRelWorkersInfoResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerGroupInfo.deserialize(reader), WorkerGroupInfo));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): GroupRelWorkersInfoResponse {
+            return GroupRelWorkersInfoResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerGroupInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            group_name?: string;
+            rel_workers?: RelWorkersInfo[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("group_name" in data && data.group_name != undefined) {
+                    this.group_name = data.group_name;
+                }
+                if ("rel_workers" in data && data.rel_workers != undefined) {
+                    this.rel_workers = data.rel_workers;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get group_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set group_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get rel_workers() {
+            return pb_1.Message.getRepeatedWrapperField(this, RelWorkersInfo, 3) as RelWorkersInfo[];
+        }
+        set rel_workers(value: RelWorkersInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 3, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            group_name?: string;
+            rel_workers?: ReturnType<typeof RelWorkersInfo.prototype.toObject>[];
+        }): WorkerGroupInfo {
+            const message = new WorkerGroupInfo({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.group_name != null) {
+                message.group_name = data.group_name;
+            }
+            if (data.rel_workers != null) {
+                message.rel_workers = data.rel_workers.map(item => RelWorkersInfo.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                group_name?: string;
+                rel_workers?: ReturnType<typeof RelWorkersInfo.prototype.toObject>[];
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.group_name != null) {
+                data.group_name = this.group_name;
+            }
+            if (this.rel_workers != null) {
+                data.rel_workers = this.rel_workers.map((item: RelWorkersInfo) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.group_name.length)
+                writer.writeString(2, this.group_name);
+            if (this.rel_workers.length)
+                writer.writeRepeatedMessage(3, this.rel_workers, (item: RelWorkersInfo) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerGroupInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerGroupInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.group_name = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.rel_workers, () => pb_1.Message.addToRepeatedWrapperField(message, 3, RelWorkersInfo.deserialize(reader), RelWorkersInfo));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerGroupInfo {
+            return WorkerGroupInfo.deserialize(bytes);
+        }
+    }
+    export class RelWorkersInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            account?: string;
+            name?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            account?: string;
+            name?: string;
+        }): RelWorkersInfo {
+            const message = new RelWorkersInfo({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                account?: string;
+                name?: string;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.account.length)
+                writer.writeString(2, this.account);
+            if (this.name.length)
+                writer.writeString(3, this.name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RelWorkersInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RelWorkersInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.account = reader.readString();
+                        break;
+                    case 3:
+                        message.name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): RelWorkersInfo {
+            return RelWorkersInfo.deserialize(bytes);
         }
     }
     export class NIMAccountRequest extends pb_1.Message {
@@ -646,7 +1164,7 @@ export namespace api.core {
             account?: string;
             password?: string;
             group_ids?: number[];
-            perm_mask?: number;
+            role_id?: number;
             name?: string;
             avatar?: string;
             group_cids?: number[];
@@ -669,8 +1187,8 @@ export namespace api.core {
                 if ("group_ids" in data && data.group_ids != undefined) {
                     this.group_ids = data.group_ids;
                 }
-                if ("perm_mask" in data && data.perm_mask != undefined) {
-                    this.perm_mask = data.perm_mask;
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
                 }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
@@ -710,11 +1228,11 @@ export namespace api.core {
         set group_ids(value: number[]) {
             pb_1.Message.setField(this, 3, value);
         }
-        get perm_mask() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
-        set perm_mask(value: number) {
-            pb_1.Message.setField(this, 4, value);
+        set role_id(value: number) {
+            pb_1.Message.setField(this, 5, value);
         }
         get name() {
             return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
@@ -792,7 +1310,7 @@ export namespace api.core {
             account?: string;
             password?: string;
             group_ids?: number[];
-            perm_mask?: number;
+            role_id?: number;
             name?: string;
             avatar?: string;
             bneednim?: boolean;
@@ -810,8 +1328,8 @@ export namespace api.core {
             if (data.group_ids != null) {
                 message.group_ids = data.group_ids;
             }
-            if (data.perm_mask != null) {
-                message.perm_mask = data.perm_mask;
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
             }
             if (data.name != null) {
                 message.name = data.name;
@@ -838,7 +1356,7 @@ export namespace api.core {
                 account?: string;
                 password?: string;
                 group_ids?: number[];
-                perm_mask?: number;
+                role_id?: number;
                 name?: string;
                 avatar?: string;
                 bneednim?: boolean;
@@ -855,8 +1373,8 @@ export namespace api.core {
             if (this.group_ids != null) {
                 data.group_ids = this.group_ids;
             }
-            if (this.perm_mask != null) {
-                data.perm_mask = this.perm_mask;
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
             }
             if (this.name != null) {
                 data.name = this.name;
@@ -888,8 +1406,8 @@ export namespace api.core {
                 writer.writeString(2, this.password);
             if (this.group_ids.length)
                 writer.writePackedInt64(3, this.group_ids);
-            if (this.perm_mask != 0)
-                writer.writeInt32(4, this.perm_mask);
+            if (this.role_id != 0)
+                writer.writeInt32(5, this.role_id);
             if (this.name.length)
                 writer.writeString(6, this.name);
             if (this.avatar.length)
@@ -920,8 +1438,8 @@ export namespace api.core {
                     case 3:
                         message.group_ids = reader.readPackedInt64();
                         break;
-                    case 4:
-                        message.perm_mask = reader.readInt32();
+                    case 5:
+                        message.role_id = reader.readInt32();
                         break;
                     case 6:
                         message.name = reader.readString();
@@ -954,7 +1472,7 @@ export namespace api.core {
         }
     }
     export class WorkerUpdateRequest extends pb_1.Message {
-        #one_of_decls: number[][] = [[2], [3], [5], [6], [7], [8], [9], [10]];
+        #one_of_decls: number[][] = [[2], [3], [4], [6], [7], [8], [9], [10]];
         constructor(data?: any[] | ({
             worker_id?: number;
             group_cids?: number[];
@@ -963,7 +1481,7 @@ export namespace api.core {
         }) | ({
             group_ids?: dependency_5.api.common.SetInt64;
         }) | ({
-            perm_mask?: number;
+            role_id?: number;
         }) | ({
             name?: string;
         }) | ({
@@ -987,8 +1505,8 @@ export namespace api.core {
                 if ("group_ids" in data && data.group_ids != undefined) {
                     this.group_ids = data.group_ids;
                 }
-                if ("perm_mask" in data && data.perm_mask != undefined) {
-                    this.perm_mask = data.perm_mask;
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
                 }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
@@ -1034,14 +1552,14 @@ export namespace api.core {
         get has_group_ids() {
             return pb_1.Message.getField(this, 3) != null;
         }
-        get perm_mask() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
-        set perm_mask(value: number) {
-            pb_1.Message.setOneofField(this, 5, this.#one_of_decls[2], value);
+        set role_id(value: number) {
+            pb_1.Message.setOneofField(this, 4, this.#one_of_decls[2], value);
         }
-        get has_perm_mask() {
-            return pb_1.Message.getField(this, 5) != null;
+        get has_role_id() {
+            return pb_1.Message.getField(this, 4) != null;
         }
         get name() {
             return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
@@ -1112,14 +1630,14 @@ export namespace api.core {
             };
             return cases[pb_1.Message.computeOneofCase(this, [3])];
         }
-        get _perm_mask() {
+        get _role_id() {
             const cases: {
-                [index: number]: "none" | "perm_mask";
+                [index: number]: "none" | "role_id";
             } = {
                 0: "none",
-                5: "perm_mask"
+                4: "role_id"
             };
-            return cases[pb_1.Message.computeOneofCase(this, [5])];
+            return cases[pb_1.Message.computeOneofCase(this, [4])];
         }
         get _name() {
             const cases: {
@@ -1170,7 +1688,7 @@ export namespace api.core {
             worker_id?: number;
             password?: string;
             group_ids?: ReturnType<typeof dependency_5.api.common.SetInt64.prototype.toObject>;
-            perm_mask?: number;
+            role_id?: number;
             name?: string;
             avatar?: string;
             nimid?: string;
@@ -1188,8 +1706,8 @@ export namespace api.core {
             if (data.group_ids != null) {
                 message.group_ids = dependency_5.api.common.SetInt64.fromObject(data.group_ids);
             }
-            if (data.perm_mask != null) {
-                message.perm_mask = data.perm_mask;
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
             }
             if (data.name != null) {
                 message.name = data.name;
@@ -1216,7 +1734,7 @@ export namespace api.core {
                 worker_id?: number;
                 password?: string;
                 group_ids?: ReturnType<typeof dependency_5.api.common.SetInt64.prototype.toObject>;
-                perm_mask?: number;
+                role_id?: number;
                 name?: string;
                 avatar?: string;
                 nimid?: string;
@@ -1233,8 +1751,8 @@ export namespace api.core {
             if (this.group_ids != null) {
                 data.group_ids = this.group_ids.toObject();
             }
-            if (this.perm_mask != null) {
-                data.perm_mask = this.perm_mask;
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
             }
             if (this.name != null) {
                 data.name = this.name;
@@ -1266,8 +1784,8 @@ export namespace api.core {
                 writer.writeString(2, this.password);
             if (this.has_group_ids)
                 writer.writeMessage(3, this.group_ids, () => this.group_ids.serialize(writer));
-            if (this.has_perm_mask)
-                writer.writeInt32(5, this.perm_mask);
+            if (this.has_role_id)
+                writer.writeInt32(4, this.role_id);
             if (this.has_name)
                 writer.writeString(6, this.name);
             if (this.has_avatar)
@@ -1298,8 +1816,8 @@ export namespace api.core {
                     case 3:
                         reader.readMessage(message.group_ids, () => message.group_ids = dependency_5.api.common.SetInt64.deserialize(reader));
                         break;
-                    case 5:
-                        message.perm_mask = reader.readInt32();
+                    case 4:
+                        message.role_id = reader.readInt32();
                         break;
                     case 6:
                         message.name = reader.readString();
@@ -4592,12 +5110,15 @@ export namespace api.core {
         }
     }
     export class NotifyMessageRequest extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
+        #one_of_decls: number[][] = [[3]];
+        constructor(data?: any[] | ({
             consultid?: number;
             userid?: number;
             msg?: string;
-        }) {
+            operationId?: string;
+        } & (({
+            account?: string;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -4607,33 +5128,65 @@ export namespace api.core {
                 if ("userid" in data && data.userid != undefined) {
                     this.userid = data.userid;
                 }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
                 if ("msg" in data && data.msg != undefined) {
                     this.msg = data.msg;
+                }
+                if ("operationId" in data && data.operationId != undefined) {
+                    this.operationId = data.operationId;
                 }
             }
         }
         get consultid() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
         set consultid(value: number) {
-            pb_1.Message.setField(this, 3, value);
+            pb_1.Message.setField(this, 1, value);
         }
         get userid() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
         }
         set userid(value: number) {
-            pb_1.Message.setField(this, 4, value);
+            pb_1.Message.setField(this, 2, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+        }
+        get has_account() {
+            return pb_1.Message.getField(this, 3) != null;
         }
         get msg() {
-            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
         set msg(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get operationId() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set operationId(value: string) {
             pb_1.Message.setField(this, 5, value);
+        }
+        get _account() {
+            const cases: {
+                [index: number]: "none" | "account";
+            } = {
+                0: "none",
+                3: "account"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
         }
         static fromObject(data: {
             consultid?: number;
             userid?: number;
+            account?: string;
             msg?: string;
+            operationId?: string;
         }): NotifyMessageRequest {
             const message = new NotifyMessageRequest({});
             if (data.consultid != null) {
@@ -4642,8 +5195,14 @@ export namespace api.core {
             if (data.userid != null) {
                 message.userid = data.userid;
             }
+            if (data.account != null) {
+                message.account = data.account;
+            }
             if (data.msg != null) {
                 message.msg = data.msg;
+            }
+            if (data.operationId != null) {
+                message.operationId = data.operationId;
             }
             return message;
         }
@@ -4651,7 +5210,9 @@ export namespace api.core {
             const data: {
                 consultid?: number;
                 userid?: number;
+                account?: string;
                 msg?: string;
+                operationId?: string;
             } = {};
             if (this.consultid != null) {
                 data.consultid = this.consultid;
@@ -4659,8 +5220,14 @@ export namespace api.core {
             if (this.userid != null) {
                 data.userid = this.userid;
             }
+            if (this.account != null) {
+                data.account = this.account;
+            }
             if (this.msg != null) {
                 data.msg = this.msg;
+            }
+            if (this.operationId != null) {
+                data.operationId = this.operationId;
             }
             return data;
         }
@@ -4669,11 +5236,15 @@ export namespace api.core {
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
             if (this.consultid != 0)
-                writer.writeInt32(3, this.consultid);
+                writer.writeInt32(1, this.consultid);
             if (this.userid != 0)
-                writer.writeInt32(4, this.userid);
+                writer.writeInt32(2, this.userid);
+            if (this.has_account)
+                writer.writeString(3, this.account);
             if (this.msg.length)
-                writer.writeString(5, this.msg);
+                writer.writeString(4, this.msg);
+            if (this.operationId.length)
+                writer.writeString(5, this.operationId);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -4683,14 +5254,20 @@ export namespace api.core {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
-                    case 3:
+                    case 1:
                         message.consultid = reader.readInt32();
                         break;
-                    case 4:
+                    case 2:
                         message.userid = reader.readInt32();
                         break;
-                    case 5:
+                    case 3:
+                        message.account = reader.readString();
+                        break;
+                    case 4:
                         message.msg = reader.readString();
+                        break;
+                    case 5:
+                        message.operationId = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -4702,6 +5279,245 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): NotifyMessageRequest {
             return NotifyMessageRequest.deserialize(bytes);
+        }
+    }
+    export class BatchNotifyMessageItem extends pb_1.Message {
+        #one_of_decls: number[][] = [[3]];
+        constructor(data?: any[] | ({
+            consultid?: number;
+            userid?: number;
+            msg?: string;
+        } & (({
+            account?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consultid" in data && data.consultid != undefined) {
+                    this.consultid = data.consultid;
+                }
+                if ("userid" in data && data.userid != undefined) {
+                    this.userid = data.userid;
+                }
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("msg" in data && data.msg != undefined) {
+                    this.msg = data.msg;
+                }
+            }
+        }
+        get consultid() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consultid(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get userid() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set userid(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+        }
+        get has_account() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get msg() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set msg(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get _account() {
+            const cases: {
+                [index: number]: "none" | "account";
+            } = {
+                0: "none",
+                3: "account"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
+        }
+        static fromObject(data: {
+            consultid?: number;
+            userid?: number;
+            account?: string;
+            msg?: string;
+        }): BatchNotifyMessageItem {
+            const message = new BatchNotifyMessageItem({});
+            if (data.consultid != null) {
+                message.consultid = data.consultid;
+            }
+            if (data.userid != null) {
+                message.userid = data.userid;
+            }
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.msg != null) {
+                message.msg = data.msg;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consultid?: number;
+                userid?: number;
+                account?: string;
+                msg?: string;
+            } = {};
+            if (this.consultid != null) {
+                data.consultid = this.consultid;
+            }
+            if (this.userid != null) {
+                data.userid = this.userid;
+            }
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.msg != null) {
+                data.msg = this.msg;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consultid != 0)
+                writer.writeInt32(1, this.consultid);
+            if (this.userid != 0)
+                writer.writeInt32(2, this.userid);
+            if (this.has_account)
+                writer.writeString(3, this.account);
+            if (this.msg.length)
+                writer.writeString(4, this.msg);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): BatchNotifyMessageItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new BatchNotifyMessageItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consultid = reader.readInt32();
+                        break;
+                    case 2:
+                        message.userid = reader.readInt32();
+                        break;
+                    case 3:
+                        message.account = reader.readString();
+                        break;
+                    case 4:
+                        message.msg = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): BatchNotifyMessageItem {
+            return BatchNotifyMessageItem.deserialize(bytes);
+        }
+    }
+    export class BatchNotifyMessageReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: BatchNotifyMessageItem[];
+            operationId?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+                if ("operationId" in data && data.operationId != undefined) {
+                    this.operationId = data.operationId;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, BatchNotifyMessageItem, 1) as BatchNotifyMessageItem[];
+        }
+        set items(value: BatchNotifyMessageItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get operationId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set operationId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof BatchNotifyMessageItem.prototype.toObject>[];
+            operationId?: string;
+        }): BatchNotifyMessageReq {
+            const message = new BatchNotifyMessageReq({});
+            if (data.items != null) {
+                message.items = data.items.map(item => BatchNotifyMessageItem.fromObject(item));
+            }
+            if (data.operationId != null) {
+                message.operationId = data.operationId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof BatchNotifyMessageItem.prototype.toObject>[];
+                operationId?: string;
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: BatchNotifyMessageItem) => item.toObject());
+            }
+            if (this.operationId != null) {
+                data.operationId = this.operationId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: BatchNotifyMessageItem) => item.serialize(writer));
+            if (this.operationId.length)
+                writer.writeString(2, this.operationId);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): BatchNotifyMessageReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new BatchNotifyMessageReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, BatchNotifyMessageItem.deserialize(reader), BatchNotifyMessageItem));
+                        break;
+                    case 2:
+                        message.operationId = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): BatchNotifyMessageReq {
+            return BatchNotifyMessageReq.deserialize(bytes);
         }
     }
     export class TransferMessageReq extends pb_1.Message {
@@ -5227,6 +6043,142 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): ThirdOrder {
             return ThirdOrder.deserialize(bytes);
+        }
+    }
+    export class ThirdUserInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            child_type?: string;
+            agent_child?: string;
+            allwin_child?: string;
+            invite_friends_child?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("child_type" in data && data.child_type != undefined) {
+                    this.child_type = data.child_type;
+                }
+                if ("agent_child" in data && data.agent_child != undefined) {
+                    this.agent_child = data.agent_child;
+                }
+                if ("allwin_child" in data && data.allwin_child != undefined) {
+                    this.allwin_child = data.allwin_child;
+                }
+                if ("invite_friends_child" in data && data.invite_friends_child != undefined) {
+                    this.invite_friends_child = data.invite_friends_child;
+                }
+            }
+        }
+        get child_type() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set child_type(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get agent_child() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set agent_child(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get allwin_child() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set allwin_child(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get invite_friends_child() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set invite_friends_child(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            child_type?: string;
+            agent_child?: string;
+            allwin_child?: string;
+            invite_friends_child?: string;
+        }): ThirdUserInfo {
+            const message = new ThirdUserInfo({});
+            if (data.child_type != null) {
+                message.child_type = data.child_type;
+            }
+            if (data.agent_child != null) {
+                message.agent_child = data.agent_child;
+            }
+            if (data.allwin_child != null) {
+                message.allwin_child = data.allwin_child;
+            }
+            if (data.invite_friends_child != null) {
+                message.invite_friends_child = data.invite_friends_child;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                child_type?: string;
+                agent_child?: string;
+                allwin_child?: string;
+                invite_friends_child?: string;
+            } = {};
+            if (this.child_type != null) {
+                data.child_type = this.child_type;
+            }
+            if (this.agent_child != null) {
+                data.agent_child = this.agent_child;
+            }
+            if (this.allwin_child != null) {
+                data.allwin_child = this.allwin_child;
+            }
+            if (this.invite_friends_child != null) {
+                data.invite_friends_child = this.invite_friends_child;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.child_type.length)
+                writer.writeString(1, this.child_type);
+            if (this.agent_child.length)
+                writer.writeString(2, this.agent_child);
+            if (this.allwin_child.length)
+                writer.writeString(3, this.allwin_child);
+            if (this.invite_friends_child.length)
+                writer.writeString(4, this.invite_friends_child);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ThirdUserInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ThirdUserInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.child_type = reader.readString();
+                        break;
+                    case 2:
+                        message.agent_child = reader.readString();
+                        break;
+                    case 3:
+                        message.allwin_child = reader.readString();
+                        break;
+                    case 4:
+                        message.invite_friends_child = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ThirdUserInfo {
+            return ThirdUserInfo.deserialize(bytes);
         }
     }
     export class TransferMessageRsp extends pb_1.Message {
@@ -6886,6 +7838,11786 @@ export namespace api.core {
             return WorkerTransferAllResp.deserialize(bytes);
         }
     }
+    export class QualityChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 5) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 6) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): QualityChatsRequest {
+            const message = new QualityChatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                user_id?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.user_id != 0)
+                writer.writeInt32(3, this.user_id);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(8, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(9, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 8:
+                        message.page = reader.readUint32();
+                        break;
+                    case 9:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityChatsRequest {
+            return QualityChatsRequest.deserialize(bytes);
+        }
+    }
+    export class QualityChatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_chats?: QualityChat[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_chats" in data && data.quality_chats != undefined) {
+                    this.quality_chats = data.quality_chats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get quality_chats() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualityChat, 1) as QualityChat[];
+        }
+        set quality_chats(value: QualityChat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            quality_chats?: ReturnType<typeof QualityChat.prototype.toObject>[];
+            total?: number;
+        }): QualityChatsResponse {
+            const message = new QualityChatsResponse({});
+            if (data.quality_chats != null) {
+                message.quality_chats = data.quality_chats.map(item => QualityChat.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_chats?: ReturnType<typeof QualityChat.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.quality_chats != null) {
+                data.quality_chats = this.quality_chats.map((item: QualityChat) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_chats.length)
+                writer.writeRepeatedMessage(1, this.quality_chats, (item: QualityChat) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityChatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityChatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_chats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, QualityChat.deserialize(reader), QualityChat));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityChatsResponse {
+            return QualityChatsResponse.deserialize(bytes);
+        }
+    }
+    export class QualityChat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            first_start_time?: number;
+            last_end_time?: number;
+            assign_time?: number;
+            total_duration?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            score_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("uid" in data && data.uid != undefined) {
+                    this.uid = data.uid;
+                }
+                if ("nickname" in data && data.nickname != undefined) {
+                    this.nickname = data.nickname;
+                }
+                if ("ip" in data && data.ip != undefined) {
+                    this.ip = data.ip;
+                }
+                if ("ip_address" in data && data.ip_address != undefined) {
+                    this.ip_address = data.ip_address;
+                }
+                if ("client_source" in data && data.client_source != undefined) {
+                    this.client_source = data.client_source;
+                }
+                if ("first_start_time" in data && data.first_start_time != undefined) {
+                    this.first_start_time = data.first_start_time;
+                }
+                if ("last_end_time" in data && data.last_end_time != undefined) {
+                    this.last_end_time = data.last_end_time;
+                }
+                if ("assign_time" in data && data.assign_time != undefined) {
+                    this.assign_time = data.assign_time;
+                }
+                if ("total_duration" in data && data.total_duration != undefined) {
+                    this.total_duration = data.total_duration;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("worker_send_count" in data && data.worker_send_count != undefined) {
+                    this.worker_send_count = data.worker_send_count;
+                }
+                if ("user_send_count" in data && data.user_send_count != undefined) {
+                    this.user_send_count = data.user_send_count;
+                }
+                if ("score_time" in data && data.score_time != undefined) {
+                    this.score_time = data.score_time;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get uid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set uid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set nickname(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get ip() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set ip(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get ip_address() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set ip_address(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get client_source() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set client_source(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get first_start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set first_start_time(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get last_end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set last_end_time(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get assign_time() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set assign_time(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get total_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 12, "") as string;
+        }
+        set total_duration(value: string) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 13, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 14, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 15, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get worker_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as number;
+        }
+        set worker_send_count(value: number) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get user_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 17, 0) as number;
+        }
+        set user_send_count(value: number) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get score_time() {
+            return pb_1.Message.getFieldWithDefault(this, 18, 0) as number;
+        }
+        set score_time(value: number) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            first_start_time?: number;
+            last_end_time?: number;
+            assign_time?: number;
+            total_duration?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            score_time?: number;
+        }): QualityChat {
+            const message = new QualityChat({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.uid != null) {
+                message.uid = data.uid;
+            }
+            if (data.nickname != null) {
+                message.nickname = data.nickname;
+            }
+            if (data.ip != null) {
+                message.ip = data.ip;
+            }
+            if (data.ip_address != null) {
+                message.ip_address = data.ip_address;
+            }
+            if (data.client_source != null) {
+                message.client_source = data.client_source;
+            }
+            if (data.first_start_time != null) {
+                message.first_start_time = data.first_start_time;
+            }
+            if (data.last_end_time != null) {
+                message.last_end_time = data.last_end_time;
+            }
+            if (data.assign_time != null) {
+                message.assign_time = data.assign_time;
+            }
+            if (data.total_duration != null) {
+                message.total_duration = data.total_duration;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.worker_send_count != null) {
+                message.worker_send_count = data.worker_send_count;
+            }
+            if (data.user_send_count != null) {
+                message.user_send_count = data.user_send_count;
+            }
+            if (data.score_time != null) {
+                message.score_time = data.score_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                consult_id?: number;
+                chat_id?: number;
+                uid?: number;
+                nickname?: string;
+                ip?: string;
+                ip_address?: string;
+                client_source?: string;
+                first_start_time?: number;
+                last_end_time?: number;
+                assign_time?: number;
+                total_duration?: string;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                worker_send_count?: number;
+                user_send_count?: number;
+                score_time?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.uid != null) {
+                data.uid = this.uid;
+            }
+            if (this.nickname != null) {
+                data.nickname = this.nickname;
+            }
+            if (this.ip != null) {
+                data.ip = this.ip;
+            }
+            if (this.ip_address != null) {
+                data.ip_address = this.ip_address;
+            }
+            if (this.client_source != null) {
+                data.client_source = this.client_source;
+            }
+            if (this.first_start_time != null) {
+                data.first_start_time = this.first_start_time;
+            }
+            if (this.last_end_time != null) {
+                data.last_end_time = this.last_end_time;
+            }
+            if (this.assign_time != null) {
+                data.assign_time = this.assign_time;
+            }
+            if (this.total_duration != null) {
+                data.total_duration = this.total_duration;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.worker_send_count != null) {
+                data.worker_send_count = this.worker_send_count;
+            }
+            if (this.user_send_count != null) {
+                data.user_send_count = this.user_send_count;
+            }
+            if (this.score_time != null) {
+                data.score_time = this.score_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeUint32(1, this.id);
+            if (this.consult_id != 0)
+                writer.writeUint32(2, this.consult_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(3, this.chat_id);
+            if (this.uid != 0)
+                writer.writeInt32(4, this.uid);
+            if (this.nickname.length)
+                writer.writeString(5, this.nickname);
+            if (this.ip.length)
+                writer.writeString(6, this.ip);
+            if (this.ip_address.length)
+                writer.writeString(7, this.ip_address);
+            if (this.client_source.length)
+                writer.writeString(8, this.client_source);
+            if (this.first_start_time != 0)
+                writer.writeInt64(9, this.first_start_time);
+            if (this.last_end_time != 0)
+                writer.writeInt64(10, this.last_end_time);
+            if (this.assign_time != 0)
+                writer.writeInt64(11, this.assign_time);
+            if (this.total_duration.length)
+                writer.writeString(12, this.total_duration);
+            if (this.worker_id != 0)
+                writer.writeInt32(13, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(14, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(15, this.worker_nickname);
+            if (this.worker_send_count != 0)
+                writer.writeInt32(16, this.worker_send_count);
+            if (this.user_send_count != 0)
+                writer.writeInt32(17, this.user_send_count);
+            if (this.score_time != 0)
+                writer.writeInt64(18, this.score_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityChat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityChat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.consult_id = reader.readUint32();
+                        break;
+                    case 3:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 4:
+                        message.uid = reader.readInt32();
+                        break;
+                    case 5:
+                        message.nickname = reader.readString();
+                        break;
+                    case 6:
+                        message.ip = reader.readString();
+                        break;
+                    case 7:
+                        message.ip_address = reader.readString();
+                        break;
+                    case 8:
+                        message.client_source = reader.readString();
+                        break;
+                    case 9:
+                        message.first_start_time = reader.readInt64();
+                        break;
+                    case 10:
+                        message.last_end_time = reader.readInt64();
+                        break;
+                    case 11:
+                        message.assign_time = reader.readInt64();
+                        break;
+                    case 12:
+                        message.total_duration = reader.readString();
+                        break;
+                    case 13:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 14:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 15:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 16:
+                        message.worker_send_count = reader.readInt32();
+                        break;
+                    case 17:
+                        message.user_send_count = reader.readInt32();
+                        break;
+                    case 18:
+                        message.score_time = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityChat {
+            return QualityChat.deserialize(bytes);
+        }
+    }
+    export class NewQualityChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("sortBy" in data && data.sortBy != undefined) {
+                    this.sortBy = data.sortBy;
+                }
+                if ("sortOrder" in data && data.sortOrder != undefined) {
+                    this.sortOrder = data.sortOrder;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 5) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 6) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get sortBy() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set sortBy(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get sortOrder() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set sortOrder(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        }): NewQualityChatsRequest {
+            const message = new NewQualityChatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.sortBy != null) {
+                message.sortBy = data.sortBy;
+            }
+            if (data.sortOrder != null) {
+                message.sortOrder = data.sortOrder;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                worker_account?: string;
+                user_id?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                sortBy?: number;
+                sortOrder?: number;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.sortBy != null) {
+                data.sortBy = this.sortBy;
+            }
+            if (this.sortOrder != null) {
+                data.sortOrder = this.sortOrder;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(3, this.worker_account);
+            if (this.user_id != 0)
+                writer.writeInt32(4, this.user_id);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.sortBy != 0)
+                writer.writeInt32(7, this.sortBy);
+            if (this.sortOrder != 0)
+                writer.writeInt32(8, this.sortOrder);
+            if (this.page != 0)
+                writer.writeUint32(9, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(10, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): NewQualityChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new NewQualityChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 4:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        message.sortBy = reader.readInt32();
+                        break;
+                    case 8:
+                        message.sortOrder = reader.readInt32();
+                        break;
+                    case 9:
+                        message.page = reader.readUint32();
+                        break;
+                    case 10:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): NewQualityChatsRequest {
+            return NewQualityChatsRequest.deserialize(bytes);
+        }
+    }
+    export class NewQualityChatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_chats?: QualityChat[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_chats" in data && data.quality_chats != undefined) {
+                    this.quality_chats = data.quality_chats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get quality_chats() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualityChat, 1) as QualityChat[];
+        }
+        set quality_chats(value: QualityChat[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            quality_chats?: ReturnType<typeof QualityChat.prototype.toObject>[];
+            total?: number;
+        }): NewQualityChatsResponse {
+            const message = new NewQualityChatsResponse({});
+            if (data.quality_chats != null) {
+                message.quality_chats = data.quality_chats.map(item => QualityChat.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_chats?: ReturnType<typeof QualityChat.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.quality_chats != null) {
+                data.quality_chats = this.quality_chats.map((item: QualityChat) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_chats.length)
+                writer.writeRepeatedMessage(1, this.quality_chats, (item: QualityChat) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): NewQualityChatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new NewQualityChatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_chats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, QualityChat.deserialize(reader), QualityChat));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): NewQualityChatsResponse {
+            return NewQualityChatsResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySessionsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [[7]];
+        constructor(data?: any[] | ({
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: string;
+            user_level?: number;
+            service_duration?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            check_worker_id?: number;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        } & (({
+            check_type?: dependency_4.api.common.WorkerCheckType;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("service_duration" in data && data.service_duration != undefined) {
+                    this.service_duration = data.service_duration;
+                }
+                if ("check_type" in data && data.check_type != undefined) {
+                    this.check_type = data.check_type;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("check_worker_id" in data && data.check_worker_id != undefined) {
+                    this.check_worker_id = data.check_worker_id;
+                }
+                if ("sortBy" in data && data.sortBy != undefined) {
+                    this.sortBy = data.sortBy;
+                }
+                if ("sortOrder" in data && data.sortOrder != undefined) {
+                    this.sortOrder = data.sortOrder;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set user_id(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set user_level(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get service_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set service_duration(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get check_type() {
+            return pb_1.Message.getFieldWithDefault(this, 7, dependency_4.api.common.WorkerCheckType.WQT_COMMON) as dependency_4.api.common.WorkerCheckType;
+        }
+        set check_type(value: dependency_4.api.common.WorkerCheckType) {
+            pb_1.Message.setOneofField(this, 7, this.#one_of_decls[0], value);
+        }
+        get has_check_type() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 8) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 8, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 9) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 9, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 9) != null;
+        }
+        get check_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set check_worker_id(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get sortBy() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set sortBy(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get sortOrder() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set sortOrder(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 13, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get _check_type() {
+            const cases: {
+                [index: number]: "none" | "check_type";
+            } = {
+                0: "none",
+                7: "check_type"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [7])];
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: string;
+            user_level?: number;
+            service_duration?: number;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            check_worker_id?: number;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        }): WorkerQualitySessionsRequest {
+            const message = new WorkerQualitySessionsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.service_duration != null) {
+                message.service_duration = data.service_duration;
+            }
+            if (data.check_type != null) {
+                message.check_type = data.check_type;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.check_worker_id != null) {
+                message.check_worker_id = data.check_worker_id;
+            }
+            if (data.sortBy != null) {
+                message.sortBy = data.sortBy;
+            }
+            if (data.sortOrder != null) {
+                message.sortOrder = data.sortOrder;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                worker_account?: string;
+                user_id?: string;
+                user_level?: number;
+                service_duration?: number;
+                check_type?: dependency_4.api.common.WorkerCheckType;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                check_worker_id?: number;
+                sortBy?: number;
+                sortOrder?: number;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.service_duration != null) {
+                data.service_duration = this.service_duration;
+            }
+            if (this.check_type != null) {
+                data.check_type = this.check_type;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.check_worker_id != null) {
+                data.check_worker_id = this.check_worker_id;
+            }
+            if (this.sortBy != null) {
+                data.sortBy = this.sortBy;
+            }
+            if (this.sortOrder != null) {
+                data.sortOrder = this.sortOrder;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(3, this.worker_account);
+            if (this.user_id.length)
+                writer.writeString(4, this.user_id);
+            if (this.user_level != 0)
+                writer.writeInt32(5, this.user_level);
+            if (this.service_duration != 0)
+                writer.writeUint32(6, this.service_duration);
+            if (this.has_check_type)
+                writer.writeEnum(7, this.check_type);
+            if (this.has_start_time)
+                writer.writeMessage(8, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(9, this.end_time, () => this.end_time.serialize(writer));
+            if (this.check_worker_id != 0)
+                writer.writeInt32(10, this.check_worker_id);
+            if (this.sortBy != 0)
+                writer.writeInt32(11, this.sortBy);
+            if (this.sortOrder != 0)
+                writer.writeInt32(12, this.sortOrder);
+            if (this.page != 0)
+                writer.writeUint32(13, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(15, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySessionsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySessionsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 4:
+                        message.user_id = reader.readString();
+                        break;
+                    case 5:
+                        message.user_level = reader.readInt32();
+                        break;
+                    case 6:
+                        message.service_duration = reader.readUint32();
+                        break;
+                    case 7:
+                        message.check_type = reader.readEnum();
+                        break;
+                    case 8:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 10:
+                        message.check_worker_id = reader.readInt32();
+                        break;
+                    case 11:
+                        message.sortBy = reader.readInt32();
+                        break;
+                    case 12:
+                        message.sortOrder = reader.readInt32();
+                        break;
+                    case 13:
+                        message.page = reader.readUint32();
+                        break;
+                    case 15:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySessionsRequest {
+            return WorkerQualitySessionsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySessionsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_sessions?: QualitySession[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_sessions" in data && data.quality_sessions != undefined) {
+                    this.quality_sessions = data.quality_sessions;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get quality_sessions() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualitySession, 1) as QualitySession[];
+        }
+        set quality_sessions(value: QualitySession[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            quality_sessions?: ReturnType<typeof QualitySession.prototype.toObject>[];
+            total?: number;
+        }): WorkerQualitySessionsResponse {
+            const message = new WorkerQualitySessionsResponse({});
+            if (data.quality_sessions != null) {
+                message.quality_sessions = data.quality_sessions.map(item => QualitySession.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_sessions?: ReturnType<typeof QualitySession.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.quality_sessions != null) {
+                data.quality_sessions = this.quality_sessions.map((item: QualitySession) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_sessions.length)
+                writer.writeRepeatedMessage(1, this.quality_sessions, (item: QualitySession) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySessionsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySessionsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_sessions, () => pb_1.Message.addToRepeatedWrapperField(message, 1, QualitySession.deserialize(reader), QualitySession));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySessionsResponse {
+            return WorkerQualitySessionsResponse.deserialize(bytes);
+        }
+    }
+    export class QualitySession extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            binding_session_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            user_level?: number;
+            user_register_source?: string;
+            first_send_time?: number;
+            last_reply_time?: number;
+            last_end_time?: number;
+            total_duration?: string;
+            last_push_time?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            read_duration?: number;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            check_worker_id?: number;
+            check_worker_account?: string;
+            check_worker_nickname?: string;
+            question_titles?: string[];
+            created_at?: number;
+            recharge_order_no?: string;
+            recharge_order_time?: string;
+            assign_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [30], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("binding_session_id" in data && data.binding_session_id != undefined) {
+                    this.binding_session_id = data.binding_session_id;
+                }
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("uid" in data && data.uid != undefined) {
+                    this.uid = data.uid;
+                }
+                if ("nickname" in data && data.nickname != undefined) {
+                    this.nickname = data.nickname;
+                }
+                if ("ip" in data && data.ip != undefined) {
+                    this.ip = data.ip;
+                }
+                if ("ip_address" in data && data.ip_address != undefined) {
+                    this.ip_address = data.ip_address;
+                }
+                if ("client_source" in data && data.client_source != undefined) {
+                    this.client_source = data.client_source;
+                }
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("user_register_source" in data && data.user_register_source != undefined) {
+                    this.user_register_source = data.user_register_source;
+                }
+                if ("first_send_time" in data && data.first_send_time != undefined) {
+                    this.first_send_time = data.first_send_time;
+                }
+                if ("last_reply_time" in data && data.last_reply_time != undefined) {
+                    this.last_reply_time = data.last_reply_time;
+                }
+                if ("last_end_time" in data && data.last_end_time != undefined) {
+                    this.last_end_time = data.last_end_time;
+                }
+                if ("total_duration" in data && data.total_duration != undefined) {
+                    this.total_duration = data.total_duration;
+                }
+                if ("last_push_time" in data && data.last_push_time != undefined) {
+                    this.last_push_time = data.last_push_time;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("worker_send_count" in data && data.worker_send_count != undefined) {
+                    this.worker_send_count = data.worker_send_count;
+                }
+                if ("user_send_count" in data && data.user_send_count != undefined) {
+                    this.user_send_count = data.user_send_count;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+                if ("check_type" in data && data.check_type != undefined) {
+                    this.check_type = data.check_type;
+                }
+                if ("check_worker_id" in data && data.check_worker_id != undefined) {
+                    this.check_worker_id = data.check_worker_id;
+                }
+                if ("check_worker_account" in data && data.check_worker_account != undefined) {
+                    this.check_worker_account = data.check_worker_account;
+                }
+                if ("check_worker_nickname" in data && data.check_worker_nickname != undefined) {
+                    this.check_worker_nickname = data.check_worker_nickname;
+                }
+                if ("question_titles" in data && data.question_titles != undefined) {
+                    this.question_titles = data.question_titles;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+                if ("recharge_order_no" in data && data.recharge_order_no != undefined) {
+                    this.recharge_order_no = data.recharge_order_no;
+                }
+                if ("recharge_order_time" in data && data.recharge_order_time != undefined) {
+                    this.recharge_order_time = data.recharge_order_time;
+                }
+                if ("assign_time" in data && data.assign_time != undefined) {
+                    this.assign_time = data.assign_time;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get binding_session_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set binding_session_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get uid() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set uid(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set nickname(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get ip() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set ip(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get ip_address() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set ip_address(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get client_source() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set client_source(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set user_level(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get user_register_source() {
+            return pb_1.Message.getFieldWithDefault(this, 11, "") as string;
+        }
+        set user_register_source(value: string) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get first_send_time() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set first_send_time(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get last_reply_time() {
+            return pb_1.Message.getFieldWithDefault(this, 14, 0) as number;
+        }
+        set last_reply_time(value: number) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        get last_end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
+        }
+        set last_end_time(value: number) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get total_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 16, "") as string;
+        }
+        set total_duration(value: string) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get last_push_time() {
+            return pb_1.Message.getFieldWithDefault(this, 17, 0) as number;
+        }
+        set last_push_time(value: number) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 18, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 19, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 19, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 21, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 21, value);
+        }
+        get worker_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 22, 0) as number;
+        }
+        set worker_send_count(value: number) {
+            pb_1.Message.setField(this, 22, value);
+        }
+        get user_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 23, 0) as number;
+        }
+        set user_send_count(value: number) {
+            pb_1.Message.setField(this, 23, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 24, 0) as number;
+        }
+        set read_duration(value: number) {
+            pb_1.Message.setField(this, 24, value);
+        }
+        get check_type() {
+            return pb_1.Message.getFieldWithDefault(this, 26, dependency_4.api.common.WorkerCheckType.WQT_COMMON) as dependency_4.api.common.WorkerCheckType;
+        }
+        set check_type(value: dependency_4.api.common.WorkerCheckType) {
+            pb_1.Message.setField(this, 26, value);
+        }
+        get check_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 27, 0) as number;
+        }
+        set check_worker_id(value: number) {
+            pb_1.Message.setField(this, 27, value);
+        }
+        get check_worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 28, "") as string;
+        }
+        set check_worker_account(value: string) {
+            pb_1.Message.setField(this, 28, value);
+        }
+        get check_worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 29, "") as string;
+        }
+        set check_worker_nickname(value: string) {
+            pb_1.Message.setField(this, 29, value);
+        }
+        get question_titles() {
+            return pb_1.Message.getFieldWithDefault(this, 30, []) as string[];
+        }
+        set question_titles(value: string[]) {
+            pb_1.Message.setField(this, 30, value);
+        }
+        get created_at() {
+            return pb_1.Message.getFieldWithDefault(this, 31, 0) as number;
+        }
+        set created_at(value: number) {
+            pb_1.Message.setField(this, 31, value);
+        }
+        get recharge_order_no() {
+            return pb_1.Message.getFieldWithDefault(this, 33, "") as string;
+        }
+        set recharge_order_no(value: string) {
+            pb_1.Message.setField(this, 33, value);
+        }
+        get recharge_order_time() {
+            return pb_1.Message.getFieldWithDefault(this, 35, "") as string;
+        }
+        set recharge_order_time(value: string) {
+            pb_1.Message.setField(this, 35, value);
+        }
+        get assign_time() {
+            return pb_1.Message.getFieldWithDefault(this, 37, 0) as number;
+        }
+        set assign_time(value: number) {
+            pb_1.Message.setField(this, 37, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            binding_session_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            user_level?: number;
+            user_register_source?: string;
+            first_send_time?: number;
+            last_reply_time?: number;
+            last_end_time?: number;
+            total_duration?: string;
+            last_push_time?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            read_duration?: number;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            check_worker_id?: number;
+            check_worker_account?: string;
+            check_worker_nickname?: string;
+            question_titles?: string[];
+            created_at?: number;
+            recharge_order_no?: string;
+            recharge_order_time?: string;
+            assign_time?: number;
+        }): QualitySession {
+            const message = new QualitySession({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.binding_session_id != null) {
+                message.binding_session_id = data.binding_session_id;
+            }
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.uid != null) {
+                message.uid = data.uid;
+            }
+            if (data.nickname != null) {
+                message.nickname = data.nickname;
+            }
+            if (data.ip != null) {
+                message.ip = data.ip;
+            }
+            if (data.ip_address != null) {
+                message.ip_address = data.ip_address;
+            }
+            if (data.client_source != null) {
+                message.client_source = data.client_source;
+            }
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.user_register_source != null) {
+                message.user_register_source = data.user_register_source;
+            }
+            if (data.first_send_time != null) {
+                message.first_send_time = data.first_send_time;
+            }
+            if (data.last_reply_time != null) {
+                message.last_reply_time = data.last_reply_time;
+            }
+            if (data.last_end_time != null) {
+                message.last_end_time = data.last_end_time;
+            }
+            if (data.total_duration != null) {
+                message.total_duration = data.total_duration;
+            }
+            if (data.last_push_time != null) {
+                message.last_push_time = data.last_push_time;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.worker_send_count != null) {
+                message.worker_send_count = data.worker_send_count;
+            }
+            if (data.user_send_count != null) {
+                message.user_send_count = data.user_send_count;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            if (data.check_type != null) {
+                message.check_type = data.check_type;
+            }
+            if (data.check_worker_id != null) {
+                message.check_worker_id = data.check_worker_id;
+            }
+            if (data.check_worker_account != null) {
+                message.check_worker_account = data.check_worker_account;
+            }
+            if (data.check_worker_nickname != null) {
+                message.check_worker_nickname = data.check_worker_nickname;
+            }
+            if (data.question_titles != null) {
+                message.question_titles = data.question_titles;
+            }
+            if (data.created_at != null) {
+                message.created_at = data.created_at;
+            }
+            if (data.recharge_order_no != null) {
+                message.recharge_order_no = data.recharge_order_no;
+            }
+            if (data.recharge_order_time != null) {
+                message.recharge_order_time = data.recharge_order_time;
+            }
+            if (data.assign_time != null) {
+                message.assign_time = data.assign_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                binding_session_id?: number;
+                consult_id?: number;
+                chat_id?: number;
+                uid?: number;
+                nickname?: string;
+                ip?: string;
+                ip_address?: string;
+                client_source?: string;
+                user_level?: number;
+                user_register_source?: string;
+                first_send_time?: number;
+                last_reply_time?: number;
+                last_end_time?: number;
+                total_duration?: string;
+                last_push_time?: number;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                worker_send_count?: number;
+                user_send_count?: number;
+                read_duration?: number;
+                check_type?: dependency_4.api.common.WorkerCheckType;
+                check_worker_id?: number;
+                check_worker_account?: string;
+                check_worker_nickname?: string;
+                question_titles?: string[];
+                created_at?: number;
+                recharge_order_no?: string;
+                recharge_order_time?: string;
+                assign_time?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.binding_session_id != null) {
+                data.binding_session_id = this.binding_session_id;
+            }
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.uid != null) {
+                data.uid = this.uid;
+            }
+            if (this.nickname != null) {
+                data.nickname = this.nickname;
+            }
+            if (this.ip != null) {
+                data.ip = this.ip;
+            }
+            if (this.ip_address != null) {
+                data.ip_address = this.ip_address;
+            }
+            if (this.client_source != null) {
+                data.client_source = this.client_source;
+            }
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.user_register_source != null) {
+                data.user_register_source = this.user_register_source;
+            }
+            if (this.first_send_time != null) {
+                data.first_send_time = this.first_send_time;
+            }
+            if (this.last_reply_time != null) {
+                data.last_reply_time = this.last_reply_time;
+            }
+            if (this.last_end_time != null) {
+                data.last_end_time = this.last_end_time;
+            }
+            if (this.total_duration != null) {
+                data.total_duration = this.total_duration;
+            }
+            if (this.last_push_time != null) {
+                data.last_push_time = this.last_push_time;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.worker_send_count != null) {
+                data.worker_send_count = this.worker_send_count;
+            }
+            if (this.user_send_count != null) {
+                data.user_send_count = this.user_send_count;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            if (this.check_type != null) {
+                data.check_type = this.check_type;
+            }
+            if (this.check_worker_id != null) {
+                data.check_worker_id = this.check_worker_id;
+            }
+            if (this.check_worker_account != null) {
+                data.check_worker_account = this.check_worker_account;
+            }
+            if (this.check_worker_nickname != null) {
+                data.check_worker_nickname = this.check_worker_nickname;
+            }
+            if (this.question_titles != null) {
+                data.question_titles = this.question_titles;
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at;
+            }
+            if (this.recharge_order_no != null) {
+                data.recharge_order_no = this.recharge_order_no;
+            }
+            if (this.recharge_order_time != null) {
+                data.recharge_order_time = this.recharge_order_time;
+            }
+            if (this.assign_time != null) {
+                data.assign_time = this.assign_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeUint32(1, this.id);
+            if (this.binding_session_id != 0)
+                writer.writeUint32(2, this.binding_session_id);
+            if (this.consult_id != 0)
+                writer.writeUint32(3, this.consult_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(4, this.chat_id);
+            if (this.uid != 0)
+                writer.writeInt32(5, this.uid);
+            if (this.nickname.length)
+                writer.writeString(6, this.nickname);
+            if (this.ip.length)
+                writer.writeString(7, this.ip);
+            if (this.ip_address.length)
+                writer.writeString(8, this.ip_address);
+            if (this.client_source.length)
+                writer.writeString(9, this.client_source);
+            if (this.user_level != 0)
+                writer.writeInt32(10, this.user_level);
+            if (this.user_register_source.length)
+                writer.writeString(11, this.user_register_source);
+            if (this.first_send_time != 0)
+                writer.writeUint32(12, this.first_send_time);
+            if (this.last_reply_time != 0)
+                writer.writeUint32(14, this.last_reply_time);
+            if (this.last_end_time != 0)
+                writer.writeUint32(15, this.last_end_time);
+            if (this.total_duration.length)
+                writer.writeString(16, this.total_duration);
+            if (this.last_push_time != 0)
+                writer.writeUint32(17, this.last_push_time);
+            if (this.worker_id != 0)
+                writer.writeInt32(18, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(19, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(21, this.worker_nickname);
+            if (this.worker_send_count != 0)
+                writer.writeInt32(22, this.worker_send_count);
+            if (this.user_send_count != 0)
+                writer.writeInt32(23, this.user_send_count);
+            if (this.read_duration != 0)
+                writer.writeUint32(24, this.read_duration);
+            if (this.check_type != dependency_4.api.common.WorkerCheckType.WQT_COMMON)
+                writer.writeEnum(26, this.check_type);
+            if (this.check_worker_id != 0)
+                writer.writeInt32(27, this.check_worker_id);
+            if (this.check_worker_account.length)
+                writer.writeString(28, this.check_worker_account);
+            if (this.check_worker_nickname.length)
+                writer.writeString(29, this.check_worker_nickname);
+            if (this.question_titles.length)
+                writer.writeRepeatedString(30, this.question_titles);
+            if (this.created_at != 0)
+                writer.writeUint32(31, this.created_at);
+            if (this.recharge_order_no.length)
+                writer.writeString(33, this.recharge_order_no);
+            if (this.recharge_order_time.length)
+                writer.writeString(35, this.recharge_order_time);
+            if (this.assign_time != 0)
+                writer.writeUint32(37, this.assign_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualitySession {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualitySession();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.binding_session_id = reader.readUint32();
+                        break;
+                    case 3:
+                        message.consult_id = reader.readUint32();
+                        break;
+                    case 4:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 5:
+                        message.uid = reader.readInt32();
+                        break;
+                    case 6:
+                        message.nickname = reader.readString();
+                        break;
+                    case 7:
+                        message.ip = reader.readString();
+                        break;
+                    case 8:
+                        message.ip_address = reader.readString();
+                        break;
+                    case 9:
+                        message.client_source = reader.readString();
+                        break;
+                    case 10:
+                        message.user_level = reader.readInt32();
+                        break;
+                    case 11:
+                        message.user_register_source = reader.readString();
+                        break;
+                    case 12:
+                        message.first_send_time = reader.readUint32();
+                        break;
+                    case 14:
+                        message.last_reply_time = reader.readUint32();
+                        break;
+                    case 15:
+                        message.last_end_time = reader.readUint32();
+                        break;
+                    case 16:
+                        message.total_duration = reader.readString();
+                        break;
+                    case 17:
+                        message.last_push_time = reader.readUint32();
+                        break;
+                    case 18:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 19:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 21:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 22:
+                        message.worker_send_count = reader.readInt32();
+                        break;
+                    case 23:
+                        message.user_send_count = reader.readInt32();
+                        break;
+                    case 24:
+                        message.read_duration = reader.readUint32();
+                        break;
+                    case 26:
+                        message.check_type = reader.readEnum();
+                        break;
+                    case 27:
+                        message.check_worker_id = reader.readInt32();
+                        break;
+                    case 28:
+                        message.check_worker_account = reader.readString();
+                        break;
+                    case 29:
+                        message.check_worker_nickname = reader.readString();
+                        break;
+                    case 30:
+                        pb_1.Message.addToRepeatedField(message, 30, reader.readString());
+                        break;
+                    case 31:
+                        message.created_at = reader.readUint32();
+                        break;
+                    case 33:
+                        message.recharge_order_no = reader.readString();
+                        break;
+                    case 35:
+                        message.recharge_order_time = reader.readString();
+                        break;
+                    case 37:
+                        message.assign_time = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualitySession {
+            return QualitySession.deserialize(bytes);
+        }
+    }
+    export class QualiyReviewedChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            auditor_account?: string;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("sortBy" in data && data.sortBy != undefined) {
+                    this.sortBy = data.sortBy;
+                }
+                if ("sortOrder" in data && data.sortOrder != undefined) {
+                    this.sortOrder = data.sortOrder;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 5) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 6) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get sortBy() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set sortBy(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get sortOrder() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set sortOrder(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            auditor_account?: string;
+            sortBy?: number;
+            sortOrder?: number;
+            page?: number;
+            pageSize?: number;
+        }): QualiyReviewedChatsRequest {
+            const message = new QualiyReviewedChatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.sortBy != null) {
+                message.sortBy = data.sortBy;
+            }
+            if (data.sortOrder != null) {
+                message.sortOrder = data.sortOrder;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                user_id?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                auditor_account?: string;
+                sortBy?: number;
+                sortOrder?: number;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.sortBy != null) {
+                data.sortBy = this.sortBy;
+            }
+            if (this.sortOrder != null) {
+                data.sortOrder = this.sortOrder;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.user_id != 0)
+                writer.writeInt32(3, this.user_id);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.auditor_account.length)
+                writer.writeString(7, this.auditor_account);
+            if (this.sortBy != 0)
+                writer.writeInt32(8, this.sortBy);
+            if (this.sortOrder != 0)
+                writer.writeInt32(9, this.sortOrder);
+            if (this.page != 0)
+                writer.writeUint32(10, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(11, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualiyReviewedChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualiyReviewedChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 8:
+                        message.sortBy = reader.readInt32();
+                        break;
+                    case 9:
+                        message.sortOrder = reader.readInt32();
+                        break;
+                    case 10:
+                        message.page = reader.readUint32();
+                        break;
+                    case 11:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualiyReviewedChatsRequest {
+            return QualiyReviewedChatsRequest.deserialize(bytes);
+        }
+    }
+    export class QualiyReviewedChatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_reviewed_chats?: dependency_4.api.common.WorkerQualitySession[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_reviewed_chats" in data && data.quality_reviewed_chats != undefined) {
+                    this.quality_reviewed_chats = data.quality_reviewed_chats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get quality_reviewed_chats() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.WorkerQualitySession, 1) as dependency_4.api.common.WorkerQualitySession[];
+        }
+        set quality_reviewed_chats(value: dependency_4.api.common.WorkerQualitySession[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            quality_reviewed_chats?: ReturnType<typeof dependency_4.api.common.WorkerQualitySession.prototype.toObject>[];
+            total?: number;
+        }): QualiyReviewedChatsResponse {
+            const message = new QualiyReviewedChatsResponse({});
+            if (data.quality_reviewed_chats != null) {
+                message.quality_reviewed_chats = data.quality_reviewed_chats.map(item => dependency_4.api.common.WorkerQualitySession.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_reviewed_chats?: ReturnType<typeof dependency_4.api.common.WorkerQualitySession.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.quality_reviewed_chats != null) {
+                data.quality_reviewed_chats = this.quality_reviewed_chats.map((item: dependency_4.api.common.WorkerQualitySession) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_reviewed_chats.length)
+                writer.writeRepeatedMessage(1, this.quality_reviewed_chats, (item: dependency_4.api.common.WorkerQualitySession) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualiyReviewedChatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualiyReviewedChatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_reviewed_chats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, dependency_4.api.common.WorkerQualitySession.deserialize(reader), dependency_4.api.common.WorkerQualitySession));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualiyReviewedChatsResponse {
+            return QualiyReviewedChatsResponse.deserialize(bytes);
+        }
+    }
+    export class NewQualiyReviewedChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [[12]];
+        constructor(data?: any[] | ({
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_level?: number;
+            user_id?: string;
+            score_worker_id?: number;
+            service_duration?: number;
+            read_duration?: number;
+            score_type?: dependency_4.api.common.WorkerScoreType;
+            is_review?: dependency_5.api.common.BoolStatus;
+            sortBy?: dependency_4.api.common.WorkerQualitySessionSortField;
+            sortOrder?: dependency_5.api.common.SortOrder;
+            page?: number;
+            pageSize?: number;
+        } & (({
+            check_type?: dependency_4.api.common.WorkerCheckType;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("score_worker_id" in data && data.score_worker_id != undefined) {
+                    this.score_worker_id = data.score_worker_id;
+                }
+                if ("service_duration" in data && data.service_duration != undefined) {
+                    this.service_duration = data.service_duration;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+                if ("score_type" in data && data.score_type != undefined) {
+                    this.score_type = data.score_type;
+                }
+                if ("check_type" in data && data.check_type != undefined) {
+                    this.check_type = data.check_type;
+                }
+                if ("is_review" in data && data.is_review != undefined) {
+                    this.is_review = data.is_review;
+                }
+                if ("sortBy" in data && data.sortBy != undefined) {
+                    this.sortBy = data.sortBy;
+                }
+                if ("sortOrder" in data && data.sortOrder != undefined) {
+                    this.sortOrder = data.sortOrder;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 1) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 2) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set user_level(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set user_id(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get score_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set score_worker_id(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get service_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set service_duration(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set read_duration(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get score_type() {
+            return pb_1.Message.getFieldWithDefault(this, 11, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set score_type(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get check_type() {
+            return pb_1.Message.getFieldWithDefault(this, 12, dependency_4.api.common.WorkerCheckType.WQT_COMMON) as dependency_4.api.common.WorkerCheckType;
+        }
+        set check_type(value: dependency_4.api.common.WorkerCheckType) {
+            pb_1.Message.setOneofField(this, 12, this.#one_of_decls[0], value);
+        }
+        get has_check_type() {
+            return pb_1.Message.getField(this, 12) != null;
+        }
+        get is_review() {
+            return pb_1.Message.getFieldWithDefault(this, 13, dependency_5.api.common.BoolStatus.Bool_DEFAULT) as dependency_5.api.common.BoolStatus;
+        }
+        set is_review(value: dependency_5.api.common.BoolStatus) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get sortBy() {
+            return pb_1.Message.getFieldWithDefault(this, 14, dependency_4.api.common.WorkerQualitySessionSortField.QualitySessionDefault) as dependency_4.api.common.WorkerQualitySessionSortField;
+        }
+        set sortBy(value: dependency_4.api.common.WorkerQualitySessionSortField) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        get sortOrder() {
+            return pb_1.Message.getFieldWithDefault(this, 15, dependency_5.api.common.SortOrder.SORT_ORDER_DEFAULT) as dependency_5.api.common.SortOrder;
+        }
+        set sortOrder(value: dependency_5.api.common.SortOrder) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 17, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get _check_type() {
+            const cases: {
+                [index: number]: "none" | "check_type";
+            } = {
+                0: "none",
+                12: "check_type"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [12])];
+        }
+        static fromObject(data: {
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_level?: number;
+            user_id?: string;
+            score_worker_id?: number;
+            service_duration?: number;
+            read_duration?: number;
+            score_type?: dependency_4.api.common.WorkerScoreType;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            is_review?: dependency_5.api.common.BoolStatus;
+            sortBy?: dependency_4.api.common.WorkerQualitySessionSortField;
+            sortOrder?: dependency_5.api.common.SortOrder;
+            page?: number;
+            pageSize?: number;
+        }): NewQualiyReviewedChatsRequest {
+            const message = new NewQualiyReviewedChatsRequest({});
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.score_worker_id != null) {
+                message.score_worker_id = data.score_worker_id;
+            }
+            if (data.service_duration != null) {
+                message.service_duration = data.service_duration;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            if (data.score_type != null) {
+                message.score_type = data.score_type;
+            }
+            if (data.check_type != null) {
+                message.check_type = data.check_type;
+            }
+            if (data.is_review != null) {
+                message.is_review = data.is_review;
+            }
+            if (data.sortBy != null) {
+                message.sortBy = data.sortBy;
+            }
+            if (data.sortOrder != null) {
+                message.sortOrder = data.sortOrder;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                group_id?: number;
+                worker_id?: number;
+                worker_account?: string;
+                user_level?: number;
+                user_id?: string;
+                score_worker_id?: number;
+                service_duration?: number;
+                read_duration?: number;
+                score_type?: dependency_4.api.common.WorkerScoreType;
+                check_type?: dependency_4.api.common.WorkerCheckType;
+                is_review?: dependency_5.api.common.BoolStatus;
+                sortBy?: dependency_4.api.common.WorkerQualitySessionSortField;
+                sortOrder?: dependency_5.api.common.SortOrder;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.score_worker_id != null) {
+                data.score_worker_id = this.score_worker_id;
+            }
+            if (this.service_duration != null) {
+                data.service_duration = this.service_duration;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            if (this.score_type != null) {
+                data.score_type = this.score_type;
+            }
+            if (this.check_type != null) {
+                data.check_type = this.check_type;
+            }
+            if (this.is_review != null) {
+                data.is_review = this.is_review;
+            }
+            if (this.sortBy != null) {
+                data.sortBy = this.sortBy;
+            }
+            if (this.sortOrder != null) {
+                data.sortOrder = this.sortOrder;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_start_time)
+                writer.writeMessage(1, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(2, this.end_time, () => this.end_time.serialize(writer));
+            if (this.group_id != 0)
+                writer.writeInt32(3, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(4, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(5, this.worker_account);
+            if (this.user_level != 0)
+                writer.writeInt32(6, this.user_level);
+            if (this.user_id.length)
+                writer.writeString(7, this.user_id);
+            if (this.score_worker_id != 0)
+                writer.writeInt32(8, this.score_worker_id);
+            if (this.service_duration != 0)
+                writer.writeUint32(9, this.service_duration);
+            if (this.read_duration != 0)
+                writer.writeUint32(10, this.read_duration);
+            if (this.score_type != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(11, this.score_type);
+            if (this.has_check_type)
+                writer.writeEnum(12, this.check_type);
+            if (this.is_review != dependency_5.api.common.BoolStatus.Bool_DEFAULT)
+                writer.writeEnum(13, this.is_review);
+            if (this.sortBy != dependency_4.api.common.WorkerQualitySessionSortField.QualitySessionDefault)
+                writer.writeEnum(14, this.sortBy);
+            if (this.sortOrder != dependency_5.api.common.SortOrder.SORT_ORDER_DEFAULT)
+                writer.writeEnum(15, this.sortOrder);
+            if (this.page != 0)
+                writer.writeUint32(16, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(17, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): NewQualiyReviewedChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new NewQualiyReviewedChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 3:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 6:
+                        message.user_level = reader.readInt32();
+                        break;
+                    case 7:
+                        message.user_id = reader.readString();
+                        break;
+                    case 8:
+                        message.score_worker_id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.service_duration = reader.readUint32();
+                        break;
+                    case 10:
+                        message.read_duration = reader.readUint32();
+                        break;
+                    case 11:
+                        message.score_type = reader.readEnum();
+                        break;
+                    case 12:
+                        message.check_type = reader.readEnum();
+                        break;
+                    case 13:
+                        message.is_review = reader.readEnum();
+                        break;
+                    case 14:
+                        message.sortBy = reader.readEnum();
+                        break;
+                    case 15:
+                        message.sortOrder = reader.readEnum();
+                        break;
+                    case 16:
+                        message.page = reader.readUint32();
+                        break;
+                    case 17:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): NewQualiyReviewedChatsRequest {
+            return NewQualiyReviewedChatsRequest.deserialize(bytes);
+        }
+    }
+    export class NewQualiyReviewedChatsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_reviewed_chats?: WorkerQualitySession[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_reviewed_chats" in data && data.quality_reviewed_chats != undefined) {
+                    this.quality_reviewed_chats = data.quality_reviewed_chats;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get quality_reviewed_chats() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerQualitySession, 1) as WorkerQualitySession[];
+        }
+        set quality_reviewed_chats(value: WorkerQualitySession[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            quality_reviewed_chats?: ReturnType<typeof WorkerQualitySession.prototype.toObject>[];
+            total?: number;
+        }): NewQualiyReviewedChatsResponse {
+            const message = new NewQualiyReviewedChatsResponse({});
+            if (data.quality_reviewed_chats != null) {
+                message.quality_reviewed_chats = data.quality_reviewed_chats.map(item => WorkerQualitySession.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_reviewed_chats?: ReturnType<typeof WorkerQualitySession.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.quality_reviewed_chats != null) {
+                data.quality_reviewed_chats = this.quality_reviewed_chats.map((item: WorkerQualitySession) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_reviewed_chats.length)
+                writer.writeRepeatedMessage(1, this.quality_reviewed_chats, (item: WorkerQualitySession) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): NewQualiyReviewedChatsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new NewQualiyReviewedChatsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_reviewed_chats, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerQualitySession.deserialize(reader), WorkerQualitySession));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): NewQualiyReviewedChatsResponse {
+            return NewQualiyReviewedChatsResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySession extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            binding_session_id?: number;
+            tenant_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            read_duration?: number;
+            total_read_duration?: string;
+            chat_read_logs?: QualitySessionReadLog[];
+            user_role?: number;
+            user_level?: string;
+            score_type?: dependency_4.api.common.WorkerScoreType;
+            review_score_type?: dependency_4.api.common.WorkerScoreType;
+            question_titles?: string[];
+            created_at?: number;
+            score_content?: string;
+            review_content?: string;
+            score_time?: number;
+            review_time?: number;
+            score_worker_id?: number;
+            auditor_account?: string;
+            auditor_nickname?: string;
+            review_worker_id?: number;
+            review_account?: string;
+            review_nickname?: string;
+            firstSendTime?: number;
+            lastReplyTime?: number;
+            lastEndTime?: number;
+            last_push_time?: number;
+            service_duration?: number;
+            total_duration?: string;
+            workerQualitySessions?: dependency_9.google.protobuf.Any[];
+            recharge_order_no?: string;
+            recharge_order_time?: string;
+            user_register_source?: string;
+            assign_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [19, 24, 42], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("binding_session_id" in data && data.binding_session_id != undefined) {
+                    this.binding_session_id = data.binding_session_id;
+                }
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
+                }
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("uid" in data && data.uid != undefined) {
+                    this.uid = data.uid;
+                }
+                if ("nickname" in data && data.nickname != undefined) {
+                    this.nickname = data.nickname;
+                }
+                if ("ip" in data && data.ip != undefined) {
+                    this.ip = data.ip;
+                }
+                if ("ip_address" in data && data.ip_address != undefined) {
+                    this.ip_address = data.ip_address;
+                }
+                if ("client_source" in data && data.client_source != undefined) {
+                    this.client_source = data.client_source;
+                }
+                if ("check_type" in data && data.check_type != undefined) {
+                    this.check_type = data.check_type;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("worker_send_count" in data && data.worker_send_count != undefined) {
+                    this.worker_send_count = data.worker_send_count;
+                }
+                if ("user_send_count" in data && data.user_send_count != undefined) {
+                    this.user_send_count = data.user_send_count;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+                if ("total_read_duration" in data && data.total_read_duration != undefined) {
+                    this.total_read_duration = data.total_read_duration;
+                }
+                if ("chat_read_logs" in data && data.chat_read_logs != undefined) {
+                    this.chat_read_logs = data.chat_read_logs;
+                }
+                if ("user_role" in data && data.user_role != undefined) {
+                    this.user_role = data.user_role;
+                }
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("score_type" in data && data.score_type != undefined) {
+                    this.score_type = data.score_type;
+                }
+                if ("review_score_type" in data && data.review_score_type != undefined) {
+                    this.review_score_type = data.review_score_type;
+                }
+                if ("question_titles" in data && data.question_titles != undefined) {
+                    this.question_titles = data.question_titles;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+                if ("score_content" in data && data.score_content != undefined) {
+                    this.score_content = data.score_content;
+                }
+                if ("review_content" in data && data.review_content != undefined) {
+                    this.review_content = data.review_content;
+                }
+                if ("score_time" in data && data.score_time != undefined) {
+                    this.score_time = data.score_time;
+                }
+                if ("review_time" in data && data.review_time != undefined) {
+                    this.review_time = data.review_time;
+                }
+                if ("score_worker_id" in data && data.score_worker_id != undefined) {
+                    this.score_worker_id = data.score_worker_id;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("auditor_nickname" in data && data.auditor_nickname != undefined) {
+                    this.auditor_nickname = data.auditor_nickname;
+                }
+                if ("review_worker_id" in data && data.review_worker_id != undefined) {
+                    this.review_worker_id = data.review_worker_id;
+                }
+                if ("review_account" in data && data.review_account != undefined) {
+                    this.review_account = data.review_account;
+                }
+                if ("review_nickname" in data && data.review_nickname != undefined) {
+                    this.review_nickname = data.review_nickname;
+                }
+                if ("firstSendTime" in data && data.firstSendTime != undefined) {
+                    this.firstSendTime = data.firstSendTime;
+                }
+                if ("lastReplyTime" in data && data.lastReplyTime != undefined) {
+                    this.lastReplyTime = data.lastReplyTime;
+                }
+                if ("lastEndTime" in data && data.lastEndTime != undefined) {
+                    this.lastEndTime = data.lastEndTime;
+                }
+                if ("last_push_time" in data && data.last_push_time != undefined) {
+                    this.last_push_time = data.last_push_time;
+                }
+                if ("service_duration" in data && data.service_duration != undefined) {
+                    this.service_duration = data.service_duration;
+                }
+                if ("total_duration" in data && data.total_duration != undefined) {
+                    this.total_duration = data.total_duration;
+                }
+                if ("workerQualitySessions" in data && data.workerQualitySessions != undefined) {
+                    this.workerQualitySessions = data.workerQualitySessions;
+                }
+                if ("recharge_order_no" in data && data.recharge_order_no != undefined) {
+                    this.recharge_order_no = data.recharge_order_no;
+                }
+                if ("recharge_order_time" in data && data.recharge_order_time != undefined) {
+                    this.recharge_order_time = data.recharge_order_time;
+                }
+                if ("user_register_source" in data && data.user_register_source != undefined) {
+                    this.user_register_source = data.user_register_source;
+                }
+                if ("assign_time" in data && data.assign_time != undefined) {
+                    this.assign_time = data.assign_time;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get binding_session_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set binding_session_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get uid() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set uid(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set nickname(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get ip() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set ip(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get ip_address() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set ip_address(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get client_source() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set client_source(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get check_type() {
+            return pb_1.Message.getFieldWithDefault(this, 11, dependency_4.api.common.WorkerCheckType.WQT_COMMON) as dependency_4.api.common.WorkerCheckType;
+        }
+        set check_type(value: dependency_4.api.common.WorkerCheckType) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 13, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 14, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        get worker_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 15, 0) as number;
+        }
+        set worker_send_count(value: number) {
+            pb_1.Message.setField(this, 15, value);
+        }
+        get user_send_count() {
+            return pb_1.Message.getFieldWithDefault(this, 16, 0) as number;
+        }
+        set user_send_count(value: number) {
+            pb_1.Message.setField(this, 16, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 17, 0) as number;
+        }
+        set read_duration(value: number) {
+            pb_1.Message.setField(this, 17, value);
+        }
+        get total_read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 18, "") as string;
+        }
+        set total_read_duration(value: string) {
+            pb_1.Message.setField(this, 18, value);
+        }
+        get chat_read_logs() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualitySessionReadLog, 19) as QualitySessionReadLog[];
+        }
+        set chat_read_logs(value: QualitySessionReadLog[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 19, value);
+        }
+        get user_role() {
+            return pb_1.Message.getFieldWithDefault(this, 20, 0) as number;
+        }
+        set user_role(value: number) {
+            pb_1.Message.setField(this, 20, value);
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 21, "") as string;
+        }
+        set user_level(value: string) {
+            pb_1.Message.setField(this, 21, value);
+        }
+        get score_type() {
+            return pb_1.Message.getFieldWithDefault(this, 22, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set score_type(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 22, value);
+        }
+        get review_score_type() {
+            return pb_1.Message.getFieldWithDefault(this, 23, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set review_score_type(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 23, value);
+        }
+        get question_titles() {
+            return pb_1.Message.getFieldWithDefault(this, 24, []) as string[];
+        }
+        set question_titles(value: string[]) {
+            pb_1.Message.setField(this, 24, value);
+        }
+        get created_at() {
+            return pb_1.Message.getFieldWithDefault(this, 25, 0) as number;
+        }
+        set created_at(value: number) {
+            pb_1.Message.setField(this, 25, value);
+        }
+        get score_content() {
+            return pb_1.Message.getFieldWithDefault(this, 26, "") as string;
+        }
+        set score_content(value: string) {
+            pb_1.Message.setField(this, 26, value);
+        }
+        get review_content() {
+            return pb_1.Message.getFieldWithDefault(this, 27, "") as string;
+        }
+        set review_content(value: string) {
+            pb_1.Message.setField(this, 27, value);
+        }
+        get score_time() {
+            return pb_1.Message.getFieldWithDefault(this, 28, 0) as number;
+        }
+        set score_time(value: number) {
+            pb_1.Message.setField(this, 28, value);
+        }
+        get review_time() {
+            return pb_1.Message.getFieldWithDefault(this, 29, 0) as number;
+        }
+        set review_time(value: number) {
+            pb_1.Message.setField(this, 29, value);
+        }
+        get score_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 30, 0) as number;
+        }
+        set score_worker_id(value: number) {
+            pb_1.Message.setField(this, 30, value);
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 31, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 31, value);
+        }
+        get auditor_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 32, "") as string;
+        }
+        set auditor_nickname(value: string) {
+            pb_1.Message.setField(this, 32, value);
+        }
+        get review_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 33, 0) as number;
+        }
+        set review_worker_id(value: number) {
+            pb_1.Message.setField(this, 33, value);
+        }
+        get review_account() {
+            return pb_1.Message.getFieldWithDefault(this, 34, "") as string;
+        }
+        set review_account(value: string) {
+            pb_1.Message.setField(this, 34, value);
+        }
+        get review_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 35, "") as string;
+        }
+        set review_nickname(value: string) {
+            pb_1.Message.setField(this, 35, value);
+        }
+        get firstSendTime() {
+            return pb_1.Message.getFieldWithDefault(this, 36, 0) as number;
+        }
+        set firstSendTime(value: number) {
+            pb_1.Message.setField(this, 36, value);
+        }
+        get lastReplyTime() {
+            return pb_1.Message.getFieldWithDefault(this, 37, 0) as number;
+        }
+        set lastReplyTime(value: number) {
+            pb_1.Message.setField(this, 37, value);
+        }
+        get lastEndTime() {
+            return pb_1.Message.getFieldWithDefault(this, 38, 0) as number;
+        }
+        set lastEndTime(value: number) {
+            pb_1.Message.setField(this, 38, value);
+        }
+        get last_push_time() {
+            return pb_1.Message.getFieldWithDefault(this, 39, 0) as number;
+        }
+        set last_push_time(value: number) {
+            pb_1.Message.setField(this, 39, value);
+        }
+        get service_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 40, 0) as number;
+        }
+        set service_duration(value: number) {
+            pb_1.Message.setField(this, 40, value);
+        }
+        get total_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 41, "") as string;
+        }
+        set total_duration(value: string) {
+            pb_1.Message.setField(this, 41, value);
+        }
+        get workerQualitySessions() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_9.google.protobuf.Any, 42) as dependency_9.google.protobuf.Any[];
+        }
+        set workerQualitySessions(value: dependency_9.google.protobuf.Any[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 42, value);
+        }
+        get recharge_order_no() {
+            return pb_1.Message.getFieldWithDefault(this, 43, "") as string;
+        }
+        set recharge_order_no(value: string) {
+            pb_1.Message.setField(this, 43, value);
+        }
+        get recharge_order_time() {
+            return pb_1.Message.getFieldWithDefault(this, 44, "") as string;
+        }
+        set recharge_order_time(value: string) {
+            pb_1.Message.setField(this, 44, value);
+        }
+        get user_register_source() {
+            return pb_1.Message.getFieldWithDefault(this, 45, "") as string;
+        }
+        set user_register_source(value: string) {
+            pb_1.Message.setField(this, 45, value);
+        }
+        get assign_time() {
+            return pb_1.Message.getFieldWithDefault(this, 46, 0) as number;
+        }
+        set assign_time(value: number) {
+            pb_1.Message.setField(this, 46, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            binding_session_id?: number;
+            tenant_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            uid?: number;
+            nickname?: string;
+            ip?: string;
+            ip_address?: string;
+            client_source?: string;
+            check_type?: dependency_4.api.common.WorkerCheckType;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            worker_send_count?: number;
+            user_send_count?: number;
+            read_duration?: number;
+            total_read_duration?: string;
+            chat_read_logs?: ReturnType<typeof QualitySessionReadLog.prototype.toObject>[];
+            user_role?: number;
+            user_level?: string;
+            score_type?: dependency_4.api.common.WorkerScoreType;
+            review_score_type?: dependency_4.api.common.WorkerScoreType;
+            question_titles?: string[];
+            created_at?: number;
+            score_content?: string;
+            review_content?: string;
+            score_time?: number;
+            review_time?: number;
+            score_worker_id?: number;
+            auditor_account?: string;
+            auditor_nickname?: string;
+            review_worker_id?: number;
+            review_account?: string;
+            review_nickname?: string;
+            firstSendTime?: number;
+            lastReplyTime?: number;
+            lastEndTime?: number;
+            last_push_time?: number;
+            service_duration?: number;
+            total_duration?: string;
+            workerQualitySessions?: ReturnType<typeof dependency_9.google.protobuf.Any.prototype.toObject>[];
+            recharge_order_no?: string;
+            recharge_order_time?: string;
+            user_register_source?: string;
+            assign_time?: number;
+        }): WorkerQualitySession {
+            const message = new WorkerQualitySession({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.binding_session_id != null) {
+                message.binding_session_id = data.binding_session_id;
+            }
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
+            }
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.uid != null) {
+                message.uid = data.uid;
+            }
+            if (data.nickname != null) {
+                message.nickname = data.nickname;
+            }
+            if (data.ip != null) {
+                message.ip = data.ip;
+            }
+            if (data.ip_address != null) {
+                message.ip_address = data.ip_address;
+            }
+            if (data.client_source != null) {
+                message.client_source = data.client_source;
+            }
+            if (data.check_type != null) {
+                message.check_type = data.check_type;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.worker_send_count != null) {
+                message.worker_send_count = data.worker_send_count;
+            }
+            if (data.user_send_count != null) {
+                message.user_send_count = data.user_send_count;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            if (data.total_read_duration != null) {
+                message.total_read_duration = data.total_read_duration;
+            }
+            if (data.chat_read_logs != null) {
+                message.chat_read_logs = data.chat_read_logs.map(item => QualitySessionReadLog.fromObject(item));
+            }
+            if (data.user_role != null) {
+                message.user_role = data.user_role;
+            }
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.score_type != null) {
+                message.score_type = data.score_type;
+            }
+            if (data.review_score_type != null) {
+                message.review_score_type = data.review_score_type;
+            }
+            if (data.question_titles != null) {
+                message.question_titles = data.question_titles;
+            }
+            if (data.created_at != null) {
+                message.created_at = data.created_at;
+            }
+            if (data.score_content != null) {
+                message.score_content = data.score_content;
+            }
+            if (data.review_content != null) {
+                message.review_content = data.review_content;
+            }
+            if (data.score_time != null) {
+                message.score_time = data.score_time;
+            }
+            if (data.review_time != null) {
+                message.review_time = data.review_time;
+            }
+            if (data.score_worker_id != null) {
+                message.score_worker_id = data.score_worker_id;
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.auditor_nickname != null) {
+                message.auditor_nickname = data.auditor_nickname;
+            }
+            if (data.review_worker_id != null) {
+                message.review_worker_id = data.review_worker_id;
+            }
+            if (data.review_account != null) {
+                message.review_account = data.review_account;
+            }
+            if (data.review_nickname != null) {
+                message.review_nickname = data.review_nickname;
+            }
+            if (data.firstSendTime != null) {
+                message.firstSendTime = data.firstSendTime;
+            }
+            if (data.lastReplyTime != null) {
+                message.lastReplyTime = data.lastReplyTime;
+            }
+            if (data.lastEndTime != null) {
+                message.lastEndTime = data.lastEndTime;
+            }
+            if (data.last_push_time != null) {
+                message.last_push_time = data.last_push_time;
+            }
+            if (data.service_duration != null) {
+                message.service_duration = data.service_duration;
+            }
+            if (data.total_duration != null) {
+                message.total_duration = data.total_duration;
+            }
+            if (data.workerQualitySessions != null) {
+                message.workerQualitySessions = data.workerQualitySessions.map(item => dependency_9.google.protobuf.Any.fromObject(item));
+            }
+            if (data.recharge_order_no != null) {
+                message.recharge_order_no = data.recharge_order_no;
+            }
+            if (data.recharge_order_time != null) {
+                message.recharge_order_time = data.recharge_order_time;
+            }
+            if (data.user_register_source != null) {
+                message.user_register_source = data.user_register_source;
+            }
+            if (data.assign_time != null) {
+                message.assign_time = data.assign_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                binding_session_id?: number;
+                tenant_id?: number;
+                consult_id?: number;
+                chat_id?: number;
+                uid?: number;
+                nickname?: string;
+                ip?: string;
+                ip_address?: string;
+                client_source?: string;
+                check_type?: dependency_4.api.common.WorkerCheckType;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                worker_send_count?: number;
+                user_send_count?: number;
+                read_duration?: number;
+                total_read_duration?: string;
+                chat_read_logs?: ReturnType<typeof QualitySessionReadLog.prototype.toObject>[];
+                user_role?: number;
+                user_level?: string;
+                score_type?: dependency_4.api.common.WorkerScoreType;
+                review_score_type?: dependency_4.api.common.WorkerScoreType;
+                question_titles?: string[];
+                created_at?: number;
+                score_content?: string;
+                review_content?: string;
+                score_time?: number;
+                review_time?: number;
+                score_worker_id?: number;
+                auditor_account?: string;
+                auditor_nickname?: string;
+                review_worker_id?: number;
+                review_account?: string;
+                review_nickname?: string;
+                firstSendTime?: number;
+                lastReplyTime?: number;
+                lastEndTime?: number;
+                last_push_time?: number;
+                service_duration?: number;
+                total_duration?: string;
+                workerQualitySessions?: ReturnType<typeof dependency_9.google.protobuf.Any.prototype.toObject>[];
+                recharge_order_no?: string;
+                recharge_order_time?: string;
+                user_register_source?: string;
+                assign_time?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.binding_session_id != null) {
+                data.binding_session_id = this.binding_session_id;
+            }
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
+            }
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.uid != null) {
+                data.uid = this.uid;
+            }
+            if (this.nickname != null) {
+                data.nickname = this.nickname;
+            }
+            if (this.ip != null) {
+                data.ip = this.ip;
+            }
+            if (this.ip_address != null) {
+                data.ip_address = this.ip_address;
+            }
+            if (this.client_source != null) {
+                data.client_source = this.client_source;
+            }
+            if (this.check_type != null) {
+                data.check_type = this.check_type;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.worker_send_count != null) {
+                data.worker_send_count = this.worker_send_count;
+            }
+            if (this.user_send_count != null) {
+                data.user_send_count = this.user_send_count;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            if (this.total_read_duration != null) {
+                data.total_read_duration = this.total_read_duration;
+            }
+            if (this.chat_read_logs != null) {
+                data.chat_read_logs = this.chat_read_logs.map((item: QualitySessionReadLog) => item.toObject());
+            }
+            if (this.user_role != null) {
+                data.user_role = this.user_role;
+            }
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.score_type != null) {
+                data.score_type = this.score_type;
+            }
+            if (this.review_score_type != null) {
+                data.review_score_type = this.review_score_type;
+            }
+            if (this.question_titles != null) {
+                data.question_titles = this.question_titles;
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at;
+            }
+            if (this.score_content != null) {
+                data.score_content = this.score_content;
+            }
+            if (this.review_content != null) {
+                data.review_content = this.review_content;
+            }
+            if (this.score_time != null) {
+                data.score_time = this.score_time;
+            }
+            if (this.review_time != null) {
+                data.review_time = this.review_time;
+            }
+            if (this.score_worker_id != null) {
+                data.score_worker_id = this.score_worker_id;
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.auditor_nickname != null) {
+                data.auditor_nickname = this.auditor_nickname;
+            }
+            if (this.review_worker_id != null) {
+                data.review_worker_id = this.review_worker_id;
+            }
+            if (this.review_account != null) {
+                data.review_account = this.review_account;
+            }
+            if (this.review_nickname != null) {
+                data.review_nickname = this.review_nickname;
+            }
+            if (this.firstSendTime != null) {
+                data.firstSendTime = this.firstSendTime;
+            }
+            if (this.lastReplyTime != null) {
+                data.lastReplyTime = this.lastReplyTime;
+            }
+            if (this.lastEndTime != null) {
+                data.lastEndTime = this.lastEndTime;
+            }
+            if (this.last_push_time != null) {
+                data.last_push_time = this.last_push_time;
+            }
+            if (this.service_duration != null) {
+                data.service_duration = this.service_duration;
+            }
+            if (this.total_duration != null) {
+                data.total_duration = this.total_duration;
+            }
+            if (this.workerQualitySessions != null) {
+                data.workerQualitySessions = this.workerQualitySessions.map((item: dependency_9.google.protobuf.Any) => item.toObject());
+            }
+            if (this.recharge_order_no != null) {
+                data.recharge_order_no = this.recharge_order_no;
+            }
+            if (this.recharge_order_time != null) {
+                data.recharge_order_time = this.recharge_order_time;
+            }
+            if (this.user_register_source != null) {
+                data.user_register_source = this.user_register_source;
+            }
+            if (this.assign_time != null) {
+                data.assign_time = this.assign_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt64(1, this.id);
+            if (this.binding_session_id != 0)
+                writer.writeInt64(2, this.binding_session_id);
+            if (this.tenant_id != 0)
+                writer.writeInt32(3, this.tenant_id);
+            if (this.consult_id != 0)
+                writer.writeInt32(4, this.consult_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(5, this.chat_id);
+            if (this.uid != 0)
+                writer.writeInt32(6, this.uid);
+            if (this.nickname.length)
+                writer.writeString(7, this.nickname);
+            if (this.ip.length)
+                writer.writeString(8, this.ip);
+            if (this.ip_address.length)
+                writer.writeString(9, this.ip_address);
+            if (this.client_source.length)
+                writer.writeString(10, this.client_source);
+            if (this.check_type != dependency_4.api.common.WorkerCheckType.WQT_COMMON)
+                writer.writeEnum(11, this.check_type);
+            if (this.worker_id != 0)
+                writer.writeInt32(12, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(13, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(14, this.worker_nickname);
+            if (this.worker_send_count != 0)
+                writer.writeInt32(15, this.worker_send_count);
+            if (this.user_send_count != 0)
+                writer.writeInt32(16, this.user_send_count);
+            if (this.read_duration != 0)
+                writer.writeInt32(17, this.read_duration);
+            if (this.total_read_duration.length)
+                writer.writeString(18, this.total_read_duration);
+            if (this.chat_read_logs.length)
+                writer.writeRepeatedMessage(19, this.chat_read_logs, (item: QualitySessionReadLog) => item.serialize(writer));
+            if (this.user_role != 0)
+                writer.writeInt32(20, this.user_role);
+            if (this.user_level.length)
+                writer.writeString(21, this.user_level);
+            if (this.score_type != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(22, this.score_type);
+            if (this.review_score_type != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(23, this.review_score_type);
+            if (this.question_titles.length)
+                writer.writeRepeatedString(24, this.question_titles);
+            if (this.created_at != 0)
+                writer.writeInt64(25, this.created_at);
+            if (this.score_content.length)
+                writer.writeString(26, this.score_content);
+            if (this.review_content.length)
+                writer.writeString(27, this.review_content);
+            if (this.score_time != 0)
+                writer.writeInt64(28, this.score_time);
+            if (this.review_time != 0)
+                writer.writeInt64(29, this.review_time);
+            if (this.score_worker_id != 0)
+                writer.writeInt32(30, this.score_worker_id);
+            if (this.auditor_account.length)
+                writer.writeString(31, this.auditor_account);
+            if (this.auditor_nickname.length)
+                writer.writeString(32, this.auditor_nickname);
+            if (this.review_worker_id != 0)
+                writer.writeInt32(33, this.review_worker_id);
+            if (this.review_account.length)
+                writer.writeString(34, this.review_account);
+            if (this.review_nickname.length)
+                writer.writeString(35, this.review_nickname);
+            if (this.firstSendTime != 0)
+                writer.writeUint32(36, this.firstSendTime);
+            if (this.lastReplyTime != 0)
+                writer.writeUint32(37, this.lastReplyTime);
+            if (this.lastEndTime != 0)
+                writer.writeUint32(38, this.lastEndTime);
+            if (this.last_push_time != 0)
+                writer.writeUint32(39, this.last_push_time);
+            if (this.service_duration != 0)
+                writer.writeUint32(40, this.service_duration);
+            if (this.total_duration.length)
+                writer.writeString(41, this.total_duration);
+            if (this.workerQualitySessions.length)
+                writer.writeRepeatedMessage(42, this.workerQualitySessions, (item: dependency_9.google.protobuf.Any) => item.serialize(writer));
+            if (this.recharge_order_no.length)
+                writer.writeString(43, this.recharge_order_no);
+            if (this.recharge_order_time.length)
+                writer.writeString(44, this.recharge_order_time);
+            if (this.user_register_source.length)
+                writer.writeString(45, this.user_register_source);
+            if (this.assign_time != 0)
+                writer.writeUint32(46, this.assign_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySession {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySession();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.binding_session_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.tenant_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.consult_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 6:
+                        message.uid = reader.readInt32();
+                        break;
+                    case 7:
+                        message.nickname = reader.readString();
+                        break;
+                    case 8:
+                        message.ip = reader.readString();
+                        break;
+                    case 9:
+                        message.ip_address = reader.readString();
+                        break;
+                    case 10:
+                        message.client_source = reader.readString();
+                        break;
+                    case 11:
+                        message.check_type = reader.readEnum();
+                        break;
+                    case 12:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 13:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 14:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 15:
+                        message.worker_send_count = reader.readInt32();
+                        break;
+                    case 16:
+                        message.user_send_count = reader.readInt32();
+                        break;
+                    case 17:
+                        message.read_duration = reader.readInt32();
+                        break;
+                    case 18:
+                        message.total_read_duration = reader.readString();
+                        break;
+                    case 19:
+                        reader.readMessage(message.chat_read_logs, () => pb_1.Message.addToRepeatedWrapperField(message, 19, QualitySessionReadLog.deserialize(reader), QualitySessionReadLog));
+                        break;
+                    case 20:
+                        message.user_role = reader.readInt32();
+                        break;
+                    case 21:
+                        message.user_level = reader.readString();
+                        break;
+                    case 22:
+                        message.score_type = reader.readEnum();
+                        break;
+                    case 23:
+                        message.review_score_type = reader.readEnum();
+                        break;
+                    case 24:
+                        pb_1.Message.addToRepeatedField(message, 24, reader.readString());
+                        break;
+                    case 25:
+                        message.created_at = reader.readInt64();
+                        break;
+                    case 26:
+                        message.score_content = reader.readString();
+                        break;
+                    case 27:
+                        message.review_content = reader.readString();
+                        break;
+                    case 28:
+                        message.score_time = reader.readInt64();
+                        break;
+                    case 29:
+                        message.review_time = reader.readInt64();
+                        break;
+                    case 30:
+                        message.score_worker_id = reader.readInt32();
+                        break;
+                    case 31:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 32:
+                        message.auditor_nickname = reader.readString();
+                        break;
+                    case 33:
+                        message.review_worker_id = reader.readInt32();
+                        break;
+                    case 34:
+                        message.review_account = reader.readString();
+                        break;
+                    case 35:
+                        message.review_nickname = reader.readString();
+                        break;
+                    case 36:
+                        message.firstSendTime = reader.readUint32();
+                        break;
+                    case 37:
+                        message.lastReplyTime = reader.readUint32();
+                        break;
+                    case 38:
+                        message.lastEndTime = reader.readUint32();
+                        break;
+                    case 39:
+                        message.last_push_time = reader.readUint32();
+                        break;
+                    case 40:
+                        message.service_duration = reader.readUint32();
+                        break;
+                    case 41:
+                        message.total_duration = reader.readString();
+                        break;
+                    case 42:
+                        reader.readMessage(message.workerQualitySessions, () => pb_1.Message.addToRepeatedWrapperField(message, 42, dependency_9.google.protobuf.Any.deserialize(reader), dependency_9.google.protobuf.Any));
+                        break;
+                    case 43:
+                        message.recharge_order_no = reader.readString();
+                        break;
+                    case 44:
+                        message.recharge_order_time = reader.readString();
+                        break;
+                    case 45:
+                        message.user_register_source = reader.readString();
+                        break;
+                    case 46:
+                        message.assign_time = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySession {
+            return WorkerQualitySession.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySessionSumResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            total?: number;
+            user_level?: number;
+            worker_sum?: number;
+            session_sum?: number;
+            quality_duration_sum?: number;
+            must_sum?: number;
+            union_sum?: number;
+            review_sum?: number;
+            perfect_sum?: number;
+            normal_sum?: number;
+            poor_sum?: number;
+            very_poor_sum?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("worker_sum" in data && data.worker_sum != undefined) {
+                    this.worker_sum = data.worker_sum;
+                }
+                if ("session_sum" in data && data.session_sum != undefined) {
+                    this.session_sum = data.session_sum;
+                }
+                if ("quality_duration_sum" in data && data.quality_duration_sum != undefined) {
+                    this.quality_duration_sum = data.quality_duration_sum;
+                }
+                if ("must_sum" in data && data.must_sum != undefined) {
+                    this.must_sum = data.must_sum;
+                }
+                if ("union_sum" in data && data.union_sum != undefined) {
+                    this.union_sum = data.union_sum;
+                }
+                if ("review_sum" in data && data.review_sum != undefined) {
+                    this.review_sum = data.review_sum;
+                }
+                if ("perfect_sum" in data && data.perfect_sum != undefined) {
+                    this.perfect_sum = data.perfect_sum;
+                }
+                if ("normal_sum" in data && data.normal_sum != undefined) {
+                    this.normal_sum = data.normal_sum;
+                }
+                if ("poor_sum" in data && data.poor_sum != undefined) {
+                    this.poor_sum = data.poor_sum;
+                }
+                if ("very_poor_sum" in data && data.very_poor_sum != undefined) {
+                    this.very_poor_sum = data.very_poor_sum;
+                }
+            }
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set user_level(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set worker_sum(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get session_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set session_sum(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get quality_duration_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set quality_duration_sum(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get must_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set must_sum(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get union_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set union_sum(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get review_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set review_sum(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get perfect_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set perfect_sum(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get normal_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set normal_sum(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get poor_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set poor_sum(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get very_poor_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set very_poor_sum(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        static fromObject(data: {
+            total?: number;
+            user_level?: number;
+            worker_sum?: number;
+            session_sum?: number;
+            quality_duration_sum?: number;
+            must_sum?: number;
+            union_sum?: number;
+            review_sum?: number;
+            perfect_sum?: number;
+            normal_sum?: number;
+            poor_sum?: number;
+            very_poor_sum?: number;
+        }): WorkerQualitySessionSumResponse {
+            const message = new WorkerQualitySessionSumResponse({});
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.worker_sum != null) {
+                message.worker_sum = data.worker_sum;
+            }
+            if (data.session_sum != null) {
+                message.session_sum = data.session_sum;
+            }
+            if (data.quality_duration_sum != null) {
+                message.quality_duration_sum = data.quality_duration_sum;
+            }
+            if (data.must_sum != null) {
+                message.must_sum = data.must_sum;
+            }
+            if (data.union_sum != null) {
+                message.union_sum = data.union_sum;
+            }
+            if (data.review_sum != null) {
+                message.review_sum = data.review_sum;
+            }
+            if (data.perfect_sum != null) {
+                message.perfect_sum = data.perfect_sum;
+            }
+            if (data.normal_sum != null) {
+                message.normal_sum = data.normal_sum;
+            }
+            if (data.poor_sum != null) {
+                message.poor_sum = data.poor_sum;
+            }
+            if (data.very_poor_sum != null) {
+                message.very_poor_sum = data.very_poor_sum;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                total?: number;
+                user_level?: number;
+                worker_sum?: number;
+                session_sum?: number;
+                quality_duration_sum?: number;
+                must_sum?: number;
+                union_sum?: number;
+                review_sum?: number;
+                perfect_sum?: number;
+                normal_sum?: number;
+                poor_sum?: number;
+                very_poor_sum?: number;
+            } = {};
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.worker_sum != null) {
+                data.worker_sum = this.worker_sum;
+            }
+            if (this.session_sum != null) {
+                data.session_sum = this.session_sum;
+            }
+            if (this.quality_duration_sum != null) {
+                data.quality_duration_sum = this.quality_duration_sum;
+            }
+            if (this.must_sum != null) {
+                data.must_sum = this.must_sum;
+            }
+            if (this.union_sum != null) {
+                data.union_sum = this.union_sum;
+            }
+            if (this.review_sum != null) {
+                data.review_sum = this.review_sum;
+            }
+            if (this.perfect_sum != null) {
+                data.perfect_sum = this.perfect_sum;
+            }
+            if (this.normal_sum != null) {
+                data.normal_sum = this.normal_sum;
+            }
+            if (this.poor_sum != null) {
+                data.poor_sum = this.poor_sum;
+            }
+            if (this.very_poor_sum != null) {
+                data.very_poor_sum = this.very_poor_sum;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.total != 0)
+                writer.writeInt32(1, this.total);
+            if (this.user_level != 0)
+                writer.writeInt32(2, this.user_level);
+            if (this.worker_sum != 0)
+                writer.writeInt32(3, this.worker_sum);
+            if (this.session_sum != 0)
+                writer.writeInt32(4, this.session_sum);
+            if (this.quality_duration_sum != 0)
+                writer.writeInt32(5, this.quality_duration_sum);
+            if (this.must_sum != 0)
+                writer.writeInt32(6, this.must_sum);
+            if (this.union_sum != 0)
+                writer.writeInt32(7, this.union_sum);
+            if (this.review_sum != 0)
+                writer.writeInt32(8, this.review_sum);
+            if (this.perfect_sum != 0)
+                writer.writeInt32(9, this.perfect_sum);
+            if (this.normal_sum != 0)
+                writer.writeInt32(10, this.normal_sum);
+            if (this.poor_sum != 0)
+                writer.writeInt32(11, this.poor_sum);
+            if (this.very_poor_sum != 0)
+                writer.writeInt32(12, this.very_poor_sum);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySessionSumResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySessionSumResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.total = reader.readInt32();
+                        break;
+                    case 2:
+                        message.user_level = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_sum = reader.readInt32();
+                        break;
+                    case 4:
+                        message.session_sum = reader.readInt32();
+                        break;
+                    case 5:
+                        message.quality_duration_sum = reader.readInt32();
+                        break;
+                    case 6:
+                        message.must_sum = reader.readInt32();
+                        break;
+                    case 7:
+                        message.union_sum = reader.readInt32();
+                        break;
+                    case 8:
+                        message.review_sum = reader.readInt32();
+                        break;
+                    case 9:
+                        message.perfect_sum = reader.readInt32();
+                        break;
+                    case 10:
+                        message.normal_sum = reader.readInt32();
+                        break;
+                    case 11:
+                        message.poor_sum = reader.readInt32();
+                        break;
+                    case 12:
+                        message.very_poor_sum = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySessionSumResponse {
+            return WorkerQualitySessionSumResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySessionSumWithLevel extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            user_level?: number;
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_level" in data && data.user_level != undefined) {
+                    this.user_level = data.user_level;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get user_level() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set user_level(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            user_level?: number;
+            total?: number;
+        }): WorkerQualitySessionSumWithLevel {
+            const message = new WorkerQualitySessionSumWithLevel({});
+            if (data.user_level != null) {
+                message.user_level = data.user_level;
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                user_level?: number;
+                total?: number;
+            } = {};
+            if (this.user_level != null) {
+                data.user_level = this.user_level;
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_level != 0)
+                writer.writeInt32(1, this.user_level);
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySessionSumWithLevel {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySessionSumWithLevel();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.user_level = reader.readInt32();
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySessionSumWithLevel {
+            return WorkerQualitySessionSumWithLevel.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitySessionLevelSumResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_session_sums?: WorkerQualitySessionSumWithLevel[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_session_sums" in data && data.quality_session_sums != undefined) {
+                    this.quality_session_sums = data.quality_session_sums;
+                }
+            }
+        }
+        get quality_session_sums() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerQualitySessionSumWithLevel, 1) as WorkerQualitySessionSumWithLevel[];
+        }
+        set quality_session_sums(value: WorkerQualitySessionSumWithLevel[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            quality_session_sums?: ReturnType<typeof WorkerQualitySessionSumWithLevel.prototype.toObject>[];
+        }): WorkerQualitySessionLevelSumResponse {
+            const message = new WorkerQualitySessionLevelSumResponse({});
+            if (data.quality_session_sums != null) {
+                message.quality_session_sums = data.quality_session_sums.map(item => WorkerQualitySessionSumWithLevel.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_session_sums?: ReturnType<typeof WorkerQualitySessionSumWithLevel.prototype.toObject>[];
+            } = {};
+            if (this.quality_session_sums != null) {
+                data.quality_session_sums = this.quality_session_sums.map((item: WorkerQualitySessionSumWithLevel) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_session_sums.length)
+                writer.writeRepeatedMessage(1, this.quality_session_sums, (item: WorkerQualitySessionSumWithLevel) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitySessionLevelSumResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitySessionLevelSumResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.quality_session_sums, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerQualitySessionSumWithLevel.deserialize(reader), WorkerQualitySessionSumWithLevel));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitySessionLevelSumResponse {
+            return WorkerQualitySessionLevelSumResponse.deserialize(bytes);
+        }
+    }
+    export class ExportNewQualiyReviewedChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            auditor_account?: string;
+            sortBy?: number;
+            sortOrder?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("sortBy" in data && data.sortBy != undefined) {
+                    this.sortBy = data.sortBy;
+                }
+                if ("sortOrder" in data && data.sortOrder != undefined) {
+                    this.sortOrder = data.sortOrder;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 5) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 6) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get sortBy() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set sortBy(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get sortOrder() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set sortOrder(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            user_id?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            auditor_account?: string;
+            sortBy?: number;
+            sortOrder?: number;
+        }): ExportNewQualiyReviewedChatsRequest {
+            const message = new ExportNewQualiyReviewedChatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.sortBy != null) {
+                message.sortBy = data.sortBy;
+            }
+            if (data.sortOrder != null) {
+                message.sortOrder = data.sortOrder;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                worker_account?: string;
+                user_id?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                auditor_account?: string;
+                sortBy?: number;
+                sortOrder?: number;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.sortBy != null) {
+                data.sortBy = this.sortBy;
+            }
+            if (this.sortOrder != null) {
+                data.sortOrder = this.sortOrder;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(3, this.worker_account);
+            if (this.user_id != 0)
+                writer.writeInt32(4, this.user_id);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.auditor_account.length)
+                writer.writeString(7, this.auditor_account);
+            if (this.sortBy != 0)
+                writer.writeInt32(8, this.sortBy);
+            if (this.sortOrder != 0)
+                writer.writeInt32(9, this.sortOrder);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportNewQualiyReviewedChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportNewQualiyReviewedChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 4:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 8:
+                        message.sortBy = reader.readInt32();
+                        break;
+                    case 9:
+                        message.sortOrder = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportNewQualiyReviewedChatsRequest {
+            return ExportNewQualiyReviewedChatsRequest.deserialize(bytes);
+        }
+    }
+    export class ChatReadLog extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            auditor_account?: string;
+            auditor_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("auditor_nickname" in data && data.auditor_nickname != undefined) {
+                    this.auditor_nickname = data.auditor_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+            }
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get auditor_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set auditor_nickname(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set read_duration(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            auditor_account?: string;
+            auditor_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+        }): ChatReadLog {
+            const message = new ChatReadLog({});
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.auditor_nickname != null) {
+                message.auditor_nickname = data.auditor_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                auditor_account?: string;
+                auditor_nickname?: string;
+                start_time?: number;
+                end_time?: number;
+                read_duration?: string;
+            } = {};
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.auditor_nickname != null) {
+                data.auditor_nickname = this.auditor_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.auditor_account.length)
+                writer.writeString(1, this.auditor_account);
+            if (this.auditor_nickname.length)
+                writer.writeString(2, this.auditor_nickname);
+            if (this.start_time != 0)
+                writer.writeInt64(3, this.start_time);
+            if (this.end_time != 0)
+                writer.writeInt64(4, this.end_time);
+            if (this.read_duration.length)
+                writer.writeString(5, this.read_duration);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ChatReadLog {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ChatReadLog();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 2:
+                        message.auditor_nickname = reader.readString();
+                        break;
+                    case 3:
+                        message.start_time = reader.readInt64();
+                        break;
+                    case 4:
+                        message.end_time = reader.readInt64();
+                        break;
+                    case 5:
+                        message.read_duration = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ChatReadLog {
+            return ChatReadLog.deserialize(bytes);
+        }
+    }
+    export class ExportQualityChatsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            auditor_account?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("group_id" in data && data.group_id != undefined) {
+                    this.group_id = data.group_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+            }
+        }
+        get group_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set group_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 5) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 5, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 6) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 6, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        static fromObject(data: {
+            group_id?: number;
+            worker_id?: number;
+            user_id?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            auditor_account?: string;
+        }): ExportQualityChatsRequest {
+            const message = new ExportQualityChatsRequest({});
+            if (data.group_id != null) {
+                message.group_id = data.group_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                group_id?: number;
+                worker_id?: number;
+                user_id?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                auditor_account?: string;
+            } = {};
+            if (this.group_id != null) {
+                data.group_id = this.group_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.group_id != 0)
+                writer.writeInt32(1, this.group_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.user_id != 0)
+                writer.writeInt32(3, this.user_id);
+            if (this.has_start_time)
+                writer.writeMessage(5, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(6, this.end_time, () => this.end_time.serialize(writer));
+            if (this.auditor_account.length)
+                writer.writeString(7, this.auditor_account);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportQualityChatsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportQualityChatsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.group_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 6:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 7:
+                        message.auditor_account = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportQualityChatsRequest {
+            return ExportQualityChatsRequest.deserialize(bytes);
+        }
+    }
+    export class AddQualitySessionReadLogRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_session_id?: number;
+            worker_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_session_id" in data && data.quality_session_id != undefined) {
+                    this.quality_session_id = data.quality_session_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get quality_session_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set quality_session_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            quality_session_id?: number;
+            worker_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }): AddQualitySessionReadLogRequest {
+            const message = new AddQualitySessionReadLogRequest({});
+            if (data.quality_session_id != null) {
+                message.quality_session_id = data.quality_session_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_session_id?: number;
+                worker_id?: number;
+                start_time?: number;
+                end_time?: number;
+            } = {};
+            if (this.quality_session_id != null) {
+                data.quality_session_id = this.quality_session_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_session_id != 0)
+                writer.writeInt64(1, this.quality_session_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.start_time != 0)
+                writer.writeUint32(3, this.start_time);
+            if (this.end_time != 0)
+                writer.writeUint32(4, this.end_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddQualitySessionReadLogRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddQualitySessionReadLogRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.quality_session_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.start_time = reader.readUint32();
+                        break;
+                    case 4:
+                        message.end_time = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): AddQualitySessionReadLogRequest {
+            return AddQualitySessionReadLogRequest.deserialize(bytes);
+        }
+    }
+    export class QualitySessionReadLog extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            check_worker_account?: string;
+            check_worker_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("check_worker_account" in data && data.check_worker_account != undefined) {
+                    this.check_worker_account = data.check_worker_account;
+                }
+                if ("check_worker_nickname" in data && data.check_worker_nickname != undefined) {
+                    this.check_worker_nickname = data.check_worker_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+            }
+        }
+        get check_worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set check_worker_account(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get check_worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set check_worker_nickname(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set read_duration(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            check_worker_account?: string;
+            check_worker_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+        }): QualitySessionReadLog {
+            const message = new QualitySessionReadLog({});
+            if (data.check_worker_account != null) {
+                message.check_worker_account = data.check_worker_account;
+            }
+            if (data.check_worker_nickname != null) {
+                message.check_worker_nickname = data.check_worker_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                check_worker_account?: string;
+                check_worker_nickname?: string;
+                start_time?: number;
+                end_time?: number;
+                read_duration?: string;
+            } = {};
+            if (this.check_worker_account != null) {
+                data.check_worker_account = this.check_worker_account;
+            }
+            if (this.check_worker_nickname != null) {
+                data.check_worker_nickname = this.check_worker_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.check_worker_account.length)
+                writer.writeString(1, this.check_worker_account);
+            if (this.check_worker_nickname.length)
+                writer.writeString(2, this.check_worker_nickname);
+            if (this.start_time != 0)
+                writer.writeUint32(3, this.start_time);
+            if (this.end_time != 0)
+                writer.writeUint32(4, this.end_time);
+            if (this.read_duration.length)
+                writer.writeString(5, this.read_duration);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualitySessionReadLog {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualitySessionReadLog();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.check_worker_account = reader.readString();
+                        break;
+                    case 2:
+                        message.check_worker_nickname = reader.readString();
+                        break;
+                    case 3:
+                        message.start_time = reader.readUint32();
+                        break;
+                    case 4:
+                        message.end_time = reader.readUint32();
+                        break;
+                    case 5:
+                        message.read_duration = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualitySessionReadLog {
+            return QualitySessionReadLog.deserialize(bytes);
+        }
+    }
+    export class AddChatReadLogRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }): AddChatReadLogRequest {
+            const message = new AddChatReadLogRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                chat_id?: number;
+                start_time?: number;
+                end_time?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(2, this.chat_id);
+            if (this.start_time != 0)
+                writer.writeInt64(3, this.start_time);
+            if (this.end_time != 0)
+                writer.writeInt64(4, this.end_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddChatReadLogRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddChatReadLogRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.start_time = reader.readInt64();
+                        break;
+                    case 4:
+                        message.end_time = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): AddChatReadLogRequest {
+            return AddChatReadLogRequest.deserialize(bytes);
+        }
+    }
+    export class QualityItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            worker_detail?: string;
+            user_sum?: number;
+            chat_sum?: number;
+            quality_sum?: number;
+            quality_radio?: string;
+            quality_union?: string;
+            quality_must?: string;
+            quality_review?: string;
+            very_pool?: string;
+            poor?: string;
+            normal?: string;
+            excellent?: string;
+            qualification_percent?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_detail" in data && data.worker_detail != undefined) {
+                    this.worker_detail = data.worker_detail;
+                }
+                if ("user_sum" in data && data.user_sum != undefined) {
+                    this.user_sum = data.user_sum;
+                }
+                if ("chat_sum" in data && data.chat_sum != undefined) {
+                    this.chat_sum = data.chat_sum;
+                }
+                if ("quality_sum" in data && data.quality_sum != undefined) {
+                    this.quality_sum = data.quality_sum;
+                }
+                if ("quality_radio" in data && data.quality_radio != undefined) {
+                    this.quality_radio = data.quality_radio;
+                }
+                if ("quality_union" in data && data.quality_union != undefined) {
+                    this.quality_union = data.quality_union;
+                }
+                if ("quality_must" in data && data.quality_must != undefined) {
+                    this.quality_must = data.quality_must;
+                }
+                if ("quality_review" in data && data.quality_review != undefined) {
+                    this.quality_review = data.quality_review;
+                }
+                if ("very_pool" in data && data.very_pool != undefined) {
+                    this.very_pool = data.very_pool;
+                }
+                if ("poor" in data && data.poor != undefined) {
+                    this.poor = data.poor;
+                }
+                if ("normal" in data && data.normal != undefined) {
+                    this.normal = data.normal;
+                }
+                if ("excellent" in data && data.excellent != undefined) {
+                    this.excellent = data.excellent;
+                }
+                if ("qualification_percent" in data && data.qualification_percent != undefined) {
+                    this.qualification_percent = data.qualification_percent;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_detail() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_detail(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get user_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set user_sum(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get chat_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set chat_sum(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get quality_sum() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set quality_sum(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get quality_radio() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set quality_radio(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get quality_union() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set quality_union(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get quality_must() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set quality_must(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get quality_review() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set quality_review(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get very_pool() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set very_pool(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get poor() {
+            return pb_1.Message.getFieldWithDefault(this, 11, "") as string;
+        }
+        set poor(value: string) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get normal() {
+            return pb_1.Message.getFieldWithDefault(this, 12, "") as string;
+        }
+        set normal(value: string) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get excellent() {
+            return pb_1.Message.getFieldWithDefault(this, 13, "") as string;
+        }
+        set excellent(value: string) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get qualification_percent() {
+            return pb_1.Message.getFieldWithDefault(this, 14, "") as string;
+        }
+        set qualification_percent(value: string) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            worker_detail?: string;
+            user_sum?: number;
+            chat_sum?: number;
+            quality_sum?: number;
+            quality_radio?: string;
+            quality_union?: string;
+            quality_must?: string;
+            quality_review?: string;
+            very_pool?: string;
+            poor?: string;
+            normal?: string;
+            excellent?: string;
+            qualification_percent?: string;
+        }): QualityItem {
+            const message = new QualityItem({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_detail != null) {
+                message.worker_detail = data.worker_detail;
+            }
+            if (data.user_sum != null) {
+                message.user_sum = data.user_sum;
+            }
+            if (data.chat_sum != null) {
+                message.chat_sum = data.chat_sum;
+            }
+            if (data.quality_sum != null) {
+                message.quality_sum = data.quality_sum;
+            }
+            if (data.quality_radio != null) {
+                message.quality_radio = data.quality_radio;
+            }
+            if (data.quality_union != null) {
+                message.quality_union = data.quality_union;
+            }
+            if (data.quality_must != null) {
+                message.quality_must = data.quality_must;
+            }
+            if (data.quality_review != null) {
+                message.quality_review = data.quality_review;
+            }
+            if (data.very_pool != null) {
+                message.very_pool = data.very_pool;
+            }
+            if (data.poor != null) {
+                message.poor = data.poor;
+            }
+            if (data.normal != null) {
+                message.normal = data.normal;
+            }
+            if (data.excellent != null) {
+                message.excellent = data.excellent;
+            }
+            if (data.qualification_percent != null) {
+                message.qualification_percent = data.qualification_percent;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                worker_detail?: string;
+                user_sum?: number;
+                chat_sum?: number;
+                quality_sum?: number;
+                quality_radio?: string;
+                quality_union?: string;
+                quality_must?: string;
+                quality_review?: string;
+                very_pool?: string;
+                poor?: string;
+                normal?: string;
+                excellent?: string;
+                qualification_percent?: string;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_detail != null) {
+                data.worker_detail = this.worker_detail;
+            }
+            if (this.user_sum != null) {
+                data.user_sum = this.user_sum;
+            }
+            if (this.chat_sum != null) {
+                data.chat_sum = this.chat_sum;
+            }
+            if (this.quality_sum != null) {
+                data.quality_sum = this.quality_sum;
+            }
+            if (this.quality_radio != null) {
+                data.quality_radio = this.quality_radio;
+            }
+            if (this.quality_union != null) {
+                data.quality_union = this.quality_union;
+            }
+            if (this.quality_must != null) {
+                data.quality_must = this.quality_must;
+            }
+            if (this.quality_review != null) {
+                data.quality_review = this.quality_review;
+            }
+            if (this.very_pool != null) {
+                data.very_pool = this.very_pool;
+            }
+            if (this.poor != null) {
+                data.poor = this.poor;
+            }
+            if (this.normal != null) {
+                data.normal = this.normal;
+            }
+            if (this.excellent != null) {
+                data.excellent = this.excellent;
+            }
+            if (this.qualification_percent != null) {
+                data.qualification_percent = this.qualification_percent;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.worker_detail.length)
+                writer.writeString(2, this.worker_detail);
+            if (this.user_sum != 0)
+                writer.writeInt32(3, this.user_sum);
+            if (this.chat_sum != 0)
+                writer.writeInt32(4, this.chat_sum);
+            if (this.quality_sum != 0)
+                writer.writeInt32(5, this.quality_sum);
+            if (this.quality_radio.length)
+                writer.writeString(6, this.quality_radio);
+            if (this.quality_union.length)
+                writer.writeString(7, this.quality_union);
+            if (this.quality_must.length)
+                writer.writeString(8, this.quality_must);
+            if (this.quality_review.length)
+                writer.writeString(9, this.quality_review);
+            if (this.very_pool.length)
+                writer.writeString(10, this.very_pool);
+            if (this.poor.length)
+                writer.writeString(11, this.poor);
+            if (this.normal.length)
+                writer.writeString(12, this.normal);
+            if (this.excellent.length)
+                writer.writeString(13, this.excellent);
+            if (this.qualification_percent.length)
+                writer.writeString(14, this.qualification_percent);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.worker_detail = reader.readString();
+                        break;
+                    case 3:
+                        message.user_sum = reader.readInt32();
+                        break;
+                    case 4:
+                        message.chat_sum = reader.readInt32();
+                        break;
+                    case 5:
+                        message.quality_sum = reader.readInt32();
+                        break;
+                    case 6:
+                        message.quality_radio = reader.readString();
+                        break;
+                    case 7:
+                        message.quality_union = reader.readString();
+                        break;
+                    case 8:
+                        message.quality_must = reader.readString();
+                        break;
+                    case 9:
+                        message.quality_review = reader.readString();
+                        break;
+                    case 10:
+                        message.very_pool = reader.readString();
+                        break;
+                    case 11:
+                        message.poor = reader.readString();
+                        break;
+                    case 12:
+                        message.normal = reader.readString();
+                        break;
+                    case 13:
+                        message.excellent = reader.readString();
+                        break;
+                    case 14:
+                        message.qualification_percent = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityItem {
+            return QualityItem.deserialize(bytes);
+        }
+    }
+    export class QualityTotal extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_total?: number;
+            user_total?: number;
+            chat_total?: number;
+            quality_total?: number;
+            quality_radio_total?: string;
+            quality_union_total?: string;
+            quality_must_total?: string;
+            quality_review_total?: string;
+            very_pool_total?: string;
+            poor_total?: string;
+            normal_total?: string;
+            excellent_total?: string;
+            qualification_percent_total?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_total" in data && data.worker_total != undefined) {
+                    this.worker_total = data.worker_total;
+                }
+                if ("user_total" in data && data.user_total != undefined) {
+                    this.user_total = data.user_total;
+                }
+                if ("chat_total" in data && data.chat_total != undefined) {
+                    this.chat_total = data.chat_total;
+                }
+                if ("quality_total" in data && data.quality_total != undefined) {
+                    this.quality_total = data.quality_total;
+                }
+                if ("quality_radio_total" in data && data.quality_radio_total != undefined) {
+                    this.quality_radio_total = data.quality_radio_total;
+                }
+                if ("quality_union_total" in data && data.quality_union_total != undefined) {
+                    this.quality_union_total = data.quality_union_total;
+                }
+                if ("quality_must_total" in data && data.quality_must_total != undefined) {
+                    this.quality_must_total = data.quality_must_total;
+                }
+                if ("quality_review_total" in data && data.quality_review_total != undefined) {
+                    this.quality_review_total = data.quality_review_total;
+                }
+                if ("very_pool_total" in data && data.very_pool_total != undefined) {
+                    this.very_pool_total = data.very_pool_total;
+                }
+                if ("poor_total" in data && data.poor_total != undefined) {
+                    this.poor_total = data.poor_total;
+                }
+                if ("normal_total" in data && data.normal_total != undefined) {
+                    this.normal_total = data.normal_total;
+                }
+                if ("excellent_total" in data && data.excellent_total != undefined) {
+                    this.excellent_total = data.excellent_total;
+                }
+                if ("qualification_percent_total" in data && data.qualification_percent_total != undefined) {
+                    this.qualification_percent_total = data.qualification_percent_total;
+                }
+            }
+        }
+        get worker_total() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_total(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user_total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set user_total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get chat_total() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set chat_total(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get quality_total() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set quality_total(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get quality_radio_total() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set quality_radio_total(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get quality_union_total() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set quality_union_total(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get quality_must_total() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set quality_must_total(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get quality_review_total() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set quality_review_total(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get very_pool_total() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set very_pool_total(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get poor_total() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set poor_total(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get normal_total() {
+            return pb_1.Message.getFieldWithDefault(this, 11, "") as string;
+        }
+        set normal_total(value: string) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get excellent_total() {
+            return pb_1.Message.getFieldWithDefault(this, 12, "") as string;
+        }
+        set excellent_total(value: string) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get qualification_percent_total() {
+            return pb_1.Message.getFieldWithDefault(this, 13, "") as string;
+        }
+        set qualification_percent_total(value: string) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        static fromObject(data: {
+            worker_total?: number;
+            user_total?: number;
+            chat_total?: number;
+            quality_total?: number;
+            quality_radio_total?: string;
+            quality_union_total?: string;
+            quality_must_total?: string;
+            quality_review_total?: string;
+            very_pool_total?: string;
+            poor_total?: string;
+            normal_total?: string;
+            excellent_total?: string;
+            qualification_percent_total?: string;
+        }): QualityTotal {
+            const message = new QualityTotal({});
+            if (data.worker_total != null) {
+                message.worker_total = data.worker_total;
+            }
+            if (data.user_total != null) {
+                message.user_total = data.user_total;
+            }
+            if (data.chat_total != null) {
+                message.chat_total = data.chat_total;
+            }
+            if (data.quality_total != null) {
+                message.quality_total = data.quality_total;
+            }
+            if (data.quality_radio_total != null) {
+                message.quality_radio_total = data.quality_radio_total;
+            }
+            if (data.quality_union_total != null) {
+                message.quality_union_total = data.quality_union_total;
+            }
+            if (data.quality_must_total != null) {
+                message.quality_must_total = data.quality_must_total;
+            }
+            if (data.quality_review_total != null) {
+                message.quality_review_total = data.quality_review_total;
+            }
+            if (data.very_pool_total != null) {
+                message.very_pool_total = data.very_pool_total;
+            }
+            if (data.poor_total != null) {
+                message.poor_total = data.poor_total;
+            }
+            if (data.normal_total != null) {
+                message.normal_total = data.normal_total;
+            }
+            if (data.excellent_total != null) {
+                message.excellent_total = data.excellent_total;
+            }
+            if (data.qualification_percent_total != null) {
+                message.qualification_percent_total = data.qualification_percent_total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_total?: number;
+                user_total?: number;
+                chat_total?: number;
+                quality_total?: number;
+                quality_radio_total?: string;
+                quality_union_total?: string;
+                quality_must_total?: string;
+                quality_review_total?: string;
+                very_pool_total?: string;
+                poor_total?: string;
+                normal_total?: string;
+                excellent_total?: string;
+                qualification_percent_total?: string;
+            } = {};
+            if (this.worker_total != null) {
+                data.worker_total = this.worker_total;
+            }
+            if (this.user_total != null) {
+                data.user_total = this.user_total;
+            }
+            if (this.chat_total != null) {
+                data.chat_total = this.chat_total;
+            }
+            if (this.quality_total != null) {
+                data.quality_total = this.quality_total;
+            }
+            if (this.quality_radio_total != null) {
+                data.quality_radio_total = this.quality_radio_total;
+            }
+            if (this.quality_union_total != null) {
+                data.quality_union_total = this.quality_union_total;
+            }
+            if (this.quality_must_total != null) {
+                data.quality_must_total = this.quality_must_total;
+            }
+            if (this.quality_review_total != null) {
+                data.quality_review_total = this.quality_review_total;
+            }
+            if (this.very_pool_total != null) {
+                data.very_pool_total = this.very_pool_total;
+            }
+            if (this.poor_total != null) {
+                data.poor_total = this.poor_total;
+            }
+            if (this.normal_total != null) {
+                data.normal_total = this.normal_total;
+            }
+            if (this.excellent_total != null) {
+                data.excellent_total = this.excellent_total;
+            }
+            if (this.qualification_percent_total != null) {
+                data.qualification_percent_total = this.qualification_percent_total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_total != 0)
+                writer.writeInt32(1, this.worker_total);
+            if (this.user_total != 0)
+                writer.writeInt32(2, this.user_total);
+            if (this.chat_total != 0)
+                writer.writeInt32(3, this.chat_total);
+            if (this.quality_total != 0)
+                writer.writeInt32(4, this.quality_total);
+            if (this.quality_radio_total.length)
+                writer.writeString(5, this.quality_radio_total);
+            if (this.quality_union_total.length)
+                writer.writeString(6, this.quality_union_total);
+            if (this.quality_must_total.length)
+                writer.writeString(7, this.quality_must_total);
+            if (this.quality_review_total.length)
+                writer.writeString(8, this.quality_review_total);
+            if (this.very_pool_total.length)
+                writer.writeString(9, this.very_pool_total);
+            if (this.poor_total.length)
+                writer.writeString(10, this.poor_total);
+            if (this.normal_total.length)
+                writer.writeString(11, this.normal_total);
+            if (this.excellent_total.length)
+                writer.writeString(12, this.excellent_total);
+            if (this.qualification_percent_total.length)
+                writer.writeString(13, this.qualification_percent_total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityTotal {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityTotal();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_total = reader.readInt32();
+                        break;
+                    case 2:
+                        message.user_total = reader.readInt32();
+                        break;
+                    case 3:
+                        message.chat_total = reader.readInt32();
+                        break;
+                    case 4:
+                        message.quality_total = reader.readInt32();
+                        break;
+                    case 5:
+                        message.quality_radio_total = reader.readString();
+                        break;
+                    case 6:
+                        message.quality_union_total = reader.readString();
+                        break;
+                    case 7:
+                        message.quality_must_total = reader.readString();
+                        break;
+                    case 8:
+                        message.quality_review_total = reader.readString();
+                        break;
+                    case 9:
+                        message.very_pool_total = reader.readString();
+                        break;
+                    case 10:
+                        message.poor_total = reader.readString();
+                        break;
+                    case 11:
+                        message.normal_total = reader.readString();
+                        break;
+                    case 12:
+                        message.excellent_total = reader.readString();
+                        break;
+                    case 13:
+                        message.qualification_percent_total = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityTotal {
+            return QualityTotal.deserialize(bytes);
+        }
+    }
+    export class QualityQueryReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            page?: number;
+            pageSize?: number;
+            start_time?: dependency_8.google.protobuf.Timestamp;
+            end_time?: dependency_8.google.protobuf.Timestamp;
+            group_pid?: number;
+            worker_id?: number;
+            SortName?: string;
+            SortType?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("group_pid" in data && data.group_pid != undefined) {
+                    this.group_pid = data.group_pid;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("SortName" in data && data.SortName != undefined) {
+                    this.SortName = data.SortName;
+                }
+                if ("SortType" in data && data.SortType != undefined) {
+                    this.SortType = data.SortType;
+                }
+            }
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 3) as dependency_8.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_8.google.protobuf.Timestamp, 4) as dependency_8.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_8.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get group_pid() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set group_pid(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get SortName() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set SortName(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get SortType() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set SortType(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        static fromObject(data: {
+            page?: number;
+            pageSize?: number;
+            start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+            group_pid?: number;
+            worker_id?: number;
+            SortName?: string;
+            SortType?: number;
+        }): QualityQueryReq {
+            const message = new QualityQueryReq({});
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_8.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_8.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.group_pid != null) {
+                message.group_pid = data.group_pid;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.SortName != null) {
+                message.SortName = data.SortName;
+            }
+            if (data.SortType != null) {
+                message.SortType = data.SortType;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                page?: number;
+                pageSize?: number;
+                start_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_8.google.protobuf.Timestamp.prototype.toObject>;
+                group_pid?: number;
+                worker_id?: number;
+                SortName?: string;
+                SortType?: number;
+            } = {};
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.group_pid != null) {
+                data.group_pid = this.group_pid;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.SortName != null) {
+                data.SortName = this.SortName;
+            }
+            if (this.SortType != null) {
+                data.SortType = this.SortType;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.page != 0)
+                writer.writeUint32(1, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(2, this.pageSize);
+            if (this.has_start_time)
+                writer.writeMessage(3, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(4, this.end_time, () => this.end_time.serialize(writer));
+            if (this.group_pid != 0)
+                writer.writeInt32(5, this.group_pid);
+            if (this.worker_id != 0)
+                writer.writeInt32(6, this.worker_id);
+            if (this.SortName.length)
+                writer.writeString(9, this.SortName);
+            if (this.SortType != 0)
+                writer.writeInt32(10, this.SortType);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityQueryReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityQueryReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.page = reader.readUint32();
+                        break;
+                    case 2:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    case 3:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_8.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        message.group_pid = reader.readInt32();
+                        break;
+                    case 6:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.SortName = reader.readString();
+                        break;
+                    case 10:
+                        message.SortType = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityQueryReq {
+            return QualityQueryReq.deserialize(bytes);
+        }
+    }
+    export class QualityQueryResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: QualityItem[];
+            total?: number;
+            quality_total?: QualityTotal;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+                if ("quality_total" in data && data.quality_total != undefined) {
+                    this.quality_total = data.quality_total;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualityItem, 1) as QualityItem[];
+        }
+        set items(value: QualityItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get quality_total() {
+            return pb_1.Message.getWrapperField(this, QualityTotal, 4) as QualityTotal;
+        }
+        set quality_total(value: QualityTotal) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_quality_total() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof QualityItem.prototype.toObject>[];
+            total?: number;
+            quality_total?: ReturnType<typeof QualityTotal.prototype.toObject>;
+        }): QualityQueryResp {
+            const message = new QualityQueryResp({});
+            if (data.items != null) {
+                message.items = data.items.map(item => QualityItem.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            if (data.quality_total != null) {
+                message.quality_total = QualityTotal.fromObject(data.quality_total);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof QualityItem.prototype.toObject>[];
+                total?: number;
+                quality_total?: ReturnType<typeof QualityTotal.prototype.toObject>;
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: QualityItem) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            if (this.quality_total != null) {
+                data.quality_total = this.quality_total.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: QualityItem) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(3, this.total);
+            if (this.has_quality_total)
+                writer.writeMessage(4, this.quality_total, () => this.quality_total.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityQueryResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityQueryResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, QualityItem.deserialize(reader), QualityItem));
+                        break;
+                    case 3:
+                        message.total = reader.readInt32();
+                        break;
+                    case 4:
+                        reader.readMessage(message.quality_total, () => message.quality_total = QualityTotal.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityQueryResp {
+            return QualityQueryResp.deserialize(bytes);
+        }
+    }
+    export class QualityCreateReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_id?: number;
+            source_id?: number;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("source_id" in data && data.source_id != undefined) {
+                    this.source_id = data.source_id;
+                }
+                if ("score" in data && data.score != undefined) {
+                    this.score = data.score;
+                }
+                if ("content" in data && data.content != undefined) {
+                    this.content = data.content;
+                }
+            }
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get source_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set source_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get score() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set score(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get content() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set content(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            chat_id?: number;
+            source_id?: number;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+        }): QualityCreateReq {
+            const message = new QualityCreateReq({});
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.source_id != null) {
+                message.source_id = data.source_id;
+            }
+            if (data.score != null) {
+                message.score = data.score;
+            }
+            if (data.content != null) {
+                message.content = data.content;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_id?: number;
+                source_id?: number;
+                score?: dependency_4.api.common.WorkerScoreType;
+                content?: string;
+            } = {};
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.source_id != null) {
+                data.source_id = this.source_id;
+            }
+            if (this.score != null) {
+                data.score = this.score;
+            }
+            if (this.content != null) {
+                data.content = this.content;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_id != 0)
+                writer.writeInt64(1, this.chat_id);
+            if (this.source_id != 0)
+                writer.writeInt64(2, this.source_id);
+            if (this.score != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(3, this.score);
+            if (this.content.length)
+                writer.writeString(4, this.content);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityCreateReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityCreateReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.source_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.score = reader.readEnum();
+                        break;
+                    case 4:
+                        message.content = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityCreateReq {
+            return QualityCreateReq.deserialize(bytes);
+        }
+    }
+    export class QualityDetailReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            source_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("source_id" in data && data.source_id != undefined) {
+                    this.source_id = data.source_id;
+                }
+            }
+        }
+        get source_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set source_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            source_id?: number;
+        }): QualityDetailReq {
+            const message = new QualityDetailReq({});
+            if (data.source_id != null) {
+                message.source_id = data.source_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                source_id?: number;
+            } = {};
+            if (this.source_id != null) {
+                data.source_id = this.source_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.source_id != 0)
+                writer.writeInt64(1, this.source_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityDetailReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityDetailReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.source_id = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityDetailReq {
+            return QualityDetailReq.deserialize(bytes);
+        }
+    }
+    export class QualityDetailResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            source_id?: number;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+            review_score?: dependency_4.api.common.WorkerScoreType;
+            review_content?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("source_id" in data && data.source_id != undefined) {
+                    this.source_id = data.source_id;
+                }
+                if ("score" in data && data.score != undefined) {
+                    this.score = data.score;
+                }
+                if ("content" in data && data.content != undefined) {
+                    this.content = data.content;
+                }
+                if ("review_score" in data && data.review_score != undefined) {
+                    this.review_score = data.review_score;
+                }
+                if ("review_content" in data && data.review_content != undefined) {
+                    this.review_content = data.review_content;
+                }
+            }
+        }
+        get source_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set source_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get score() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set score(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get content() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set content(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get review_score() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set review_score(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get review_content() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set review_content(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            source_id?: number;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+            review_score?: dependency_4.api.common.WorkerScoreType;
+            review_content?: string;
+        }): QualityDetailResp {
+            const message = new QualityDetailResp({});
+            if (data.source_id != null) {
+                message.source_id = data.source_id;
+            }
+            if (data.score != null) {
+                message.score = data.score;
+            }
+            if (data.content != null) {
+                message.content = data.content;
+            }
+            if (data.review_score != null) {
+                message.review_score = data.review_score;
+            }
+            if (data.review_content != null) {
+                message.review_content = data.review_content;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                source_id?: number;
+                score?: dependency_4.api.common.WorkerScoreType;
+                content?: string;
+                review_score?: dependency_4.api.common.WorkerScoreType;
+                review_content?: string;
+            } = {};
+            if (this.source_id != null) {
+                data.source_id = this.source_id;
+            }
+            if (this.score != null) {
+                data.score = this.score;
+            }
+            if (this.content != null) {
+                data.content = this.content;
+            }
+            if (this.review_score != null) {
+                data.review_score = this.review_score;
+            }
+            if (this.review_content != null) {
+                data.review_content = this.review_content;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.source_id != 0)
+                writer.writeInt64(1, this.source_id);
+            if (this.score != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(3, this.score);
+            if (this.content.length)
+                writer.writeString(4, this.content);
+            if (this.review_score != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(5, this.review_score);
+            if (this.review_content.length)
+                writer.writeString(6, this.review_content);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityDetailResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityDetailResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.source_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.score = reader.readEnum();
+                        break;
+                    case 4:
+                        message.content = reader.readString();
+                        break;
+                    case 5:
+                        message.review_score = reader.readEnum();
+                        break;
+                    case 6:
+                        message.review_content = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityDetailResp {
+            return QualityDetailResp.deserialize(bytes);
+        }
+    }
+    export class QualityScoreItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            quality_worker_id?: number;
+            quality_worker_name?: string;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+            review_score?: dependency_4.api.common.WorkerScoreType;
+            review_content?: string;
+            quality_session_id?: number;
+            quality_worker_account?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("quality_worker_id" in data && data.quality_worker_id != undefined) {
+                    this.quality_worker_id = data.quality_worker_id;
+                }
+                if ("quality_worker_name" in data && data.quality_worker_name != undefined) {
+                    this.quality_worker_name = data.quality_worker_name;
+                }
+                if ("score" in data && data.score != undefined) {
+                    this.score = data.score;
+                }
+                if ("content" in data && data.content != undefined) {
+                    this.content = data.content;
+                }
+                if ("review_score" in data && data.review_score != undefined) {
+                    this.review_score = data.review_score;
+                }
+                if ("review_content" in data && data.review_content != undefined) {
+                    this.review_content = data.review_content;
+                }
+                if ("quality_session_id" in data && data.quality_session_id != undefined) {
+                    this.quality_session_id = data.quality_session_id;
+                }
+                if ("quality_worker_account" in data && data.quality_worker_account != undefined) {
+                    this.quality_worker_account = data.quality_worker_account;
+                }
+            }
+        }
+        get quality_worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set quality_worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get quality_worker_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set quality_worker_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get score() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set score(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get content() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set content(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get review_score() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_4.api.common.WorkerScoreType.WST_UNKNOWN) as dependency_4.api.common.WorkerScoreType;
+        }
+        set review_score(value: dependency_4.api.common.WorkerScoreType) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get review_content() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set review_content(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get quality_session_id() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set quality_session_id(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get quality_worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set quality_worker_account(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            quality_worker_id?: number;
+            quality_worker_name?: string;
+            score?: dependency_4.api.common.WorkerScoreType;
+            content?: string;
+            review_score?: dependency_4.api.common.WorkerScoreType;
+            review_content?: string;
+            quality_session_id?: number;
+            quality_worker_account?: string;
+        }): QualityScoreItem {
+            const message = new QualityScoreItem({});
+            if (data.quality_worker_id != null) {
+                message.quality_worker_id = data.quality_worker_id;
+            }
+            if (data.quality_worker_name != null) {
+                message.quality_worker_name = data.quality_worker_name;
+            }
+            if (data.score != null) {
+                message.score = data.score;
+            }
+            if (data.content != null) {
+                message.content = data.content;
+            }
+            if (data.review_score != null) {
+                message.review_score = data.review_score;
+            }
+            if (data.review_content != null) {
+                message.review_content = data.review_content;
+            }
+            if (data.quality_session_id != null) {
+                message.quality_session_id = data.quality_session_id;
+            }
+            if (data.quality_worker_account != null) {
+                message.quality_worker_account = data.quality_worker_account;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                quality_worker_id?: number;
+                quality_worker_name?: string;
+                score?: dependency_4.api.common.WorkerScoreType;
+                content?: string;
+                review_score?: dependency_4.api.common.WorkerScoreType;
+                review_content?: string;
+                quality_session_id?: number;
+                quality_worker_account?: string;
+            } = {};
+            if (this.quality_worker_id != null) {
+                data.quality_worker_id = this.quality_worker_id;
+            }
+            if (this.quality_worker_name != null) {
+                data.quality_worker_name = this.quality_worker_name;
+            }
+            if (this.score != null) {
+                data.score = this.score;
+            }
+            if (this.content != null) {
+                data.content = this.content;
+            }
+            if (this.review_score != null) {
+                data.review_score = this.review_score;
+            }
+            if (this.review_content != null) {
+                data.review_content = this.review_content;
+            }
+            if (this.quality_session_id != null) {
+                data.quality_session_id = this.quality_session_id;
+            }
+            if (this.quality_worker_account != null) {
+                data.quality_worker_account = this.quality_worker_account;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.quality_worker_id != 0)
+                writer.writeInt32(1, this.quality_worker_id);
+            if (this.quality_worker_name.length)
+                writer.writeString(2, this.quality_worker_name);
+            if (this.score != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(3, this.score);
+            if (this.content.length)
+                writer.writeString(4, this.content);
+            if (this.review_score != dependency_4.api.common.WorkerScoreType.WST_UNKNOWN)
+                writer.writeEnum(5, this.review_score);
+            if (this.review_content.length)
+                writer.writeString(6, this.review_content);
+            if (this.quality_session_id != 0)
+                writer.writeInt64(7, this.quality_session_id);
+            if (this.quality_worker_account.length)
+                writer.writeString(8, this.quality_worker_account);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityScoreItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityScoreItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.quality_worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.quality_worker_name = reader.readString();
+                        break;
+                    case 3:
+                        message.score = reader.readEnum();
+                        break;
+                    case 4:
+                        message.content = reader.readString();
+                        break;
+                    case 5:
+                        message.review_score = reader.readEnum();
+                        break;
+                    case 6:
+                        message.review_content = reader.readString();
+                        break;
+                    case 7:
+                        message.quality_session_id = reader.readInt64();
+                        break;
+                    case 8:
+                        message.quality_worker_account = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityScoreItem {
+            return QualityScoreItem.deserialize(bytes);
+        }
+    }
+    export class QualityDetailListResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            item?: QualityScoreItem[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("item" in data && data.item != undefined) {
+                    this.item = data.item;
+                }
+            }
+        }
+        get item() {
+            return pb_1.Message.getRepeatedWrapperField(this, QualityScoreItem, 1) as QualityScoreItem[];
+        }
+        set item(value: QualityScoreItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            item?: ReturnType<typeof QualityScoreItem.prototype.toObject>[];
+        }): QualityDetailListResp {
+            const message = new QualityDetailListResp({});
+            if (data.item != null) {
+                message.item = data.item.map(item => QualityScoreItem.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                item?: ReturnType<typeof QualityScoreItem.prototype.toObject>[];
+            } = {};
+            if (this.item != null) {
+                data.item = this.item.map((item: QualityScoreItem) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.item.length)
+                writer.writeRepeatedMessage(1, this.item, (item: QualityScoreItem) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityDetailListResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityDetailListResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.item, () => pb_1.Message.addToRepeatedWrapperField(message, 1, QualityScoreItem.deserialize(reader), QualityScoreItem));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityDetailListResp {
+            return QualityDetailListResp.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitiesRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            chat_id?: number;
+            auditor_account?: string;
+            start_time?: number;
+            end_time?: number;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            chat_id?: number;
+            auditor_account?: string;
+            start_time?: number;
+            end_time?: number;
+            page?: number;
+            pageSize?: number;
+        }): WorkerQualitiesRequest {
+            const message = new WorkerQualitiesRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                chat_id?: number;
+                auditor_account?: string;
+                start_time?: number;
+                end_time?: number;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(2, this.chat_id);
+            if (this.auditor_account.length)
+                writer.writeString(3, this.auditor_account);
+            if (this.start_time != 0)
+                writer.writeInt64(4, this.start_time);
+            if (this.end_time != 0)
+                writer.writeInt64(5, this.end_time);
+            if (this.page != 0)
+                writer.writeUint32(6, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(7, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitiesRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitiesRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 4:
+                        message.start_time = reader.readInt64();
+                        break;
+                    case 5:
+                        message.end_time = reader.readInt64();
+                        break;
+                    case 6:
+                        message.page = reader.readUint32();
+                        break;
+                    case 7:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitiesRequest {
+            return WorkerQualitiesRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerQualitiesResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_qualities?: WorkerQuality[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_qualities" in data && data.worker_qualities != undefined) {
+                    this.worker_qualities = data.worker_qualities;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get worker_qualities() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerQuality, 1) as WorkerQuality[];
+        }
+        set worker_qualities(value: WorkerQuality[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            worker_qualities?: ReturnType<typeof WorkerQuality.prototype.toObject>[];
+            total?: number;
+        }): WorkerQualitiesResponse {
+            const message = new WorkerQualitiesResponse({});
+            if (data.worker_qualities != null) {
+                message.worker_qualities = data.worker_qualities.map(item => WorkerQuality.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_qualities?: ReturnType<typeof WorkerQuality.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.worker_qualities != null) {
+                data.worker_qualities = this.worker_qualities.map((item: WorkerQuality) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_qualities.length)
+                writer.writeRepeatedMessage(1, this.worker_qualities, (item: WorkerQuality) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQualitiesResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQualitiesResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.worker_qualities, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerQuality.deserialize(reader), WorkerQuality));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQualitiesResponse {
+            return WorkerQualitiesResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerQuality extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            consult_id?: number;
+            chat_id?: number;
+            score_time?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+            score?: number;
+            content?: string;
+            score_date?: string;
+            auditor_account?: string;
+            auditor_nickname?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("score_time" in data && data.score_time != undefined) {
+                    this.score_time = data.score_time;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("read_duration" in data && data.read_duration != undefined) {
+                    this.read_duration = data.read_duration;
+                }
+                if ("score" in data && data.score != undefined) {
+                    this.score = data.score;
+                }
+                if ("content" in data && data.content != undefined) {
+                    this.content = data.content;
+                }
+                if ("score_date" in data && data.score_date != undefined) {
+                    this.score_date = data.score_date;
+                }
+                if ("auditor_account" in data && data.auditor_account != undefined) {
+                    this.auditor_account = data.auditor_account;
+                }
+                if ("auditor_nickname" in data && data.auditor_nickname != undefined) {
+                    this.auditor_nickname = data.auditor_nickname;
+                }
+            }
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get score_time() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set score_time(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get read_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set read_duration(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get score() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set score(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get content() {
+            return pb_1.Message.getFieldWithDefault(this, 11, "") as string;
+        }
+        set content(value: string) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get score_date() {
+            return pb_1.Message.getFieldWithDefault(this, 12, "") as string;
+        }
+        set score_date(value: string) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        get auditor_account() {
+            return pb_1.Message.getFieldWithDefault(this, 13, "") as string;
+        }
+        set auditor_account(value: string) {
+            pb_1.Message.setField(this, 13, value);
+        }
+        get auditor_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 14, "") as string;
+        }
+        set auditor_nickname(value: string) {
+            pb_1.Message.setField(this, 14, value);
+        }
+        static fromObject(data: {
+            consult_id?: number;
+            chat_id?: number;
+            score_time?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            start_time?: number;
+            end_time?: number;
+            read_duration?: string;
+            score?: number;
+            content?: string;
+            score_date?: string;
+            auditor_account?: string;
+            auditor_nickname?: string;
+        }): WorkerQuality {
+            const message = new WorkerQuality({});
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.score_time != null) {
+                message.score_time = data.score_time;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            if (data.read_duration != null) {
+                message.read_duration = data.read_duration;
+            }
+            if (data.score != null) {
+                message.score = data.score;
+            }
+            if (data.content != null) {
+                message.content = data.content;
+            }
+            if (data.score_date != null) {
+                message.score_date = data.score_date;
+            }
+            if (data.auditor_account != null) {
+                message.auditor_account = data.auditor_account;
+            }
+            if (data.auditor_nickname != null) {
+                message.auditor_nickname = data.auditor_nickname;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                consult_id?: number;
+                chat_id?: number;
+                score_time?: number;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                start_time?: number;
+                end_time?: number;
+                read_duration?: string;
+                score?: number;
+                content?: string;
+                score_date?: string;
+                auditor_account?: string;
+                auditor_nickname?: string;
+            } = {};
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.score_time != null) {
+                data.score_time = this.score_time;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            if (this.read_duration != null) {
+                data.read_duration = this.read_duration;
+            }
+            if (this.score != null) {
+                data.score = this.score;
+            }
+            if (this.content != null) {
+                data.content = this.content;
+            }
+            if (this.score_date != null) {
+                data.score_date = this.score_date;
+            }
+            if (this.auditor_account != null) {
+                data.auditor_account = this.auditor_account;
+            }
+            if (this.auditor_nickname != null) {
+                data.auditor_nickname = this.auditor_nickname;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.consult_id != 0)
+                writer.writeUint32(1, this.consult_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(2, this.chat_id);
+            if (this.score_time != 0)
+                writer.writeInt64(3, this.score_time);
+            if (this.worker_id != 0)
+                writer.writeInt32(4, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(5, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(6, this.worker_nickname);
+            if (this.start_time != 0)
+                writer.writeInt64(7, this.start_time);
+            if (this.end_time != 0)
+                writer.writeInt64(8, this.end_time);
+            if (this.read_duration.length)
+                writer.writeString(9, this.read_duration);
+            if (this.score != 0)
+                writer.writeFloat(10, this.score);
+            if (this.content.length)
+                writer.writeString(11, this.content);
+            if (this.score_date.length)
+                writer.writeString(12, this.score_date);
+            if (this.auditor_account.length)
+                writer.writeString(13, this.auditor_account);
+            if (this.auditor_nickname.length)
+                writer.writeString(14, this.auditor_nickname);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerQuality {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerQuality();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.consult_id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 3:
+                        message.score_time = reader.readInt64();
+                        break;
+                    case 4:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 5:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 6:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 7:
+                        message.start_time = reader.readInt64();
+                        break;
+                    case 8:
+                        message.end_time = reader.readInt64();
+                        break;
+                    case 9:
+                        message.read_duration = reader.readString();
+                        break;
+                    case 10:
+                        message.score = reader.readFloat();
+                        break;
+                    case 11:
+                        message.content = reader.readString();
+                        break;
+                    case 12:
+                        message.score_date = reader.readString();
+                        break;
+                    case 13:
+                        message.auditor_account = reader.readString();
+                        break;
+                    case 14:
+                        message.auditor_nickname = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerQuality {
+            return WorkerQuality.deserialize(bytes);
+        }
+    }
+    export class SessionMessageWorkersRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set start_time(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get end_time() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set end_time(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: number;
+            end_time?: number;
+        }): SessionMessageWorkersRequest {
+            const message = new SessionMessageWorkersRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = data.start_time;
+            }
+            if (data.end_time != null) {
+                message.end_time = data.end_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                chat_id?: number;
+                start_time?: number;
+                end_time?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time;
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(2, this.chat_id);
+            if (this.start_time != 0)
+                writer.writeInt64(7, this.start_time);
+            if (this.end_time != 0)
+                writer.writeInt64(8, this.end_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SessionMessageWorkersRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SessionMessageWorkersRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 7:
+                        message.start_time = reader.readInt64();
+                        break;
+                    case 8:
+                        message.end_time = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SessionMessageWorkersRequest {
+            return SessionMessageWorkersRequest.deserialize(bytes);
+        }
+    }
+    export class SessionMessageWorkersResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session_message_workers?: SessionMessageWorker[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session_message_workers" in data && data.session_message_workers != undefined) {
+                    this.session_message_workers = data.session_message_workers;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get session_message_workers() {
+            return pb_1.Message.getRepeatedWrapperField(this, SessionMessageWorker, 1) as SessionMessageWorker[];
+        }
+        set session_message_workers(value: SessionMessageWorker[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            session_message_workers?: ReturnType<typeof SessionMessageWorker.prototype.toObject>[];
+            total?: number;
+        }): SessionMessageWorkersResponse {
+            const message = new SessionMessageWorkersResponse({});
+            if (data.session_message_workers != null) {
+                message.session_message_workers = data.session_message_workers.map(item => SessionMessageWorker.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session_message_workers?: ReturnType<typeof SessionMessageWorker.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.session_message_workers != null) {
+                data.session_message_workers = this.session_message_workers.map((item: SessionMessageWorker) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.session_message_workers.length)
+                writer.writeRepeatedMessage(1, this.session_message_workers, (item: SessionMessageWorker) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SessionMessageWorkersResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SessionMessageWorkersResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session_message_workers, () => pb_1.Message.addToRepeatedWrapperField(message, 1, SessionMessageWorker.deserialize(reader), SessionMessageWorker));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SessionMessageWorkersResponse {
+            return SessionMessageWorkersResponse.deserialize(bytes);
+        }
+    }
+    export class SessionMessageWorker extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+            }
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            chat_id?: number;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+        }): SessionMessageWorker {
+            const message = new SessionMessageWorker({});
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_id?: number;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+            } = {};
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_id != 0)
+                writer.writeInt64(1, this.chat_id);
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(3, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(4, this.worker_nickname);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SessionMessageWorker {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SessionMessageWorker();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 4:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SessionMessageWorker {
+            return SessionMessageWorker.deserialize(bytes);
+        }
+    }
+    export class CheckItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            account?: string;
+            nick_name?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("account" in data && data.account != undefined) {
+                    this.account = data.account;
+                }
+                if ("nick_name" in data && data.nick_name != undefined) {
+                    this.nick_name = data.nick_name;
+                }
+            }
+        }
+        get account() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set account(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get nick_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set nick_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            account?: string;
+            nick_name?: string;
+        }): CheckItem {
+            const message = new CheckItem({});
+            if (data.account != null) {
+                message.account = data.account;
+            }
+            if (data.nick_name != null) {
+                message.nick_name = data.nick_name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                account?: string;
+                nick_name?: string;
+            } = {};
+            if (this.account != null) {
+                data.account = this.account;
+            }
+            if (this.nick_name != null) {
+                data.nick_name = this.nick_name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.account.length)
+                writer.writeString(1, this.account);
+            if (this.nick_name.length)
+                writer.writeString(2, this.nick_name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CheckItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CheckItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.account = reader.readString();
+                        break;
+                    case 2:
+                        message.nick_name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CheckItem {
+            return CheckItem.deserialize(bytes);
+        }
+    }
+    export class QualityCheckerResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: CheckItem[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, CheckItem, 1) as CheckItem[];
+        }
+        set items(value: CheckItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof CheckItem.prototype.toObject>[];
+        }): QualityCheckerResp {
+            const message = new QualityCheckerResp({});
+            if (data.items != null) {
+                message.items = data.items.map(item => CheckItem.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof CheckItem.prototype.toObject>[];
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: CheckItem) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: CheckItem) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): QualityCheckerResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new QualityCheckerResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, CheckItem.deserialize(reader), CheckItem));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): QualityCheckerResp {
+            return QualityCheckerResp.deserialize(bytes);
+        }
+    }
+    export class TransferSessionLogReq extends pb_1.Message {
+        #one_of_decls: number[][] = [[3], [4], [5], [6], [7]];
+        constructor(data?: any[] | ({
+            page?: number;
+            pageSize?: number;
+        } & (({
+            from_worker_account?: string;
+        }) | ({
+            chat_id?: number;
+        }) | ({
+            user_id?: number;
+        }) | ({
+            start?: string;
+        }) | ({
+            end?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+                if ("from_worker_account" in data && data.from_worker_account != undefined) {
+                    this.from_worker_account = data.from_worker_account;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("start" in data && data.start != undefined) {
+                    this.start = data.start;
+                }
+                if ("end" in data && data.end != undefined) {
+                    this.end = data.end;
+                }
+            }
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get from_worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set from_worker_account(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+        }
+        get has_from_worker_account() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setOneofField(this, 4, this.#one_of_decls[1], value);
+        }
+        get has_chat_id() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setOneofField(this, 5, this.#one_of_decls[2], value);
+        }
+        get has_user_id() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get start() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set start(value: string) {
+            pb_1.Message.setOneofField(this, 6, this.#one_of_decls[3], value);
+        }
+        get has_start() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get end() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set end(value: string) {
+            pb_1.Message.setOneofField(this, 7, this.#one_of_decls[4], value);
+        }
+        get has_end() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get _from_worker_account() {
+            const cases: {
+                [index: number]: "none" | "from_worker_account";
+            } = {
+                0: "none",
+                3: "from_worker_account"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
+        }
+        get _chat_id() {
+            const cases: {
+                [index: number]: "none" | "chat_id";
+            } = {
+                0: "none",
+                4: "chat_id"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [4])];
+        }
+        get _user_id() {
+            const cases: {
+                [index: number]: "none" | "user_id";
+            } = {
+                0: "none",
+                5: "user_id"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [5])];
+        }
+        get _start() {
+            const cases: {
+                [index: number]: "none" | "start";
+            } = {
+                0: "none",
+                6: "start"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [6])];
+        }
+        get _end() {
+            const cases: {
+                [index: number]: "none" | "end";
+            } = {
+                0: "none",
+                7: "end"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [7])];
+        }
+        static fromObject(data: {
+            page?: number;
+            pageSize?: number;
+            from_worker_account?: string;
+            chat_id?: number;
+            user_id?: number;
+            start?: string;
+            end?: string;
+        }): TransferSessionLogReq {
+            const message = new TransferSessionLogReq({});
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            if (data.from_worker_account != null) {
+                message.from_worker_account = data.from_worker_account;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.start != null) {
+                message.start = data.start;
+            }
+            if (data.end != null) {
+                message.end = data.end;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                page?: number;
+                pageSize?: number;
+                from_worker_account?: string;
+                chat_id?: number;
+                user_id?: number;
+                start?: string;
+                end?: string;
+            } = {};
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            if (this.from_worker_account != null) {
+                data.from_worker_account = this.from_worker_account;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.start != null) {
+                data.start = this.start;
+            }
+            if (this.end != null) {
+                data.end = this.end;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.page != 0)
+                writer.writeUint32(1, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(2, this.pageSize);
+            if (this.has_from_worker_account)
+                writer.writeString(3, this.from_worker_account);
+            if (this.has_chat_id)
+                writer.writeInt64(4, this.chat_id);
+            if (this.has_user_id)
+                writer.writeInt32(5, this.user_id);
+            if (this.has_start)
+                writer.writeString(6, this.start);
+            if (this.has_end)
+                writer.writeString(7, this.end);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TransferSessionLogReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TransferSessionLogReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.page = reader.readUint32();
+                        break;
+                    case 2:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    case 3:
+                        message.from_worker_account = reader.readString();
+                        break;
+                    case 4:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 5:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 6:
+                        message.start = reader.readString();
+                        break;
+                    case 7:
+                        message.end = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TransferSessionLogReq {
+            return TransferSessionLogReq.deserialize(bytes);
+        }
+    }
+    export class TransferSessionLogResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: TransferSessionLog[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, TransferSessionLog, 1) as TransferSessionLog[];
+        }
+        set items(value: TransferSessionLog[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof TransferSessionLog.prototype.toObject>[];
+            total?: number;
+        }): TransferSessionLogResp {
+            const message = new TransferSessionLogResp({});
+            if (data.items != null) {
+                message.items = data.items.map(item => TransferSessionLog.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof TransferSessionLog.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: TransferSessionLog) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: TransferSessionLog) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeUint64(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TransferSessionLogResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TransferSessionLogResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, TransferSessionLog.deserialize(reader), TransferSessionLog));
+                        break;
+                    case 2:
+                        message.total = reader.readUint64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TransferSessionLogResp {
+            return TransferSessionLogResp.deserialize(bytes);
+        }
+    }
+    export class TransferSessionLog extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            user_id?: number;
+            from_worker?: string;
+            to_worker?: string;
+            session_id?: number;
+            transfer_date?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("from_worker" in data && data.from_worker != undefined) {
+                    this.from_worker = data.from_worker;
+                }
+                if ("to_worker" in data && data.to_worker != undefined) {
+                    this.to_worker = data.to_worker;
+                }
+                if ("session_id" in data && data.session_id != undefined) {
+                    this.session_id = data.session_id;
+                }
+                if ("transfer_date" in data && data.transfer_date != undefined) {
+                    this.transfer_date = data.transfer_date;
+                }
+            }
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get from_worker() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set from_worker(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get to_worker() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set to_worker(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get session_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set session_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get transfer_date() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set transfer_date(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            user_id?: number;
+            from_worker?: string;
+            to_worker?: string;
+            session_id?: number;
+            transfer_date?: string;
+        }): TransferSessionLog {
+            const message = new TransferSessionLog({});
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.from_worker != null) {
+                message.from_worker = data.from_worker;
+            }
+            if (data.to_worker != null) {
+                message.to_worker = data.to_worker;
+            }
+            if (data.session_id != null) {
+                message.session_id = data.session_id;
+            }
+            if (data.transfer_date != null) {
+                message.transfer_date = data.transfer_date;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                user_id?: number;
+                from_worker?: string;
+                to_worker?: string;
+                session_id?: number;
+                transfer_date?: string;
+            } = {};
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.from_worker != null) {
+                data.from_worker = this.from_worker;
+            }
+            if (this.to_worker != null) {
+                data.to_worker = this.to_worker;
+            }
+            if (this.session_id != null) {
+                data.session_id = this.session_id;
+            }
+            if (this.transfer_date != null) {
+                data.transfer_date = this.transfer_date;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_id != 0)
+                writer.writeInt32(1, this.user_id);
+            if (this.from_worker.length)
+                writer.writeString(2, this.from_worker);
+            if (this.to_worker.length)
+                writer.writeString(3, this.to_worker);
+            if (this.session_id != 0)
+                writer.writeInt64(4, this.session_id);
+            if (this.transfer_date.length)
+                writer.writeString(5, this.transfer_date);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TransferSessionLog {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TransferSessionLog();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.from_worker = reader.readString();
+                        break;
+                    case 3:
+                        message.to_worker = reader.readString();
+                        break;
+                    case 4:
+                        message.session_id = reader.readInt64();
+                        break;
+                    case 5:
+                        message.transfer_date = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TransferSessionLog {
+            return TransferSessionLog.deserialize(bytes);
+        }
+    }
+    export class WorkerAccountBannedListReq extends pb_1.Message {
+        #one_of_decls: number[][] = [[3]];
+        constructor(data?: any[] | ({
+            page?: number;
+            pageSize?: number;
+        } & (({
+            worker_account?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+            }
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+        }
+        get has_worker_account() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get _worker_account() {
+            const cases: {
+                [index: number]: "none" | "worker_account";
+            } = {
+                0: "none",
+                3: "worker_account"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
+        }
+        static fromObject(data: {
+            page?: number;
+            pageSize?: number;
+            worker_account?: string;
+        }): WorkerAccountBannedListReq {
+            const message = new WorkerAccountBannedListReq({});
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                page?: number;
+                pageSize?: number;
+                worker_account?: string;
+            } = {};
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.page != 0)
+                writer.writeUint32(1, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(2, this.pageSize);
+            if (this.has_worker_account)
+                writer.writeString(3, this.worker_account);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAccountBannedListReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAccountBannedListReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.page = reader.readUint32();
+                        break;
+                    case 2:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    case 3:
+                        message.worker_account = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAccountBannedListReq {
+            return WorkerAccountBannedListReq.deserialize(bytes);
+        }
+    }
+    export class WorkerAccountUnbanReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_account?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+            }
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            worker_account?: string;
+        }): WorkerAccountUnbanReq {
+            const message = new WorkerAccountUnbanReq({});
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_account?: string;
+            } = {};
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_account.length)
+                writer.writeString(1, this.worker_account);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAccountUnbanReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAccountUnbanReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_account = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAccountUnbanReq {
+            return WorkerAccountUnbanReq.deserialize(bytes);
+        }
+    }
+    export class WorkerAccountBannedItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_account?: string;
+            worker_name?: string;
+            worker_groups?: string;
+            attempted_ip?: string;
+            banned_time?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_name" in data && data.worker_name != undefined) {
+                    this.worker_name = data.worker_name;
+                }
+                if ("worker_groups" in data && data.worker_groups != undefined) {
+                    this.worker_groups = data.worker_groups;
+                }
+                if ("attempted_ip" in data && data.attempted_ip != undefined) {
+                    this.attempted_ip = data.attempted_ip;
+                }
+                if ("banned_time" in data && data.banned_time != undefined) {
+                    this.banned_time = data.banned_time;
+                }
+            }
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get worker_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set worker_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_groups() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_groups(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get attempted_ip() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set attempted_ip(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get banned_time() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set banned_time(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            worker_account?: string;
+            worker_name?: string;
+            worker_groups?: string;
+            attempted_ip?: string;
+            banned_time?: string;
+        }): WorkerAccountBannedItem {
+            const message = new WorkerAccountBannedItem({});
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_name != null) {
+                message.worker_name = data.worker_name;
+            }
+            if (data.worker_groups != null) {
+                message.worker_groups = data.worker_groups;
+            }
+            if (data.attempted_ip != null) {
+                message.attempted_ip = data.attempted_ip;
+            }
+            if (data.banned_time != null) {
+                message.banned_time = data.banned_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_account?: string;
+                worker_name?: string;
+                worker_groups?: string;
+                attempted_ip?: string;
+                banned_time?: string;
+            } = {};
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_name != null) {
+                data.worker_name = this.worker_name;
+            }
+            if (this.worker_groups != null) {
+                data.worker_groups = this.worker_groups;
+            }
+            if (this.attempted_ip != null) {
+                data.attempted_ip = this.attempted_ip;
+            }
+            if (this.banned_time != null) {
+                data.banned_time = this.banned_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_account.length)
+                writer.writeString(1, this.worker_account);
+            if (this.worker_name.length)
+                writer.writeString(2, this.worker_name);
+            if (this.worker_groups.length)
+                writer.writeString(3, this.worker_groups);
+            if (this.attempted_ip.length)
+                writer.writeString(4, this.attempted_ip);
+            if (this.banned_time.length)
+                writer.writeString(5, this.banned_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAccountBannedItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAccountBannedItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 2:
+                        message.worker_name = reader.readString();
+                        break;
+                    case 3:
+                        message.worker_groups = reader.readString();
+                        break;
+                    case 4:
+                        message.attempted_ip = reader.readString();
+                        break;
+                    case 5:
+                        message.banned_time = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAccountBannedItem {
+            return WorkerAccountBannedItem.deserialize(bytes);
+        }
+    }
+    export class WorkerAccountBannedListResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            list?: WorkerAccountBannedItem[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerAccountBannedItem, 1) as WorkerAccountBannedItem[];
+        }
+        set list(value: WorkerAccountBannedItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            list?: ReturnType<typeof WorkerAccountBannedItem.prototype.toObject>[];
+            total?: number;
+        }): WorkerAccountBannedListResp {
+            const message = new WorkerAccountBannedListResp({});
+            if (data.list != null) {
+                message.list = data.list.map(item => WorkerAccountBannedItem.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                list?: ReturnType<typeof WorkerAccountBannedItem.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.list != null) {
+                data.list = this.list.map((item: WorkerAccountBannedItem) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.list.length)
+                writer.writeRepeatedMessage(1, this.list, (item: WorkerAccountBannedItem) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeUint32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAccountBannedListResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAccountBannedListResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerAccountBannedItem.deserialize(reader), WorkerAccountBannedItem));
+                        break;
+                    case 2:
+                        message.total = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAccountBannedListResp {
+            return WorkerAccountBannedListResp.deserialize(bytes);
+        }
+    }
+    export class WorkerIPBannedListReq extends pb_1.Message {
+        #one_of_decls: number[][] = [[3]];
+        constructor(data?: any[] | ({
+            page?: number;
+            pageSize?: number;
+        } & (({
+            worker_ip?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+                if ("worker_ip" in data && data.worker_ip != undefined) {
+                    this.worker_ip = data.worker_ip;
+                }
+            }
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get worker_ip() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set worker_ip(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+        }
+        get has_worker_ip() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get _worker_ip() {
+            const cases: {
+                [index: number]: "none" | "worker_ip";
+            } = {
+                0: "none",
+                3: "worker_ip"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
+        }
+        static fromObject(data: {
+            page?: number;
+            pageSize?: number;
+            worker_ip?: string;
+        }): WorkerIPBannedListReq {
+            const message = new WorkerIPBannedListReq({});
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            if (data.worker_ip != null) {
+                message.worker_ip = data.worker_ip;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                page?: number;
+                pageSize?: number;
+                worker_ip?: string;
+            } = {};
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            if (this.worker_ip != null) {
+                data.worker_ip = this.worker_ip;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.page != 0)
+                writer.writeUint32(1, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(2, this.pageSize);
+            if (this.has_worker_ip)
+                writer.writeString(3, this.worker_ip);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerIPBannedListReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerIPBannedListReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.page = reader.readUint32();
+                        break;
+                    case 2:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    case 3:
+                        message.worker_ip = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerIPBannedListReq {
+            return WorkerIPBannedListReq.deserialize(bytes);
+        }
+    }
+    export class WorkerIPUnbanReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            ip?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("ip" in data && data.ip != undefined) {
+                    this.ip = data.ip;
+                }
+            }
+        }
+        get ip() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set ip(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            ip?: string;
+        }): WorkerIPUnbanReq {
+            const message = new WorkerIPUnbanReq({});
+            if (data.ip != null) {
+                message.ip = data.ip;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                ip?: string;
+            } = {};
+            if (this.ip != null) {
+                data.ip = this.ip;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.ip.length)
+                writer.writeString(1, this.ip);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerIPUnbanReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerIPUnbanReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.ip = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerIPUnbanReq {
+            return WorkerIPUnbanReq.deserialize(bytes);
+        }
+    }
+    export class WorkerIPBannedItem extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_ip?: string;
+            banned_time?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_ip" in data && data.worker_ip != undefined) {
+                    this.worker_ip = data.worker_ip;
+                }
+                if ("banned_time" in data && data.banned_time != undefined) {
+                    this.banned_time = data.banned_time;
+                }
+            }
+        }
+        get worker_ip() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set worker_ip(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get banned_time() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set banned_time(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            worker_ip?: string;
+            banned_time?: string;
+        }): WorkerIPBannedItem {
+            const message = new WorkerIPBannedItem({});
+            if (data.worker_ip != null) {
+                message.worker_ip = data.worker_ip;
+            }
+            if (data.banned_time != null) {
+                message.banned_time = data.banned_time;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_ip?: string;
+                banned_time?: string;
+            } = {};
+            if (this.worker_ip != null) {
+                data.worker_ip = this.worker_ip;
+            }
+            if (this.banned_time != null) {
+                data.banned_time = this.banned_time;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_ip.length)
+                writer.writeString(1, this.worker_ip);
+            if (this.banned_time.length)
+                writer.writeString(2, this.banned_time);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerIPBannedItem {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerIPBannedItem();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_ip = reader.readString();
+                        break;
+                    case 2:
+                        message.banned_time = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerIPBannedItem {
+            return WorkerIPBannedItem.deserialize(bytes);
+        }
+    }
+    export class WorkerIPBannedListResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            list?: WorkerIPBannedItem[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerIPBannedItem, 1) as WorkerIPBannedItem[];
+        }
+        set list(value: WorkerIPBannedItem[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            list?: ReturnType<typeof WorkerIPBannedItem.prototype.toObject>[];
+            total?: number;
+        }): WorkerIPBannedListResp {
+            const message = new WorkerIPBannedListResp({});
+            if (data.list != null) {
+                message.list = data.list.map(item => WorkerIPBannedItem.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                list?: ReturnType<typeof WorkerIPBannedItem.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.list != null) {
+                data.list = this.list.map((item: WorkerIPBannedItem) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.list.length)
+                writer.writeRepeatedMessage(1, this.list, (item: WorkerIPBannedItem) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeUint32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerIPBannedListResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerIPBannedListResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerIPBannedItem.deserialize(reader), WorkerIPBannedItem));
+                        break;
+                    case 2:
+                        message.total = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerIPBannedListResp {
+            return WorkerIPBannedListResp.deserialize(bytes);
+        }
+    }
+    export class WorkerRouteListRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [[2], [3], [4], [5]];
+        constructor(data?: any[] | ({
+            batch?: dependency_5.api.common.Page;
+        } & (({
+            name?: string;
+        }) | ({
+            url?: string;
+        }) | ({
+            pid?: number;
+        }) | ({
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("batch" in data && data.batch != undefined) {
+                    this.batch = data.batch;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("pid" in data && data.pid != undefined) {
+                    this.pid = data.pid;
+                }
+                if ("role_type" in data && data.role_type != undefined) {
+                    this.role_type = data.role_type;
+                }
+            }
+        }
+        get batch() {
+            return pb_1.Message.getWrapperField(this, dependency_5.api.common.Page, 1) as dependency_5.api.common.Page;
+        }
+        set batch(value: dependency_5.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_batch() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setOneofField(this, 2, this.#one_of_decls[0], value);
+        }
+        get has_name() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[1], value);
+        }
+        get has_url() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get pid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set pid(value: number) {
+            pb_1.Message.setOneofField(this, 4, this.#one_of_decls[2], value);
+        }
+        get has_pid() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get role_type() {
+            return pb_1.Message.getFieldWithDefault(this, 5, dependency_4.api.common.WorkerRoleType.WRT_DEFAULT) as dependency_4.api.common.WorkerRoleType;
+        }
+        set role_type(value: dependency_4.api.common.WorkerRoleType) {
+            pb_1.Message.setOneofField(this, 5, this.#one_of_decls[3], value);
+        }
+        get has_role_type() {
+            return pb_1.Message.getField(this, 5) != null;
+        }
+        get _name() {
+            const cases: {
+                [index: number]: "none" | "name";
+            } = {
+                0: "none",
+                2: "name"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [2])];
+        }
+        get _url() {
+            const cases: {
+                [index: number]: "none" | "url";
+            } = {
+                0: "none",
+                3: "url"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [3])];
+        }
+        get _pid() {
+            const cases: {
+                [index: number]: "none" | "pid";
+            } = {
+                0: "none",
+                4: "pid"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [4])];
+        }
+        get _role_type() {
+            const cases: {
+                [index: number]: "none" | "role_type";
+            } = {
+                0: "none",
+                5: "role_type"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [5])];
+        }
+        static fromObject(data: {
+            batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+            name?: string;
+            url?: string;
+            pid?: number;
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        }): WorkerRouteListRequest {
+            const message = new WorkerRouteListRequest({});
+            if (data.batch != null) {
+                message.batch = dependency_5.api.common.Page.fromObject(data.batch);
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.pid != null) {
+                message.pid = data.pid;
+            }
+            if (data.role_type != null) {
+                message.role_type = data.role_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+                name?: string;
+                url?: string;
+                pid?: number;
+                role_type?: dependency_4.api.common.WorkerRoleType;
+            } = {};
+            if (this.batch != null) {
+                data.batch = this.batch.toObject();
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.pid != null) {
+                data.pid = this.pid;
+            }
+            if (this.role_type != null) {
+                data.role_type = this.role_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_batch)
+                writer.writeMessage(1, this.batch, () => this.batch.serialize(writer));
+            if (this.has_name)
+                writer.writeString(2, this.name);
+            if (this.has_url)
+                writer.writeString(3, this.url);
+            if (this.has_pid)
+                writer.writeInt32(4, this.pid);
+            if (this.has_role_type)
+                writer.writeEnum(5, this.role_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRouteListRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRouteListRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.batch, () => message.batch = dependency_5.api.common.Page.deserialize(reader));
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.url = reader.readString();
+                        break;
+                    case 4:
+                        message.pid = reader.readInt32();
+                        break;
+                    case 5:
+                        message.role_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRouteListRequest {
+            return WorkerRouteListRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRouteListResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            batch?: dependency_5.api.common.Page;
+            list?: dependency_4.api.common.WorkerRoute[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("batch" in data && data.batch != undefined) {
+                    this.batch = data.batch;
+                }
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get batch() {
+            return pb_1.Message.getWrapperField(this, dependency_5.api.common.Page, 1) as dependency_5.api.common.Page;
+        }
+        set batch(value: dependency_5.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_batch() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.WorkerRoute, 2) as dependency_4.api.common.WorkerRoute[];
+        }
+        set list(value: dependency_4.api.common.WorkerRoute[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 2, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+            list?: ReturnType<typeof dependency_4.api.common.WorkerRoute.prototype.toObject>[];
+            total?: number;
+        }): WorkerRouteListResponse {
+            const message = new WorkerRouteListResponse({});
+            if (data.batch != null) {
+                message.batch = dependency_5.api.common.Page.fromObject(data.batch);
+            }
+            if (data.list != null) {
+                message.list = data.list.map(item => dependency_4.api.common.WorkerRoute.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+                list?: ReturnType<typeof dependency_4.api.common.WorkerRoute.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.batch != null) {
+                data.batch = this.batch.toObject();
+            }
+            if (this.list != null) {
+                data.list = this.list.map((item: dependency_4.api.common.WorkerRoute) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_batch)
+                writer.writeMessage(1, this.batch, () => this.batch.serialize(writer));
+            if (this.list.length)
+                writer.writeRepeatedMessage(2, this.list, (item: dependency_4.api.common.WorkerRoute) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(3, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRouteListResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRouteListResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.batch, () => message.batch = dependency_5.api.common.Page.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_4.api.common.WorkerRoute.deserialize(reader), dependency_4.api.common.WorkerRoute));
+                        break;
+                    case 3:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRouteListResponse {
+            return WorkerRouteListResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerRouteCreateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            remark?: string;
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("pid" in data && data.pid != undefined) {
+                    this.pid = data.pid;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("remark" in data && data.remark != undefined) {
+                    this.remark = data.remark;
+                }
+                if ("role_type" in data && data.role_type != undefined) {
+                    this.role_type = data.role_type;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get pid() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set pid(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get remark() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set remark(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get role_type() {
+            return pb_1.Message.getFieldWithDefault(this, 6, dependency_4.api.common.WorkerRoleType.WRT_DEFAULT) as dependency_4.api.common.WorkerRoleType;
+        }
+        set role_type(value: dependency_4.api.common.WorkerRoleType) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            remark?: string;
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        }): WorkerRouteCreateRequest {
+            const message = new WorkerRouteCreateRequest({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.pid != null) {
+                message.pid = data.pid;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.remark != null) {
+                message.remark = data.remark;
+            }
+            if (data.role_type != null) {
+                message.role_type = data.role_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+                url?: string;
+                pid?: number;
+                sort?: number;
+                remark?: string;
+                role_type?: dependency_4.api.common.WorkerRoleType;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.pid != null) {
+                data.pid = this.pid;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.remark != null) {
+                data.remark = this.remark;
+            }
+            if (this.role_type != null) {
+                data.role_type = this.role_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.url.length)
+                writer.writeString(2, this.url);
+            if (this.pid != 0)
+                writer.writeInt32(3, this.pid);
+            if (this.sort != 0)
+                writer.writeInt32(4, this.sort);
+            if (this.remark.length)
+                writer.writeString(5, this.remark);
+            if (this.role_type != dependency_4.api.common.WorkerRoleType.WRT_DEFAULT)
+                writer.writeEnum(6, this.role_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRouteCreateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRouteCreateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    case 2:
+                        message.url = reader.readString();
+                        break;
+                    case 3:
+                        message.pid = reader.readInt32();
+                        break;
+                    case 4:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 5:
+                        message.remark = reader.readString();
+                        break;
+                    case 6:
+                        message.role_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRouteCreateRequest {
+            return WorkerRouteCreateRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRouteUpdateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            remark?: string;
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("pid" in data && data.pid != undefined) {
+                    this.pid = data.pid;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("remark" in data && data.remark != undefined) {
+                    this.remark = data.remark;
+                }
+                if ("role_type" in data && data.role_type != undefined) {
+                    this.role_type = data.role_type;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get pid() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set pid(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get remark() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set remark(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get role_type() {
+            return pb_1.Message.getFieldWithDefault(this, 7, dependency_4.api.common.WorkerRoleType.WRT_DEFAULT) as dependency_4.api.common.WorkerRoleType;
+        }
+        set role_type(value: dependency_4.api.common.WorkerRoleType) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            url?: string;
+            pid?: number;
+            sort?: number;
+            remark?: string;
+            role_type?: dependency_4.api.common.WorkerRoleType;
+        }): WorkerRouteUpdateRequest {
+            const message = new WorkerRouteUpdateRequest({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.pid != null) {
+                message.pid = data.pid;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.remark != null) {
+                message.remark = data.remark;
+            }
+            if (data.role_type != null) {
+                message.role_type = data.role_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                url?: string;
+                pid?: number;
+                sort?: number;
+                remark?: string;
+                role_type?: dependency_4.api.common.WorkerRoleType;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.pid != null) {
+                data.pid = this.pid;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.remark != null) {
+                data.remark = this.remark;
+            }
+            if (this.role_type != null) {
+                data.role_type = this.role_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.url.length)
+                writer.writeString(3, this.url);
+            if (this.pid != 0)
+                writer.writeInt32(4, this.pid);
+            if (this.sort != 0)
+                writer.writeInt32(5, this.sort);
+            if (this.remark.length)
+                writer.writeString(6, this.remark);
+            if (this.role_type != dependency_4.api.common.WorkerRoleType.WRT_DEFAULT)
+                writer.writeEnum(7, this.role_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRouteUpdateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRouteUpdateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.url = reader.readString();
+                        break;
+                    case 4:
+                        message.pid = reader.readInt32();
+                        break;
+                    case 5:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 6:
+                        message.remark = reader.readString();
+                        break;
+                    case 7:
+                        message.role_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRouteUpdateRequest {
+            return WorkerRouteUpdateRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRouteDeleteRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            id?: number;
+        }): WorkerRouteDeleteRequest {
+            const message = new WorkerRouteDeleteRequest({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRouteDeleteRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRouteDeleteRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRouteDeleteRequest {
+            return WorkerRouteDeleteRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleListRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [[2]];
+        constructor(data?: any[] | ({
+            batch?: dependency_5.api.common.Page;
+            listCall?: boolean;
+        } & (({
+            name?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("batch" in data && data.batch != undefined) {
+                    this.batch = data.batch;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("listCall" in data && data.listCall != undefined) {
+                    this.listCall = data.listCall;
+                }
+            }
+        }
+        get batch() {
+            return pb_1.Message.getWrapperField(this, dependency_5.api.common.Page, 1) as dependency_5.api.common.Page;
+        }
+        set batch(value: dependency_5.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_batch() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setOneofField(this, 2, this.#one_of_decls[0], value);
+        }
+        get has_name() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get listCall() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set listCall(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get _name() {
+            const cases: {
+                [index: number]: "none" | "name";
+            } = {
+                0: "none",
+                2: "name"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [2])];
+        }
+        static fromObject(data: {
+            batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+            name?: string;
+            listCall?: boolean;
+        }): WorkerRoleListRequest {
+            const message = new WorkerRoleListRequest({});
+            if (data.batch != null) {
+                message.batch = dependency_5.api.common.Page.fromObject(data.batch);
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.listCall != null) {
+                message.listCall = data.listCall;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+                name?: string;
+                listCall?: boolean;
+            } = {};
+            if (this.batch != null) {
+                data.batch = this.batch.toObject();
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.listCall != null) {
+                data.listCall = this.listCall;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_batch)
+                writer.writeMessage(1, this.batch, () => this.batch.serialize(writer));
+            if (this.has_name)
+                writer.writeString(2, this.name);
+            if (this.listCall != false)
+                writer.writeBool(3, this.listCall);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleListRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleListRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.batch, () => message.batch = dependency_5.api.common.Page.deserialize(reader));
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.listCall = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleListRequest {
+            return WorkerRoleListRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleListResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            batch?: dependency_5.api.common.Page;
+            list?: dependency_4.api.common.WorkerRole[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("batch" in data && data.batch != undefined) {
+                    this.batch = data.batch;
+                }
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get batch() {
+            return pb_1.Message.getWrapperField(this, dependency_5.api.common.Page, 1) as dependency_5.api.common.Page;
+        }
+        set batch(value: dependency_5.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_batch() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.WorkerRole, 2) as dependency_4.api.common.WorkerRole[];
+        }
+        set list(value: dependency_4.api.common.WorkerRole[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 2, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+            list?: ReturnType<typeof dependency_4.api.common.WorkerRole.prototype.toObject>[];
+            total?: number;
+        }): WorkerRoleListResponse {
+            const message = new WorkerRoleListResponse({});
+            if (data.batch != null) {
+                message.batch = dependency_5.api.common.Page.fromObject(data.batch);
+            }
+            if (data.list != null) {
+                message.list = data.list.map(item => dependency_4.api.common.WorkerRole.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                batch?: ReturnType<typeof dependency_5.api.common.Page.prototype.toObject>;
+                list?: ReturnType<typeof dependency_4.api.common.WorkerRole.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.batch != null) {
+                data.batch = this.batch.toObject();
+            }
+            if (this.list != null) {
+                data.list = this.list.map((item: dependency_4.api.common.WorkerRole) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_batch)
+                writer.writeMessage(1, this.batch, () => this.batch.serialize(writer));
+            if (this.list.length)
+                writer.writeRepeatedMessage(2, this.list, (item: dependency_4.api.common.WorkerRole) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(3, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleListResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleListResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.batch, () => message.batch = dependency_5.api.common.Page.deserialize(reader));
+                        break;
+                    case 2:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_4.api.common.WorkerRole.deserialize(reader), dependency_4.api.common.WorkerRole));
+                        break;
+                    case 3:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleListResponse {
+            return WorkerRoleListResponse.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleCreateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+            sort?: number;
+            remark?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("remark" in data && data.remark != undefined) {
+                    this.remark = data.remark;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get remark() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set remark(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            name?: string;
+            sort?: number;
+            remark?: string;
+        }): WorkerRoleCreateRequest {
+            const message = new WorkerRoleCreateRequest({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.remark != null) {
+                message.remark = data.remark;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+                sort?: number;
+                remark?: string;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.remark != null) {
+                data.remark = this.remark;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.sort != 0)
+                writer.writeInt32(2, this.sort);
+            if (this.remark.length)
+                writer.writeString(3, this.remark);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleCreateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleCreateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    case 2:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 3:
+                        message.remark = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleCreateRequest {
+            return WorkerRoleCreateRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleUpdateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            sort?: number;
+            remark?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("remark" in data && data.remark != undefined) {
+                    this.remark = data.remark;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get remark() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set remark(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            sort?: number;
+            remark?: string;
+        }): WorkerRoleUpdateRequest {
+            const message = new WorkerRoleUpdateRequest({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.remark != null) {
+                message.remark = data.remark;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                sort?: number;
+                remark?: string;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.remark != null) {
+                data.remark = this.remark;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.sort != 0)
+                writer.writeInt32(3, this.sort);
+            if (this.remark.length)
+                writer.writeString(4, this.remark);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleUpdateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleUpdateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 4:
+                        message.remark = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleUpdateRequest {
+            return WorkerRoleUpdateRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleDeleteRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            id?: number;
+        }): WorkerRoleDeleteRequest {
+            const message = new WorkerRoleDeleteRequest({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleDeleteRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleDeleteRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleDeleteRequest {
+            return WorkerRoleDeleteRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleRouteRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            role_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
+                }
+            }
+        }
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set role_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            role_id?: number;
+        }): WorkerRoleRouteRequest {
+            const message = new WorkerRoleRouteRequest({});
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                role_id?: number;
+            } = {};
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.role_id != 0)
+                writer.writeInt32(1, this.role_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleRouteRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleRouteRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.role_id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleRouteRequest {
+            return WorkerRoleRouteRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleRouteTree extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            name?: string;
+            sort?: number;
+            remark?: string;
+            route_type_routes?: dependency_4.api.common.WorkerRouteTypeRoutes[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [5], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("sort" in data && data.sort != undefined) {
+                    this.sort = data.sort;
+                }
+                if ("remark" in data && data.remark != undefined) {
+                    this.remark = data.remark;
+                }
+                if ("route_type_routes" in data && data.route_type_routes != undefined) {
+                    this.route_type_routes = data.route_type_routes;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get sort() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set sort(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get remark() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set remark(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get route_type_routes() {
+            return pb_1.Message.getRepeatedWrapperField(this, dependency_4.api.common.WorkerRouteTypeRoutes, 5) as dependency_4.api.common.WorkerRouteTypeRoutes[];
+        }
+        set route_type_routes(value: dependency_4.api.common.WorkerRouteTypeRoutes[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 5, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            name?: string;
+            sort?: number;
+            remark?: string;
+            route_type_routes?: ReturnType<typeof dependency_4.api.common.WorkerRouteTypeRoutes.prototype.toObject>[];
+        }): WorkerRoleRouteTree {
+            const message = new WorkerRoleRouteTree({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.sort != null) {
+                message.sort = data.sort;
+            }
+            if (data.remark != null) {
+                message.remark = data.remark;
+            }
+            if (data.route_type_routes != null) {
+                message.route_type_routes = data.route_type_routes.map(item => dependency_4.api.common.WorkerRouteTypeRoutes.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                name?: string;
+                sort?: number;
+                remark?: string;
+                route_type_routes?: ReturnType<typeof dependency_4.api.common.WorkerRouteTypeRoutes.prototype.toObject>[];
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.sort != null) {
+                data.sort = this.sort;
+            }
+            if (this.remark != null) {
+                data.remark = this.remark;
+            }
+            if (this.route_type_routes != null) {
+                data.route_type_routes = this.route_type_routes.map((item: dependency_4.api.common.WorkerRouteTypeRoutes) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.sort != 0)
+                writer.writeInt32(3, this.sort);
+            if (this.remark.length)
+                writer.writeString(4, this.remark);
+            if (this.route_type_routes.length)
+                writer.writeRepeatedMessage(5, this.route_type_routes, (item: dependency_4.api.common.WorkerRouteTypeRoutes) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleRouteTree {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleRouteTree();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.sort = reader.readInt32();
+                        break;
+                    case 4:
+                        message.remark = reader.readString();
+                        break;
+                    case 5:
+                        reader.readMessage(message.route_type_routes, () => pb_1.Message.addToRepeatedWrapperField(message, 5, dependency_4.api.common.WorkerRouteTypeRoutes.deserialize(reader), dependency_4.api.common.WorkerRouteTypeRoutes));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleRouteTree {
+            return WorkerRoleRouteTree.deserialize(bytes);
+        }
+    }
+    export class WorkerRoleRouteUpdateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            role_id?: number;
+            route_ids?: number[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("role_id" in data && data.role_id != undefined) {
+                    this.role_id = data.role_id;
+                }
+                if ("route_ids" in data && data.route_ids != undefined) {
+                    this.route_ids = data.route_ids;
+                }
+            }
+        }
+        get role_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set role_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get route_ids() {
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as number[];
+        }
+        set route_ids(value: number[]) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            role_id?: number;
+            route_ids?: number[];
+        }): WorkerRoleRouteUpdateRequest {
+            const message = new WorkerRoleRouteUpdateRequest({});
+            if (data.role_id != null) {
+                message.role_id = data.role_id;
+            }
+            if (data.route_ids != null) {
+                message.route_ids = data.route_ids;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                role_id?: number;
+                route_ids?: number[];
+            } = {};
+            if (this.role_id != null) {
+                data.role_id = this.role_id;
+            }
+            if (this.route_ids != null) {
+                data.route_ids = this.route_ids;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.role_id != 0)
+                writer.writeInt32(1, this.role_id);
+            if (this.route_ids.length)
+                writer.writePackedInt32(2, this.route_ids);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerRoleRouteUpdateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerRoleRouteUpdateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.role_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.route_ids = reader.readPackedInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerRoleRouteUpdateRequest {
+            return WorkerRoleRouteUpdateRequest.deserialize(bytes);
+        }
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -7128,6 +19860,15 @@ export namespace api.core {
                 responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             },
+            NotifyMessageBatch: {
+                path: "/api.core.Worker/NotifyMessageBatch",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: BatchNotifyMessageReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => BatchNotifyMessageReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             TransferWithDraWal: {
                 path: "/api.core.Worker/TransferWithDraWal",
                 requestStream: false,
@@ -7244,6 +19985,357 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => GlReq.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: GlResp) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => GlResp.deserialize(new Uint8Array(bytes))
+            },
+            QualityChats: {
+                path: "/api.core.Worker/QualityChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualityChatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualityChatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            QualiyReviewedChats: {
+                path: "/api.core.Worker/QualiyReviewedChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualiyReviewedChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualiyReviewedChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualiyReviewedChatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualiyReviewedChatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportQualiyReviewedChats: {
+                path: "/api.core.Worker/ExportQualiyReviewedChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ExportQualityChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportQualityChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            AddChatReadLog: {
+                path: "/api.core.Worker/AddChatReadLog",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: AddChatReadLogRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => AddChatReadLogRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            QualityCreate: {
+                path: "/api.core.Worker/QualityCreate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityCreateReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityCreateReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            QualityQuery: {
+                path: "/api.core.Worker/QualityQuery",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityQueryReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityQueryReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualityQueryResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualityQueryResp.deserialize(new Uint8Array(bytes))
+            },
+            QualityExport: {
+                path: "/api.core.Worker/QualityExport",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityQueryReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityQueryReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            QualityDetail: {
+                path: "/api.core.Worker/QualityDetail",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityDetailReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityDetailReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualityDetailResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualityDetailResp.deserialize(new Uint8Array(bytes))
+            },
+            QualityDetailList: {
+                path: "/api.core.Worker/QualityDetailList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: QualityDetailReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => QualityDetailReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualityDetailListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualityDetailListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerQualities: {
+                path: "/api.core.Worker/WorkerQualities",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerQualitiesRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerQualitiesRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerQualitiesResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerQualitiesResponse.deserialize(new Uint8Array(bytes))
+            },
+            SessionMessageWorkers: {
+                path: "/api.core.Worker/SessionMessageWorkers",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SessionMessageWorkersRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SessionMessageWorkersRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: SessionMessageWorkersResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => SessionMessageWorkersResponse.deserialize(new Uint8Array(bytes))
+            },
+            NewQualityChats: {
+                path: "/api.core.Worker/NewQualityChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: NewQualityChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => NewQualityChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: NewQualityChatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => NewQualityChatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            NewQualiyReviewedChats: {
+                path: "/api.core.Worker/NewQualiyReviewedChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: NewQualiyReviewedChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: NewQualiyReviewedChatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            ExportNewQualiyReviewedChats: {
+                path: "/api.core.Worker/ExportNewQualiyReviewedChats",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: NewQualiyReviewedChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: NewQualiyReviewedChatsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            QualityChecker: {
+                path: "/api.core.Worker/QualityChecker",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: QualityCheckerResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => QualityCheckerResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerQualitySessions: {
+                path: "/api.core.Worker/WorkerQualitySessions",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerQualitySessionsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerQualitySessionsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerQualitySessionsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerQualitySessionsResponse.deserialize(new Uint8Array(bytes))
+            },
+            AddQualitySessionReadLog: {
+                path: "/api.core.Worker/AddQualitySessionReadLog",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: AddQualitySessionReadLogRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => AddQualitySessionReadLogRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerQualitySessionLevelSum: {
+                path: "/api.core.Worker/WorkerQualitySessionLevelSum",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: NewQualiyReviewedChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerQualitySessionLevelSumResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerQualitySessionLevelSumResponse.deserialize(new Uint8Array(bytes))
+            },
+            WorkerQualitySessionSum: {
+                path: "/api.core.Worker/WorkerQualitySessionSum",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: NewQualiyReviewedChatsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => NewQualiyReviewedChatsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerQualitySessionSumResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerQualitySessionSumResponse.deserialize(new Uint8Array(bytes))
+            },
+            QueryAll: {
+                path: "/api.core.Worker/QueryAll",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerQueryAllResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerQueryAllResponse.deserialize(new Uint8Array(bytes))
+            },
+            TransferSessionLog: {
+                path: "/api.core.Worker/TransferSessionLog",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: TransferSessionLogReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => TransferSessionLogReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: TransferSessionLogResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => TransferSessionLogResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRouteList: {
+                path: "/api.core.Worker/WorkerRouteList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRouteListRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRouteListRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerRouteListResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerRouteListResponse.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRouteCreate: {
+                path: "/api.core.Worker/WorkerRouteCreate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRouteCreateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRouteCreateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRouteUpdate: {
+                path: "/api.core.Worker/WorkerRouteUpdate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRouteUpdateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRouteUpdateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRouteDelete: {
+                path: "/api.core.Worker/WorkerRouteDelete",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRouteDeleteRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRouteDeleteRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleList: {
+                path: "/api.core.Worker/WorkerRoleList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleListRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleListRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerRoleListResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerRoleListResponse.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleCreate: {
+                path: "/api.core.Worker/WorkerRoleCreate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleCreateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleCreateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleUpdate: {
+                path: "/api.core.Worker/WorkerRoleUpdate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleUpdateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleUpdateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleDelete: {
+                path: "/api.core.Worker/WorkerRoleDelete",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleDeleteRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleDeleteRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerAccountBannedList: {
+                path: "/api.core.Worker/WorkerAccountBannedList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerAccountBannedListReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerAccountBannedListReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerAccountBannedListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerAccountBannedListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerAccountBannedListSuper: {
+                path: "/api.core.Worker/WorkerAccountBannedListSuper",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerAccountBannedListReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerAccountBannedListReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerAccountBannedListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerAccountBannedListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerIPBannedList: {
+                path: "/api.core.Worker/WorkerIPBannedList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerIPBannedListReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerIPBannedListReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerIPBannedListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerIPBannedListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerIPBannedListSuper: {
+                path: "/api.core.Worker/WorkerIPBannedListSuper",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerIPBannedListReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerIPBannedListReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerIPBannedListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerIPBannedListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerAccountUnban: {
+                path: "/api.core.Worker/WorkerAccountUnban",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerAccountUnbanReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerAccountUnbanReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerIPUnban: {
+                path: "/api.core.Worker/WorkerIPUnban",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerIPUnbanReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerIPUnbanReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleRouteList: {
+                path: "/api.core.Worker/WorkerRoleRouteList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleRouteRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleRouteRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerRoleRouteTree) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerRoleRouteTree.deserialize(new Uint8Array(bytes))
+            },
+            WorkerRoleRouteUpdate: {
+                path: "/api.core.Worker/WorkerRoleRouteUpdate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerRoleRouteUpdateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerRoleRouteUpdateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerBaseInfoQuery: {
+                path: "/api.core.Worker/WorkerBaseInfoQuery",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: BaseWorkerInfoListResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => BaseWorkerInfoListResponse.deserialize(new Uint8Array(bytes))
+            },
+            GroupRelWorkerInfoQuery: {
+                path: "/api.core.Worker/GroupRelWorkerInfoQuery",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: GroupRelWorkersInfoRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => GroupRelWorkersInfoRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: GroupRelWorkersInfoResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => GroupRelWorkersInfoResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -7271,6 +20363,7 @@ export namespace api.core {
         abstract QuerySession(call: grpc_1.ServerUnaryCall<QuerySessionRequest, QuerySessionResponse>, callback: grpc_1.sendUnaryData<QuerySessionResponse>): void;
         abstract CreateNimAccount(call: grpc_1.ServerUnaryCall<NIMAccountRequest, NIMAccountResponse>, callback: grpc_1.sendUnaryData<NIMAccountResponse>): void;
         abstract NotifyMessage(call: grpc_1.ServerUnaryCall<NotifyMessageRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract NotifyMessageBatch(call: grpc_1.ServerUnaryCall<BatchNotifyMessageReq, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
         abstract TransferWithDraWal(call: grpc_1.ServerUnaryCall<TransferMessageReq, TransferMessageRsp>, callback: grpc_1.sendUnaryData<TransferMessageRsp>): void;
         abstract QueryChildByGroup(call: grpc_1.ServerUnaryCall<QueryChildByGroupRequest, QueryChildByGroupResponse>, callback: grpc_1.sendUnaryData<QueryChildByGroupResponse>): void;
         abstract QueryCustomer(call: grpc_1.ServerUnaryCall<SessionCustomerQueryRequest, SessionCustomerQueryResponse>, callback: grpc_1.sendUnaryData<SessionCustomerQueryResponse>): void;
@@ -7284,6 +20377,45 @@ export namespace api.core {
         abstract BindGl(call: grpc_1.ServerUnaryCall<GlReq, GlResp>, callback: grpc_1.sendUnaryData<GlResp>): void;
         abstract VerifyGl(call: grpc_1.ServerUnaryCall<GlReq, GlResp>, callback: grpc_1.sendUnaryData<GlResp>): void;
         abstract ResetGl(call: grpc_1.ServerUnaryCall<GlReq, GlResp>, callback: grpc_1.sendUnaryData<GlResp>): void;
+        abstract QualityChats(call: grpc_1.ServerUnaryCall<QualityChatsRequest, QualityChatsResponse>, callback: grpc_1.sendUnaryData<QualityChatsResponse>): void;
+        abstract QualiyReviewedChats(call: grpc_1.ServerUnaryCall<QualiyReviewedChatsRequest, QualiyReviewedChatsResponse>, callback: grpc_1.sendUnaryData<QualiyReviewedChatsResponse>): void;
+        abstract ExportQualiyReviewedChats(call: grpc_1.ServerUnaryCall<ExportQualityChatsRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract AddChatReadLog(call: grpc_1.ServerUnaryCall<AddChatReadLogRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract QualityCreate(call: grpc_1.ServerUnaryCall<QualityCreateReq, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract QualityQuery(call: grpc_1.ServerUnaryCall<QualityQueryReq, QualityQueryResp>, callback: grpc_1.sendUnaryData<QualityQueryResp>): void;
+        abstract QualityExport(call: grpc_1.ServerUnaryCall<QualityQueryReq, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract QualityDetail(call: grpc_1.ServerUnaryCall<QualityDetailReq, QualityDetailResp>, callback: grpc_1.sendUnaryData<QualityDetailResp>): void;
+        abstract QualityDetailList(call: grpc_1.ServerUnaryCall<QualityDetailReq, QualityDetailListResp>, callback: grpc_1.sendUnaryData<QualityDetailListResp>): void;
+        abstract WorkerQualities(call: grpc_1.ServerUnaryCall<WorkerQualitiesRequest, WorkerQualitiesResponse>, callback: grpc_1.sendUnaryData<WorkerQualitiesResponse>): void;
+        abstract SessionMessageWorkers(call: grpc_1.ServerUnaryCall<SessionMessageWorkersRequest, SessionMessageWorkersResponse>, callback: grpc_1.sendUnaryData<SessionMessageWorkersResponse>): void;
+        abstract NewQualityChats(call: grpc_1.ServerUnaryCall<NewQualityChatsRequest, NewQualityChatsResponse>, callback: grpc_1.sendUnaryData<NewQualityChatsResponse>): void;
+        abstract NewQualiyReviewedChats(call: grpc_1.ServerUnaryCall<NewQualiyReviewedChatsRequest, NewQualiyReviewedChatsResponse>, callback: grpc_1.sendUnaryData<NewQualiyReviewedChatsResponse>): void;
+        abstract ExportNewQualiyReviewedChats(call: grpc_1.ServerUnaryCall<NewQualiyReviewedChatsRequest, NewQualiyReviewedChatsResponse>, callback: grpc_1.sendUnaryData<NewQualiyReviewedChatsResponse>): void;
+        abstract QualityChecker(call: grpc_1.ServerUnaryCall<dependency_1.google.protobuf.Empty, QualityCheckerResp>, callback: grpc_1.sendUnaryData<QualityCheckerResp>): void;
+        abstract WorkerQualitySessions(call: grpc_1.ServerUnaryCall<WorkerQualitySessionsRequest, WorkerQualitySessionsResponse>, callback: grpc_1.sendUnaryData<WorkerQualitySessionsResponse>): void;
+        abstract AddQualitySessionReadLog(call: grpc_1.ServerUnaryCall<AddQualitySessionReadLogRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerQualitySessionLevelSum(call: grpc_1.ServerUnaryCall<NewQualiyReviewedChatsRequest, WorkerQualitySessionLevelSumResponse>, callback: grpc_1.sendUnaryData<WorkerQualitySessionLevelSumResponse>): void;
+        abstract WorkerQualitySessionSum(call: grpc_1.ServerUnaryCall<NewQualiyReviewedChatsRequest, WorkerQualitySessionSumResponse>, callback: grpc_1.sendUnaryData<WorkerQualitySessionSumResponse>): void;
+        abstract QueryAll(call: grpc_1.ServerUnaryCall<dependency_1.google.protobuf.Empty, WorkerQueryAllResponse>, callback: grpc_1.sendUnaryData<WorkerQueryAllResponse>): void;
+        abstract TransferSessionLog(call: grpc_1.ServerUnaryCall<TransferSessionLogReq, TransferSessionLogResp>, callback: grpc_1.sendUnaryData<TransferSessionLogResp>): void;
+        abstract WorkerRouteList(call: grpc_1.ServerUnaryCall<WorkerRouteListRequest, WorkerRouteListResponse>, callback: grpc_1.sendUnaryData<WorkerRouteListResponse>): void;
+        abstract WorkerRouteCreate(call: grpc_1.ServerUnaryCall<WorkerRouteCreateRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRouteUpdate(call: grpc_1.ServerUnaryCall<WorkerRouteUpdateRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRouteDelete(call: grpc_1.ServerUnaryCall<WorkerRouteDeleteRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRoleList(call: grpc_1.ServerUnaryCall<WorkerRoleListRequest, WorkerRoleListResponse>, callback: grpc_1.sendUnaryData<WorkerRoleListResponse>): void;
+        abstract WorkerRoleCreate(call: grpc_1.ServerUnaryCall<WorkerRoleCreateRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRoleUpdate(call: grpc_1.ServerUnaryCall<WorkerRoleUpdateRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRoleDelete(call: grpc_1.ServerUnaryCall<WorkerRoleDeleteRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerAccountBannedList(call: grpc_1.ServerUnaryCall<WorkerAccountBannedListReq, WorkerAccountBannedListResp>, callback: grpc_1.sendUnaryData<WorkerAccountBannedListResp>): void;
+        abstract WorkerAccountBannedListSuper(call: grpc_1.ServerUnaryCall<WorkerAccountBannedListReq, WorkerAccountBannedListResp>, callback: grpc_1.sendUnaryData<WorkerAccountBannedListResp>): void;
+        abstract WorkerIPBannedList(call: grpc_1.ServerUnaryCall<WorkerIPBannedListReq, WorkerIPBannedListResp>, callback: grpc_1.sendUnaryData<WorkerIPBannedListResp>): void;
+        abstract WorkerIPBannedListSuper(call: grpc_1.ServerUnaryCall<WorkerIPBannedListReq, WorkerIPBannedListResp>, callback: grpc_1.sendUnaryData<WorkerIPBannedListResp>): void;
+        abstract WorkerAccountUnban(call: grpc_1.ServerUnaryCall<WorkerAccountUnbanReq, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerIPUnban(call: grpc_1.ServerUnaryCall<WorkerIPUnbanReq, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerRoleRouteList(call: grpc_1.ServerUnaryCall<WorkerRoleRouteRequest, WorkerRoleRouteTree>, callback: grpc_1.sendUnaryData<WorkerRoleRouteTree>): void;
+        abstract WorkerRoleRouteUpdate(call: grpc_1.ServerUnaryCall<WorkerRoleRouteUpdateRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerBaseInfoQuery(call: grpc_1.ServerUnaryCall<dependency_1.google.protobuf.Empty, BaseWorkerInfoListResponse>, callback: grpc_1.sendUnaryData<BaseWorkerInfoListResponse>): void;
+        abstract GroupRelWorkerInfoQuery(call: grpc_1.ServerUnaryCall<GroupRelWorkersInfoRequest, GroupRelWorkersInfoResponse>, callback: grpc_1.sendUnaryData<GroupRelWorkersInfoResponse>): void;
     }
     export class WorkerClient extends grpc_1.makeGenericClientConstructor(UnimplementedWorkerService.definition, "Worker", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -7361,6 +20493,9 @@ export namespace api.core {
         NotifyMessage: GrpcUnaryServiceInterface<NotifyMessageRequest, dependency_1.google.protobuf.Empty> = (message: NotifyMessageRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.NotifyMessage(message, metadata, options, callback);
         };
+        NotifyMessageBatch: GrpcUnaryServiceInterface<BatchNotifyMessageReq, dependency_1.google.protobuf.Empty> = (message: BatchNotifyMessageReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.NotifyMessageBatch(message, metadata, options, callback);
+        };
         TransferWithDraWal: GrpcUnaryServiceInterface<TransferMessageReq, TransferMessageRsp> = (message: TransferMessageReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<TransferMessageRsp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<TransferMessageRsp>, callback?: grpc_1.requestCallback<TransferMessageRsp>): grpc_1.ClientUnaryCall => {
             return super.TransferWithDraWal(message, metadata, options, callback);
         };
@@ -7399,6 +20534,123 @@ export namespace api.core {
         };
         ResetGl: GrpcUnaryServiceInterface<GlReq, GlResp> = (message: GlReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GlResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GlResp>, callback?: grpc_1.requestCallback<GlResp>): grpc_1.ClientUnaryCall => {
             return super.ResetGl(message, metadata, options, callback);
+        };
+        QualityChats: GrpcUnaryServiceInterface<QualityChatsRequest, QualityChatsResponse> = (message: QualityChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualityChatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualityChatsResponse>, callback?: grpc_1.requestCallback<QualityChatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.QualityChats(message, metadata, options, callback);
+        };
+        QualiyReviewedChats: GrpcUnaryServiceInterface<QualiyReviewedChatsRequest, QualiyReviewedChatsResponse> = (message: QualiyReviewedChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualiyReviewedChatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualiyReviewedChatsResponse>, callback?: grpc_1.requestCallback<QualiyReviewedChatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.QualiyReviewedChats(message, metadata, options, callback);
+        };
+        ExportQualiyReviewedChats: GrpcUnaryServiceInterface<ExportQualityChatsRequest, dependency_1.google.protobuf.Empty> = (message: ExportQualityChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportQualiyReviewedChats(message, metadata, options, callback);
+        };
+        AddChatReadLog: GrpcUnaryServiceInterface<AddChatReadLogRequest, dependency_1.google.protobuf.Empty> = (message: AddChatReadLogRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.AddChatReadLog(message, metadata, options, callback);
+        };
+        QualityCreate: GrpcUnaryServiceInterface<QualityCreateReq, dependency_1.google.protobuf.Empty> = (message: QualityCreateReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.QualityCreate(message, metadata, options, callback);
+        };
+        QualityQuery: GrpcUnaryServiceInterface<QualityQueryReq, QualityQueryResp> = (message: QualityQueryReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualityQueryResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualityQueryResp>, callback?: grpc_1.requestCallback<QualityQueryResp>): grpc_1.ClientUnaryCall => {
+            return super.QualityQuery(message, metadata, options, callback);
+        };
+        QualityExport: GrpcUnaryServiceInterface<QualityQueryReq, dependency_1.google.protobuf.Empty> = (message: QualityQueryReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.QualityExport(message, metadata, options, callback);
+        };
+        QualityDetail: GrpcUnaryServiceInterface<QualityDetailReq, QualityDetailResp> = (message: QualityDetailReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualityDetailResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualityDetailResp>, callback?: grpc_1.requestCallback<QualityDetailResp>): grpc_1.ClientUnaryCall => {
+            return super.QualityDetail(message, metadata, options, callback);
+        };
+        QualityDetailList: GrpcUnaryServiceInterface<QualityDetailReq, QualityDetailListResp> = (message: QualityDetailReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualityDetailListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualityDetailListResp>, callback?: grpc_1.requestCallback<QualityDetailListResp>): grpc_1.ClientUnaryCall => {
+            return super.QualityDetailList(message, metadata, options, callback);
+        };
+        WorkerQualities: GrpcUnaryServiceInterface<WorkerQualitiesRequest, WorkerQualitiesResponse> = (message: WorkerQualitiesRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitiesResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitiesResponse>, callback?: grpc_1.requestCallback<WorkerQualitiesResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerQualities(message, metadata, options, callback);
+        };
+        SessionMessageWorkers: GrpcUnaryServiceInterface<SessionMessageWorkersRequest, SessionMessageWorkersResponse> = (message: SessionMessageWorkersRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<SessionMessageWorkersResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<SessionMessageWorkersResponse>, callback?: grpc_1.requestCallback<SessionMessageWorkersResponse>): grpc_1.ClientUnaryCall => {
+            return super.SessionMessageWorkers(message, metadata, options, callback);
+        };
+        NewQualityChats: GrpcUnaryServiceInterface<NewQualityChatsRequest, NewQualityChatsResponse> = (message: NewQualityChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<NewQualityChatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<NewQualityChatsResponse>, callback?: grpc_1.requestCallback<NewQualityChatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.NewQualityChats(message, metadata, options, callback);
+        };
+        NewQualiyReviewedChats: GrpcUnaryServiceInterface<NewQualiyReviewedChatsRequest, NewQualiyReviewedChatsResponse> = (message: NewQualiyReviewedChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<NewQualiyReviewedChatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<NewQualiyReviewedChatsResponse>, callback?: grpc_1.requestCallback<NewQualiyReviewedChatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.NewQualiyReviewedChats(message, metadata, options, callback);
+        };
+        ExportNewQualiyReviewedChats: GrpcUnaryServiceInterface<NewQualiyReviewedChatsRequest, NewQualiyReviewedChatsResponse> = (message: NewQualiyReviewedChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<NewQualiyReviewedChatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<NewQualiyReviewedChatsResponse>, callback?: grpc_1.requestCallback<NewQualiyReviewedChatsResponse>): grpc_1.ClientUnaryCall => {
+            return super.ExportNewQualiyReviewedChats(message, metadata, options, callback);
+        };
+        QualityChecker: GrpcUnaryServiceInterface<dependency_1.google.protobuf.Empty, QualityCheckerResp> = (message: dependency_1.google.protobuf.Empty, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<QualityCheckerResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<QualityCheckerResp>, callback?: grpc_1.requestCallback<QualityCheckerResp>): grpc_1.ClientUnaryCall => {
+            return super.QualityChecker(message, metadata, options, callback);
+        };
+        WorkerQualitySessions: GrpcUnaryServiceInterface<WorkerQualitySessionsRequest, WorkerQualitySessionsResponse> = (message: WorkerQualitySessionsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionsResponse>, callback?: grpc_1.requestCallback<WorkerQualitySessionsResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerQualitySessions(message, metadata, options, callback);
+        };
+        AddQualitySessionReadLog: GrpcUnaryServiceInterface<AddQualitySessionReadLogRequest, dependency_1.google.protobuf.Empty> = (message: AddQualitySessionReadLogRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.AddQualitySessionReadLog(message, metadata, options, callback);
+        };
+        WorkerQualitySessionLevelSum: GrpcUnaryServiceInterface<NewQualiyReviewedChatsRequest, WorkerQualitySessionLevelSumResponse> = (message: NewQualiyReviewedChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionLevelSumResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionLevelSumResponse>, callback?: grpc_1.requestCallback<WorkerQualitySessionLevelSumResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerQualitySessionLevelSum(message, metadata, options, callback);
+        };
+        WorkerQualitySessionSum: GrpcUnaryServiceInterface<NewQualiyReviewedChatsRequest, WorkerQualitySessionSumResponse> = (message: NewQualiyReviewedChatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionSumResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerQualitySessionSumResponse>, callback?: grpc_1.requestCallback<WorkerQualitySessionSumResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerQualitySessionSum(message, metadata, options, callback);
+        };
+        QueryAll: GrpcUnaryServiceInterface<dependency_1.google.protobuf.Empty, WorkerQueryAllResponse> = (message: dependency_1.google.protobuf.Empty, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerQueryAllResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerQueryAllResponse>, callback?: grpc_1.requestCallback<WorkerQueryAllResponse>): grpc_1.ClientUnaryCall => {
+            return super.QueryAll(message, metadata, options, callback);
+        };
+        TransferSessionLog: GrpcUnaryServiceInterface<TransferSessionLogReq, TransferSessionLogResp> = (message: TransferSessionLogReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<TransferSessionLogResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<TransferSessionLogResp>, callback?: grpc_1.requestCallback<TransferSessionLogResp>): grpc_1.ClientUnaryCall => {
+            return super.TransferSessionLog(message, metadata, options, callback);
+        };
+        WorkerRouteList: GrpcUnaryServiceInterface<WorkerRouteListRequest, WorkerRouteListResponse> = (message: WorkerRouteListRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerRouteListResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerRouteListResponse>, callback?: grpc_1.requestCallback<WorkerRouteListResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRouteList(message, metadata, options, callback);
+        };
+        WorkerRouteCreate: GrpcUnaryServiceInterface<WorkerRouteCreateRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRouteCreateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRouteCreate(message, metadata, options, callback);
+        };
+        WorkerRouteUpdate: GrpcUnaryServiceInterface<WorkerRouteUpdateRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRouteUpdateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRouteUpdate(message, metadata, options, callback);
+        };
+        WorkerRouteDelete: GrpcUnaryServiceInterface<WorkerRouteDeleteRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRouteDeleteRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRouteDelete(message, metadata, options, callback);
+        };
+        WorkerRoleList: GrpcUnaryServiceInterface<WorkerRoleListRequest, WorkerRoleListResponse> = (message: WorkerRoleListRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerRoleListResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerRoleListResponse>, callback?: grpc_1.requestCallback<WorkerRoleListResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleList(message, metadata, options, callback);
+        };
+        WorkerRoleCreate: GrpcUnaryServiceInterface<WorkerRoleCreateRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRoleCreateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleCreate(message, metadata, options, callback);
+        };
+        WorkerRoleUpdate: GrpcUnaryServiceInterface<WorkerRoleUpdateRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRoleUpdateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleUpdate(message, metadata, options, callback);
+        };
+        WorkerRoleDelete: GrpcUnaryServiceInterface<WorkerRoleDeleteRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRoleDeleteRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleDelete(message, metadata, options, callback);
+        };
+        WorkerAccountBannedList: GrpcUnaryServiceInterface<WorkerAccountBannedListReq, WorkerAccountBannedListResp> = (message: WorkerAccountBannedListReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerAccountBannedListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerAccountBannedListResp>, callback?: grpc_1.requestCallback<WorkerAccountBannedListResp>): grpc_1.ClientUnaryCall => {
+            return super.WorkerAccountBannedList(message, metadata, options, callback);
+        };
+        WorkerAccountBannedListSuper: GrpcUnaryServiceInterface<WorkerAccountBannedListReq, WorkerAccountBannedListResp> = (message: WorkerAccountBannedListReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerAccountBannedListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerAccountBannedListResp>, callback?: grpc_1.requestCallback<WorkerAccountBannedListResp>): grpc_1.ClientUnaryCall => {
+            return super.WorkerAccountBannedListSuper(message, metadata, options, callback);
+        };
+        WorkerIPBannedList: GrpcUnaryServiceInterface<WorkerIPBannedListReq, WorkerIPBannedListResp> = (message: WorkerIPBannedListReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerIPBannedListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerIPBannedListResp>, callback?: grpc_1.requestCallback<WorkerIPBannedListResp>): grpc_1.ClientUnaryCall => {
+            return super.WorkerIPBannedList(message, metadata, options, callback);
+        };
+        WorkerIPBannedListSuper: GrpcUnaryServiceInterface<WorkerIPBannedListReq, WorkerIPBannedListResp> = (message: WorkerIPBannedListReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerIPBannedListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerIPBannedListResp>, callback?: grpc_1.requestCallback<WorkerIPBannedListResp>): grpc_1.ClientUnaryCall => {
+            return super.WorkerIPBannedListSuper(message, metadata, options, callback);
+        };
+        WorkerAccountUnban: GrpcUnaryServiceInterface<WorkerAccountUnbanReq, dependency_1.google.protobuf.Empty> = (message: WorkerAccountUnbanReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerAccountUnban(message, metadata, options, callback);
+        };
+        WorkerIPUnban: GrpcUnaryServiceInterface<WorkerIPUnbanReq, dependency_1.google.protobuf.Empty> = (message: WorkerIPUnbanReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerIPUnban(message, metadata, options, callback);
+        };
+        WorkerRoleRouteList: GrpcUnaryServiceInterface<WorkerRoleRouteRequest, WorkerRoleRouteTree> = (message: WorkerRoleRouteRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerRoleRouteTree>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerRoleRouteTree>, callback?: grpc_1.requestCallback<WorkerRoleRouteTree>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleRouteList(message, metadata, options, callback);
+        };
+        WorkerRoleRouteUpdate: GrpcUnaryServiceInterface<WorkerRoleRouteUpdateRequest, dependency_1.google.protobuf.Empty> = (message: WorkerRoleRouteUpdateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.WorkerRoleRouteUpdate(message, metadata, options, callback);
+        };
+        WorkerBaseInfoQuery: GrpcUnaryServiceInterface<dependency_1.google.protobuf.Empty, BaseWorkerInfoListResponse> = (message: dependency_1.google.protobuf.Empty, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<BaseWorkerInfoListResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<BaseWorkerInfoListResponse>, callback?: grpc_1.requestCallback<BaseWorkerInfoListResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerBaseInfoQuery(message, metadata, options, callback);
+        };
+        GroupRelWorkerInfoQuery: GrpcUnaryServiceInterface<GroupRelWorkersInfoRequest, GroupRelWorkersInfoResponse> = (message: GroupRelWorkersInfoRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GroupRelWorkersInfoResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GroupRelWorkersInfoResponse>, callback?: grpc_1.requestCallback<GroupRelWorkersInfoResponse>): grpc_1.ClientUnaryCall => {
+            return super.GroupRelWorkerInfoQuery(message, metadata, options, callback);
         };
     }
 }
