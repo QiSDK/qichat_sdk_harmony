@@ -70,7 +70,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -177,8 +177,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -202,7 +202,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -276,7 +276,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -351,8 +351,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(3, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(3, this.last_msg_id);
             if (this.nick.length)
                 writer.writeString(4, this.nick);
             if (this.replyList.length)
@@ -373,7 +373,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 4:
                         message.nick = reader.readString();
@@ -449,7 +449,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -598,8 +598,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -629,7 +629,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -720,7 +720,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -823,8 +823,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: MessageWithSenderInfo) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(3, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(3, this.last_msg_id);
             if (this.replyList.length)
                 writer.writeRepeatedMessage(4, this.replyList, (item: MessageWithSenderInfo) => item.serialize(writer));
             if (this.uid != 0)
@@ -849,7 +849,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 4:
                         reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 4, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
@@ -899,7 +899,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -936,8 +936,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -951,7 +951,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -1184,7 +1184,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -1333,8 +1333,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (this.count != 0)
                 writer.writeInt32(3, this.count);
             if (this.with_last_one != false)
@@ -1364,7 +1364,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 3:
                         message.count = reader.readInt32();
@@ -1461,7 +1461,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 3, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 4, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 4, value);
@@ -1560,8 +1560,8 @@ export namespace api.core {
                 writer.writeRepeatedMessage(2, this.list, (item: MessageWithSenderInfo) => item.serialize(writer));
             if (this.replyList.length)
                 writer.writeRepeatedMessage(3, this.replyList, (item: MessageWithSenderInfo) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(4, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(4, this.last_msg_id);
             if (this.uid != 0)
                 writer.writeInt32(5, this.uid);
             if (this.nick.length)
@@ -1587,7 +1587,7 @@ export namespace api.core {
                         reader.readMessage(message.replyList, () => pb_1.Message.addToRepeatedWrapperField(message, 3, MessageWithSenderInfo.deserialize(reader), MessageWithSenderInfo));
                         break;
                     case 4:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 5:
                         message.uid = reader.readInt32();
@@ -1874,7 +1874,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 9, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 10, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 10, value);
@@ -2009,8 +2009,8 @@ export namespace api.core {
                 writer.writeInt64(8, this.end_at);
             if (this.sender_type != MessageSenderType.SENDER_TYPE_ALL)
                 writer.writeEnum(9, this.sender_type);
-            if (this.last_msg_id.length)
-                writer.writeString(10, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(10, this.last_msg_id);
             if (this.last_msg_created_at != 0)
                 writer.writeInt64(11, this.last_msg_created_at);
             if (this.keyword.length)
@@ -2049,7 +2049,7 @@ export namespace api.core {
                         message.sender_type = reader.readEnum();
                         break;
                     case 10:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 11:
                         message.last_msg_created_at = reader.readInt64();
@@ -2097,7 +2097,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 4, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 4, value);
@@ -2148,8 +2148,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: MessageWithInfo) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(4, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(4, this.last_msg_id);
             if (this.total != 0)
                 writer.writeInt32(5, this.total);
             if (!w)
@@ -2165,7 +2165,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, MessageWithInfo.deserialize(reader), MessageWithInfo));
                         break;
                     case 4:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 5:
                         message.total = reader.readInt32();
@@ -3728,7 +3728,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -3823,8 +3823,8 @@ export namespace api.core {
                 writer.writeString(1, this.content);
             if (this.chat_id != 0)
                 writer.writeInt64(2, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(3, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(3, this.msg_id);
             if (this.has_start)
                 writer.writeMessage(4, this.start, () => this.start.serialize(writer));
             if (this.has_end)
@@ -3847,7 +3847,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 4:
                         reader.readMessage(message.start, () => message.start = dependency_4.google.protobuf.Timestamp.deserialize(reader));
@@ -3913,7 +3913,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -3978,8 +3978,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(3, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(3, this.last_msg_id);
             for (const [key, value] of this.detail) {
                 writer.writeMessage(4, this.detail, () => {
                     writer.writeInt64(1, key);
@@ -4002,7 +4002,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     case 4:
                         reader.readMessage(message, () => pb_1.Map.deserializeBinary(message.detail as any, reader, reader.readInt64, () => {
@@ -4047,7 +4047,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -4084,8 +4084,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -4099,7 +4099,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -4219,7 +4219,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -4298,8 +4298,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(2, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(3, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(3, this.msg_id);
             if (this.start != 0)
                 writer.writeInt64(4, this.start);
             if (this.end != 0)
@@ -4319,7 +4319,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 4:
                         message.start = reader.readInt64();
@@ -4379,7 +4379,7 @@ export namespace api.core {
             pb_1.Message.setRepeatedWrapperField(this, 2, value);
         }
         get last_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set last_msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -4426,8 +4426,8 @@ export namespace api.core {
                 writer.writeMessage(1, this.request, () => this.request.serialize(writer));
             if (this.list.length)
                 writer.writeRepeatedMessage(2, this.list, (item: dependency_5.api.common.Message) => item.serialize(writer));
-            if (this.last_msg_id.length)
-                writer.writeString(3, this.last_msg_id);
+            if (this.last_msg_id != "0")
+                writer.writeUint64String(3, this.last_msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -4444,7 +4444,7 @@ export namespace api.core {
                         reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 2, dependency_5.api.common.Message.deserialize(reader), dependency_5.api.common.Message));
                         break;
                     case 3:
-                        message.last_msg_id = reader.readString();
+                        message.last_msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }

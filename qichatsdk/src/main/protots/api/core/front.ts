@@ -2567,7 +2567,7 @@ export namespace api.core {
             }
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 1, value);
@@ -2594,8 +2594,8 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.msg_id.length)
-                writer.writeString(1, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(1, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2606,7 +2606,7 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }

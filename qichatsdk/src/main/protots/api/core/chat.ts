@@ -1012,7 +1012,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -1059,8 +1059,8 @@ export namespace api.core {
                 writer.writeInt64(1, this.chat_id);
             if (this.consult_id != 0)
                 writer.writeInt64(2, this.consult_id);
-            if (this.msg_id.length)
-                writer.writeString(3, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(3, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1077,7 +1077,7 @@ export namespace api.core {
                         message.consult_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -1538,7 +1538,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 5, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 6, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 6, value);
@@ -1615,8 +1615,8 @@ export namespace api.core {
                 writer.writeInt32(4, this.owner_role);
             if (this.chat_id != 0)
                 writer.writeInt64(5, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(6, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(6, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1642,7 +1642,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 6:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }

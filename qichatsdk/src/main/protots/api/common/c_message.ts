@@ -1090,7 +1090,7 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -1127,8 +1127,8 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1142,7 +1142,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -1684,7 +1684,7 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -1705,7 +1705,7 @@ export namespace api.common {
             pb_1.Message.setField(this, 4, value);
         }
         get reply_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 5, "0") as string;
         }
         set reply_msg_id(value: string) {
             pb_1.Message.setField(this, 5, value);
@@ -1756,7 +1756,7 @@ export namespace api.common {
             pb_1.Message.setField(this, 12, value);
         }
         get payload_id() {
-            return pb_1.Message.getFieldWithDefault(this, 99, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 99, "0") as string;
         }
         set payload_id(value: string) {
             pb_1.Message.setField(this, 99, value);
@@ -2087,14 +2087,14 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (this.has_msg_time)
                 writer.writeMessage(3, this.msg_time, () => this.msg_time.serialize(writer));
             if (this.sender != 0)
                 writer.writeInt64(4, this.sender);
-            if (this.reply_msg_id.length)
-                writer.writeString(5, this.reply_msg_id);
+            if (this.reply_msg_id != "0")
+                writer.writeUint64String(5, this.reply_msg_id);
             if (this.msg_op != MessageOperate.MSG_OP_POST)
                 writer.writeEnum(6, this.msg_op);
             if (this.worker != 0)
@@ -2109,8 +2109,8 @@ export namespace api.common {
                 writer.writeRepeatedMessage(11, this.with_auto_replies, (item: WithAutoReply) => item.serialize(writer));
             if (this.msg_source_type != MsgSourceType.MST_DEFAULT)
                 writer.writeEnum(12, this.msg_source_type);
-            if (this.payload_id.length)
-                writer.writeString(99, this.payload_id);
+            if (this.payload_id != "0")
+                writer.writeUint64String(99, this.payload_id);
             if (this.has_content)
                 writer.writeMessage(100, this.content, () => this.content.serialize(writer));
             if (this.has_image)
@@ -2146,7 +2146,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 3:
                         reader.readMessage(message.msg_time, () => message.msg_time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
@@ -2155,7 +2155,7 @@ export namespace api.common {
                         message.sender = reader.readInt64();
                         break;
                     case 5:
-                        message.reply_msg_id = reader.readString();
+                        message.reply_msg_id = reader.readUint64String();
                         break;
                     case 6:
                         message.msg_op = reader.readEnum();
@@ -2179,7 +2179,7 @@ export namespace api.common {
                         message.msg_source_type = reader.readEnum();
                         break;
                     case 99:
-                        message.payload_id = reader.readString();
+                        message.payload_id = reader.readUint64String();
                         break;
                     case 100:
                         reader.readMessage(message.content, () => message.content = MessageContent.deserialize(reader));

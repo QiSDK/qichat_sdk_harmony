@@ -29,7 +29,7 @@ export namespace gateway {
             }
         }
         get id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, "0") as string;
         }
         set id(value: string) {
             pb_1.Message.setField(this, 1, value);
@@ -84,8 +84,8 @@ export namespace gateway {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id.length)
-                writer.writeString(1, this.id);
+            if (this.id != "0")
+                writer.writeUint64String(1, this.id);
             if (this.act != dependency_2.gateway.Action.ActionForward)
                 writer.writeEnum(2, this.act);
             if (this.data.length)
@@ -100,7 +100,7 @@ export namespace gateway {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.id = reader.readString();
+                        message.id = reader.readUint64String();
                         break;
                     case 2:
                         message.act = reader.readEnum();

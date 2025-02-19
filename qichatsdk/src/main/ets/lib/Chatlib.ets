@@ -427,8 +427,9 @@ export class Chatlib {
     payLoad.act = GAction.gateway.Action.ActionCSSendMsg
 
     //payload_id != 0的时候，可能是重发，重发不需要+1
-    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID != '0'){
-      this.payloadId += 1
+    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == '0'){
+      const tempId = BigInt(this.payloadId) + 1n
+      this.payloadId = tempId.toString()
       this.msgList.set(this.payloadId, this.sendingMessage);
     }
 

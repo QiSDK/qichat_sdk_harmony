@@ -516,7 +516,7 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -584,8 +584,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (this.has_msg_time)
                 writer.writeMessage(3, this.msg_time, () => this.msg_time.serialize(writer));
             if (this.err_msg.length)
@@ -603,7 +603,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     case 3:
                         reader.readMessage(message.msg_time, () => message.msg_time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
@@ -740,7 +740,7 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -777,8 +777,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -792,7 +792,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -830,7 +830,7 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -867,8 +867,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -882,7 +882,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
@@ -920,7 +920,7 @@ export namespace gateway {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 2, value);
@@ -957,8 +957,8 @@ export namespace gateway {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id.length)
-                writer.writeString(2, this.msg_id);
+            if (this.msg_id != "0")
+                writer.writeUint64String(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -972,7 +972,7 @@ export namespace gateway {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readString();
+                        message.msg_id = reader.readUint64String();
                         break;
                     default: reader.skipField();
                 }
