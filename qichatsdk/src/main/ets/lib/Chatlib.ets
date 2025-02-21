@@ -461,7 +461,7 @@ export class Chatlib {
     this.listener?.systemMsg(resp)
   }
 
-  private doDisConnect(): void{
+  doDisConnect(): void{
     this.stopHeartbeatTimer();
     this.ws.close()
   }
