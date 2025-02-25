@@ -7,7 +7,7 @@ import * as GAction from '../../protots/gateway/g_action';
 import { ArrayList, JSON, List } from '@kit.ArkTS';
 import * as Timestamp from '../../protots/google/protobuf/timestamp';
 import Utils from './Utils';
-
+import connection from '@ohos.net.connection';
 
 export class Resp<T> {
   public code: number = 0;
@@ -93,7 +93,7 @@ export class Chatlib {
   private maxSessionMinutes: number = 9000000; // Set session limits (adjust as needed)
   private withAutoReply: CMessage.api.common.WithAutoReply | null = null;
   private heartbeatTimer: number | null = null; // Timer ID
-
+  netCon: connection.NetConnection = connection.createNetConnection();
 
   constructor(cert: string, token: string, baseUrl: string = "", userId: number, sign: string, chatID: number = 0) {
     this.chatId = chatID;
@@ -473,6 +473,7 @@ export class Chatlib {
       this.heartbeatTimer = setInterval(() => {
         this.sendHeartBeat();
       }, 1000 * 30); // 60 seconds
+      this.listenForNetworkChanges()
     }
   }
 
@@ -481,6 +482,7 @@ export class Chatlib {
     if (this.heartbeatTimer) {
       clearInterval(this.heartbeatTimer);
       this.heartbeatTimer = null; // Reset the timer ID
+      this.unRegisterNetwork()
     }
   }
 
@@ -504,6 +506,28 @@ export class Chatlib {
         console.log("WebSocket connection closed successfully");
       }
     });
+  }
+
+
+  listenForNetworkChanges() {
+    this.netCon.register((error) => {
+      console.debug(`${JSON.stringify(error)}`)
+    })
+    // 订阅网络可用事件。调用register后，才能接收到此事件通知
+    this.netCon.on('netAvailable', (data: connection.NetHandle) => {
+      console.debug(`${JSON.stringify(data)}`)
+    })
+    // 订阅事件，如果当前指定网络不可用，通过on_netUnavailable通知用户
+    this.netCon.on('netUnavailable', ((data: void) => {
+      console.log("net is unavailable, data is " + data);
+      this.disConnected(1009, '没有网络')
+    }));
+  }
+
+  unRegisterNetwork(){
+    this.netCon.unregister((error) =>{
+
+    })
   }
 }
 
