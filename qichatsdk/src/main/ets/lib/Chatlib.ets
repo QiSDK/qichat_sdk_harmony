@@ -117,7 +117,8 @@ export class Chatlib {
 
   public connectWebSocket(): void {
     //let defaultIpAddress = "wss://csapi.hfxg.xyz/v1/gateway/h5?cert=COYBEAUYASDyASiG2piD9zE.te46qua5ha2r-Caz03Vx2JXH5OLSRRV2GqdYcn9UslwibsxBSP98GhUKSGEI0Z84FRMkp16ZK8eS-y72QVE2AQ&token=&userid=666333&ty=104&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
-    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +"&ty=104&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
+    //CLIENT_TYPE_USER_APP_HARMONYOS = 113; // app端HARMONYOS
+    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +"&ty=113&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
     //let defaultIpAddress = "wss://echo.websocket.org"
 
     // Handle the open connection event
