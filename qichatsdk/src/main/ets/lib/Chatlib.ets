@@ -310,8 +310,8 @@ export class Chatlib {
     // Message sending encapsulation, four layers
     // payload -> CSSendMessage -> common message -> CommonMessageContent
     switch (type) {
-      case CMessage.api.common.MessageFormat.MSG_TEXT:
-        this.sendTextMessage(msg);
+      case CMessage.api.common.MessageFormat.MSG_FILE:
+        this.sendFileMessage(msg);
         break;
       case CMessage.api.common.MessageFormat.MSG_IMG:
         this.sendImageMessage(msg);
@@ -369,6 +369,30 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
+
+  private sendFileMessage(txt: string){
+    // 第一层
+    let content = new CMessage.api.common.MessageFile
+    content.uri = txt
+
+    // 第二层, 消息主题
+    let msg = new CMessage.api.common.Message()
+    msg.consult_id = this.consultId
+    msg.file = content
+    msg.sender = 0
+    msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_POST
+    //msg.payload = GPayload.gateway.Payload.Com
+    msg.reply_msg_id = this.replyMsgId
+    msg.chat_id = this.chatId
+    msg.worker = 0
+
+    msg.msg_time = Utils.msgTime();
+
+    // 临时放到一个变量
+    this.sendingMessage = msg
+  }
+
+
   private sendVideoMessage(txt: string){
     // 第一层
     let content = new CMessage.api.common.MessageVideo()
@@ -392,13 +416,29 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  /**
-   * 重发消息
-   * @param cMsg: Message
-   * @param payloadId: Long
-   */
   resendMSg(cMsg: CMessage.api.common.Message, payloadId: string){
     this.sendingMessage = cMsg;
+    this.doSend(payloadId)
+  }
+
+  /**
+   * 重发消息
+   */
+  resendMsg(msg: string, payloadId: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null){
+    switch (type) {
+      case CMessage.api.common.MessageFormat.MSG_FILE:
+        this.sendFileMessage(msg);
+        break;
+      case CMessage.api.common.MessageFormat.MSG_IMG:
+        this.sendImageMessage(msg);
+        break;
+      case CMessage.api.common.MessageFormat.MSG_VIDEO:
+        this.sendVideoMessage(msg);
+        break;
+      default:
+        this.sendTextMessage(msg);
+        break;
+    }
     this.doSend(payloadId)
   }
 
