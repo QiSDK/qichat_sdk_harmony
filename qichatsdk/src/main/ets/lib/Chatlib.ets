@@ -95,6 +95,9 @@ export class Chatlib {
   private heartbeatTimer: number | null = null; // Timer ID
   netCon: connection.NetConnection = connection.createNetConnection();
 
+  private fileSize: number = 0;
+  private fileName: string | null = null;
+
   constructor(cert: string, token: string, baseUrl: string = "", userId: number, sign: string, chatID: number = 0) {
     this.chatId = chatID;
     if (token.length > 10) {
@@ -304,10 +307,12 @@ export class Chatlib {
     }
   }
 
-  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null): void {
+  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null, fileSize: number = 0, fileName: string | null = null): void {
     this.replyMsgId = replyMsgId;
     this.consultId = consultId;
     this.withAutoReply = withAutoReply;
+    this.fileSize = fileSize;
+    this.fileName = fileName;
     // Message sending encapsulation, four layers
     // payload -> CSSendMessage -> common message -> CommonMessageContent
     switch (type) {
@@ -375,6 +380,8 @@ export class Chatlib {
     // 第一层
     let content = new CMessage.api.common.MessageFile
     content.uri = txt
+    content.file_name = this.fileName ?? "";
+    content.size = this.fileSize;
 
     // 第二层, 消息主题
     let msg = new CMessage.api.common.Message()
