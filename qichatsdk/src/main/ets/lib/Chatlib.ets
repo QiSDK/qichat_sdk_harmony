@@ -28,7 +28,6 @@ export class Resp<T> {
 }
 
 
-
 export interface TeneasySDKDelegate {
   // Received message
   receivedMsg(msg: CMessage.api.common.Message): void;
@@ -71,7 +70,6 @@ export class Chatlib {
   private TAG: string = "ChatLib ";
   private baseUrl: string = "";
   public isConnected: boolean = false;
-
   // The current message entity sent
   public sendingMessage: CMessage.api.common.Message | null = null;
   private chatId: number = 0;
@@ -84,7 +82,6 @@ export class Chatlib {
   public listener: TeneasySDKDelegate | null = null;
   public payloadId: string = '0';
   private msgList: Map<string, CMessage.api.common.Message> = new Map();
-
   public replyMsgId: string = '0';
   public consultId: number = 0;
   //private heartTimer: any | null = null; // You can replace with a suitable Timer in ArkTS
@@ -94,7 +91,6 @@ export class Chatlib {
   private withAutoReply: CMessage.api.common.WithAutoReply | null = null;
   private heartbeatTimer: number | null = null; // Timer ID
   netCon: connection.NetConnection = connection.createNetConnection();
-
   private fileSize: number = 0;
   private fileName: string | null = null;
 
@@ -121,7 +117,8 @@ export class Chatlib {
   public connectWebSocket(): void {
     //let defaultIpAddress = "wss://csapi.hfxg.xyz/v1/gateway/h5?cert=COYBEAUYASDyASiG2piD9zE.te46qua5ha2r-Caz03Vx2JXH5OLSRRV2GqdYcn9UslwibsxBSP98GhUKSGEI0Z84FRMkp16ZK8eS-y72QVE2AQ&token=&userid=666333&ty=104&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
     //CLIENT_TYPE_USER_APP_HARMONYOS = 113; // app端HARMONYOS
-    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +"&ty=113&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
+    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +
+      "&ty=113&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
     //let defaultIpAddress = "wss://echo.websocket.org"
 
     // Handle the open connection event
@@ -173,9 +170,9 @@ export class Chatlib {
       console.error("WebSocket error: " + JSON.stringify(err));
     });
 
-    const  traceId = "79d3ea32-d236-4a0a-af01-8353e35311d8";
+    const traceId = "79d3ea32-d236-4a0a-af01-8353e35311d8";
     // Connect to the WebSocket server
-    this.ws.connect(defaultIpAddress,  {
+    this.ws.connect(defaultIpAddress, {
       header: {
         'x-trace-id': traceId
       }
@@ -288,7 +285,7 @@ export class Chatlib {
             } else {
               this.listener?.msgReceipt(cMsg, recvPayload.id, sendMsgAck.msg_id, sendMsgAck.err_msg);
             }
-          }else{
+          } else {
             console.log(`消息列表异常`);
           }
           break;
@@ -307,7 +304,9 @@ export class Chatlib {
     }
   }
 
-  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null, fileSize: number = 0, fileName: string | null = null): void {
+  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0',
+    withAutoReply: CMessage.api.common.WithAutoReply | null = null, fileSize: number = 0,
+    fileName: string | null = null): void {
     this.replyMsgId = replyMsgId;
     this.consultId = consultId;
     this.withAutoReply = withAutoReply;
@@ -332,7 +331,7 @@ export class Chatlib {
     this.doSend();
   }
 
-  private sendTextMessage(txt: string){
+  private sendTextMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageContent()
     content.data = txt
@@ -353,7 +352,7 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  private sendImageMessage(txt: string){
+  private sendImageMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageImage()
     content.uri = txt
@@ -376,7 +375,7 @@ export class Chatlib {
   }
 
 
-  private sendFileMessage(txt: string){
+  private sendFileMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageFile
     content.uri = txt
@@ -401,7 +400,7 @@ export class Chatlib {
   }
 
 
-  private sendVideoMessage(txt: string){
+  private sendVideoMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageVideo()
     content.uri = txt
@@ -424,7 +423,7 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  resendMSg(cMsg: CMessage.api.common.Message, payloadId: string){
+  resendMSg(cMsg: CMessage.api.common.Message, payloadId: string) {
     this.sendingMessage = cMsg;
     this.doSend(payloadId)
   }
@@ -432,7 +431,8 @@ export class Chatlib {
   /**
    * 重发消息
    */
-  resendMsg(msg: string, payloadId: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null){
+  resendMsg(msg: string, payloadId: string, type: CMessage.api.common.MessageFormat, consultId: number,
+    replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null) {
     switch (type) {
       case CMessage.api.common.MessageFormat.MSG_FILE:
         this.sendFileMessage(msg);
@@ -453,13 +453,13 @@ export class Chatlib {
   /*
   CMessage.api.common.MessageOperate
    */
-  private doSend(myPayloadID: string = '0'){
+  private doSend(myPayloadID: string = '0') {
 
-    if (this.sendingMessage == null){
+    if (this.sendingMessage == null) {
       return
     }
 
-    if (this.withAutoReply != null){
+    if (this.withAutoReply != null) {
       this.sendingMessage.with_auto_replies.push(this.withAutoReply)
     }
 
@@ -475,15 +475,15 @@ export class Chatlib {
     payLoad.act = GAction.gateway.Action.ActionCSSendMsg
 
     //payload_id != 0的时候，可能是重发，重发不需要+1
-    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == '0'){
+    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == '0') {
       const tempId = BigInt(this.payloadId) + 1n
       this.payloadId = tempId.toString()
       this.msgList.set(this.payloadId, this.sendingMessage);
     }
 
-    if (myPayloadID != '0'){
+    if (myPayloadID != '0') {
       payLoad.id = myPayloadID
-    }else{
+    } else {
       payLoad.id = this.payloadId
     }
     let binaryData = payLoad.serializeBinary()
@@ -509,7 +509,7 @@ export class Chatlib {
     this.listener?.systemMsg(resp)
   }
 
-  doDisConnect(): void{
+  doDisConnect(): void {
     this.stopHeartbeatTimer();
     this.ws.close()
   }
@@ -537,8 +537,10 @@ export class Chatlib {
   /**
    *  心跳，一般建议每隔60秒调用
    */
-  private sendHeartBeat(): void{
-    if (!this.isConnected) return;
+  private sendHeartBeat(): void {
+    if (!this.isConnected) {
+      return;
+    }
     const buffer = new Uint8Array([0]);
     if (this.ws) {
       this.ws.send(buffer.buffer);
@@ -572,8 +574,8 @@ export class Chatlib {
     }));
   }
 
-  unRegisterNetwork(){
-    this.netCon.unregister((error) =>{
+  unRegisterNetwork() {
+    this.netCon.unregister((error) => {
 
     })
   }
