@@ -28,7 +28,6 @@ export class Resp<T> {
 }
 
 
-
 export interface TeneasySDKDelegate {
   // Received message
   receivedMsg(msg: CMessage.api.common.Message): void;
@@ -40,7 +39,7 @@ export interface TeneasySDKDelegate {
    * @param msgId - If 0, it means the server didn't generate a message ID, meaning sending failed
    * @param errMsg - Error message
    */
-  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: number, msgId: number, errMsg: string): void;
+  msgReceipt(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string, errMsg: string): void;
 
   /**
    * Message deletion receipt
@@ -48,7 +47,7 @@ export interface TeneasySDKDelegate {
    * @param payloadId
    * @param msgId
    */
-  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: number): void;
+  msgDeleted(msg: CMessage.api.common.Message | null, payloadId: string, msgId: string): void;
 
   /**
    * System message for displaying a tip
@@ -71,7 +70,6 @@ export class Chatlib {
   private TAG: string = "ChatLib ";
   private baseUrl: string = "";
   public isConnected: boolean = false;
-
   // The current message entity sent
   public sendingMessage: CMessage.api.common.Message | null = null;
   private chatId: number = 0;
@@ -82,10 +80,9 @@ export class Chatlib {
   //private socket: WebSocketClient | null = null;
   private ws = webSocket.createWebSocket()
   public listener: TeneasySDKDelegate | null = null;
-  public payloadId: number = 0;
-  private msgList: Map<number, CMessage.api.common.Message> = new Map();
-
-  public replyMsgId: number = 0;
+  public payloadId: string = '0';
+  private msgList: Map<string, CMessage.api.common.Message> = new Map();
+  public replyMsgId: string = '0';
   public consultId: number = 0;
   //private heartTimer: any | null = null; // You can replace with a suitable Timer in ArkTS
   private sessionTime: number = 0;
@@ -94,6 +91,8 @@ export class Chatlib {
   private withAutoReply: CMessage.api.common.WithAutoReply | null = null;
   private heartbeatTimer: number | null = null; // Timer ID
   netCon: connection.NetConnection = connection.createNetConnection();
+  private fileSize: number = 0;
+  private fileName: string | null = null;
 
   constructor(cert: string, token: string, baseUrl: string = "", userId: number, sign: string, chatID: number = 0) {
     this.chatId = chatID;
@@ -118,7 +117,8 @@ export class Chatlib {
   public connectWebSocket(): void {
     //let defaultIpAddress = "wss://csapi.hfxg.xyz/v1/gateway/h5?cert=COYBEAUYASDyASiG2piD9zE.te46qua5ha2r-Caz03Vx2JXH5OLSRRV2GqdYcn9UslwibsxBSP98GhUKSGEI0Z84FRMkp16ZK8eS-y72QVE2AQ&token=&userid=666333&ty=104&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
     //CLIENT_TYPE_USER_APP_HARMONYOS = 113; // app端HARMONYOS
-    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +"&ty=113&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
+    let defaultIpAddress = this.baseUrl + "?cert=" + this.cert + "&token=" + this.token + "&userid=" + this.userId +
+      "&ty=113&dt=1714976421667&sign=9zgd9YUc&rd=1672306";
     //let defaultIpAddress = "wss://echo.websocket.org"
 
     // Handle the open connection event
@@ -170,9 +170,9 @@ export class Chatlib {
       console.error("WebSocket error: " + JSON.stringify(err));
     });
 
-    const  traceId = "79d3ea32-d236-4a0a-af01-8353e35311d8";
+    const traceId = "79d3ea32-d236-4a0a-af01-8353e35311d8";
     // Connect to the WebSocket server
-    this.ws.connect(defaultIpAddress,  {
+    this.ws.connect(defaultIpAddress, {
       header: {
         'x-trace-id': traceId
       }
@@ -224,7 +224,7 @@ export class Chatlib {
         case GAction.gateway.Action.ActionSCRecvMsg:
           const recvMsg = GGateway.gateway.SCRecvMessage.deserializeBinary(msgData);
           if (recvMsg.msg.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
-            this.listener?.msgDeleted(recvMsg.msg, recvPayload.id);
+            this.listener?.msgDeleted(recvMsg.msg, recvPayload.id, '-1');
             console.log(`收到撤回消息`);
           } else {
             console.log(`收到消息`);
@@ -258,7 +258,7 @@ export class Chatlib {
           msg.msg_id = deleteMsgAck.msg_id;
           msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
           console.log(`Delete acknowledgment received: message ID: ${msg.msg_id}`);
-          this.listener?.msgDeleted(msg, recvPayload.id);
+          this.listener?.msgDeleted(msg, recvPayload.id, '-1');
           break;
 
         case GAction.gateway.Action.ActionSCDeleteMsg:
@@ -267,7 +267,7 @@ export class Chatlib {
           msgDel.msg_id = deleteMsg.msg.msg_id
           msgDel.msg_op = CMessage.api.common.MessageOperate.MSG_OP_DELETE
 
-          this.listener?.msgDeleted(msgDel, recvPayload.id);
+          this.listener?.msgDeleted(msgDel, recvPayload.id, '-1');
           console.log(`Message deleted by the other party: payload ID ${recvPayload.id}`);
           break;
 
@@ -280,12 +280,12 @@ export class Chatlib {
 
           if (cMsg != null) {
             if (this.sendingMessage?.msg_op === CMessage.api.common.MessageOperate.MSG_OP_DELETE) {
-              this.listener?.msgDeleted(cMsg, recvPayload.id);
+              this.listener?.msgDeleted(cMsg, recvPayload.id, '-1');
               console.log("Message deleted successfully");
             } else {
               this.listener?.msgReceipt(cMsg, recvPayload.id, sendMsgAck.msg_id, sendMsgAck.err_msg);
             }
-          }else{
+          } else {
             console.log(`消息列表异常`);
           }
           break;
@@ -304,15 +304,19 @@ export class Chatlib {
     }
   }
 
-  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: number = 0, withAutoReply: CMessage.api.common.WithAutoReply | null = null): void {
+  public sendMessage(msg: string, type: CMessage.api.common.MessageFormat, consultId: number, replyMsgId: string = '0',
+    withAutoReply: CMessage.api.common.WithAutoReply | null = null, fileSize: number = 0,
+    fileName: string | null = null): void {
     this.replyMsgId = replyMsgId;
     this.consultId = consultId;
     this.withAutoReply = withAutoReply;
+    this.fileSize = fileSize;
+    this.fileName = fileName;
     // Message sending encapsulation, four layers
     // payload -> CSSendMessage -> common message -> CommonMessageContent
     switch (type) {
-      case CMessage.api.common.MessageFormat.MSG_TEXT:
-        this.sendTextMessage(msg);
+      case CMessage.api.common.MessageFormat.MSG_FILE:
+        this.sendFileMessage(msg);
         break;
       case CMessage.api.common.MessageFormat.MSG_IMG:
         this.sendImageMessage(msg);
@@ -327,7 +331,7 @@ export class Chatlib {
     this.doSend();
   }
 
-  private sendTextMessage(txt: string){
+  private sendTextMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageContent()
     content.data = txt
@@ -348,7 +352,7 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  private sendImageMessage(txt: string){
+  private sendImageMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageImage()
     content.uri = txt
@@ -370,7 +374,33 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
-  private sendVideoMessage(txt: string){
+
+  private sendFileMessage(txt: string) {
+    // 第一层
+    let content = new CMessage.api.common.MessageFile
+    content.uri = txt
+    content.file_name = this.fileName ?? "";
+    content.size = this.fileSize;
+
+    // 第二层, 消息主题
+    let msg = new CMessage.api.common.Message()
+    msg.consult_id = this.consultId
+    msg.file = content
+    msg.sender = 0
+    msg.msg_op = CMessage.api.common.MessageOperate.MSG_OP_POST
+    //msg.payload = GPayload.gateway.Payload.Com
+    msg.reply_msg_id = this.replyMsgId
+    msg.chat_id = this.chatId
+    msg.worker = 0
+
+    msg.msg_time = Utils.msgTime();
+
+    // 临时放到一个变量
+    this.sendingMessage = msg
+  }
+
+
+  private sendVideoMessage(txt: string) {
     // 第一层
     let content = new CMessage.api.common.MessageVideo()
     content.uri = txt
@@ -393,26 +423,43 @@ export class Chatlib {
     this.sendingMessage = msg
   }
 
+  resendMSg(cMsg: CMessage.api.common.Message, payloadId: string) {
+    this.sendingMessage = cMsg;
+    this.doSend(payloadId)
+  }
+
   /**
    * 重发消息
-   * @param cMsg: Message
-   * @param payloadId: Long
    */
-  resendMSg(cMsg: CMessage.api.common.Message, payloadId: number){
-    this.sendingMessage = cMsg;
+  resendMsg(msg: string, payloadId: string, type: CMessage.api.common.MessageFormat, consultId: number,
+    replyMsgId: string = '0', withAutoReply: CMessage.api.common.WithAutoReply | null = null) {
+    switch (type) {
+      case CMessage.api.common.MessageFormat.MSG_FILE:
+        this.sendFileMessage(msg);
+        break;
+      case CMessage.api.common.MessageFormat.MSG_IMG:
+        this.sendImageMessage(msg);
+        break;
+      case CMessage.api.common.MessageFormat.MSG_VIDEO:
+        this.sendVideoMessage(msg);
+        break;
+      default:
+        this.sendTextMessage(msg);
+        break;
+    }
     this.doSend(payloadId)
   }
 
   /*
   CMessage.api.common.MessageOperate
    */
-  private doSend(myPayloadID: number = 0){
+  private doSend(myPayloadID: string = '0') {
 
-    if (this.sendingMessage == null){
+    if (this.sendingMessage == null) {
       return
     }
 
-    if (this.withAutoReply != null){
+    if (this.withAutoReply != null) {
       this.sendingMessage.with_auto_replies.push(this.withAutoReply)
     }
 
@@ -428,15 +475,15 @@ export class Chatlib {
     payLoad.act = GAction.gateway.Action.ActionCSSendMsg
 
     //payload_id != 0的时候，可能是重发，重发不需要+1
-    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == 0){
-      const tempId = this.payloadId + 1
-      this.payloadId = tempId
+    if (this.sendingMessage.msg_op == CMessage.api.common.MessageOperate.MSG_OP_POST && myPayloadID == '0') {
+      const tempId = BigInt(this.payloadId) + 1n
+      this.payloadId = tempId.toString()
       this.msgList.set(this.payloadId, this.sendingMessage);
     }
 
-    if (myPayloadID != 0){
+    if (myPayloadID != '0') {
       payLoad.id = myPayloadID
-    }else{
+    } else {
       payLoad.id = this.payloadId
     }
     let binaryData = payLoad.serializeBinary()
@@ -462,7 +509,7 @@ export class Chatlib {
     this.listener?.systemMsg(resp)
   }
 
-  doDisConnect(): void{
+  doDisConnect(): void {
     this.stopHeartbeatTimer();
     this.ws.close()
   }
@@ -490,8 +537,10 @@ export class Chatlib {
   /**
    *  心跳，一般建议每隔60秒调用
    */
-  private sendHeartBeat(): void{
-    if (!this.isConnected) return;
+  private sendHeartBeat(): void {
+    if (!this.isConnected) {
+      return;
+    }
     const buffer = new Uint8Array([0]);
     if (this.ws) {
       this.ws.send(buffer.buffer);
@@ -525,8 +574,8 @@ export class Chatlib {
     }));
   }
 
-  unRegisterNetwork(){
-    this.netCon.unregister((error) =>{
+  unRegisterNetwork() {
+    this.netCon.unregister((error) => {
 
     })
   }
