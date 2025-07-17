@@ -10,7 +10,7 @@ export namespace gateway {
     export class Payload extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            id?: string;
+            id?: number;
             act?: dependency_2.gateway.Action;
             data?: Uint8Array;
         }) {
@@ -29,9 +29,9 @@ export namespace gateway {
             }
         }
         get id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set id(value: string) {
+        set id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         get act() {
@@ -47,7 +47,7 @@ export namespace gateway {
             pb_1.Message.setField(this, 3, value);
         }
         static fromObject(data: {
-            id?: string;
+            id?: number;
             act?: dependency_2.gateway.Action;
             data?: Uint8Array;
         }): Payload {
@@ -65,7 +65,7 @@ export namespace gateway {
         }
         toObject() {
             const data: {
-                id?: string;
+                id?: number;
                 act?: dependency_2.gateway.Action;
                 data?: Uint8Array;
             } = {};
@@ -84,8 +84,8 @@ export namespace gateway {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.id != "0")
-                writer.writeUint64String(1, this.id);
+            if (this.id != 0)
+                writer.writeUint64(1, this.id);
             if (this.act != dependency_2.gateway.Action.ActionForward)
                 writer.writeEnum(2, this.act);
             if (this.data.length)
@@ -100,7 +100,7 @@ export namespace gateway {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.id = reader.readUint64String();
+                        message.id = reader.readUint64();
                         break;
                     case 2:
                         message.act = reader.readEnum();

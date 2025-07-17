@@ -527,6 +527,7 @@ export namespace api.common {
             reset_at?: dependency_2.google.protobuf.Timestamp;
             visible?: boolean;
             is_worker_reply?: boolean;
+            first_unread_msg?: dependency_4.api.common.Message;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -563,6 +564,9 @@ export namespace api.common {
                 }
                 if ("is_worker_reply" in data && data.is_worker_reply != undefined) {
                     this.is_worker_reply = data.is_worker_reply;
+                }
+                if ("first_unread_msg" in data && data.first_unread_msg != undefined) {
+                    this.first_unread_msg = data.first_unread_msg;
                 }
             }
         }
@@ -650,6 +654,15 @@ export namespace api.common {
         set is_worker_reply(value: boolean) {
             pb_1.Message.setField(this, 11, value);
         }
+        get first_unread_msg() {
+            return pb_1.Message.getWrapperField(this, dependency_4.api.common.Message, 12) as dependency_4.api.common.Message;
+        }
+        set first_unread_msg(value: dependency_4.api.common.Message) {
+            pb_1.Message.setWrapperField(this, 12, value);
+        }
+        get has_first_unread_msg() {
+            return pb_1.Message.getField(this, 12) != null;
+        }
         static fromObject(data: {
             chat_id?: number;
             state?: dependency_4.api.common.ChatState;
@@ -662,6 +675,7 @@ export namespace api.common {
             reset_at?: ReturnType<typeof dependency_2.google.protobuf.Timestamp.prototype.toObject>;
             visible?: boolean;
             is_worker_reply?: boolean;
+            first_unread_msg?: ReturnType<typeof dependency_4.api.common.Message.prototype.toObject>;
         }): ChatItem {
             const message = new ChatItem({});
             if (data.chat_id != null) {
@@ -697,6 +711,9 @@ export namespace api.common {
             if (data.is_worker_reply != null) {
                 message.is_worker_reply = data.is_worker_reply;
             }
+            if (data.first_unread_msg != null) {
+                message.first_unread_msg = dependency_4.api.common.Message.fromObject(data.first_unread_msg);
+            }
             return message;
         }
         toObject() {
@@ -712,6 +729,7 @@ export namespace api.common {
                 reset_at?: ReturnType<typeof dependency_2.google.protobuf.Timestamp.prototype.toObject>;
                 visible?: boolean;
                 is_worker_reply?: boolean;
+                first_unread_msg?: ReturnType<typeof dependency_4.api.common.Message.prototype.toObject>;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -746,6 +764,9 @@ export namespace api.common {
             if (this.is_worker_reply != null) {
                 data.is_worker_reply = this.is_worker_reply;
             }
+            if (this.first_unread_msg != null) {
+                data.first_unread_msg = this.first_unread_msg.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -774,6 +795,8 @@ export namespace api.common {
                 writer.writeBool(9, this.visible);
             if (this.is_worker_reply != false)
                 writer.writeBool(11, this.is_worker_reply);
+            if (this.has_first_unread_msg)
+                writer.writeMessage(12, this.first_unread_msg, () => this.first_unread_msg.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -815,6 +838,9 @@ export namespace api.common {
                         break;
                     case 11:
                         message.is_worker_reply = reader.readBool();
+                        break;
+                    case 12:
+                        reader.readMessage(message.first_unread_msg, () => message.first_unread_msg = dependency_4.api.common.Message.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }

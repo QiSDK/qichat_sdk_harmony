@@ -113,6 +113,1220 @@ export namespace api.core {
             return PageParam.deserialize(bytes);
         }
     }
+    export class AddVersionPublishReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            package_name?: string;
+            version?: string;
+            type?: dependency_7.api.common.ClientType;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            version_type?: dependency_7.api.common.VersionType;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("package_name" in data && data.package_name != undefined) {
+                    this.package_name = data.package_name;
+                }
+                if ("version" in data && data.version != undefined) {
+                    this.version = data.version;
+                }
+                if ("type" in data && data.type != undefined) {
+                    this.type = data.type;
+                }
+                if ("cn_desc" in data && data.cn_desc != undefined) {
+                    this.cn_desc = data.cn_desc;
+                }
+                if ("en_desc" in data && data.en_desc != undefined) {
+                    this.en_desc = data.en_desc;
+                }
+                if ("code" in data && data.code != undefined) {
+                    this.code = data.code;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("version_type" in data && data.version_type != undefined) {
+                    this.version_type = data.version_type;
+                }
+            }
+        }
+        get package_name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set package_name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get version() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set version(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get type() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN) as dependency_7.api.common.ClientType;
+        }
+        set type(value: dependency_7.api.common.ClientType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get cn_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set cn_desc(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get en_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set en_desc(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get code() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set code(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get version_type() {
+            return pb_1.Message.getFieldWithDefault(this, 8, dependency_7.api.common.VersionType.Pre) as dependency_7.api.common.VersionType;
+        }
+        set version_type(value: dependency_7.api.common.VersionType) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        static fromObject(data: {
+            package_name?: string;
+            version?: string;
+            type?: dependency_7.api.common.ClientType;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            version_type?: dependency_7.api.common.VersionType;
+        }): AddVersionPublishReq {
+            const message = new AddVersionPublishReq({});
+            if (data.package_name != null) {
+                message.package_name = data.package_name;
+            }
+            if (data.version != null) {
+                message.version = data.version;
+            }
+            if (data.type != null) {
+                message.type = data.type;
+            }
+            if (data.cn_desc != null) {
+                message.cn_desc = data.cn_desc;
+            }
+            if (data.en_desc != null) {
+                message.en_desc = data.en_desc;
+            }
+            if (data.code != null) {
+                message.code = data.code;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.version_type != null) {
+                message.version_type = data.version_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                package_name?: string;
+                version?: string;
+                type?: dependency_7.api.common.ClientType;
+                cn_desc?: string;
+                en_desc?: string;
+                code?: string;
+                url?: string;
+                version_type?: dependency_7.api.common.VersionType;
+            } = {};
+            if (this.package_name != null) {
+                data.package_name = this.package_name;
+            }
+            if (this.version != null) {
+                data.version = this.version;
+            }
+            if (this.type != null) {
+                data.type = this.type;
+            }
+            if (this.cn_desc != null) {
+                data.cn_desc = this.cn_desc;
+            }
+            if (this.en_desc != null) {
+                data.en_desc = this.en_desc;
+            }
+            if (this.code != null) {
+                data.code = this.code;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.version_type != null) {
+                data.version_type = this.version_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.package_name.length)
+                writer.writeString(1, this.package_name);
+            if (this.version.length)
+                writer.writeString(2, this.version);
+            if (this.type != dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN)
+                writer.writeEnum(3, this.type);
+            if (this.cn_desc.length)
+                writer.writeString(4, this.cn_desc);
+            if (this.en_desc.length)
+                writer.writeString(5, this.en_desc);
+            if (this.code.length)
+                writer.writeString(6, this.code);
+            if (this.url.length)
+                writer.writeString(7, this.url);
+            if (this.version_type != dependency_7.api.common.VersionType.Pre)
+                writer.writeEnum(8, this.version_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddVersionPublishReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddVersionPublishReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.package_name = reader.readString();
+                        break;
+                    case 2:
+                        message.version = reader.readString();
+                        break;
+                    case 3:
+                        message.type = reader.readEnum();
+                        break;
+                    case 4:
+                        message.cn_desc = reader.readString();
+                        break;
+                    case 5:
+                        message.en_desc = reader.readString();
+                        break;
+                    case 6:
+                        message.code = reader.readString();
+                        break;
+                    case 7:
+                        message.url = reader.readString();
+                        break;
+                    case 8:
+                        message.version_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): AddVersionPublishReq {
+            return AddVersionPublishReq.deserialize(bytes);
+        }
+    }
+    export class EditVersionPublishReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            package_name?: string;
+            version?: string;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            type?: dependency_7.api.common.ClientType;
+            version_type?: dependency_7.api.common.VersionType;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("package_name" in data && data.package_name != undefined) {
+                    this.package_name = data.package_name;
+                }
+                if ("version" in data && data.version != undefined) {
+                    this.version = data.version;
+                }
+                if ("cn_desc" in data && data.cn_desc != undefined) {
+                    this.cn_desc = data.cn_desc;
+                }
+                if ("en_desc" in data && data.en_desc != undefined) {
+                    this.en_desc = data.en_desc;
+                }
+                if ("code" in data && data.code != undefined) {
+                    this.code = data.code;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("type" in data && data.type != undefined) {
+                    this.type = data.type;
+                }
+                if ("version_type" in data && data.version_type != undefined) {
+                    this.version_type = data.version_type;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get package_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set package_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get version() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set version(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get cn_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set cn_desc(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get en_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set en_desc(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get code() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set code(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get type() {
+            return pb_1.Message.getFieldWithDefault(this, 8, dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN) as dependency_7.api.common.ClientType;
+        }
+        set type(value: dependency_7.api.common.ClientType) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get version_type() {
+            return pb_1.Message.getFieldWithDefault(this, 9, dependency_7.api.common.VersionType.Pre) as dependency_7.api.common.VersionType;
+        }
+        set version_type(value: dependency_7.api.common.VersionType) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            package_name?: string;
+            version?: string;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            type?: dependency_7.api.common.ClientType;
+            version_type?: dependency_7.api.common.VersionType;
+        }): EditVersionPublishReq {
+            const message = new EditVersionPublishReq({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.package_name != null) {
+                message.package_name = data.package_name;
+            }
+            if (data.version != null) {
+                message.version = data.version;
+            }
+            if (data.cn_desc != null) {
+                message.cn_desc = data.cn_desc;
+            }
+            if (data.en_desc != null) {
+                message.en_desc = data.en_desc;
+            }
+            if (data.code != null) {
+                message.code = data.code;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.type != null) {
+                message.type = data.type;
+            }
+            if (data.version_type != null) {
+                message.version_type = data.version_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                package_name?: string;
+                version?: string;
+                cn_desc?: string;
+                en_desc?: string;
+                code?: string;
+                url?: string;
+                type?: dependency_7.api.common.ClientType;
+                version_type?: dependency_7.api.common.VersionType;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.package_name != null) {
+                data.package_name = this.package_name;
+            }
+            if (this.version != null) {
+                data.version = this.version;
+            }
+            if (this.cn_desc != null) {
+                data.cn_desc = this.cn_desc;
+            }
+            if (this.en_desc != null) {
+                data.en_desc = this.en_desc;
+            }
+            if (this.code != null) {
+                data.code = this.code;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.type != null) {
+                data.type = this.type;
+            }
+            if (this.version_type != null) {
+                data.version_type = this.version_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.package_name.length)
+                writer.writeString(2, this.package_name);
+            if (this.version.length)
+                writer.writeString(3, this.version);
+            if (this.cn_desc.length)
+                writer.writeString(4, this.cn_desc);
+            if (this.en_desc.length)
+                writer.writeString(5, this.en_desc);
+            if (this.code.length)
+                writer.writeString(6, this.code);
+            if (this.url.length)
+                writer.writeString(7, this.url);
+            if (this.type != dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN)
+                writer.writeEnum(8, this.type);
+            if (this.version_type != dependency_7.api.common.VersionType.Pre)
+                writer.writeEnum(9, this.version_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): EditVersionPublishReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new EditVersionPublishReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.package_name = reader.readString();
+                        break;
+                    case 3:
+                        message.version = reader.readString();
+                        break;
+                    case 4:
+                        message.cn_desc = reader.readString();
+                        break;
+                    case 5:
+                        message.en_desc = reader.readString();
+                        break;
+                    case 6:
+                        message.code = reader.readString();
+                        break;
+                    case 7:
+                        message.url = reader.readString();
+                        break;
+                    case 8:
+                        message.type = reader.readEnum();
+                        break;
+                    case 9:
+                        message.version_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): EditVersionPublishReq {
+            return EditVersionPublishReq.deserialize(bytes);
+        }
+    }
+    export class VersionPublishEntity extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            package_name?: string;
+            version?: string;
+            type?: dependency_7.api.common.ClientType;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            id?: number;
+            updated_by?: string;
+            state?: boolean;
+            created_at?: dependency_3.google.protobuf.Timestamp;
+            updated_at?: dependency_3.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("package_name" in data && data.package_name != undefined) {
+                    this.package_name = data.package_name;
+                }
+                if ("version" in data && data.version != undefined) {
+                    this.version = data.version;
+                }
+                if ("type" in data && data.type != undefined) {
+                    this.type = data.type;
+                }
+                if ("cn_desc" in data && data.cn_desc != undefined) {
+                    this.cn_desc = data.cn_desc;
+                }
+                if ("en_desc" in data && data.en_desc != undefined) {
+                    this.en_desc = data.en_desc;
+                }
+                if ("code" in data && data.code != undefined) {
+                    this.code = data.code;
+                }
+                if ("url" in data && data.url != undefined) {
+                    this.url = data.url;
+                }
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("updated_by" in data && data.updated_by != undefined) {
+                    this.updated_by = data.updated_by;
+                }
+                if ("state" in data && data.state != undefined) {
+                    this.state = data.state;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+                if ("updated_at" in data && data.updated_at != undefined) {
+                    this.updated_at = data.updated_at;
+                }
+            }
+        }
+        get package_name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set package_name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get version() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set version(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get type() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN) as dependency_7.api.common.ClientType;
+        }
+        set type(value: dependency_7.api.common.ClientType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get cn_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set cn_desc(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get en_desc() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set en_desc(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get code() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set code(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get url() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set url(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get updated_by() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set updated_by(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get state() {
+            return pb_1.Message.getFieldWithDefault(this, 10, false) as boolean;
+        }
+        set state(value: boolean) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get created_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 11) as dependency_3.google.protobuf.Timestamp;
+        }
+        set created_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 11, value);
+        }
+        get has_created_at() {
+            return pb_1.Message.getField(this, 11) != null;
+        }
+        get updated_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 12) as dependency_3.google.protobuf.Timestamp;
+        }
+        set updated_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 12, value);
+        }
+        get has_updated_at() {
+            return pb_1.Message.getField(this, 12) != null;
+        }
+        static fromObject(data: {
+            package_name?: string;
+            version?: string;
+            type?: dependency_7.api.common.ClientType;
+            cn_desc?: string;
+            en_desc?: string;
+            code?: string;
+            url?: string;
+            id?: number;
+            updated_by?: string;
+            state?: boolean;
+            created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            updated_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+        }): VersionPublishEntity {
+            const message = new VersionPublishEntity({});
+            if (data.package_name != null) {
+                message.package_name = data.package_name;
+            }
+            if (data.version != null) {
+                message.version = data.version;
+            }
+            if (data.type != null) {
+                message.type = data.type;
+            }
+            if (data.cn_desc != null) {
+                message.cn_desc = data.cn_desc;
+            }
+            if (data.en_desc != null) {
+                message.en_desc = data.en_desc;
+            }
+            if (data.code != null) {
+                message.code = data.code;
+            }
+            if (data.url != null) {
+                message.url = data.url;
+            }
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.updated_by != null) {
+                message.updated_by = data.updated_by;
+            }
+            if (data.state != null) {
+                message.state = data.state;
+            }
+            if (data.created_at != null) {
+                message.created_at = dependency_3.google.protobuf.Timestamp.fromObject(data.created_at);
+            }
+            if (data.updated_at != null) {
+                message.updated_at = dependency_3.google.protobuf.Timestamp.fromObject(data.updated_at);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                package_name?: string;
+                version?: string;
+                type?: dependency_7.api.common.ClientType;
+                cn_desc?: string;
+                en_desc?: string;
+                code?: string;
+                url?: string;
+                id?: number;
+                updated_by?: string;
+                state?: boolean;
+                created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                updated_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.package_name != null) {
+                data.package_name = this.package_name;
+            }
+            if (this.version != null) {
+                data.version = this.version;
+            }
+            if (this.type != null) {
+                data.type = this.type;
+            }
+            if (this.cn_desc != null) {
+                data.cn_desc = this.cn_desc;
+            }
+            if (this.en_desc != null) {
+                data.en_desc = this.en_desc;
+            }
+            if (this.code != null) {
+                data.code = this.code;
+            }
+            if (this.url != null) {
+                data.url = this.url;
+            }
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.updated_by != null) {
+                data.updated_by = this.updated_by;
+            }
+            if (this.state != null) {
+                data.state = this.state;
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at.toObject();
+            }
+            if (this.updated_at != null) {
+                data.updated_at = this.updated_at.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.package_name.length)
+                writer.writeString(1, this.package_name);
+            if (this.version.length)
+                writer.writeString(2, this.version);
+            if (this.type != dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN)
+                writer.writeEnum(3, this.type);
+            if (this.cn_desc.length)
+                writer.writeString(4, this.cn_desc);
+            if (this.en_desc.length)
+                writer.writeString(5, this.en_desc);
+            if (this.code.length)
+                writer.writeString(6, this.code);
+            if (this.url.length)
+                writer.writeString(7, this.url);
+            if (this.id != 0)
+                writer.writeInt32(8, this.id);
+            if (this.updated_by.length)
+                writer.writeString(9, this.updated_by);
+            if (this.state != false)
+                writer.writeBool(10, this.state);
+            if (this.has_created_at)
+                writer.writeMessage(11, this.created_at, () => this.created_at.serialize(writer));
+            if (this.has_updated_at)
+                writer.writeMessage(12, this.updated_at, () => this.updated_at.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): VersionPublishEntity {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new VersionPublishEntity();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.package_name = reader.readString();
+                        break;
+                    case 2:
+                        message.version = reader.readString();
+                        break;
+                    case 3:
+                        message.type = reader.readEnum();
+                        break;
+                    case 4:
+                        message.cn_desc = reader.readString();
+                        break;
+                    case 5:
+                        message.en_desc = reader.readString();
+                        break;
+                    case 6:
+                        message.code = reader.readString();
+                        break;
+                    case 7:
+                        message.url = reader.readString();
+                        break;
+                    case 8:
+                        message.id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.updated_by = reader.readString();
+                        break;
+                    case 10:
+                        message.state = reader.readBool();
+                        break;
+                    case 11:
+                        reader.readMessage(message.created_at, () => message.created_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 12:
+                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): VersionPublishEntity {
+            return VersionPublishEntity.deserialize(bytes);
+        }
+    }
+    export class VersionPublishListReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            version_type?: dependency_7.api.common.VersionType;
+            page?: dependency_6.api.common.Page;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("version_type" in data && data.version_type != undefined) {
+                    this.version_type = data.version_type;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+            }
+        }
+        get version_type() {
+            return pb_1.Message.getFieldWithDefault(this, 1, dependency_7.api.common.VersionType.Pre) as dependency_7.api.common.VersionType;
+        }
+        set version_type(value: dependency_7.api.common.VersionType) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get page() {
+            return pb_1.Message.getWrapperField(this, dependency_6.api.common.Page, 2) as dependency_6.api.common.Page;
+        }
+        set page(value: dependency_6.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_page() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            version_type?: dependency_7.api.common.VersionType;
+            page?: ReturnType<typeof dependency_6.api.common.Page.prototype.toObject>;
+        }): VersionPublishListReq {
+            const message = new VersionPublishListReq({});
+            if (data.version_type != null) {
+                message.version_type = data.version_type;
+            }
+            if (data.page != null) {
+                message.page = dependency_6.api.common.Page.fromObject(data.page);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                version_type?: dependency_7.api.common.VersionType;
+                page?: ReturnType<typeof dependency_6.api.common.Page.prototype.toObject>;
+            } = {};
+            if (this.version_type != null) {
+                data.version_type = this.version_type;
+            }
+            if (this.page != null) {
+                data.page = this.page.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.version_type != dependency_7.api.common.VersionType.Pre)
+                writer.writeEnum(1, this.version_type);
+            if (this.has_page)
+                writer.writeMessage(2, this.page, () => this.page.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): VersionPublishListReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new VersionPublishListReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.version_type = reader.readEnum();
+                        break;
+                    case 2:
+                        reader.readMessage(message.page, () => message.page = dependency_6.api.common.Page.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): VersionPublishListReq {
+            return VersionPublishListReq.deserialize(bytes);
+        }
+    }
+    export class VersionPublishListResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            list?: VersionPublishEntity[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, VersionPublishEntity, 1) as VersionPublishEntity[];
+        }
+        set list(value: VersionPublishEntity[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            list?: ReturnType<typeof VersionPublishEntity.prototype.toObject>[];
+            total?: number;
+        }): VersionPublishListResp {
+            const message = new VersionPublishListResp({});
+            if (data.list != null) {
+                message.list = data.list.map(item => VersionPublishEntity.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                list?: ReturnType<typeof VersionPublishEntity.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.list != null) {
+                data.list = this.list.map((item: VersionPublishEntity) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.list.length)
+                writer.writeRepeatedMessage(1, this.list, (item: VersionPublishEntity) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): VersionPublishListResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new VersionPublishListResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 1, VersionPublishEntity.deserialize(reader), VersionPublishEntity));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): VersionPublishListResp {
+            return VersionPublishListResp.deserialize(bytes);
+        }
+    }
+    export class VersionPublishReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            type?: dependency_7.api.common.ClientType;
+            version_type?: dependency_7.api.common.VersionType;
+            version?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("type" in data && data.type != undefined) {
+                    this.type = data.type;
+                }
+                if ("version_type" in data && data.version_type != undefined) {
+                    this.version_type = data.version_type;
+                }
+                if ("version" in data && data.version != undefined) {
+                    this.version = data.version;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get type() {
+            return pb_1.Message.getFieldWithDefault(this, 2, dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN) as dependency_7.api.common.ClientType;
+        }
+        set type(value: dependency_7.api.common.ClientType) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get version_type() {
+            return pb_1.Message.getFieldWithDefault(this, 3, dependency_7.api.common.VersionType.Pre) as dependency_7.api.common.VersionType;
+        }
+        set version_type(value: dependency_7.api.common.VersionType) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get version() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set version(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            id?: number;
+            type?: dependency_7.api.common.ClientType;
+            version_type?: dependency_7.api.common.VersionType;
+            version?: string;
+        }): VersionPublishReq {
+            const message = new VersionPublishReq({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.type != null) {
+                message.type = data.type;
+            }
+            if (data.version_type != null) {
+                message.version_type = data.version_type;
+            }
+            if (data.version != null) {
+                message.version = data.version;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                type?: dependency_7.api.common.ClientType;
+                version_type?: dependency_7.api.common.VersionType;
+                version?: string;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.type != null) {
+                data.type = this.type;
+            }
+            if (this.version_type != null) {
+                data.version_type = this.version_type;
+            }
+            if (this.version != null) {
+                data.version = this.version;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt32(1, this.id);
+            if (this.type != dependency_7.api.common.ClientType.CLIENT_TYPE_UNKNOWN)
+                writer.writeEnum(2, this.type);
+            if (this.version_type != dependency_7.api.common.VersionType.Pre)
+                writer.writeEnum(3, this.version_type);
+            if (this.version.length)
+                writer.writeString(4, this.version);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): VersionPublishReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new VersionPublishReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.type = reader.readEnum();
+                        break;
+                    case 3:
+                        message.version_type = reader.readEnum();
+                        break;
+                    case 4:
+                        message.version = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): VersionPublishReq {
+            return VersionPublishReq.deserialize(bytes);
+        }
+    }
+    export class SetFileExtractCodeReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            code?: string;
+            version_type?: dependency_7.api.common.VersionType;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("code" in data && data.code != undefined) {
+                    this.code = data.code;
+                }
+                if ("version_type" in data && data.version_type != undefined) {
+                    this.version_type = data.version_type;
+                }
+            }
+        }
+        get code() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set code(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get version_type() {
+            return pb_1.Message.getFieldWithDefault(this, 2, dependency_7.api.common.VersionType.Pre) as dependency_7.api.common.VersionType;
+        }
+        set version_type(value: dependency_7.api.common.VersionType) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            code?: string;
+            version_type?: dependency_7.api.common.VersionType;
+        }): SetFileExtractCodeReq {
+            const message = new SetFileExtractCodeReq({});
+            if (data.code != null) {
+                message.code = data.code;
+            }
+            if (data.version_type != null) {
+                message.version_type = data.version_type;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                code?: string;
+                version_type?: dependency_7.api.common.VersionType;
+            } = {};
+            if (this.code != null) {
+                data.code = this.code;
+            }
+            if (this.version_type != null) {
+                data.version_type = this.version_type;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.code.length)
+                writer.writeString(1, this.code);
+            if (this.version_type != dependency_7.api.common.VersionType.Pre)
+                writer.writeEnum(2, this.version_type);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetFileExtractCodeReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetFileExtractCodeReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.code = reader.readString();
+                        break;
+                    case 2:
+                        message.version_type = reader.readEnum();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetFileExtractCodeReq {
+            return SetFileExtractCodeReq.deserialize(bytes);
+        }
+    }
     export class RouteRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -1851,6 +3065,8 @@ export namespace api.core {
             update_at?: dependency_3.google.protobuf.Timestamp;
             h5_domain_cert?: string;
             remark?: string;
+            workers_used?: number;
+            api_callback_url?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1938,6 +3154,12 @@ export namespace api.core {
                 }
                 if ("remark" in data && data.remark != undefined) {
                     this.remark = data.remark;
+                }
+                if ("workers_used" in data && data.workers_used != undefined) {
+                    this.workers_used = data.workers_used;
+                }
+                if ("api_callback_url" in data && data.api_callback_url != undefined) {
+                    this.api_callback_url = data.api_callback_url;
                 }
             }
         }
@@ -2121,6 +3343,18 @@ export namespace api.core {
         set remark(value: string) {
             pb_1.Message.setField(this, 26, value);
         }
+        get workers_used() {
+            return pb_1.Message.getFieldWithDefault(this, 27, 0) as number;
+        }
+        set workers_used(value: number) {
+            pb_1.Message.setField(this, 27, value);
+        }
+        get api_callback_url() {
+            return pb_1.Message.getFieldWithDefault(this, 28, "") as string;
+        }
+        set api_callback_url(value: string) {
+            pb_1.Message.setField(this, 28, value);
+        }
         static fromObject(data: {
             tenant_id?: number;
             tenant_public_key?: string;
@@ -2150,6 +3384,8 @@ export namespace api.core {
             update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
             h5_domain_cert?: string;
             remark?: string;
+            workers_used?: number;
+            api_callback_url?: string;
         }): TenantItem {
             const message = new TenantItem({});
             if (data.tenant_id != null) {
@@ -2236,6 +3472,12 @@ export namespace api.core {
             if (data.remark != null) {
                 message.remark = data.remark;
             }
+            if (data.workers_used != null) {
+                message.workers_used = data.workers_used;
+            }
+            if (data.api_callback_url != null) {
+                message.api_callback_url = data.api_callback_url;
+            }
             return message;
         }
         toObject() {
@@ -2268,6 +3510,8 @@ export namespace api.core {
                 update_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
                 h5_domain_cert?: string;
                 remark?: string;
+                workers_used?: number;
+                api_callback_url?: string;
             } = {};
             if (this.tenant_id != null) {
                 data.tenant_id = this.tenant_id;
@@ -2353,6 +3597,12 @@ export namespace api.core {
             if (this.remark != null) {
                 data.remark = this.remark;
             }
+            if (this.workers_used != null) {
+                data.workers_used = this.workers_used;
+            }
+            if (this.api_callback_url != null) {
+                data.api_callback_url = this.api_callback_url;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -2415,6 +3665,10 @@ export namespace api.core {
                 writer.writeString(25, this.h5_domain_cert);
             if (this.remark.length)
                 writer.writeString(26, this.remark);
+            if (this.workers_used != 0)
+                writer.writeInt32(27, this.workers_used);
+            if (this.api_callback_url.length)
+                writer.writeString(28, this.api_callback_url);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2507,6 +3761,12 @@ export namespace api.core {
                         break;
                     case 26:
                         message.remark = reader.readString();
+                        break;
+                    case 27:
+                        message.workers_used = reader.readInt32();
+                        break;
+                    case 28:
+                        message.api_callback_url = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -3222,6 +4482,122 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): UpdateNimInfoRequest {
             return UpdateNimInfoRequest.deserialize(bytes);
+        }
+    }
+    export class ExportUsersListRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            batch?: dependency_6.api.common.Page;
+            name?: string;
+            clique_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("batch" in data && data.batch != undefined) {
+                    this.batch = data.batch;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("clique_id" in data && data.clique_id != undefined) {
+                    this.clique_id = data.clique_id;
+                }
+            }
+        }
+        get batch() {
+            return pb_1.Message.getWrapperField(this, dependency_6.api.common.Page, 1) as dependency_6.api.common.Page;
+        }
+        set batch(value: dependency_6.api.common.Page) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_batch() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get clique_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set clique_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            batch?: ReturnType<typeof dependency_6.api.common.Page.prototype.toObject>;
+            name?: string;
+            clique_id?: number;
+        }): ExportUsersListRequest {
+            const message = new ExportUsersListRequest({});
+            if (data.batch != null) {
+                message.batch = dependency_6.api.common.Page.fromObject(data.batch);
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.clique_id != null) {
+                message.clique_id = data.clique_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                batch?: ReturnType<typeof dependency_6.api.common.Page.prototype.toObject>;
+                name?: string;
+                clique_id?: number;
+            } = {};
+            if (this.batch != null) {
+                data.batch = this.batch.toObject();
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.clique_id != null) {
+                data.clique_id = this.clique_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_batch)
+                writer.writeMessage(1, this.batch, () => this.batch.serialize(writer));
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (this.clique_id != 0)
+                writer.writeInt32(3, this.clique_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ExportUsersListRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ExportUsersListRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.batch, () => message.batch = dependency_6.api.common.Page.deserialize(reader));
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    case 3:
+                        message.clique_id = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ExportUsersListRequest {
+            return ExportUsersListRequest.deserialize(bytes);
         }
     }
     export class VersionRequest extends pb_1.Message {
@@ -5443,6 +6819,7 @@ export namespace api.core {
             online_total?: number;
             all_total?: number;
             workers_capacity?: number;
+            monitor_all?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
@@ -5464,6 +6841,9 @@ export namespace api.core {
                 }
                 if ("workers_capacity" in data && data.workers_capacity != undefined) {
                     this.workers_capacity = data.workers_capacity;
+                }
+                if ("monitor_all" in data && data.monitor_all != undefined) {
+                    this.monitor_all = data.monitor_all;
                 }
             }
         }
@@ -5506,6 +6886,12 @@ export namespace api.core {
         set workers_capacity(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
+        get monitor_all() {
+            return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
+        }
+        set monitor_all(value: boolean) {
+            pb_1.Message.setField(this, 7, value);
+        }
         static fromObject(data: {
             items?: ReturnType<typeof WorkerWithState.prototype.toObject>[];
             batch?: ReturnType<typeof dependency_6.api.common.Batch.prototype.toObject>;
@@ -5513,6 +6899,7 @@ export namespace api.core {
             online_total?: number;
             all_total?: number;
             workers_capacity?: number;
+            monitor_all?: boolean;
         }): TenantWorkerQueryResponse {
             const message = new TenantWorkerQueryResponse({});
             if (data.items != null) {
@@ -5533,6 +6920,9 @@ export namespace api.core {
             if (data.workers_capacity != null) {
                 message.workers_capacity = data.workers_capacity;
             }
+            if (data.monitor_all != null) {
+                message.monitor_all = data.monitor_all;
+            }
             return message;
         }
         toObject() {
@@ -5543,6 +6933,7 @@ export namespace api.core {
                 online_total?: number;
                 all_total?: number;
                 workers_capacity?: number;
+                monitor_all?: boolean;
             } = {};
             if (this.items != null) {
                 data.items = this.items.map((item: WorkerWithState) => item.toObject());
@@ -5562,6 +6953,9 @@ export namespace api.core {
             if (this.workers_capacity != null) {
                 data.workers_capacity = this.workers_capacity;
             }
+            if (this.monitor_all != null) {
+                data.monitor_all = this.monitor_all;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -5580,6 +6974,8 @@ export namespace api.core {
                 writer.writeInt32(5, this.all_total);
             if (this.workers_capacity != 0)
                 writer.writeInt32(6, this.workers_capacity);
+            if (this.monitor_all != false)
+                writer.writeBool(7, this.monitor_all);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -5607,6 +7003,9 @@ export namespace api.core {
                     case 6:
                         message.workers_capacity = reader.readInt32();
                         break;
+                    case 7:
+                        message.monitor_all = reader.readBool();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -5624,6 +7023,8 @@ export namespace api.core {
         constructor(data?: any[] | {
             worker?: dependency_5.api.common.Worker;
             worker_state?: dependency_5.api.common.WorkerState;
+            last_logout?: string;
+            client_ver?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -5633,6 +7034,12 @@ export namespace api.core {
                 }
                 if ("worker_state" in data && data.worker_state != undefined) {
                     this.worker_state = data.worker_state;
+                }
+                if ("last_logout" in data && data.last_logout != undefined) {
+                    this.last_logout = data.last_logout;
+                }
+                if ("client_ver" in data && data.client_ver != undefined) {
+                    this.client_ver = data.client_ver;
                 }
             }
         }
@@ -5651,9 +7058,23 @@ export namespace api.core {
         set worker_state(value: dependency_5.api.common.WorkerState) {
             pb_1.Message.setField(this, 2, value);
         }
+        get last_logout() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set last_logout(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get client_ver() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set client_ver(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
         static fromObject(data: {
             worker?: ReturnType<typeof dependency_5.api.common.Worker.prototype.toObject>;
             worker_state?: dependency_5.api.common.WorkerState;
+            last_logout?: string;
+            client_ver?: string;
         }): WorkerWithState {
             const message = new WorkerWithState({});
             if (data.worker != null) {
@@ -5662,18 +7083,32 @@ export namespace api.core {
             if (data.worker_state != null) {
                 message.worker_state = data.worker_state;
             }
+            if (data.last_logout != null) {
+                message.last_logout = data.last_logout;
+            }
+            if (data.client_ver != null) {
+                message.client_ver = data.client_ver;
+            }
             return message;
         }
         toObject() {
             const data: {
                 worker?: ReturnType<typeof dependency_5.api.common.Worker.prototype.toObject>;
                 worker_state?: dependency_5.api.common.WorkerState;
+                last_logout?: string;
+                client_ver?: string;
             } = {};
             if (this.worker != null) {
                 data.worker = this.worker.toObject();
             }
             if (this.worker_state != null) {
                 data.worker_state = this.worker_state;
+            }
+            if (this.last_logout != null) {
+                data.last_logout = this.last_logout;
+            }
+            if (this.client_ver != null) {
+                data.client_ver = this.client_ver;
             }
             return data;
         }
@@ -5685,6 +7120,10 @@ export namespace api.core {
                 writer.writeMessage(1, this.worker, () => this.worker.serialize(writer));
             if (this.worker_state != dependency_5.api.common.WorkerState.WORKER_OFFLINE)
                 writer.writeEnum(2, this.worker_state);
+            if (this.last_logout.length)
+                writer.writeString(3, this.last_logout);
+            if (this.client_ver.length)
+                writer.writeString(4, this.client_ver);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -5699,6 +7138,12 @@ export namespace api.core {
                         break;
                     case 2:
                         message.worker_state = reader.readEnum();
+                        break;
+                    case 3:
+                        message.last_logout = reader.readString();
+                        break;
+                    case 4:
+                        message.client_ver = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -10117,6 +11562,10 @@ export namespace api.core {
             replay_user_count?: number;
             leave_work_warn_enabled?: boolean;
             leave_work_count?: number;
+            monitor_all?: boolean;
+            segmented_monitor?: boolean;
+            abnormal_logout_enabled?: boolean;
+            abnormal_logout_time?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -10138,6 +11587,18 @@ export namespace api.core {
                 }
                 if ("leave_work_count" in data && data.leave_work_count != undefined) {
                     this.leave_work_count = data.leave_work_count;
+                }
+                if ("monitor_all" in data && data.monitor_all != undefined) {
+                    this.monitor_all = data.monitor_all;
+                }
+                if ("segmented_monitor" in data && data.segmented_monitor != undefined) {
+                    this.segmented_monitor = data.segmented_monitor;
+                }
+                if ("abnormal_logout_enabled" in data && data.abnormal_logout_enabled != undefined) {
+                    this.abnormal_logout_enabled = data.abnormal_logout_enabled;
+                }
+                if ("abnormal_logout_time" in data && data.abnormal_logout_time != undefined) {
+                    this.abnormal_logout_time = data.abnormal_logout_time;
                 }
             }
         }
@@ -10180,6 +11641,30 @@ export namespace api.core {
         set leave_work_count(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
+        get monitor_all() {
+            return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
+        }
+        set monitor_all(value: boolean) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get segmented_monitor() {
+            return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
+        }
+        set segmented_monitor(value: boolean) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get abnormal_logout_enabled() {
+            return pb_1.Message.getFieldWithDefault(this, 9, false) as boolean;
+        }
+        set abnormal_logout_enabled(value: boolean) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get abnormal_logout_time() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set abnormal_logout_time(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
         static fromObject(data: {
             time_warn_enabled?: boolean;
             time_warn?: ReturnType<typeof TimeWarnSet.prototype.toObject>;
@@ -10187,6 +11672,10 @@ export namespace api.core {
             replay_user_count?: number;
             leave_work_warn_enabled?: boolean;
             leave_work_count?: number;
+            monitor_all?: boolean;
+            segmented_monitor?: boolean;
+            abnormal_logout_enabled?: boolean;
+            abnormal_logout_time?: number;
         }): TenantWarnParams {
             const message = new TenantWarnParams({});
             if (data.time_warn_enabled != null) {
@@ -10207,6 +11696,18 @@ export namespace api.core {
             if (data.leave_work_count != null) {
                 message.leave_work_count = data.leave_work_count;
             }
+            if (data.monitor_all != null) {
+                message.monitor_all = data.monitor_all;
+            }
+            if (data.segmented_monitor != null) {
+                message.segmented_monitor = data.segmented_monitor;
+            }
+            if (data.abnormal_logout_enabled != null) {
+                message.abnormal_logout_enabled = data.abnormal_logout_enabled;
+            }
+            if (data.abnormal_logout_time != null) {
+                message.abnormal_logout_time = data.abnormal_logout_time;
+            }
             return message;
         }
         toObject() {
@@ -10217,6 +11718,10 @@ export namespace api.core {
                 replay_user_count?: number;
                 leave_work_warn_enabled?: boolean;
                 leave_work_count?: number;
+                monitor_all?: boolean;
+                segmented_monitor?: boolean;
+                abnormal_logout_enabled?: boolean;
+                abnormal_logout_time?: number;
             } = {};
             if (this.time_warn_enabled != null) {
                 data.time_warn_enabled = this.time_warn_enabled;
@@ -10236,6 +11741,18 @@ export namespace api.core {
             if (this.leave_work_count != null) {
                 data.leave_work_count = this.leave_work_count;
             }
+            if (this.monitor_all != null) {
+                data.monitor_all = this.monitor_all;
+            }
+            if (this.segmented_monitor != null) {
+                data.segmented_monitor = this.segmented_monitor;
+            }
+            if (this.abnormal_logout_enabled != null) {
+                data.abnormal_logout_enabled = this.abnormal_logout_enabled;
+            }
+            if (this.abnormal_logout_time != null) {
+                data.abnormal_logout_time = this.abnormal_logout_time;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -10254,6 +11771,14 @@ export namespace api.core {
                 writer.writeBool(5, this.leave_work_warn_enabled);
             if (this.leave_work_count != 0)
                 writer.writeInt32(6, this.leave_work_count);
+            if (this.monitor_all != false)
+                writer.writeBool(7, this.monitor_all);
+            if (this.segmented_monitor != false)
+                writer.writeBool(8, this.segmented_monitor);
+            if (this.abnormal_logout_enabled != false)
+                writer.writeBool(9, this.abnormal_logout_enabled);
+            if (this.abnormal_logout_time != 0)
+                writer.writeInt32(10, this.abnormal_logout_time);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -10280,6 +11805,18 @@ export namespace api.core {
                         break;
                     case 6:
                         message.leave_work_count = reader.readInt32();
+                        break;
+                    case 7:
+                        message.monitor_all = reader.readBool();
+                        break;
+                    case 8:
+                        message.segmented_monitor = reader.readBool();
+                        break;
+                    case 9:
+                        message.abnormal_logout_enabled = reader.readBool();
+                        break;
+                    case 10:
+                        message.abnormal_logout_time = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -10413,6 +11950,10 @@ export namespace api.core {
             event_value?: number;
             worker_name?: string;
             worker_account?: string;
+            unprocessed_3min_count?: number;
+            timeout_count?: number;
+            transfer_count?: number;
+            is_busy?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -10428,6 +11969,18 @@ export namespace api.core {
                 }
                 if ("worker_account" in data && data.worker_account != undefined) {
                     this.worker_account = data.worker_account;
+                }
+                if ("unprocessed_3min_count" in data && data.unprocessed_3min_count != undefined) {
+                    this.unprocessed_3min_count = data.unprocessed_3min_count;
+                }
+                if ("timeout_count" in data && data.timeout_count != undefined) {
+                    this.timeout_count = data.timeout_count;
+                }
+                if ("transfer_count" in data && data.transfer_count != undefined) {
+                    this.transfer_count = data.transfer_count;
+                }
+                if ("is_busy" in data && data.is_busy != undefined) {
+                    this.is_busy = data.is_busy;
                 }
             }
         }
@@ -10455,11 +12008,39 @@ export namespace api.core {
         set worker_account(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
+        get unprocessed_3min_count() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set unprocessed_3min_count(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get timeout_count() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set timeout_count(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get transfer_count() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set transfer_count(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get is_busy() {
+            return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
+        }
+        set is_busy(value: boolean) {
+            pb_1.Message.setField(this, 8, value);
+        }
         static fromObject(data: {
             event_type?: dependency_8.api.common.TenantWarnEventType;
             event_value?: number;
             worker_name?: string;
             worker_account?: string;
+            unprocessed_3min_count?: number;
+            timeout_count?: number;
+            transfer_count?: number;
+            is_busy?: boolean;
         }): WarnRecordReq {
             const message = new WarnRecordReq({});
             if (data.event_type != null) {
@@ -10474,6 +12055,18 @@ export namespace api.core {
             if (data.worker_account != null) {
                 message.worker_account = data.worker_account;
             }
+            if (data.unprocessed_3min_count != null) {
+                message.unprocessed_3min_count = data.unprocessed_3min_count;
+            }
+            if (data.timeout_count != null) {
+                message.timeout_count = data.timeout_count;
+            }
+            if (data.transfer_count != null) {
+                message.transfer_count = data.transfer_count;
+            }
+            if (data.is_busy != null) {
+                message.is_busy = data.is_busy;
+            }
             return message;
         }
         toObject() {
@@ -10482,6 +12075,10 @@ export namespace api.core {
                 event_value?: number;
                 worker_name?: string;
                 worker_account?: string;
+                unprocessed_3min_count?: number;
+                timeout_count?: number;
+                transfer_count?: number;
+                is_busy?: boolean;
             } = {};
             if (this.event_type != null) {
                 data.event_type = this.event_type;
@@ -10494,6 +12091,18 @@ export namespace api.core {
             }
             if (this.worker_account != null) {
                 data.worker_account = this.worker_account;
+            }
+            if (this.unprocessed_3min_count != null) {
+                data.unprocessed_3min_count = this.unprocessed_3min_count;
+            }
+            if (this.timeout_count != null) {
+                data.timeout_count = this.timeout_count;
+            }
+            if (this.transfer_count != null) {
+                data.transfer_count = this.transfer_count;
+            }
+            if (this.is_busy != null) {
+                data.is_busy = this.is_busy;
             }
             return data;
         }
@@ -10509,6 +12118,14 @@ export namespace api.core {
                 writer.writeString(3, this.worker_name);
             if (this.worker_account.length)
                 writer.writeString(4, this.worker_account);
+            if (this.unprocessed_3min_count != 0)
+                writer.writeUint32(5, this.unprocessed_3min_count);
+            if (this.timeout_count != 0)
+                writer.writeUint32(6, this.timeout_count);
+            if (this.transfer_count != 0)
+                writer.writeUint32(7, this.transfer_count);
+            if (this.is_busy != false)
+                writer.writeBool(8, this.is_busy);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -10530,6 +12147,18 @@ export namespace api.core {
                     case 4:
                         message.worker_account = reader.readString();
                         break;
+                    case 5:
+                        message.unprocessed_3min_count = reader.readUint32();
+                        break;
+                    case 6:
+                        message.timeout_count = reader.readUint32();
+                        break;
+                    case 7:
+                        message.transfer_count = reader.readUint32();
+                        break;
+                    case 8:
+                        message.is_busy = reader.readBool();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -10543,8 +12172,8 @@ export namespace api.core {
         }
     }
     export class WarnRecordQueryReq extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
+        #one_of_decls: number[][] = [[9]];
+        constructor(data?: any[] | ({
             start_time?: dependency_3.google.protobuf.Timestamp;
             end_time?: dependency_3.google.protobuf.Timestamp;
             group_pid?: number;
@@ -10553,7 +12182,9 @@ export namespace api.core {
             event_type?: number;
             page?: number;
             pageSize?: number;
-        }) {
+        } & (({
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -10580,6 +12211,9 @@ export namespace api.core {
                 }
                 if ("pageSize" in data && data.pageSize != undefined) {
                     this.pageSize = data.pageSize;
+                }
+                if ("alarm_level" in data && data.alarm_level != undefined) {
+                    this.alarm_level = data.alarm_level;
                 }
             }
         }
@@ -10637,6 +12271,24 @@ export namespace api.core {
         set pageSize(value: number) {
             pb_1.Message.setField(this, 8, value);
         }
+        get alarm_level() {
+            return pb_1.Message.getFieldWithDefault(this, 9, dependency_8.api.common.EventAlarmLevel.Level_None) as dependency_8.api.common.EventAlarmLevel;
+        }
+        set alarm_level(value: dependency_8.api.common.EventAlarmLevel) {
+            pb_1.Message.setOneofField(this, 9, this.#one_of_decls[0], value);
+        }
+        get has_alarm_level() {
+            return pb_1.Message.getField(this, 9) != null;
+        }
+        get _alarm_level() {
+            const cases: {
+                [index: number]: "none" | "alarm_level";
+            } = {
+                0: "none",
+                9: "alarm_level"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [9])];
+        }
         static fromObject(data: {
             start_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
             end_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
@@ -10646,6 +12298,7 @@ export namespace api.core {
             event_type?: number;
             page?: number;
             pageSize?: number;
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
         }): WarnRecordQueryReq {
             const message = new WarnRecordQueryReq({});
             if (data.start_time != null) {
@@ -10672,6 +12325,9 @@ export namespace api.core {
             if (data.pageSize != null) {
                 message.pageSize = data.pageSize;
             }
+            if (data.alarm_level != null) {
+                message.alarm_level = data.alarm_level;
+            }
             return message;
         }
         toObject() {
@@ -10684,6 +12340,7 @@ export namespace api.core {
                 event_type?: number;
                 page?: number;
                 pageSize?: number;
+                alarm_level?: dependency_8.api.common.EventAlarmLevel;
             } = {};
             if (this.start_time != null) {
                 data.start_time = this.start_time.toObject();
@@ -10709,6 +12366,9 @@ export namespace api.core {
             if (this.pageSize != null) {
                 data.pageSize = this.pageSize;
             }
+            if (this.alarm_level != null) {
+                data.alarm_level = this.alarm_level;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -10731,6 +12391,8 @@ export namespace api.core {
                 writer.writeUint32(7, this.page);
             if (this.pageSize != 0)
                 writer.writeUint32(8, this.pageSize);
+            if (this.has_alarm_level)
+                writer.writeEnum(9, this.alarm_level);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -10764,6 +12426,9 @@ export namespace api.core {
                     case 8:
                         message.pageSize = reader.readUint32();
                         break;
+                    case 9:
+                        message.alarm_level = reader.readEnum();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -10777,15 +12442,17 @@ export namespace api.core {
         }
     }
     export class ExportWarnRecordQueryReq extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
+        #one_of_decls: number[][] = [[9]];
+        constructor(data?: any[] | ({
             start_time?: dependency_3.google.protobuf.Timestamp;
             end_time?: dependency_3.google.protobuf.Timestamp;
             group_pid?: number;
             worker_id?: number;
             like_word?: string;
             event_type?: number;
-        }) {
+        } & (({
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
+        })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
@@ -10806,6 +12473,9 @@ export namespace api.core {
                 }
                 if ("event_type" in data && data.event_type != undefined) {
                     this.event_type = data.event_type;
+                }
+                if ("alarm_level" in data && data.alarm_level != undefined) {
+                    this.alarm_level = data.alarm_level;
                 }
             }
         }
@@ -10851,6 +12521,24 @@ export namespace api.core {
         set event_type(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
+        get alarm_level() {
+            return pb_1.Message.getFieldWithDefault(this, 9, dependency_8.api.common.EventAlarmLevel.Level_None) as dependency_8.api.common.EventAlarmLevel;
+        }
+        set alarm_level(value: dependency_8.api.common.EventAlarmLevel) {
+            pb_1.Message.setOneofField(this, 9, this.#one_of_decls[0], value);
+        }
+        get has_alarm_level() {
+            return pb_1.Message.getField(this, 9) != null;
+        }
+        get _alarm_level() {
+            const cases: {
+                [index: number]: "none" | "alarm_level";
+            } = {
+                0: "none",
+                9: "alarm_level"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [9])];
+        }
         static fromObject(data: {
             start_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
             end_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
@@ -10858,6 +12546,7 @@ export namespace api.core {
             worker_id?: number;
             like_word?: string;
             event_type?: number;
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
         }): ExportWarnRecordQueryReq {
             const message = new ExportWarnRecordQueryReq({});
             if (data.start_time != null) {
@@ -10878,6 +12567,9 @@ export namespace api.core {
             if (data.event_type != null) {
                 message.event_type = data.event_type;
             }
+            if (data.alarm_level != null) {
+                message.alarm_level = data.alarm_level;
+            }
             return message;
         }
         toObject() {
@@ -10888,6 +12580,7 @@ export namespace api.core {
                 worker_id?: number;
                 like_word?: string;
                 event_type?: number;
+                alarm_level?: dependency_8.api.common.EventAlarmLevel;
             } = {};
             if (this.start_time != null) {
                 data.start_time = this.start_time.toObject();
@@ -10907,6 +12600,9 @@ export namespace api.core {
             if (this.event_type != null) {
                 data.event_type = this.event_type;
             }
+            if (this.alarm_level != null) {
+                data.alarm_level = this.alarm_level;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -10925,6 +12621,8 @@ export namespace api.core {
                 writer.writeString(5, this.like_word);
             if (this.event_type != 0)
                 writer.writeInt32(6, this.event_type);
+            if (this.has_alarm_level)
+                writer.writeEnum(9, this.alarm_level);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -10952,6 +12650,9 @@ export namespace api.core {
                     case 6:
                         message.event_type = reader.readInt32();
                         break;
+                    case 9:
+                        message.alarm_level = reader.readEnum();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -10973,6 +12674,8 @@ export namespace api.core {
             create_time?: number;
             worker_name?: string;
             worker_group?: string;
+            clearance_time?: string;
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -10994,6 +12697,12 @@ export namespace api.core {
                 }
                 if ("worker_group" in data && data.worker_group != undefined) {
                     this.worker_group = data.worker_group;
+                }
+                if ("clearance_time" in data && data.clearance_time != undefined) {
+                    this.clearance_time = data.clearance_time;
+                }
+                if ("alarm_level" in data && data.alarm_level != undefined) {
+                    this.alarm_level = data.alarm_level;
                 }
             }
         }
@@ -11033,6 +12742,18 @@ export namespace api.core {
         set worker_group(value: string) {
             pb_1.Message.setField(this, 6, value);
         }
+        get clearance_time() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set clearance_time(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get alarm_level() {
+            return pb_1.Message.getFieldWithDefault(this, 8, dependency_8.api.common.EventAlarmLevel.Level_None) as dependency_8.api.common.EventAlarmLevel;
+        }
+        set alarm_level(value: dependency_8.api.common.EventAlarmLevel) {
+            pb_1.Message.setField(this, 8, value);
+        }
         static fromObject(data: {
             id?: number;
             event_type?: dependency_8.api.common.TenantWarnEventType;
@@ -11040,6 +12761,8 @@ export namespace api.core {
             create_time?: number;
             worker_name?: string;
             worker_group?: string;
+            clearance_time?: string;
+            alarm_level?: dependency_8.api.common.EventAlarmLevel;
         }): WarnRecord {
             const message = new WarnRecord({});
             if (data.id != null) {
@@ -11060,6 +12783,12 @@ export namespace api.core {
             if (data.worker_group != null) {
                 message.worker_group = data.worker_group;
             }
+            if (data.clearance_time != null) {
+                message.clearance_time = data.clearance_time;
+            }
+            if (data.alarm_level != null) {
+                message.alarm_level = data.alarm_level;
+            }
             return message;
         }
         toObject() {
@@ -11070,6 +12799,8 @@ export namespace api.core {
                 create_time?: number;
                 worker_name?: string;
                 worker_group?: string;
+                clearance_time?: string;
+                alarm_level?: dependency_8.api.common.EventAlarmLevel;
             } = {};
             if (this.id != null) {
                 data.id = this.id;
@@ -11089,6 +12820,12 @@ export namespace api.core {
             if (this.worker_group != null) {
                 data.worker_group = this.worker_group;
             }
+            if (this.clearance_time != null) {
+                data.clearance_time = this.clearance_time;
+            }
+            if (this.alarm_level != null) {
+                data.alarm_level = this.alarm_level;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -11107,6 +12844,10 @@ export namespace api.core {
                 writer.writeString(5, this.worker_name);
             if (this.worker_group.length)
                 writer.writeString(6, this.worker_group);
+            if (this.clearance_time.length)
+                writer.writeString(7, this.clearance_time);
+            if (this.alarm_level != dependency_8.api.common.EventAlarmLevel.Level_None)
+                writer.writeEnum(8, this.alarm_level);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -11134,6 +12875,12 @@ export namespace api.core {
                     case 6:
                         message.worker_group = reader.readString();
                         break;
+                    case 7:
+                        message.clearance_time = reader.readString();
+                        break;
+                    case 8:
+                        message.alarm_level = reader.readEnum();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -11154,6 +12901,7 @@ export namespace api.core {
             event_unreply_count?: number;
             event_time_count?: number;
             event_leave_count?: number;
+            event_abnormal_leave?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
@@ -11172,6 +12920,9 @@ export namespace api.core {
                 }
                 if ("event_leave_count" in data && data.event_leave_count != undefined) {
                     this.event_leave_count = data.event_leave_count;
+                }
+                if ("event_abnormal_leave" in data && data.event_abnormal_leave != undefined) {
+                    this.event_abnormal_leave = data.event_abnormal_leave;
                 }
             }
         }
@@ -11205,12 +12956,19 @@ export namespace api.core {
         set event_leave_count(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
+        get event_abnormal_leave() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set event_abnormal_leave(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
         static fromObject(data: {
             items?: ReturnType<typeof WarnRecord.prototype.toObject>[];
             total?: number;
             event_unreply_count?: number;
             event_time_count?: number;
             event_leave_count?: number;
+            event_abnormal_leave?: number;
         }): WarnRecordQueryResp {
             const message = new WarnRecordQueryResp({});
             if (data.items != null) {
@@ -11228,6 +12986,9 @@ export namespace api.core {
             if (data.event_leave_count != null) {
                 message.event_leave_count = data.event_leave_count;
             }
+            if (data.event_abnormal_leave != null) {
+                message.event_abnormal_leave = data.event_abnormal_leave;
+            }
             return message;
         }
         toObject() {
@@ -11237,6 +12998,7 @@ export namespace api.core {
                 event_unreply_count?: number;
                 event_time_count?: number;
                 event_leave_count?: number;
+                event_abnormal_leave?: number;
             } = {};
             if (this.items != null) {
                 data.items = this.items.map((item: WarnRecord) => item.toObject());
@@ -11252,6 +13014,9 @@ export namespace api.core {
             }
             if (this.event_leave_count != null) {
                 data.event_leave_count = this.event_leave_count;
+            }
+            if (this.event_abnormal_leave != null) {
+                data.event_abnormal_leave = this.event_abnormal_leave;
             }
             return data;
         }
@@ -11269,6 +13034,8 @@ export namespace api.core {
                 writer.writeInt64(4, this.event_time_count);
             if (this.event_leave_count != 0)
                 writer.writeInt64(5, this.event_leave_count);
+            if (this.event_abnormal_leave != 0)
+                writer.writeInt64(6, this.event_abnormal_leave);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -11293,6 +13060,9 @@ export namespace api.core {
                     case 5:
                         message.event_leave_count = reader.readInt64();
                         break;
+                    case 6:
+                        message.event_abnormal_leave = reader.readInt64();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -11303,6 +13073,1272 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): WarnRecordQueryResp {
             return WarnRecordQueryResp.deserialize(bytes);
+        }
+    }
+    export class WorkerAssignLogReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            user_role?: number;
+            user_keyword?: string;
+            worker_name?: string;
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: dependency_3.google.protobuf.Timestamp;
+            end_time?: dependency_3.google.protobuf.Timestamp;
+            last_id?: number;
+            page_up_down?: dependency_6.api.common.PageUpDown;
+            count?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_role" in data && data.user_role != undefined) {
+                    this.user_role = data.user_role;
+                }
+                if ("user_keyword" in data && data.user_keyword != undefined) {
+                    this.user_keyword = data.user_keyword;
+                }
+                if ("worker_name" in data && data.worker_name != undefined) {
+                    this.worker_name = data.worker_name;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("last_id" in data && data.last_id != undefined) {
+                    this.last_id = data.last_id;
+                }
+                if ("page_up_down" in data && data.page_up_down != undefined) {
+                    this.page_up_down = data.page_up_down;
+                }
+                if ("count" in data && data.count != undefined) {
+                    this.count = data.count;
+                }
+            }
+        }
+        get user_role() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set user_role(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get user_keyword() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set user_keyword(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get worker_name() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set worker_name(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 7) as dependency_3.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 7, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 8) as dependency_3.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 8, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get last_id() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set last_id(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get page_up_down() {
+            return pb_1.Message.getFieldWithDefault(this, 10, dependency_6.api.common.PageUpDown.PUD_DEFAULT) as dependency_6.api.common.PageUpDown;
+        }
+        set page_up_down(value: dependency_6.api.common.PageUpDown) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get count() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set count(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        static fromObject(data: {
+            user_role?: number;
+            user_keyword?: string;
+            worker_name?: string;
+            worker_id?: number;
+            chat_id?: number;
+            start_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            last_id?: number;
+            page_up_down?: dependency_6.api.common.PageUpDown;
+            count?: number;
+        }): WorkerAssignLogReq {
+            const message = new WorkerAssignLogReq({});
+            if (data.user_role != null) {
+                message.user_role = data.user_role;
+            }
+            if (data.user_keyword != null) {
+                message.user_keyword = data.user_keyword;
+            }
+            if (data.worker_name != null) {
+                message.worker_name = data.worker_name;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_3.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_3.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.last_id != null) {
+                message.last_id = data.last_id;
+            }
+            if (data.page_up_down != null) {
+                message.page_up_down = data.page_up_down;
+            }
+            if (data.count != null) {
+                message.count = data.count;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                user_role?: number;
+                user_keyword?: string;
+                worker_name?: string;
+                worker_id?: number;
+                chat_id?: number;
+                start_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                last_id?: number;
+                page_up_down?: dependency_6.api.common.PageUpDown;
+                count?: number;
+            } = {};
+            if (this.user_role != null) {
+                data.user_role = this.user_role;
+            }
+            if (this.user_keyword != null) {
+                data.user_keyword = this.user_keyword;
+            }
+            if (this.worker_name != null) {
+                data.worker_name = this.worker_name;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.last_id != null) {
+                data.last_id = this.last_id;
+            }
+            if (this.page_up_down != null) {
+                data.page_up_down = this.page_up_down;
+            }
+            if (this.count != null) {
+                data.count = this.count;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_role != 0)
+                writer.writeInt32(2, this.user_role);
+            if (this.user_keyword.length)
+                writer.writeString(3, this.user_keyword);
+            if (this.worker_name.length)
+                writer.writeString(4, this.worker_name);
+            if (this.worker_id != 0)
+                writer.writeInt32(5, this.worker_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(6, this.chat_id);
+            if (this.has_start_time)
+                writer.writeMessage(7, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(8, this.end_time, () => this.end_time.serialize(writer));
+            if (this.last_id != 0)
+                writer.writeInt64(9, this.last_id);
+            if (this.page_up_down != dependency_6.api.common.PageUpDown.PUD_DEFAULT)
+                writer.writeEnum(10, this.page_up_down);
+            if (this.count != 0)
+                writer.writeInt32(11, this.count);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAssignLogReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAssignLogReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 2:
+                        message.user_role = reader.readInt32();
+                        break;
+                    case 3:
+                        message.user_keyword = reader.readString();
+                        break;
+                    case 4:
+                        message.worker_name = reader.readString();
+                        break;
+                    case 5:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 6:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 7:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 8:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 9:
+                        message.last_id = reader.readInt64();
+                        break;
+                    case 10:
+                        message.page_up_down = reader.readEnum();
+                        break;
+                    case 11:
+                        message.count = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAssignLogReq {
+            return WorkerAssignLogReq.deserialize(bytes);
+        }
+    }
+    export class WorkerAssignLogResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            items?: WorkerAssignLog[];
+            total?: number;
+            last_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("items" in data && data.items != undefined) {
+                    this.items = data.items;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+                if ("last_id" in data && data.last_id != undefined) {
+                    this.last_id = data.last_id;
+                }
+            }
+        }
+        get items() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerAssignLog, 1) as WorkerAssignLog[];
+        }
+        set items(value: WorkerAssignLog[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get last_id() {
+            return pb_1.Message.getFieldWithDefault(this, 9, 0) as number;
+        }
+        set last_id(value: number) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        static fromObject(data: {
+            items?: ReturnType<typeof WorkerAssignLog.prototype.toObject>[];
+            total?: number;
+            last_id?: number;
+        }): WorkerAssignLogResp {
+            const message = new WorkerAssignLogResp({});
+            if (data.items != null) {
+                message.items = data.items.map(item => WorkerAssignLog.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            if (data.last_id != null) {
+                message.last_id = data.last_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                items?: ReturnType<typeof WorkerAssignLog.prototype.toObject>[];
+                total?: number;
+                last_id?: number;
+            } = {};
+            if (this.items != null) {
+                data.items = this.items.map((item: WorkerAssignLog) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            if (this.last_id != null) {
+                data.last_id = this.last_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.items.length)
+                writer.writeRepeatedMessage(1, this.items, (item: WorkerAssignLog) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(3, this.total);
+            if (this.last_id != 0)
+                writer.writeInt64(9, this.last_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAssignLogResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAssignLogResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.items, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerAssignLog.deserialize(reader), WorkerAssignLog));
+                        break;
+                    case 3:
+                        message.total = reader.readInt32();
+                        break;
+                    case 9:
+                        message.last_id = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAssignLogResp {
+            return WorkerAssignLogResp.deserialize(bytes);
+        }
+    }
+    export class WorkerAssignLog extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            tenant_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            user_id?: number;
+            user_role?: number;
+            user_name?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            created_at?: dependency_3.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
+                }
+                if ("consult_id" in data && data.consult_id != undefined) {
+                    this.consult_id = data.consult_id;
+                }
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("user_role" in data && data.user_role != undefined) {
+                    this.user_role = data.user_role;
+                }
+                if ("user_name" in data && data.user_name != undefined) {
+                    this.user_name = data.user_name;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("worker_account" in data && data.worker_account != undefined) {
+                    this.worker_account = data.worker_account;
+                }
+                if ("worker_nickname" in data && data.worker_nickname != undefined) {
+                    this.worker_nickname = data.worker_nickname;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get consult_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set consult_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get user_role() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set user_role(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get user_name() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set user_name(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 8, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get worker_account() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set worker_account(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get worker_nickname() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set worker_nickname(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get created_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 11) as dependency_3.google.protobuf.Timestamp;
+        }
+        set created_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 11, value);
+        }
+        get has_created_at() {
+            return pb_1.Message.getField(this, 11) != null;
+        }
+        static fromObject(data: {
+            id?: number;
+            tenant_id?: number;
+            consult_id?: number;
+            chat_id?: number;
+            user_id?: number;
+            user_role?: number;
+            user_name?: string;
+            worker_id?: number;
+            worker_account?: string;
+            worker_nickname?: string;
+            created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+        }): WorkerAssignLog {
+            const message = new WorkerAssignLog({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
+            }
+            if (data.consult_id != null) {
+                message.consult_id = data.consult_id;
+            }
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.user_role != null) {
+                message.user_role = data.user_role;
+            }
+            if (data.user_name != null) {
+                message.user_name = data.user_name;
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.worker_account != null) {
+                message.worker_account = data.worker_account;
+            }
+            if (data.worker_nickname != null) {
+                message.worker_nickname = data.worker_nickname;
+            }
+            if (data.created_at != null) {
+                message.created_at = dependency_3.google.protobuf.Timestamp.fromObject(data.created_at);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                tenant_id?: number;
+                consult_id?: number;
+                chat_id?: number;
+                user_id?: number;
+                user_role?: number;
+                user_name?: string;
+                worker_id?: number;
+                worker_account?: string;
+                worker_nickname?: string;
+                created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
+            }
+            if (this.consult_id != null) {
+                data.consult_id = this.consult_id;
+            }
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.user_role != null) {
+                data.user_role = this.user_role;
+            }
+            if (this.user_name != null) {
+                data.user_name = this.user_name;
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.worker_account != null) {
+                data.worker_account = this.worker_account;
+            }
+            if (this.worker_nickname != null) {
+                data.worker_nickname = this.worker_nickname;
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt64(1, this.id);
+            if (this.tenant_id != 0)
+                writer.writeInt32(2, this.tenant_id);
+            if (this.consult_id != 0)
+                writer.writeInt32(3, this.consult_id);
+            if (this.chat_id != 0)
+                writer.writeInt64(4, this.chat_id);
+            if (this.user_id != 0)
+                writer.writeInt32(5, this.user_id);
+            if (this.user_role != 0)
+                writer.writeInt32(6, this.user_role);
+            if (this.user_name.length)
+                writer.writeString(7, this.user_name);
+            if (this.worker_id != 0)
+                writer.writeInt32(8, this.worker_id);
+            if (this.worker_account.length)
+                writer.writeString(9, this.worker_account);
+            if (this.worker_nickname.length)
+                writer.writeString(10, this.worker_nickname);
+            if (this.has_created_at)
+                writer.writeMessage(11, this.created_at, () => this.created_at.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAssignLog {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAssignLog();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.tenant_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.consult_id = reader.readInt32();
+                        break;
+                    case 4:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    case 5:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 6:
+                        message.user_role = reader.readInt32();
+                        break;
+                    case 7:
+                        message.user_name = reader.readString();
+                        break;
+                    case 8:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 9:
+                        message.worker_account = reader.readString();
+                        break;
+                    case 10:
+                        message.worker_nickname = reader.readString();
+                        break;
+                    case 11:
+                        reader.readMessage(message.created_at, () => message.created_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAssignLog {
+            return WorkerAssignLog.deserialize(bytes);
+        }
+    }
+    export class OrderFieldConfig extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            field_name?: string;
+            display_name?: string;
+            visible?: boolean;
+            copyable?: boolean;
+            color?: string;
+            display_order?: number;
+            copy_order?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("field_name" in data && data.field_name != undefined) {
+                    this.field_name = data.field_name;
+                }
+                if ("display_name" in data && data.display_name != undefined) {
+                    this.display_name = data.display_name;
+                }
+                if ("visible" in data && data.visible != undefined) {
+                    this.visible = data.visible;
+                }
+                if ("copyable" in data && data.copyable != undefined) {
+                    this.copyable = data.copyable;
+                }
+                if ("color" in data && data.color != undefined) {
+                    this.color = data.color;
+                }
+                if ("display_order" in data && data.display_order != undefined) {
+                    this.display_order = data.display_order;
+                }
+                if ("copy_order" in data && data.copy_order != undefined) {
+                    this.copy_order = data.copy_order;
+                }
+            }
+        }
+        get field_name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set field_name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get display_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set display_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get visible() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set visible(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get copyable() {
+            return pb_1.Message.getFieldWithDefault(this, 4, false) as boolean;
+        }
+        set copyable(value: boolean) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get color() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set color(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get display_order() {
+            return pb_1.Message.getFieldWithDefault(this, 10, 0) as number;
+        }
+        set display_order(value: number) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get copy_order() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set copy_order(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        static fromObject(data: {
+            field_name?: string;
+            display_name?: string;
+            visible?: boolean;
+            copyable?: boolean;
+            color?: string;
+            display_order?: number;
+            copy_order?: number;
+        }): OrderFieldConfig {
+            const message = new OrderFieldConfig({});
+            if (data.field_name != null) {
+                message.field_name = data.field_name;
+            }
+            if (data.display_name != null) {
+                message.display_name = data.display_name;
+            }
+            if (data.visible != null) {
+                message.visible = data.visible;
+            }
+            if (data.copyable != null) {
+                message.copyable = data.copyable;
+            }
+            if (data.color != null) {
+                message.color = data.color;
+            }
+            if (data.display_order != null) {
+                message.display_order = data.display_order;
+            }
+            if (data.copy_order != null) {
+                message.copy_order = data.copy_order;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                field_name?: string;
+                display_name?: string;
+                visible?: boolean;
+                copyable?: boolean;
+                color?: string;
+                display_order?: number;
+                copy_order?: number;
+            } = {};
+            if (this.field_name != null) {
+                data.field_name = this.field_name;
+            }
+            if (this.display_name != null) {
+                data.display_name = this.display_name;
+            }
+            if (this.visible != null) {
+                data.visible = this.visible;
+            }
+            if (this.copyable != null) {
+                data.copyable = this.copyable;
+            }
+            if (this.color != null) {
+                data.color = this.color;
+            }
+            if (this.display_order != null) {
+                data.display_order = this.display_order;
+            }
+            if (this.copy_order != null) {
+                data.copy_order = this.copy_order;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.field_name.length)
+                writer.writeString(1, this.field_name);
+            if (this.display_name.length)
+                writer.writeString(2, this.display_name);
+            if (this.visible != false)
+                writer.writeBool(3, this.visible);
+            if (this.copyable != false)
+                writer.writeBool(4, this.copyable);
+            if (this.color.length)
+                writer.writeString(5, this.color);
+            if (this.display_order != 0)
+                writer.writeInt32(10, this.display_order);
+            if (this.copy_order != 0)
+                writer.writeInt32(11, this.copy_order);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): OrderFieldConfig {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new OrderFieldConfig();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.field_name = reader.readString();
+                        break;
+                    case 2:
+                        message.display_name = reader.readString();
+                        break;
+                    case 3:
+                        message.visible = reader.readBool();
+                        break;
+                    case 4:
+                        message.copyable = reader.readBool();
+                        break;
+                    case 5:
+                        message.color = reader.readString();
+                        break;
+                    case 10:
+                        message.display_order = reader.readInt32();
+                        break;
+                    case 11:
+                        message.copy_order = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): OrderFieldConfig {
+            return OrderFieldConfig.deserialize(bytes);
+        }
+    }
+    export class TenantOrderSettingsCreateRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            recharge_fields?: OrderFieldConfig[];
+            withdraw_fields?: OrderFieldConfig[];
+            updated_by?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [10, 11], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("recharge_fields" in data && data.recharge_fields != undefined) {
+                    this.recharge_fields = data.recharge_fields;
+                }
+                if ("withdraw_fields" in data && data.withdraw_fields != undefined) {
+                    this.withdraw_fields = data.withdraw_fields;
+                }
+                if ("updated_by" in data && data.updated_by != undefined) {
+                    this.updated_by = data.updated_by;
+                }
+            }
+        }
+        get recharge_fields() {
+            return pb_1.Message.getRepeatedWrapperField(this, OrderFieldConfig, 10) as OrderFieldConfig[];
+        }
+        set recharge_fields(value: OrderFieldConfig[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 10, value);
+        }
+        get withdraw_fields() {
+            return pb_1.Message.getRepeatedWrapperField(this, OrderFieldConfig, 11) as OrderFieldConfig[];
+        }
+        set withdraw_fields(value: OrderFieldConfig[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 11, value);
+        }
+        get updated_by() {
+            return pb_1.Message.getFieldWithDefault(this, 20, 0) as number;
+        }
+        set updated_by(value: number) {
+            pb_1.Message.setField(this, 20, value);
+        }
+        static fromObject(data: {
+            recharge_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+            withdraw_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+            updated_by?: number;
+        }): TenantOrderSettingsCreateRequest {
+            const message = new TenantOrderSettingsCreateRequest({});
+            if (data.recharge_fields != null) {
+                message.recharge_fields = data.recharge_fields.map(item => OrderFieldConfig.fromObject(item));
+            }
+            if (data.withdraw_fields != null) {
+                message.withdraw_fields = data.withdraw_fields.map(item => OrderFieldConfig.fromObject(item));
+            }
+            if (data.updated_by != null) {
+                message.updated_by = data.updated_by;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                recharge_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+                withdraw_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+                updated_by?: number;
+            } = {};
+            if (this.recharge_fields != null) {
+                data.recharge_fields = this.recharge_fields.map((item: OrderFieldConfig) => item.toObject());
+            }
+            if (this.withdraw_fields != null) {
+                data.withdraw_fields = this.withdraw_fields.map((item: OrderFieldConfig) => item.toObject());
+            }
+            if (this.updated_by != null) {
+                data.updated_by = this.updated_by;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.recharge_fields.length)
+                writer.writeRepeatedMessage(10, this.recharge_fields, (item: OrderFieldConfig) => item.serialize(writer));
+            if (this.withdraw_fields.length)
+                writer.writeRepeatedMessage(11, this.withdraw_fields, (item: OrderFieldConfig) => item.serialize(writer));
+            if (this.updated_by != 0)
+                writer.writeInt32(20, this.updated_by);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantOrderSettingsCreateRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantOrderSettingsCreateRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 10:
+                        reader.readMessage(message.recharge_fields, () => pb_1.Message.addToRepeatedWrapperField(message, 10, OrderFieldConfig.deserialize(reader), OrderFieldConfig));
+                        break;
+                    case 11:
+                        reader.readMessage(message.withdraw_fields, () => pb_1.Message.addToRepeatedWrapperField(message, 11, OrderFieldConfig.deserialize(reader), OrderFieldConfig));
+                        break;
+                    case 20:
+                        message.updated_by = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantOrderSettingsCreateRequest {
+            return TenantOrderSettingsCreateRequest.deserialize(bytes);
+        }
+    }
+    export class TenantOrderSettingsGetResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+            tenant_id?: number;
+            recharge_fields?: OrderFieldConfig[];
+            withdraw_fields?: OrderFieldConfig[];
+            created_at?: dependency_3.google.protobuf.Timestamp;
+            updated_at?: dependency_3.google.protobuf.Timestamp;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [10, 11], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
+                }
+                if ("recharge_fields" in data && data.recharge_fields != undefined) {
+                    this.recharge_fields = data.recharge_fields;
+                }
+                if ("withdraw_fields" in data && data.withdraw_fields != undefined) {
+                    this.withdraw_fields = data.withdraw_fields;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+                if ("updated_at" in data && data.updated_at != undefined) {
+                    this.updated_at = data.updated_at;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get recharge_fields() {
+            return pb_1.Message.getRepeatedWrapperField(this, OrderFieldConfig, 10) as OrderFieldConfig[];
+        }
+        set recharge_fields(value: OrderFieldConfig[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 10, value);
+        }
+        get withdraw_fields() {
+            return pb_1.Message.getRepeatedWrapperField(this, OrderFieldConfig, 11) as OrderFieldConfig[];
+        }
+        set withdraw_fields(value: OrderFieldConfig[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 11, value);
+        }
+        get created_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 20) as dependency_3.google.protobuf.Timestamp;
+        }
+        set created_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 20, value);
+        }
+        get has_created_at() {
+            return pb_1.Message.getField(this, 20) != null;
+        }
+        get updated_at() {
+            return pb_1.Message.getWrapperField(this, dependency_3.google.protobuf.Timestamp, 21) as dependency_3.google.protobuf.Timestamp;
+        }
+        set updated_at(value: dependency_3.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 21, value);
+        }
+        get has_updated_at() {
+            return pb_1.Message.getField(this, 21) != null;
+        }
+        static fromObject(data: {
+            id?: number;
+            tenant_id?: number;
+            recharge_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+            withdraw_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+            created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            updated_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+        }): TenantOrderSettingsGetResponse {
+            const message = new TenantOrderSettingsGetResponse({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
+            }
+            if (data.recharge_fields != null) {
+                message.recharge_fields = data.recharge_fields.map(item => OrderFieldConfig.fromObject(item));
+            }
+            if (data.withdraw_fields != null) {
+                message.withdraw_fields = data.withdraw_fields.map(item => OrderFieldConfig.fromObject(item));
+            }
+            if (data.created_at != null) {
+                message.created_at = dependency_3.google.protobuf.Timestamp.fromObject(data.created_at);
+            }
+            if (data.updated_at != null) {
+                message.updated_at = dependency_3.google.protobuf.Timestamp.fromObject(data.updated_at);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+                tenant_id?: number;
+                recharge_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+                withdraw_fields?: ReturnType<typeof OrderFieldConfig.prototype.toObject>[];
+                created_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+                updated_at?: ReturnType<typeof dependency_3.google.protobuf.Timestamp.prototype.toObject>;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
+            }
+            if (this.recharge_fields != null) {
+                data.recharge_fields = this.recharge_fields.map((item: OrderFieldConfig) => item.toObject());
+            }
+            if (this.withdraw_fields != null) {
+                data.withdraw_fields = this.withdraw_fields.map((item: OrderFieldConfig) => item.toObject());
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at.toObject();
+            }
+            if (this.updated_at != null) {
+                data.updated_at = this.updated_at.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt64(1, this.id);
+            if (this.tenant_id != 0)
+                writer.writeInt64(2, this.tenant_id);
+            if (this.recharge_fields.length)
+                writer.writeRepeatedMessage(10, this.recharge_fields, (item: OrderFieldConfig) => item.serialize(writer));
+            if (this.withdraw_fields.length)
+                writer.writeRepeatedMessage(11, this.withdraw_fields, (item: OrderFieldConfig) => item.serialize(writer));
+            if (this.has_created_at)
+                writer.writeMessage(20, this.created_at, () => this.created_at.serialize(writer));
+            if (this.has_updated_at)
+                writer.writeMessage(21, this.updated_at, () => this.updated_at.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantOrderSettingsGetResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantOrderSettingsGetResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt64();
+                        break;
+                    case 2:
+                        message.tenant_id = reader.readInt64();
+                        break;
+                    case 10:
+                        reader.readMessage(message.recharge_fields, () => pb_1.Message.addToRepeatedWrapperField(message, 10, OrderFieldConfig.deserialize(reader), OrderFieldConfig));
+                        break;
+                    case 11:
+                        reader.readMessage(message.withdraw_fields, () => pb_1.Message.addToRepeatedWrapperField(message, 11, OrderFieldConfig.deserialize(reader), OrderFieldConfig));
+                        break;
+                    case 20:
+                        reader.readMessage(message.created_at, () => message.created_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 21:
+                        reader.readMessage(message.updated_at, () => message.updated_at = dependency_3.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantOrderSettingsGetResponse {
+            return TenantOrderSettingsGetResponse.deserialize(bytes);
+        }
+    }
+    export class TenantOrderSettingsDeleteRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("id" in data && data.id != undefined) {
+                    this.id = data.id;
+                }
+            }
+        }
+        get id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            id?: number;
+        }): TenantOrderSettingsDeleteRequest {
+            const message = new TenantOrderSettingsDeleteRequest({});
+            if (data.id != null) {
+                message.id = data.id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                id?: number;
+            } = {};
+            if (this.id != null) {
+                data.id = this.id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.id != 0)
+                writer.writeInt64(1, this.id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TenantOrderSettingsDeleteRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TenantOrderSettingsDeleteRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.id = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): TenantOrderSettingsDeleteRequest {
+            return TenantOrderSettingsDeleteRequest.deserialize(bytes);
         }
     }
     interface GrpcUnaryServiceInterface<P, R> {
@@ -11443,8 +14479,8 @@ export namespace api.core {
                 path: "/api.core.Tenant/ExportUsersList",
                 requestStream: false,
                 responseStream: false,
-                requestSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
-                requestDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes)),
+                requestSerialize: (message: ExportUsersListRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ExportUsersListRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             },
@@ -11727,6 +14763,15 @@ export namespace api.core {
                 responseSerialize: (message: WorkerSessionActivityLogResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => WorkerSessionActivityLogResponse.deserialize(new Uint8Array(bytes))
             },
+            ExportWorkerSessionActivityLog: {
+                path: "/api.core.Tenant/ExportWorkerSessionActivityLog",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerSessionActivityLogRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerSessionActivityLogRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
             TenantQualityContentAdd: {
                 path: "/api.core.Tenant/TenantQualityContentAdd",
                 requestStream: false,
@@ -11816,6 +14861,87 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => ExportWarnRecordQueryReq.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            AddVersionPublish: {
+                path: "/api.core.Tenant/AddVersionPublish",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: AddVersionPublishReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => AddVersionPublishReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            EditVersionPublish: {
+                path: "/api.core.Tenant/EditVersionPublish",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: EditVersionPublishReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => EditVersionPublishReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            VersionPublish: {
+                path: "/api.core.Tenant/VersionPublish",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: VersionPublishReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => VersionPublishReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            SetFileExtractCode: {
+                path: "/api.core.Tenant/SetFileExtractCode",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetFileExtractCodeReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetFileExtractCodeReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            VersionPublishList: {
+                path: "/api.core.Tenant/VersionPublishList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: VersionPublishListReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => VersionPublishListReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: VersionPublishListResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => VersionPublishListResp.deserialize(new Uint8Array(bytes))
+            },
+            WorkerAssignLog: {
+                path: "/api.core.Tenant/WorkerAssignLog",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerAssignLogReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerAssignLogReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerAssignLogResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerAssignLogResp.deserialize(new Uint8Array(bytes))
+            },
+            TenantOrderSettingsCreate: {
+                path: "/api.core.Tenant/TenantOrderSettingsCreate",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: TenantOrderSettingsCreateRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => TenantOrderSettingsCreateRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            TenantOrderSettingsGet: {
+                path: "/api.core.Tenant/TenantOrderSettingsGet",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: TenantOrderSettingsGetResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => TenantOrderSettingsGetResponse.deserialize(new Uint8Array(bytes))
+            },
+            TenantOrderSettingsDelete: {
+                path: "/api.core.Tenant/TenantOrderSettingsDelete",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: TenantOrderSettingsDeleteRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => TenantOrderSettingsDeleteRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -11831,7 +14957,7 @@ export namespace api.core {
         abstract CreatePublicKey(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, PublicKeyResponse>, callback: grpc_1.sendUnaryData<PublicKeyResponse>): void;
         abstract QuerySelfInfo(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, QueryTenantInfoResponse>, callback: grpc_1.sendUnaryData<QueryTenantInfoResponse>): void;
         abstract UpdateNimInfo(call: grpc_1.ServerUnaryCall<UpdateNimInfoRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
-        abstract ExportUsersList(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract ExportUsersList(call: grpc_1.ServerUnaryCall<ExportUsersListRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract create_version(call: grpc_1.ServerUnaryCall<VersionRequest, CreateVersionResponse>, callback: grpc_1.sendUnaryData<CreateVersionResponse>): void;
         abstract update_version(call: grpc_1.ServerUnaryCall<VersionRequest, UpdateVersionResponse>, callback: grpc_1.sendUnaryData<UpdateVersionResponse>): void;
         abstract getallversion(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, GetVersionResponse>, callback: grpc_1.sendUnaryData<GetVersionResponse>): void;
@@ -11863,6 +14989,7 @@ export namespace api.core {
         abstract SetTenantSystemSetting(call: grpc_1.ServerUnaryCall<SetTenantSystemSettingRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract Captcha(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, CaptchaResponse>, callback: grpc_1.sendUnaryData<CaptchaResponse>): void;
         abstract WorkerSessionActivityLog(call: grpc_1.ServerUnaryCall<WorkerSessionActivityLogRequest, WorkerSessionActivityLogResponse>, callback: grpc_1.sendUnaryData<WorkerSessionActivityLogResponse>): void;
+        abstract ExportWorkerSessionActivityLog(call: grpc_1.ServerUnaryCall<WorkerSessionActivityLogRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract TenantQualityContentAdd(call: grpc_1.ServerUnaryCall<AddQualityContentReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract TenantQualityContentUpdate(call: grpc_1.ServerUnaryCall<UpdateQualityContentReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract TenantQualityContentList(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, TenantQualityContentListResp>, callback: grpc_1.sendUnaryData<TenantQualityContentListResp>): void;
@@ -11873,6 +15000,15 @@ export namespace api.core {
         abstract TenantWarnRecordCreate(call: grpc_1.ServerUnaryCall<WarnRecordReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract TenantWarnRecordQuery(call: grpc_1.ServerUnaryCall<WarnRecordQueryReq, WarnRecordQueryResp>, callback: grpc_1.sendUnaryData<WarnRecordQueryResp>): void;
         abstract ExportTenantWarnRecordQuery(call: grpc_1.ServerUnaryCall<ExportWarnRecordQueryReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract AddVersionPublish(call: grpc_1.ServerUnaryCall<AddVersionPublishReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract EditVersionPublish(call: grpc_1.ServerUnaryCall<EditVersionPublishReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract VersionPublish(call: grpc_1.ServerUnaryCall<VersionPublishReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract SetFileExtractCode(call: grpc_1.ServerUnaryCall<SetFileExtractCodeReq, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract VersionPublishList(call: grpc_1.ServerUnaryCall<VersionPublishListReq, VersionPublishListResp>, callback: grpc_1.sendUnaryData<VersionPublishListResp>): void;
+        abstract WorkerAssignLog(call: grpc_1.ServerUnaryCall<WorkerAssignLogReq, WorkerAssignLogResp>, callback: grpc_1.sendUnaryData<WorkerAssignLogResp>): void;
+        abstract TenantOrderSettingsCreate(call: grpc_1.ServerUnaryCall<TenantOrderSettingsCreateRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract TenantOrderSettingsGet(call: grpc_1.ServerUnaryCall<dependency_2.google.protobuf.Empty, TenantOrderSettingsGetResponse>, callback: grpc_1.sendUnaryData<TenantOrderSettingsGetResponse>): void;
+        abstract TenantOrderSettingsDelete(call: grpc_1.ServerUnaryCall<TenantOrderSettingsDeleteRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
     }
     export class TenantClient extends grpc_1.makeGenericClientConstructor(UnimplementedTenantService.definition, "Tenant", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -11914,7 +15050,7 @@ export namespace api.core {
         UpdateNimInfo: GrpcUnaryServiceInterface<UpdateNimInfoRequest, dependency_2.google.protobuf.Empty> = (message: UpdateNimInfoRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.UpdateNimInfo(message, metadata, options, callback);
         };
-        ExportUsersList: GrpcUnaryServiceInterface<dependency_2.google.protobuf.Empty, dependency_2.google.protobuf.Empty> = (message: dependency_2.google.protobuf.Empty, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+        ExportUsersList: GrpcUnaryServiceInterface<ExportUsersListRequest, dependency_2.google.protobuf.Empty> = (message: ExportUsersListRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.ExportUsersList(message, metadata, options, callback);
         };
         create_version: GrpcUnaryServiceInterface<VersionRequest, CreateVersionResponse> = (message: VersionRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CreateVersionResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CreateVersionResponse>, callback?: grpc_1.requestCallback<CreateVersionResponse>): grpc_1.ClientUnaryCall => {
@@ -12010,6 +15146,9 @@ export namespace api.core {
         WorkerSessionActivityLog: GrpcUnaryServiceInterface<WorkerSessionActivityLogRequest, WorkerSessionActivityLogResponse> = (message: WorkerSessionActivityLogRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerSessionActivityLogResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerSessionActivityLogResponse>, callback?: grpc_1.requestCallback<WorkerSessionActivityLogResponse>): grpc_1.ClientUnaryCall => {
             return super.WorkerSessionActivityLog(message, metadata, options, callback);
         };
+        ExportWorkerSessionActivityLog: GrpcUnaryServiceInterface<WorkerSessionActivityLogRequest, dependency_2.google.protobuf.Empty> = (message: WorkerSessionActivityLogRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.ExportWorkerSessionActivityLog(message, metadata, options, callback);
+        };
         TenantQualityContentAdd: GrpcUnaryServiceInterface<AddQualityContentReq, dependency_2.google.protobuf.Empty> = (message: AddQualityContentReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.TenantQualityContentAdd(message, metadata, options, callback);
         };
@@ -12039,6 +15178,33 @@ export namespace api.core {
         };
         ExportTenantWarnRecordQuery: GrpcUnaryServiceInterface<ExportWarnRecordQueryReq, dependency_2.google.protobuf.Empty> = (message: ExportWarnRecordQueryReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.ExportTenantWarnRecordQuery(message, metadata, options, callback);
+        };
+        AddVersionPublish: GrpcUnaryServiceInterface<AddVersionPublishReq, dependency_2.google.protobuf.Empty> = (message: AddVersionPublishReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.AddVersionPublish(message, metadata, options, callback);
+        };
+        EditVersionPublish: GrpcUnaryServiceInterface<EditVersionPublishReq, dependency_2.google.protobuf.Empty> = (message: EditVersionPublishReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.EditVersionPublish(message, metadata, options, callback);
+        };
+        VersionPublish: GrpcUnaryServiceInterface<VersionPublishReq, dependency_2.google.protobuf.Empty> = (message: VersionPublishReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.VersionPublish(message, metadata, options, callback);
+        };
+        SetFileExtractCode: GrpcUnaryServiceInterface<SetFileExtractCodeReq, dependency_2.google.protobuf.Empty> = (message: SetFileExtractCodeReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.SetFileExtractCode(message, metadata, options, callback);
+        };
+        VersionPublishList: GrpcUnaryServiceInterface<VersionPublishListReq, VersionPublishListResp> = (message: VersionPublishListReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<VersionPublishListResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<VersionPublishListResp>, callback?: grpc_1.requestCallback<VersionPublishListResp>): grpc_1.ClientUnaryCall => {
+            return super.VersionPublishList(message, metadata, options, callback);
+        };
+        WorkerAssignLog: GrpcUnaryServiceInterface<WorkerAssignLogReq, WorkerAssignLogResp> = (message: WorkerAssignLogReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerAssignLogResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerAssignLogResp>, callback?: grpc_1.requestCallback<WorkerAssignLogResp>): grpc_1.ClientUnaryCall => {
+            return super.WorkerAssignLog(message, metadata, options, callback);
+        };
+        TenantOrderSettingsCreate: GrpcUnaryServiceInterface<TenantOrderSettingsCreateRequest, dependency_2.google.protobuf.Empty> = (message: TenantOrderSettingsCreateRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.TenantOrderSettingsCreate(message, metadata, options, callback);
+        };
+        TenantOrderSettingsGet: GrpcUnaryServiceInterface<dependency_2.google.protobuf.Empty, TenantOrderSettingsGetResponse> = (message: dependency_2.google.protobuf.Empty, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<TenantOrderSettingsGetResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<TenantOrderSettingsGetResponse>, callback?: grpc_1.requestCallback<TenantOrderSettingsGetResponse>): grpc_1.ClientUnaryCall => {
+            return super.TenantOrderSettingsGet(message, metadata, options, callback);
+        };
+        TenantOrderSettingsDelete: GrpcUnaryServiceInterface<TenantOrderSettingsDeleteRequest, dependency_2.google.protobuf.Empty> = (message: TenantOrderSettingsDeleteRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.TenantOrderSettingsDelete(message, metadata, options, callback);
         };
     }
 }

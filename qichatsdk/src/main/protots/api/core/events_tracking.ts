@@ -32,9 +32,12 @@ export namespace api.core {
         ClickEvents_STATUS_CHANGE = 100,
         ClickEvents_STATUS_CHANGE_CANCEL = 101,
         ClickEvents_STATUS_CHANGE_CONFIRM = 102,
-        ClickEvents_STATUS_UNBIND = 103,
-        ClickEvents_SEARCH = 104,
-        ClickEvents_SESSION_LIST = 105,
+        ClickEvents_STATUS_UNBIND_APPLY = 103,
+        ClickEvents_STATUS_UNBIND = 104,
+        ClickEvents_STATUS_UNBIND_CONFIRM = 105,
+        ClickEvents_STATUS_UNBIND_CANCEL = 106,
+        ClickEvents_SEARCH = 107,
+        ClickEvents_SESSION_LIST = 108,
         ClickEvents_COPY_UID = 200,
         ClickEvents_REFRESH = 201,
         ClickEvents_TRANSFER = 202,
@@ -145,10 +148,14 @@ export namespace api.core {
         EVENT_CATEGORY_CLICK_SEND = 2
     }
     export class EventTracking extends pb_1.Message {
-        #one_of_decls: number[][] = [[3, 4, 5]];
+        #one_of_decls: number[][] = [[7, 8, 9]];
         constructor(data?: any[] | ({
             timestamp?: number;
             session_id?: number;
+            unprocessed_3min_count?: number;
+            timeout_count?: number;
+            transfer_count?: number;
+            is_busy?: boolean;
         } & (({
             click?: ClickEvents;
             scroll?: never;
@@ -170,6 +177,18 @@ export namespace api.core {
                 }
                 if ("session_id" in data && data.session_id != undefined) {
                     this.session_id = data.session_id;
+                }
+                if ("unprocessed_3min_count" in data && data.unprocessed_3min_count != undefined) {
+                    this.unprocessed_3min_count = data.unprocessed_3min_count;
+                }
+                if ("timeout_count" in data && data.timeout_count != undefined) {
+                    this.timeout_count = data.timeout_count;
+                }
+                if ("transfer_count" in data && data.transfer_count != undefined) {
+                    this.transfer_count = data.transfer_count;
+                }
+                if ("is_busy" in data && data.is_busy != undefined) {
+                    this.is_busy = data.is_busy;
                 }
                 if ("click" in data && data.click != undefined) {
                     this.click = data.click;
@@ -194,47 +213,75 @@ export namespace api.core {
         set session_id(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
+        get unprocessed_3min_count() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set unprocessed_3min_count(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get timeout_count() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set timeout_count(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get transfer_count() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set transfer_count(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get is_busy() {
+            return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
+        }
+        set is_busy(value: boolean) {
+            pb_1.Message.setField(this, 6, value);
+        }
         get click() {
-            return pb_1.Message.getFieldWithDefault(this, 3, ClickEvents.ClickEvents_LOGIN) as ClickEvents;
+            return pb_1.Message.getFieldWithDefault(this, 7, ClickEvents.ClickEvents_LOGIN) as ClickEvents;
         }
         set click(value: ClickEvents) {
-            pb_1.Message.setOneofField(this, 3, this.#one_of_decls[0], value);
+            pb_1.Message.setOneofField(this, 7, this.#one_of_decls[0], value);
         }
         get has_click() {
-            return pb_1.Message.getField(this, 3) != null;
+            return pb_1.Message.getField(this, 7) != null;
         }
         get scroll() {
-            return pb_1.Message.getFieldWithDefault(this, 4, ScrollEvents.ScrollEvents_MENU2_CHAT) as ScrollEvents;
+            return pb_1.Message.getFieldWithDefault(this, 8, ScrollEvents.ScrollEvents_MENU2_CHAT) as ScrollEvents;
         }
         set scroll(value: ScrollEvents) {
-            pb_1.Message.setOneofField(this, 4, this.#one_of_decls[0], value);
+            pb_1.Message.setOneofField(this, 8, this.#one_of_decls[0], value);
         }
         get has_scroll() {
-            return pb_1.Message.getField(this, 4) != null;
+            return pb_1.Message.getField(this, 8) != null;
         }
         get action() {
-            return pb_1.Message.getFieldWithDefault(this, 5, ActionEvents.ActionEvents_HISTORY_SEARCH) as ActionEvents;
+            return pb_1.Message.getFieldWithDefault(this, 9, ActionEvents.ActionEvents_HISTORY_SEARCH) as ActionEvents;
         }
         set action(value: ActionEvents) {
-            pb_1.Message.setOneofField(this, 5, this.#one_of_decls[0], value);
+            pb_1.Message.setOneofField(this, 9, this.#one_of_decls[0], value);
         }
         get has_action() {
-            return pb_1.Message.getField(this, 5) != null;
+            return pb_1.Message.getField(this, 9) != null;
         }
         get event() {
             const cases: {
                 [index: number]: "none" | "click" | "scroll" | "action";
             } = {
                 0: "none",
-                3: "click",
-                4: "scroll",
-                5: "action"
+                7: "click",
+                8: "scroll",
+                9: "action"
             };
-            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5])];
+            return cases[pb_1.Message.computeOneofCase(this, [7, 8, 9])];
         }
         static fromObject(data: {
             timestamp?: number;
             session_id?: number;
+            unprocessed_3min_count?: number;
+            timeout_count?: number;
+            transfer_count?: number;
+            is_busy?: boolean;
             click?: ClickEvents;
             scroll?: ScrollEvents;
             action?: ActionEvents;
@@ -245,6 +292,18 @@ export namespace api.core {
             }
             if (data.session_id != null) {
                 message.session_id = data.session_id;
+            }
+            if (data.unprocessed_3min_count != null) {
+                message.unprocessed_3min_count = data.unprocessed_3min_count;
+            }
+            if (data.timeout_count != null) {
+                message.timeout_count = data.timeout_count;
+            }
+            if (data.transfer_count != null) {
+                message.transfer_count = data.transfer_count;
+            }
+            if (data.is_busy != null) {
+                message.is_busy = data.is_busy;
             }
             if (data.click != null) {
                 message.click = data.click;
@@ -261,6 +320,10 @@ export namespace api.core {
             const data: {
                 timestamp?: number;
                 session_id?: number;
+                unprocessed_3min_count?: number;
+                timeout_count?: number;
+                transfer_count?: number;
+                is_busy?: boolean;
                 click?: ClickEvents;
                 scroll?: ScrollEvents;
                 action?: ActionEvents;
@@ -270,6 +333,18 @@ export namespace api.core {
             }
             if (this.session_id != null) {
                 data.session_id = this.session_id;
+            }
+            if (this.unprocessed_3min_count != null) {
+                data.unprocessed_3min_count = this.unprocessed_3min_count;
+            }
+            if (this.timeout_count != null) {
+                data.timeout_count = this.timeout_count;
+            }
+            if (this.transfer_count != null) {
+                data.transfer_count = this.transfer_count;
+            }
+            if (this.is_busy != null) {
+                data.is_busy = this.is_busy;
             }
             if (this.click != null) {
                 data.click = this.click;
@@ -290,12 +365,20 @@ export namespace api.core {
                 writer.writeInt64(1, this.timestamp);
             if (this.session_id != 0)
                 writer.writeInt32(2, this.session_id);
+            if (this.unprocessed_3min_count != 0)
+                writer.writeUint32(3, this.unprocessed_3min_count);
+            if (this.timeout_count != 0)
+                writer.writeUint32(4, this.timeout_count);
+            if (this.transfer_count != 0)
+                writer.writeUint32(5, this.transfer_count);
+            if (this.is_busy != false)
+                writer.writeBool(6, this.is_busy);
             if (this.has_click)
-                writer.writeEnum(3, this.click);
+                writer.writeEnum(7, this.click);
             if (this.has_scroll)
-                writer.writeEnum(4, this.scroll);
+                writer.writeEnum(8, this.scroll);
             if (this.has_action)
-                writer.writeEnum(5, this.action);
+                writer.writeEnum(9, this.action);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -312,12 +395,24 @@ export namespace api.core {
                         message.session_id = reader.readInt32();
                         break;
                     case 3:
-                        message.click = reader.readEnum();
+                        message.unprocessed_3min_count = reader.readUint32();
                         break;
                     case 4:
-                        message.scroll = reader.readEnum();
+                        message.timeout_count = reader.readUint32();
                         break;
                     case 5:
+                        message.transfer_count = reader.readUint32();
+                        break;
+                    case 6:
+                        message.is_busy = reader.readBool();
+                        break;
+                    case 7:
+                        message.click = reader.readEnum();
+                        break;
+                    case 8:
+                        message.scroll = reader.readEnum();
+                        break;
+                    case 9:
                         message.action = reader.readEnum();
                         break;
                     default: reader.skipField();
@@ -932,7 +1027,7 @@ export namespace api.core {
         }
     }
     export class EventTrackingListRequest extends pb_1.Message {
-        #one_of_decls: number[][] = [[2], [6]];
+        #one_of_decls: number[][] = [[2], [6], [7]];
         constructor(data?: any[] | ({
             worker_id?: number;
             cursor?: string;
@@ -942,6 +1037,8 @@ export namespace api.core {
             event_category?: EventCategory;
         }) | ({
             time_range?: TimeRange;
+        }) | ({
+            alarm_level?: dependency_6.api.common.EventAlarmLevel;
         })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -963,6 +1060,9 @@ export namespace api.core {
                 }
                 if ("time_range" in data && data.time_range != undefined) {
                     this.time_range = data.time_range;
+                }
+                if ("alarm_level" in data && data.alarm_level != undefined) {
+                    this.alarm_level = data.alarm_level;
                 }
             }
         }
@@ -1008,6 +1108,15 @@ export namespace api.core {
         get has_time_range() {
             return pb_1.Message.getField(this, 6) != null;
         }
+        get alarm_level() {
+            return pb_1.Message.getFieldWithDefault(this, 7, dependency_6.api.common.EventAlarmLevel.Level_None) as dependency_6.api.common.EventAlarmLevel;
+        }
+        set alarm_level(value: dependency_6.api.common.EventAlarmLevel) {
+            pb_1.Message.setOneofField(this, 7, this.#one_of_decls[2], value);
+        }
+        get has_alarm_level() {
+            return pb_1.Message.getField(this, 7) != null;
+        }
         get _event_category() {
             const cases: {
                 [index: number]: "none" | "event_category";
@@ -1026,6 +1135,15 @@ export namespace api.core {
             };
             return cases[pb_1.Message.computeOneofCase(this, [6])];
         }
+        get _alarm_level() {
+            const cases: {
+                [index: number]: "none" | "alarm_level";
+            } = {
+                0: "none",
+                7: "alarm_level"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [7])];
+        }
         static fromObject(data: {
             worker_id?: number;
             event_category?: EventCategory;
@@ -1033,6 +1151,7 @@ export namespace api.core {
             reverse?: boolean;
             limit?: number;
             time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+            alarm_level?: dependency_6.api.common.EventAlarmLevel;
         }): EventTrackingListRequest {
             const message = new EventTrackingListRequest({});
             if (data.worker_id != null) {
@@ -1053,6 +1172,9 @@ export namespace api.core {
             if (data.time_range != null) {
                 message.time_range = TimeRange.fromObject(data.time_range);
             }
+            if (data.alarm_level != null) {
+                message.alarm_level = data.alarm_level;
+            }
             return message;
         }
         toObject() {
@@ -1063,6 +1185,7 @@ export namespace api.core {
                 reverse?: boolean;
                 limit?: number;
                 time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+                alarm_level?: dependency_6.api.common.EventAlarmLevel;
             } = {};
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
@@ -1082,6 +1205,9 @@ export namespace api.core {
             if (this.time_range != null) {
                 data.time_range = this.time_range.toObject();
             }
+            if (this.alarm_level != null) {
+                data.alarm_level = this.alarm_level;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1100,6 +1226,8 @@ export namespace api.core {
                 writer.writeUint32(5, this.limit);
             if (this.has_time_range)
                 writer.writeMessage(6, this.time_range, () => this.time_range.serialize(writer));
+            if (this.has_alarm_level)
+                writer.writeEnum(7, this.alarm_level);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1126,6 +1254,9 @@ export namespace api.core {
                         break;
                     case 6:
                         reader.readMessage(message.time_range, () => message.time_range = TimeRange.deserialize(reader));
+                        break;
+                    case 7:
+                        message.alarm_level = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }
@@ -1237,6 +1368,7 @@ export namespace api.core {
                 time_taken?: number;
                 event_category?: string;
                 event_type?: string;
+                alarm_level?: dependency_6.api.common.EventAlarmLevel;
             }) {
                 super();
                 pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1252,6 +1384,9 @@ export namespace api.core {
                     }
                     if ("event_type" in data && data.event_type != undefined) {
                         this.event_type = data.event_type;
+                    }
+                    if ("alarm_level" in data && data.alarm_level != undefined) {
+                        this.alarm_level = data.alarm_level;
                     }
                 }
             }
@@ -1279,11 +1414,18 @@ export namespace api.core {
             set event_type(value: string) {
                 pb_1.Message.setField(this, 4, value);
             }
+            get alarm_level() {
+                return pb_1.Message.getFieldWithDefault(this, 5, dependency_6.api.common.EventAlarmLevel.Level_None) as dependency_6.api.common.EventAlarmLevel;
+            }
+            set alarm_level(value: dependency_6.api.common.EventAlarmLevel) {
+                pb_1.Message.setField(this, 5, value);
+            }
             static fromObject(data: {
                 timestamp?: string;
                 time_taken?: number;
                 event_category?: string;
                 event_type?: string;
+                alarm_level?: dependency_6.api.common.EventAlarmLevel;
             }): EventTrackingItem {
                 const message = new EventTrackingItem({});
                 if (data.timestamp != null) {
@@ -1298,6 +1440,9 @@ export namespace api.core {
                 if (data.event_type != null) {
                     message.event_type = data.event_type;
                 }
+                if (data.alarm_level != null) {
+                    message.alarm_level = data.alarm_level;
+                }
                 return message;
             }
             toObject() {
@@ -1306,6 +1451,7 @@ export namespace api.core {
                     time_taken?: number;
                     event_category?: string;
                     event_type?: string;
+                    alarm_level?: dependency_6.api.common.EventAlarmLevel;
                 } = {};
                 if (this.timestamp != null) {
                     data.timestamp = this.timestamp;
@@ -1318,6 +1464,9 @@ export namespace api.core {
                 }
                 if (this.event_type != null) {
                     data.event_type = this.event_type;
+                }
+                if (this.alarm_level != null) {
+                    data.alarm_level = this.alarm_level;
                 }
                 return data;
             }
@@ -1333,6 +1482,8 @@ export namespace api.core {
                     writer.writeString(3, this.event_category);
                 if (this.event_type.length)
                     writer.writeString(4, this.event_type);
+                if (this.alarm_level != dependency_6.api.common.EventAlarmLevel.Level_None)
+                    writer.writeEnum(5, this.alarm_level);
                 if (!w)
                     return writer.getResultBuffer();
             }
@@ -1354,6 +1505,9 @@ export namespace api.core {
                         case 4:
                             message.event_type = reader.readString();
                             break;
+                        case 5:
+                            message.alarm_level = reader.readEnum();
+                            break;
                         default: reader.skipField();
                     }
                 }
@@ -1368,17 +1522,20 @@ export namespace api.core {
         }
     }
     export class EventTrackingDailyStatsRequest extends pb_1.Message {
-        #one_of_decls: number[][] = [[4], [7]];
+        #one_of_decls: number[][] = [[4], [7], [8]];
         constructor(data?: any[] | ({
             group_id?: number;
             worker_id?: number;
             worker_account?: string;
             page?: number;
             page_size?: number;
+            is_asc?: boolean;
         } & (({
             worker_status?: dependency_5.api.common.WorkerState;
         }) | ({
             time_range?: TimeRange;
+        }) | ({
+            sort_by?: EventTrackingDailyStatsRequest.SortBy;
         })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1403,6 +1560,12 @@ export namespace api.core {
                 }
                 if ("time_range" in data && data.time_range != undefined) {
                     this.time_range = data.time_range;
+                }
+                if ("sort_by" in data && data.sort_by != undefined) {
+                    this.sort_by = data.sort_by;
+                }
+                if ("is_asc" in data && data.is_asc != undefined) {
+                    this.is_asc = data.is_asc;
                 }
             }
         }
@@ -1454,6 +1617,21 @@ export namespace api.core {
         get has_time_range() {
             return pb_1.Message.getField(this, 7) != null;
         }
+        get sort_by() {
+            return pb_1.Message.getFieldWithDefault(this, 8, EventTrackingDailyStatsRequest.SortBy.NONE) as EventTrackingDailyStatsRequest.SortBy;
+        }
+        set sort_by(value: EventTrackingDailyStatsRequest.SortBy) {
+            pb_1.Message.setOneofField(this, 8, this.#one_of_decls[2], value);
+        }
+        get has_sort_by() {
+            return pb_1.Message.getField(this, 8) != null;
+        }
+        get is_asc() {
+            return pb_1.Message.getFieldWithDefault(this, 9, false) as boolean;
+        }
+        set is_asc(value: boolean) {
+            pb_1.Message.setField(this, 9, value);
+        }
         get _worker_status() {
             const cases: {
                 [index: number]: "none" | "worker_status";
@@ -1472,6 +1650,15 @@ export namespace api.core {
             };
             return cases[pb_1.Message.computeOneofCase(this, [7])];
         }
+        get _sort_by() {
+            const cases: {
+                [index: number]: "none" | "sort_by";
+            } = {
+                0: "none",
+                8: "sort_by"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [8])];
+        }
         static fromObject(data: {
             group_id?: number;
             worker_id?: number;
@@ -1480,6 +1667,8 @@ export namespace api.core {
             page?: number;
             page_size?: number;
             time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+            sort_by?: EventTrackingDailyStatsRequest.SortBy;
+            is_asc?: boolean;
         }): EventTrackingDailyStatsRequest {
             const message = new EventTrackingDailyStatsRequest({});
             if (data.group_id != null) {
@@ -1503,6 +1692,12 @@ export namespace api.core {
             if (data.time_range != null) {
                 message.time_range = TimeRange.fromObject(data.time_range);
             }
+            if (data.sort_by != null) {
+                message.sort_by = data.sort_by;
+            }
+            if (data.is_asc != null) {
+                message.is_asc = data.is_asc;
+            }
             return message;
         }
         toObject() {
@@ -1514,6 +1709,8 @@ export namespace api.core {
                 page?: number;
                 page_size?: number;
                 time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+                sort_by?: EventTrackingDailyStatsRequest.SortBy;
+                is_asc?: boolean;
             } = {};
             if (this.group_id != null) {
                 data.group_id = this.group_id;
@@ -1536,6 +1733,12 @@ export namespace api.core {
             if (this.time_range != null) {
                 data.time_range = this.time_range.toObject();
             }
+            if (this.sort_by != null) {
+                data.sort_by = this.sort_by;
+            }
+            if (this.is_asc != null) {
+                data.is_asc = this.is_asc;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1556,6 +1759,10 @@ export namespace api.core {
                 writer.writeUint32(6, this.page_size);
             if (this.has_time_range)
                 writer.writeMessage(7, this.time_range, () => this.time_range.serialize(writer));
+            if (this.has_sort_by)
+                writer.writeEnum(8, this.sort_by);
+            if (this.is_asc != false)
+                writer.writeBool(9, this.is_asc);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1586,6 +1793,12 @@ export namespace api.core {
                     case 7:
                         reader.readMessage(message.time_range, () => message.time_range = TimeRange.deserialize(reader));
                         break;
+                    case 8:
+                        message.sort_by = reader.readEnum();
+                        break;
+                    case 9:
+                        message.is_asc = reader.readBool();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -1596,6 +1809,19 @@ export namespace api.core {
         }
         static deserializeBinary(bytes: Uint8Array): EventTrackingDailyStatsRequest {
             return EventTrackingDailyStatsRequest.deserialize(bytes);
+        }
+    }
+    export namespace EventTrackingDailyStatsRequest {
+        export enum SortBy {
+            NONE = 0,
+            LAST_ALARM_TRIGGER_TIME = 1,
+            TOTAL_DURATION = 2,
+            ALARM_DURATION = 3,
+            AVG_RESP_TIME = 4,
+            CLICK = 5,
+            SCROLL = 6,
+            SEND = 7,
+            TRIGGER_TIME = 8
         }
     }
     export class EventTrackingDailyStatsResponse extends pb_1.Message {
@@ -2079,6 +2305,507 @@ export namespace api.core {
             }
         }
     }
+    export class SetMonitorAllRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            is_monitor?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("is_monitor" in data && data.is_monitor != undefined) {
+                    this.is_monitor = data.is_monitor;
+                }
+            }
+        }
+        get is_monitor() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set is_monitor(value: boolean) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            is_monitor?: boolean;
+        }): SetMonitorAllRequest {
+            const message = new SetMonitorAllRequest({});
+            if (data.is_monitor != null) {
+                message.is_monitor = data.is_monitor;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                is_monitor?: boolean;
+            } = {};
+            if (this.is_monitor != null) {
+                data.is_monitor = this.is_monitor;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.is_monitor != false)
+                writer.writeBool(1, this.is_monitor);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetMonitorAllRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetMonitorAllRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.is_monitor = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetMonitorAllRequest {
+            return SetMonitorAllRequest.deserialize(bytes);
+        }
+    }
+    export class SetMonitorRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            is_monitor?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("is_monitor" in data && data.is_monitor != undefined) {
+                    this.is_monitor = data.is_monitor;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get is_monitor() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        }
+        set is_monitor(value: boolean) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            is_monitor?: boolean;
+        }): SetMonitorRequest {
+            const message = new SetMonitorRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.is_monitor != null) {
+                message.is_monitor = data.is_monitor;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                is_monitor?: boolean;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.is_monitor != null) {
+                data.is_monitor = this.is_monitor;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeUint32(1, this.worker_id);
+            if (this.is_monitor != false)
+                writer.writeBool(2, this.is_monitor);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetMonitorRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetMonitorRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.is_monitor = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetMonitorRequest {
+            return SetMonitorRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerAlarmsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            page?: number;
+            page_size?: number;
+            time_range?: TimeRange;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("page_size" in data && data.page_size != undefined) {
+                    this.page_size = data.page_size;
+                }
+                if ("time_range" in data && data.time_range != undefined) {
+                    this.time_range = data.time_range;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get page_size() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set page_size(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get time_range() {
+            return pb_1.Message.getWrapperField(this, TimeRange, 4) as TimeRange;
+        }
+        set time_range(value: TimeRange) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_time_range() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            page?: number;
+            page_size?: number;
+            time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+        }): WorkerAlarmsRequest {
+            const message = new WorkerAlarmsRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.page_size != null) {
+                message.page_size = data.page_size;
+            }
+            if (data.time_range != null) {
+                message.time_range = TimeRange.fromObject(data.time_range);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                page?: number;
+                page_size?: number;
+                time_range?: ReturnType<typeof TimeRange.prototype.toObject>;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.page_size != null) {
+                data.page_size = this.page_size;
+            }
+            if (this.time_range != null) {
+                data.time_range = this.time_range.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeUint32(1, this.worker_id);
+            if (this.page != 0)
+                writer.writeUint32(2, this.page);
+            if (this.page_size != 0)
+                writer.writeUint32(3, this.page_size);
+            if (this.has_time_range)
+                writer.writeMessage(4, this.time_range, () => this.time_range.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAlarmsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAlarmsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readUint32();
+                        break;
+                    case 2:
+                        message.page = reader.readUint32();
+                        break;
+                    case 3:
+                        message.page_size = reader.readUint32();
+                        break;
+                    case 4:
+                        reader.readMessage(message.time_range, () => message.time_range = TimeRange.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAlarmsRequest {
+            return WorkerAlarmsRequest.deserialize(bytes);
+        }
+    }
+    export class WorkerAlarmsResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            list?: WorkerAlarmsResponse.Item[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, WorkerAlarmsResponse.Item, 1) as WorkerAlarmsResponse.Item[];
+        }
+        set list(value: WorkerAlarmsResponse.Item[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            list?: ReturnType<typeof WorkerAlarmsResponse.Item.prototype.toObject>[];
+            total?: number;
+        }): WorkerAlarmsResponse {
+            const message = new WorkerAlarmsResponse({});
+            if (data.list != null) {
+                message.list = data.list.map(item => WorkerAlarmsResponse.Item.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                list?: ReturnType<typeof WorkerAlarmsResponse.Item.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.list != null) {
+                data.list = this.list.map((item: WorkerAlarmsResponse.Item) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.list.length)
+                writer.writeRepeatedMessage(1, this.list, (item: WorkerAlarmsResponse.Item) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeUint32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): WorkerAlarmsResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new WorkerAlarmsResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 1, WorkerAlarmsResponse.Item.deserialize(reader), WorkerAlarmsResponse.Item));
+                        break;
+                    case 2:
+                        message.total = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): WorkerAlarmsResponse {
+            return WorkerAlarmsResponse.deserialize(bytes);
+        }
+    }
+    export namespace WorkerAlarmsResponse {
+        export class Item extends pb_1.Message {
+            #one_of_decls: number[][] = [];
+            constructor(data?: any[] | {
+                alarm_trigger_time?: string;
+                clearance_time?: string;
+                duration?: number;
+            }) {
+                super();
+                pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+                if (!Array.isArray(data) && typeof data == "object") {
+                    if ("alarm_trigger_time" in data && data.alarm_trigger_time != undefined) {
+                        this.alarm_trigger_time = data.alarm_trigger_time;
+                    }
+                    if ("clearance_time" in data && data.clearance_time != undefined) {
+                        this.clearance_time = data.clearance_time;
+                    }
+                    if ("duration" in data && data.duration != undefined) {
+                        this.duration = data.duration;
+                    }
+                }
+            }
+            get alarm_trigger_time() {
+                return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+            }
+            set alarm_trigger_time(value: string) {
+                pb_1.Message.setField(this, 1, value);
+            }
+            get clearance_time() {
+                return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+            }
+            set clearance_time(value: string) {
+                pb_1.Message.setField(this, 2, value);
+            }
+            get duration() {
+                return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            }
+            set duration(value: number) {
+                pb_1.Message.setField(this, 3, value);
+            }
+            static fromObject(data: {
+                alarm_trigger_time?: string;
+                clearance_time?: string;
+                duration?: number;
+            }): Item {
+                const message = new Item({});
+                if (data.alarm_trigger_time != null) {
+                    message.alarm_trigger_time = data.alarm_trigger_time;
+                }
+                if (data.clearance_time != null) {
+                    message.clearance_time = data.clearance_time;
+                }
+                if (data.duration != null) {
+                    message.duration = data.duration;
+                }
+                return message;
+            }
+            toObject() {
+                const data: {
+                    alarm_trigger_time?: string;
+                    clearance_time?: string;
+                    duration?: number;
+                } = {};
+                if (this.alarm_trigger_time != null) {
+                    data.alarm_trigger_time = this.alarm_trigger_time;
+                }
+                if (this.clearance_time != null) {
+                    data.clearance_time = this.clearance_time;
+                }
+                if (this.duration != null) {
+                    data.duration = this.duration;
+                }
+                return data;
+            }
+            serialize(): Uint8Array;
+            serialize(w: pb_1.BinaryWriter): void;
+            serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+                const writer = w || new pb_1.BinaryWriter();
+                if (this.alarm_trigger_time.length)
+                    writer.writeString(1, this.alarm_trigger_time);
+                if (this.clearance_time.length)
+                    writer.writeString(2, this.clearance_time);
+                if (this.duration != 0)
+                    writer.writeUint64(3, this.duration);
+                if (!w)
+                    return writer.getResultBuffer();
+            }
+            static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Item {
+                const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Item();
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            message.alarm_trigger_time = reader.readString();
+                            break;
+                        case 2:
+                            message.clearance_time = reader.readString();
+                            break;
+                        case 3:
+                            message.duration = reader.readUint64();
+                            break;
+                        default: reader.skipField();
+                    }
+                }
+                return message;
+            }
+            serializeBinary(): Uint8Array {
+                return this.serialize();
+            }
+            static deserializeBinary(bytes: Uint8Array): Item {
+                return Item.deserialize(bytes);
+            }
+        }
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -2149,6 +2876,33 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => EventTrackingDailyStatsRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: EventTrackingDailyStatsResponse) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => EventTrackingDailyStatsResponse.deserialize(new Uint8Array(bytes))
+            },
+            SetMonitor: {
+                path: "/api.core.EventTrackingService/SetMonitor",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetMonitorRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetMonitorRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            SetMonitorAll: {
+                path: "/api.core.EventTrackingService/SetMonitorAll",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetMonitorAllRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetMonitorAllRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: dependency_1.google.protobuf.Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => dependency_1.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            WorkerAlarms: {
+                path: "/api.core.EventTrackingService/WorkerAlarms",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: WorkerAlarmsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => WorkerAlarmsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: WorkerAlarmsResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => WorkerAlarmsResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -2157,6 +2911,9 @@ export namespace api.core {
         abstract EventTrackingList(call: grpc_1.ServerUnaryCall<EventTrackingListRequest, EventTrackingListResponse>, callback: grpc_1.sendUnaryData<EventTrackingListResponse>): void;
         abstract EventTrackingDailyStats(call: grpc_1.ServerUnaryCall<EventTrackingDailyStatsRequest, EventTrackingDailyStatsResponse>, callback: grpc_1.sendUnaryData<EventTrackingDailyStatsResponse>): void;
         abstract EventTrackingDailyStatsExport(call: grpc_1.ServerUnaryCall<EventTrackingDailyStatsRequest, EventTrackingDailyStatsResponse>, callback: grpc_1.sendUnaryData<EventTrackingDailyStatsResponse>): void;
+        abstract SetMonitor(call: grpc_1.ServerUnaryCall<SetMonitorRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract SetMonitorAll(call: grpc_1.ServerUnaryCall<SetMonitorAllRequest, dependency_1.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_1.google.protobuf.Empty>): void;
+        abstract WorkerAlarms(call: grpc_1.ServerUnaryCall<WorkerAlarmsRequest, WorkerAlarmsResponse>, callback: grpc_1.sendUnaryData<WorkerAlarmsResponse>): void;
     }
     export class EventTrackingServiceClient extends grpc_1.makeGenericClientConstructor(UnimplementedEventTrackingServiceService.definition, "EventTrackingService", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -2176,6 +2933,15 @@ export namespace api.core {
         };
         EventTrackingDailyStatsExport: GrpcUnaryServiceInterface<EventTrackingDailyStatsRequest, EventTrackingDailyStatsResponse> = (message: EventTrackingDailyStatsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<EventTrackingDailyStatsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<EventTrackingDailyStatsResponse>, callback?: grpc_1.requestCallback<EventTrackingDailyStatsResponse>): grpc_1.ClientUnaryCall => {
             return super.EventTrackingDailyStatsExport(message, metadata, options, callback);
+        };
+        SetMonitor: GrpcUnaryServiceInterface<SetMonitorRequest, dependency_1.google.protobuf.Empty> = (message: SetMonitorRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.SetMonitor(message, metadata, options, callback);
+        };
+        SetMonitorAll: GrpcUnaryServiceInterface<SetMonitorAllRequest, dependency_1.google.protobuf.Empty> = (message: SetMonitorAllRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_1.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_1.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
+            return super.SetMonitorAll(message, metadata, options, callback);
+        };
+        WorkerAlarms: GrpcUnaryServiceInterface<WorkerAlarmsRequest, WorkerAlarmsResponse> = (message: WorkerAlarmsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<WorkerAlarmsResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<WorkerAlarmsResponse>, callback?: grpc_1.requestCallback<WorkerAlarmsResponse>): grpc_1.ClientUnaryCall => {
+            return super.WorkerAlarms(message, metadata, options, callback);
         };
     }
 }

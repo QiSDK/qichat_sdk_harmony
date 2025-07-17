@@ -812,12 +812,20 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             autoReplyItem?: dependency_6.api.common.AutoReplyItem;
+            worker_id?: number;
+            tenant_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("autoReplyItem" in data && data.autoReplyItem != undefined) {
                     this.autoReplyItem = data.autoReplyItem;
+                }
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("tenant_id" in data && data.tenant_id != undefined) {
+                    this.tenant_id = data.tenant_id;
                 }
             }
         }
@@ -830,21 +838,49 @@ export namespace api.core {
         get has_autoReplyItem() {
             return pb_1.Message.getField(this, 1) != null;
         }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get tenant_id() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set tenant_id(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
         static fromObject(data: {
             autoReplyItem?: ReturnType<typeof dependency_6.api.common.AutoReplyItem.prototype.toObject>;
+            worker_id?: number;
+            tenant_id?: number;
         }): QueryAutoReplyResponse {
             const message = new QueryAutoReplyResponse({});
             if (data.autoReplyItem != null) {
                 message.autoReplyItem = dependency_6.api.common.AutoReplyItem.fromObject(data.autoReplyItem);
+            }
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.tenant_id != null) {
+                message.tenant_id = data.tenant_id;
             }
             return message;
         }
         toObject() {
             const data: {
                 autoReplyItem?: ReturnType<typeof dependency_6.api.common.AutoReplyItem.prototype.toObject>;
+                worker_id?: number;
+                tenant_id?: number;
             } = {};
             if (this.autoReplyItem != null) {
                 data.autoReplyItem = this.autoReplyItem.toObject();
+            }
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.tenant_id != null) {
+                data.tenant_id = this.tenant_id;
             }
             return data;
         }
@@ -854,6 +890,10 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.has_autoReplyItem)
                 writer.writeMessage(1, this.autoReplyItem, () => this.autoReplyItem.serialize(writer));
+            if (this.worker_id != 0)
+                writer.writeInt32(2, this.worker_id);
+            if (this.tenant_id != 0)
+                writer.writeInt32(3, this.tenant_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -865,6 +905,12 @@ export namespace api.core {
                 switch (reader.getFieldNumber()) {
                     case 1:
                         reader.readMessage(message.autoReplyItem, () => message.autoReplyItem = dependency_6.api.common.AutoReplyItem.deserialize(reader));
+                        break;
+                    case 2:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 3:
+                        message.tenant_id = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -2154,6 +2200,7 @@ export namespace api.core {
         constructor(data?: any[] | {
             chat_id?: number[];
             consult_id?: number;
+            flag?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
@@ -2163,6 +2210,9 @@ export namespace api.core {
                 }
                 if ("consult_id" in data && data.consult_id != undefined) {
                     this.consult_id = data.consult_id;
+                }
+                if ("flag" in data && data.flag != undefined) {
+                    this.flag = data.flag;
                 }
             }
         }
@@ -2178,9 +2228,16 @@ export namespace api.core {
         set consult_id(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
+        get flag() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set flag(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
         static fromObject(data: {
             chat_id?: number[];
             consult_id?: number;
+            flag?: boolean;
         }): QueryChatRequest {
             const message = new QueryChatRequest({});
             if (data.chat_id != null) {
@@ -2189,18 +2246,25 @@ export namespace api.core {
             if (data.consult_id != null) {
                 message.consult_id = data.consult_id;
             }
+            if (data.flag != null) {
+                message.flag = data.flag;
+            }
             return message;
         }
         toObject() {
             const data: {
                 chat_id?: number[];
                 consult_id?: number;
+                flag?: boolean;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
             }
             if (this.consult_id != null) {
                 data.consult_id = this.consult_id;
+            }
+            if (this.flag != null) {
+                data.flag = this.flag;
             }
             return data;
         }
@@ -2212,6 +2276,8 @@ export namespace api.core {
                 writer.writePackedInt64(1, this.chat_id);
             if (this.consult_id != 0)
                 writer.writeUint32(2, this.consult_id);
+            if (this.flag != false)
+                writer.writeBool(3, this.flag);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2226,6 +2292,9 @@ export namespace api.core {
                         break;
                     case 2:
                         message.consult_id = reader.readUint32();
+                        break;
+                    case 3:
+                        message.flag = reader.readBool();
                         break;
                     default: reader.skipField();
                 }
@@ -2556,7 +2625,7 @@ export namespace api.core {
     export class ReplyRequest extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            msg_id?: string;
+            msg_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -2567,13 +2636,13 @@ export namespace api.core {
             }
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 1, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set msg_id(value: string) {
+        set msg_id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            msg_id?: string;
+            msg_id?: number;
         }): ReplyRequest {
             const message = new ReplyRequest({});
             if (data.msg_id != null) {
@@ -2583,7 +2652,7 @@ export namespace api.core {
         }
         toObject() {
             const data: {
-                msg_id?: string;
+                msg_id?: number;
             } = {};
             if (this.msg_id != null) {
                 data.msg_id = this.msg_id;
@@ -2594,8 +2663,8 @@ export namespace api.core {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.msg_id != "0")
-                writer.writeUint64String(1, this.msg_id);
+            if (this.msg_id != 0)
+                writer.writeInt64(1, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2606,7 +2675,7 @@ export namespace api.core {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.msg_id = reader.readUint64String();
+                        message.msg_id = reader.readInt64();
                         break;
                     default: reader.skipField();
                 }

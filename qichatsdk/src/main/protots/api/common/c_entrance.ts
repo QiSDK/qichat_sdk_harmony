@@ -26,12 +26,20 @@ export namespace api.common {
         CLIENT_TYPE_USER_WEB = 103,
         CLIENT_TYPE_USER_APP = 104,
         CLIENT_TYPE_USER_WEB_IOS = 105,
+        CLIENT_TYPE_USER_WEB_ANDROID = 111,
         CLIENT_TYPE_USER_WEB_WINDOWS = 106,
+        CLIENT_TYPE_USER_WEB_HARMONYOS = 112,
         CLIENT_TYPE_USER_APP_IOS = 107,
         CLIENT_TYPE_USER_APP_ANDROID = 108,
+        CLIENT_TYPE_USER_APP_HARMONYOS = 113,
         CLIENT_TYPE_USER_WINDOWS = 109,
         CLIENT_TYPE_USER_MAC = 110,
+        CLIENT_TYPE_USER_HARMONYOS = 114,
         CLIENT_TYPE_USER_END = 200
+    }
+    export enum VersionType {
+        Pre = 0,
+        Official = 1
     }
     export class Entrance extends pb_1.Message {
         #one_of_decls: number[][] = [];

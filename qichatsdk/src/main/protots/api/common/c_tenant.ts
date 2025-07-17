@@ -27,7 +27,14 @@ export namespace api.common {
         Warn_Unknown = 0,
         Warn_Leave_Time = 1,
         Warn_leave_Count = 2,
-        Warn_Wait_Reply = 3
+        Warn_Wait_Reply = 3,
+        Warn_Abnormal_Logout = 4
+    }
+    export enum EventAlarmLevel {
+        Level_None = 0,
+        Level_Normal = 1,
+        Level_Alarm_Free = 2,
+        Level_Alarm = 3
     }
     export class WarnInfo extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -40,6 +47,7 @@ export namespace api.common {
             threshold?: number;
             times?: number;
             create_time?: string;
+            alarm_level?: EventAlarmLevel;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -67,6 +75,9 @@ export namespace api.common {
                 }
                 if ("create_time" in data && data.create_time != undefined) {
                     this.create_time = data.create_time;
+                }
+                if ("alarm_level" in data && data.alarm_level != undefined) {
+                    this.alarm_level = data.alarm_level;
                 }
             }
         }
@@ -118,6 +129,12 @@ export namespace api.common {
         set create_time(value: string) {
             pb_1.Message.setField(this, 9, value);
         }
+        get alarm_level() {
+            return pb_1.Message.getFieldWithDefault(this, 10, EventAlarmLevel.Level_None) as EventAlarmLevel;
+        }
+        set alarm_level(value: EventAlarmLevel) {
+            pb_1.Message.setField(this, 10, value);
+        }
         static fromObject(data: {
             warn_type?: TenantWarnEventType;
             name?: string;
@@ -127,6 +144,7 @@ export namespace api.common {
             threshold?: number;
             times?: number;
             create_time?: string;
+            alarm_level?: EventAlarmLevel;
         }): WarnInfo {
             const message = new WarnInfo({});
             if (data.warn_type != null) {
@@ -153,6 +171,9 @@ export namespace api.common {
             if (data.create_time != null) {
                 message.create_time = data.create_time;
             }
+            if (data.alarm_level != null) {
+                message.alarm_level = data.alarm_level;
+            }
             return message;
         }
         toObject() {
@@ -165,6 +186,7 @@ export namespace api.common {
                 threshold?: number;
                 times?: number;
                 create_time?: string;
+                alarm_level?: EventAlarmLevel;
             } = {};
             if (this.warn_type != null) {
                 data.warn_type = this.warn_type;
@@ -190,6 +212,9 @@ export namespace api.common {
             if (this.create_time != null) {
                 data.create_time = this.create_time;
             }
+            if (this.alarm_level != null) {
+                data.alarm_level = this.alarm_level;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -212,6 +237,8 @@ export namespace api.common {
                 writer.writeInt32(8, this.times);
             if (this.create_time.length)
                 writer.writeString(9, this.create_time);
+            if (this.alarm_level != EventAlarmLevel.Level_None)
+                writer.writeEnum(10, this.alarm_level);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -244,6 +271,9 @@ export namespace api.common {
                         break;
                     case 9:
                         message.create_time = reader.readString();
+                        break;
+                    case 10:
+                        message.alarm_level = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }

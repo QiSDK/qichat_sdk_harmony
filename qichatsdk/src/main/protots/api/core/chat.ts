@@ -109,12 +109,16 @@ export namespace api.core {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             worker_id?: number;
+            flag?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("worker_id" in data && data.worker_id != undefined) {
                     this.worker_id = data.worker_id;
+                }
+                if ("flag" in data && data.flag != undefined) {
+                    this.flag = data.flag;
                 }
             }
         }
@@ -124,21 +128,35 @@ export namespace api.core {
         set worker_id(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
+        get flag() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        }
+        set flag(value: boolean) {
+            pb_1.Message.setField(this, 2, value);
+        }
         static fromObject(data: {
             worker_id?: number;
+            flag?: boolean;
         }): ChatListQueryRequest {
             const message = new ChatListQueryRequest({});
             if (data.worker_id != null) {
                 message.worker_id = data.worker_id;
+            }
+            if (data.flag != null) {
+                message.flag = data.flag;
             }
             return message;
         }
         toObject() {
             const data: {
                 worker_id?: number;
+                flag?: boolean;
             } = {};
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
+            }
+            if (this.flag != null) {
+                data.flag = this.flag;
             }
             return data;
         }
@@ -148,6 +166,8 @@ export namespace api.core {
             const writer = w || new pb_1.BinaryWriter();
             if (this.worker_id != 0)
                 writer.writeInt32(1, this.worker_id);
+            if (this.flag != false)
+                writer.writeBool(2, this.flag);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -159,6 +179,9 @@ export namespace api.core {
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.flag = reader.readBool();
                         break;
                     default: reader.skipField();
                 }
@@ -1012,7 +1035,7 @@ export namespace api.core {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 3, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
         set msg_id(value: string) {
             pb_1.Message.setField(this, 3, value);
@@ -1059,8 +1082,8 @@ export namespace api.core {
                 writer.writeInt64(1, this.chat_id);
             if (this.consult_id != 0)
                 writer.writeInt64(2, this.consult_id);
-            if (this.msg_id != "0")
-                writer.writeUint64String(3, this.msg_id);
+            if (this.msg_id.length)
+                writer.writeString(3, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1077,7 +1100,7 @@ export namespace api.core {
                         message.consult_id = reader.readInt64();
                         break;
                     case 3:
-                        message.msg_id = reader.readUint64String();
+                        message.msg_id = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -1482,7 +1505,7 @@ export namespace api.core {
             owner_id?: number;
             owner_role?: number;
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1538,9 +1561,9 @@ export namespace api.core {
             pb_1.Message.setField(this, 5, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 6, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
         }
-        set msg_id(value: string) {
+        set msg_id(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
         static fromObject(data: {
@@ -1549,7 +1572,7 @@ export namespace api.core {
             owner_id?: number;
             owner_role?: number;
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
         }): GetChatSessionStateRequest {
             const message = new GetChatSessionStateRequest({});
             if (data.tenant_id != null) {
@@ -1579,7 +1602,7 @@ export namespace api.core {
                 owner_id?: number;
                 owner_role?: number;
                 chat_id?: number;
-                msg_id?: string;
+                msg_id?: number;
             } = {};
             if (this.tenant_id != null) {
                 data.tenant_id = this.tenant_id;
@@ -1615,8 +1638,8 @@ export namespace api.core {
                 writer.writeInt32(4, this.owner_role);
             if (this.chat_id != 0)
                 writer.writeInt64(5, this.chat_id);
-            if (this.msg_id != "0")
-                writer.writeUint64String(6, this.msg_id);
+            if (this.msg_id != 0)
+                writer.writeInt64(6, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1642,7 +1665,7 @@ export namespace api.core {
                         message.chat_id = reader.readInt64();
                         break;
                     case 6:
-                        message.msg_id = reader.readUint64String();
+                        message.msg_id = reader.readInt64();
                         break;
                     default: reader.skipField();
                 }
@@ -2855,6 +2878,140 @@ export namespace api.core {
             return GetChatStateRespV1.deserialize(bytes);
         }
     }
+    export class ChatFaqRemarkReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_id?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_id" in data && data.chat_id != undefined) {
+                    this.chat_id = data.chat_id;
+                }
+            }
+        }
+        get chat_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set chat_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            chat_id?: number;
+        }): ChatFaqRemarkReq {
+            const message = new ChatFaqRemarkReq({});
+            if (data.chat_id != null) {
+                message.chat_id = data.chat_id;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_id?: number;
+            } = {};
+            if (this.chat_id != null) {
+                data.chat_id = this.chat_id;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_id != 0)
+                writer.writeInt64(1, this.chat_id);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ChatFaqRemarkReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ChatFaqRemarkReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_id = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ChatFaqRemarkReq {
+            return ChatFaqRemarkReq.deserialize(bytes);
+        }
+    }
+    export class ChatFaqRemarkResp extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            chat_remark?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("chat_remark" in data && data.chat_remark != undefined) {
+                    this.chat_remark = data.chat_remark;
+                }
+            }
+        }
+        get chat_remark() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set chat_remark(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            chat_remark?: string;
+        }): ChatFaqRemarkResp {
+            const message = new ChatFaqRemarkResp({});
+            if (data.chat_remark != null) {
+                message.chat_remark = data.chat_remark;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                chat_remark?: string;
+            } = {};
+            if (this.chat_remark != null) {
+                data.chat_remark = this.chat_remark;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.chat_remark.length)
+                writer.writeString(1, this.chat_remark);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ChatFaqRemarkResp {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ChatFaqRemarkResp();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.chat_remark = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ChatFaqRemarkResp {
+            return ChatFaqRemarkResp.deserialize(bytes);
+        }
+    }
     interface GrpcUnaryServiceInterface<P, R> {
         (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
         (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
@@ -2988,6 +3145,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => GetChatStateReq.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: GetChatStateRespV1) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => GetChatStateRespV1.deserialize(new Uint8Array(bytes))
+            },
+            GetChatFaqRemark: {
+                path: "/api.core.Chat/GetChatFaqRemark",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ChatFaqRemarkReq) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ChatFaqRemarkReq.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: ChatFaqRemarkResp) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => ChatFaqRemarkResp.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -3003,6 +3169,7 @@ export namespace api.core {
         abstract GetChatSessionState(call: grpc_1.ServerUnaryCall<GetChatSessionStateRequest, GetChatSessionStateResponse>, callback: grpc_1.sendUnaryData<GetChatSessionStateResponse>): void;
         abstract GetChatState(call: grpc_1.ServerUnaryCall<GetChatStateReq, GetChatStateResp>, callback: grpc_1.sendUnaryData<GetChatStateResp>): void;
         abstract GetChatStateV1(call: grpc_1.ServerUnaryCall<GetChatStateReq, GetChatStateRespV1>, callback: grpc_1.sendUnaryData<GetChatStateRespV1>): void;
+        abstract GetChatFaqRemark(call: grpc_1.ServerUnaryCall<ChatFaqRemarkReq, ChatFaqRemarkResp>, callback: grpc_1.sendUnaryData<ChatFaqRemarkResp>): void;
     }
     export class ChatClient extends grpc_1.makeGenericClientConstructor(UnimplementedChatService.definition, "Chat", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -3043,6 +3210,9 @@ export namespace api.core {
         };
         GetChatStateV1: GrpcUnaryServiceInterface<GetChatStateReq, GetChatStateRespV1> = (message: GetChatStateReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateRespV1>, options?: grpc_1.CallOptions | grpc_1.requestCallback<GetChatStateRespV1>, callback?: grpc_1.requestCallback<GetChatStateRespV1>): grpc_1.ClientUnaryCall => {
             return super.GetChatStateV1(message, metadata, options, callback);
+        };
+        GetChatFaqRemark: GrpcUnaryServiceInterface<ChatFaqRemarkReq, ChatFaqRemarkResp> = (message: ChatFaqRemarkReq, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ChatFaqRemarkResp>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ChatFaqRemarkResp>, callback?: grpc_1.requestCallback<ChatFaqRemarkResp>): grpc_1.ClientUnaryCall => {
+            return super.GetChatFaqRemark(message, metadata, options, callback);
         };
     }
 }

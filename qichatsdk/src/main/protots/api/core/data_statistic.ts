@@ -10106,6 +10106,420 @@ export namespace api.core {
             return WorkerSessionStatsRequest.deserialize(bytes);
         }
     }
+    export class ReplyRelUidRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            worker_id?: number;
+            reply_type?: number;
+            start_time?: dependency_6.google.protobuf.Timestamp;
+            end_time?: dependency_6.google.protobuf.Timestamp;
+            page?: number;
+            pageSize?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("worker_id" in data && data.worker_id != undefined) {
+                    this.worker_id = data.worker_id;
+                }
+                if ("reply_type" in data && data.reply_type != undefined) {
+                    this.reply_type = data.reply_type;
+                }
+                if ("start_time" in data && data.start_time != undefined) {
+                    this.start_time = data.start_time;
+                }
+                if ("end_time" in data && data.end_time != undefined) {
+                    this.end_time = data.end_time;
+                }
+                if ("page" in data && data.page != undefined) {
+                    this.page = data.page;
+                }
+                if ("pageSize" in data && data.pageSize != undefined) {
+                    this.pageSize = data.pageSize;
+                }
+            }
+        }
+        get worker_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set worker_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get reply_type() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set reply_type(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get start_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 3) as dependency_6.google.protobuf.Timestamp;
+        }
+        set start_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_start_time() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
+        get end_time() {
+            return pb_1.Message.getWrapperField(this, dependency_6.google.protobuf.Timestamp, 4) as dependency_6.google.protobuf.Timestamp;
+        }
+        set end_time(value: dependency_6.google.protobuf.Timestamp) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_end_time() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
+        get page() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set page(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get pageSize() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set pageSize(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            worker_id?: number;
+            reply_type?: number;
+            start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+            page?: number;
+            pageSize?: number;
+        }): ReplyRelUidRequest {
+            const message = new ReplyRelUidRequest({});
+            if (data.worker_id != null) {
+                message.worker_id = data.worker_id;
+            }
+            if (data.reply_type != null) {
+                message.reply_type = data.reply_type;
+            }
+            if (data.start_time != null) {
+                message.start_time = dependency_6.google.protobuf.Timestamp.fromObject(data.start_time);
+            }
+            if (data.end_time != null) {
+                message.end_time = dependency_6.google.protobuf.Timestamp.fromObject(data.end_time);
+            }
+            if (data.page != null) {
+                message.page = data.page;
+            }
+            if (data.pageSize != null) {
+                message.pageSize = data.pageSize;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                worker_id?: number;
+                reply_type?: number;
+                start_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                end_time?: ReturnType<typeof dependency_6.google.protobuf.Timestamp.prototype.toObject>;
+                page?: number;
+                pageSize?: number;
+            } = {};
+            if (this.worker_id != null) {
+                data.worker_id = this.worker_id;
+            }
+            if (this.reply_type != null) {
+                data.reply_type = this.reply_type;
+            }
+            if (this.start_time != null) {
+                data.start_time = this.start_time.toObject();
+            }
+            if (this.end_time != null) {
+                data.end_time = this.end_time.toObject();
+            }
+            if (this.page != null) {
+                data.page = this.page;
+            }
+            if (this.pageSize != null) {
+                data.pageSize = this.pageSize;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.worker_id != 0)
+                writer.writeInt32(1, this.worker_id);
+            if (this.reply_type != 0)
+                writer.writeInt32(2, this.reply_type);
+            if (this.has_start_time)
+                writer.writeMessage(3, this.start_time, () => this.start_time.serialize(writer));
+            if (this.has_end_time)
+                writer.writeMessage(4, this.end_time, () => this.end_time.serialize(writer));
+            if (this.page != 0)
+                writer.writeUint32(5, this.page);
+            if (this.pageSize != 0)
+                writer.writeUint32(6, this.pageSize);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReplyRelUidRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReplyRelUidRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.worker_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.reply_type = reader.readInt32();
+                        break;
+                    case 3:
+                        reader.readMessage(message.start_time, () => message.start_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 4:
+                        reader.readMessage(message.end_time, () => message.end_time = dependency_6.google.protobuf.Timestamp.deserialize(reader));
+                        break;
+                    case 5:
+                        message.page = reader.readUint32();
+                        break;
+                    case 6:
+                        message.pageSize = reader.readUint32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReplyRelUidRequest {
+            return ReplyRelUidRequest.deserialize(bytes);
+        }
+    }
+    export class ReplyRelUidResponse extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            list?: ReplyRelUidList[];
+            total?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("list" in data && data.list != undefined) {
+                    this.list = data.list;
+                }
+                if ("total" in data && data.total != undefined) {
+                    this.total = data.total;
+                }
+            }
+        }
+        get list() {
+            return pb_1.Message.getRepeatedWrapperField(this, ReplyRelUidList, 1) as ReplyRelUidList[];
+        }
+        set list(value: ReplyRelUidList[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        get total() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set total(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            list?: ReturnType<typeof ReplyRelUidList.prototype.toObject>[];
+            total?: number;
+        }): ReplyRelUidResponse {
+            const message = new ReplyRelUidResponse({});
+            if (data.list != null) {
+                message.list = data.list.map(item => ReplyRelUidList.fromObject(item));
+            }
+            if (data.total != null) {
+                message.total = data.total;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                list?: ReturnType<typeof ReplyRelUidList.prototype.toObject>[];
+                total?: number;
+            } = {};
+            if (this.list != null) {
+                data.list = this.list.map((item: ReplyRelUidList) => item.toObject());
+            }
+            if (this.total != null) {
+                data.total = this.total;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.list.length)
+                writer.writeRepeatedMessage(1, this.list, (item: ReplyRelUidList) => item.serialize(writer));
+            if (this.total != 0)
+                writer.writeInt32(2, this.total);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReplyRelUidResponse {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReplyRelUidResponse();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.list, () => pb_1.Message.addToRepeatedWrapperField(message, 1, ReplyRelUidList.deserialize(reader), ReplyRelUidList));
+                        break;
+                    case 2:
+                        message.total = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReplyRelUidResponse {
+            return ReplyRelUidResponse.deserialize(bytes);
+        }
+    }
+    export class ReplyRelUidList extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            user_id?: number;
+            user_name?: string;
+            created_at?: number;
+            user_role?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("user_id" in data && data.user_id != undefined) {
+                    this.user_id = data.user_id;
+                }
+                if ("user_name" in data && data.user_name != undefined) {
+                    this.user_name = data.user_name;
+                }
+                if ("created_at" in data && data.created_at != undefined) {
+                    this.created_at = data.created_at;
+                }
+                if ("user_role" in data && data.user_role != undefined) {
+                    this.user_role = data.user_role;
+                }
+            }
+        }
+        get user_id() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set user_id(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get user_name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set user_name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get created_at() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set created_at(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get user_role() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set user_role(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        static fromObject(data: {
+            user_id?: number;
+            user_name?: string;
+            created_at?: number;
+            user_role?: number;
+        }): ReplyRelUidList {
+            const message = new ReplyRelUidList({});
+            if (data.user_id != null) {
+                message.user_id = data.user_id;
+            }
+            if (data.user_name != null) {
+                message.user_name = data.user_name;
+            }
+            if (data.created_at != null) {
+                message.created_at = data.created_at;
+            }
+            if (data.user_role != null) {
+                message.user_role = data.user_role;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                user_id?: number;
+                user_name?: string;
+                created_at?: number;
+                user_role?: number;
+            } = {};
+            if (this.user_id != null) {
+                data.user_id = this.user_id;
+            }
+            if (this.user_name != null) {
+                data.user_name = this.user_name;
+            }
+            if (this.created_at != null) {
+                data.created_at = this.created_at;
+            }
+            if (this.user_role != null) {
+                data.user_role = this.user_role;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.user_id != 0)
+                writer.writeInt32(1, this.user_id);
+            if (this.user_name.length)
+                writer.writeString(2, this.user_name);
+            if (this.created_at != 0)
+                writer.writeInt32(3, this.created_at);
+            if (this.user_role != 0)
+                writer.writeInt32(4, this.user_role);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ReplyRelUidList {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ReplyRelUidList();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.user_id = reader.readInt32();
+                        break;
+                    case 2:
+                        message.user_name = reader.readString();
+                        break;
+                    case 3:
+                        message.created_at = reader.readInt32();
+                        break;
+                    case 4:
+                        message.user_role = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ReplyRelUidList {
+            return ReplyRelUidList.deserialize(bytes);
+        }
+    }
     export class WorkerSessionStatsResponse extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -10550,6 +10964,8 @@ export namespace api.core {
             medium_response_count?: number;
             long_response_count?: number;
             delayed_response_count?: number;
+            total_online_duration?: number;
+            worker_remark?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -10640,6 +11056,12 @@ export namespace api.core {
                 }
                 if ("delayed_response_count" in data && data.delayed_response_count != undefined) {
                     this.delayed_response_count = data.delayed_response_count;
+                }
+                if ("total_online_duration" in data && data.total_online_duration != undefined) {
+                    this.total_online_duration = data.total_online_duration;
+                }
+                if ("worker_remark" in data && data.worker_remark != undefined) {
+                    this.worker_remark = data.worker_remark;
                 }
             }
         }
@@ -10817,6 +11239,18 @@ export namespace api.core {
         set delayed_response_count(value: number) {
             pb_1.Message.setField(this, 35, value);
         }
+        get total_online_duration() {
+            return pb_1.Message.getFieldWithDefault(this, 36, 0) as number;
+        }
+        set total_online_duration(value: number) {
+            pb_1.Message.setField(this, 36, value);
+        }
+        get worker_remark() {
+            return pb_1.Message.getFieldWithDefault(this, 37, "") as string;
+        }
+        set worker_remark(value: string) {
+            pb_1.Message.setField(this, 37, value);
+        }
         static fromObject(data: {
             worker_id?: number;
             worker_account?: string;
@@ -10847,6 +11281,8 @@ export namespace api.core {
             medium_response_count?: number;
             long_response_count?: number;
             delayed_response_count?: number;
+            total_online_duration?: number;
+            worker_remark?: string;
         }): WorkerSessionStat {
             const message = new WorkerSessionStat({});
             if (data.worker_id != null) {
@@ -10936,6 +11372,12 @@ export namespace api.core {
             if (data.delayed_response_count != null) {
                 message.delayed_response_count = data.delayed_response_count;
             }
+            if (data.total_online_duration != null) {
+                message.total_online_duration = data.total_online_duration;
+            }
+            if (data.worker_remark != null) {
+                message.worker_remark = data.worker_remark;
+            }
             return message;
         }
         toObject() {
@@ -10969,6 +11411,8 @@ export namespace api.core {
                 medium_response_count?: number;
                 long_response_count?: number;
                 delayed_response_count?: number;
+                total_online_duration?: number;
+                worker_remark?: string;
             } = {};
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
@@ -11057,6 +11501,12 @@ export namespace api.core {
             if (this.delayed_response_count != null) {
                 data.delayed_response_count = this.delayed_response_count;
             }
+            if (this.total_online_duration != null) {
+                data.total_online_duration = this.total_online_duration;
+            }
+            if (this.worker_remark != null) {
+                data.worker_remark = this.worker_remark;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -11121,6 +11571,10 @@ export namespace api.core {
                 writer.writeInt32(33, this.long_response_count);
             if (this.delayed_response_count != 0)
                 writer.writeInt32(35, this.delayed_response_count);
+            if (this.total_online_duration != 0)
+                writer.writeInt32(36, this.total_online_duration);
+            if (this.worker_remark.length)
+                writer.writeString(37, this.worker_remark);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -11216,6 +11670,12 @@ export namespace api.core {
                         break;
                     case 35:
                         message.delayed_response_count = reader.readInt32();
+                        break;
+                    case 36:
+                        message.total_online_duration = reader.readInt32();
+                        break;
+                    case 37:
+                        message.worker_remark = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -11826,6 +12286,15 @@ export namespace api.core {
                 requestDeserialize: (bytes: Buffer) => WorkerRelConsultTypeStatsDetailRequest.deserialize(new Uint8Array(bytes)),
                 responseSerialize: (message: dependency_2.google.protobuf.Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => dependency_2.google.protobuf.Empty.deserialize(new Uint8Array(bytes))
+            },
+            QueryReplyRelUidList: {
+                path: "/api.core.DataStatistic/QueryReplyRelUidList",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: ReplyRelUidRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => ReplyRelUidRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: ReplyRelUidResponse) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => ReplyRelUidResponse.deserialize(new Uint8Array(bytes))
             }
         };
         [method: string]: grpc_1.UntypedHandleCall;
@@ -11864,6 +12333,7 @@ export namespace api.core {
         abstract ExportWorkerRelConsultTypeQuestions(call: grpc_1.ServerUnaryCall<ExportWorkerRelConsultTypeStatsRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
         abstract ConsultTypeRelQuestionsList(call: grpc_1.ServerUnaryCall<WorkerRelConsultTypeStatsDetailRequest, ConsultRelQuestionStatResponse>, callback: grpc_1.sendUnaryData<ConsultRelQuestionStatResponse>): void;
         abstract ExportConsultTypeRelQuestionsList(call: grpc_1.ServerUnaryCall<WorkerRelConsultTypeStatsDetailRequest, dependency_2.google.protobuf.Empty>, callback: grpc_1.sendUnaryData<dependency_2.google.protobuf.Empty>): void;
+        abstract QueryReplyRelUidList(call: grpc_1.ServerUnaryCall<ReplyRelUidRequest, ReplyRelUidResponse>, callback: grpc_1.sendUnaryData<ReplyRelUidResponse>): void;
     }
     export class DataStatisticClient extends grpc_1.makeGenericClientConstructor(UnimplementedDataStatisticService.definition, "DataStatistic", {}) {
         constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
@@ -11973,6 +12443,9 @@ export namespace api.core {
         };
         ExportConsultTypeRelQuestionsList: GrpcUnaryServiceInterface<WorkerRelConsultTypeStatsDetailRequest, dependency_2.google.protobuf.Empty> = (message: WorkerRelConsultTypeStatsDetailRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<dependency_2.google.protobuf.Empty>, callback?: grpc_1.requestCallback<dependency_2.google.protobuf.Empty>): grpc_1.ClientUnaryCall => {
             return super.ExportConsultTypeRelQuestionsList(message, metadata, options, callback);
+        };
+        QueryReplyRelUidList: GrpcUnaryServiceInterface<ReplyRelUidRequest, ReplyRelUidResponse> = (message: ReplyRelUidRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ReplyRelUidResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ReplyRelUidResponse>, callback?: grpc_1.requestCallback<ReplyRelUidResponse>): grpc_1.ClientUnaryCall => {
+            return super.QueryReplyRelUidList(message, metadata, options, callback);
         };
     }
 }

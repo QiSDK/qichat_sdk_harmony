@@ -54,7 +54,8 @@ export namespace api.common {
     export enum OnlineState {
         ONLINE_STATE_IDLE = 0,
         ONLINE_STATE_BUSY = 1,
-        ONLINE_STATE_AFK = 2
+        ONLINE_STATE_AFK = 2,
+        ONLINE_STATE_UNBIND_ALL = 3
     }
     export enum WorkerState {
         WORKER_OFFLINE = 0,
@@ -518,6 +519,7 @@ export namespace api.common {
             role_name?: string;
             routesItems?: string[];
             menuItems?: string[];
+            is_monitored?: boolean;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3, 14, 16, 23, 24], this.#one_of_decls);
@@ -593,6 +595,9 @@ export namespace api.common {
                 }
                 if ("menuItems" in data && data.menuItems != undefined) {
                     this.menuItems = data.menuItems;
+                }
+                if ("is_monitored" in data && data.is_monitored != undefined) {
+                    this.is_monitored = data.is_monitored;
                 }
             }
         }
@@ -749,6 +754,12 @@ export namespace api.common {
         set menuItems(value: string[]) {
             pb_1.Message.setField(this, 24, value);
         }
+        get is_monitored() {
+            return pb_1.Message.getFieldWithDefault(this, 25, false) as boolean;
+        }
+        set is_monitored(value: boolean) {
+            pb_1.Message.setField(this, 25, value);
+        }
         static fromObject(data: {
             worker_id?: number;
             account?: string;
@@ -774,6 +785,7 @@ export namespace api.common {
             role_name?: string;
             routesItems?: string[];
             menuItems?: string[];
+            is_monitored?: boolean;
         }): Worker {
             const message = new Worker({});
             if (data.worker_id != null) {
@@ -848,6 +860,9 @@ export namespace api.common {
             if (data.menuItems != null) {
                 message.menuItems = data.menuItems;
             }
+            if (data.is_monitored != null) {
+                message.is_monitored = data.is_monitored;
+            }
             return message;
         }
         toObject() {
@@ -876,6 +891,7 @@ export namespace api.common {
                 role_name?: string;
                 routesItems?: string[];
                 menuItems?: string[];
+                is_monitored?: boolean;
             } = {};
             if (this.worker_id != null) {
                 data.worker_id = this.worker_id;
@@ -949,6 +965,9 @@ export namespace api.common {
             if (this.menuItems != null) {
                 data.menuItems = this.menuItems;
             }
+            if (this.is_monitored != null) {
+                data.is_monitored = this.is_monitored;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1003,6 +1022,8 @@ export namespace api.common {
                 writer.writeRepeatedString(23, this.routesItems);
             if (this.menuItems.length)
                 writer.writeRepeatedString(24, this.menuItems);
+            if (this.is_monitored != false)
+                writer.writeBool(25, this.is_monitored);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1083,6 +1104,9 @@ export namespace api.common {
                         break;
                     case 24:
                         pb_1.Message.addToRepeatedField(message, 24, reader.readString());
+                        break;
+                    case 25:
+                        message.is_monitored = reader.readBool();
                         break;
                     default: reader.skipField();
                 }

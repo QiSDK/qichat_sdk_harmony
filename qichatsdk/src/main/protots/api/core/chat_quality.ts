@@ -2195,23 +2195,23 @@ export namespace api.core {
             if (this.very_bad_count != 0)
                 writer.writeInt32(12, this.very_bad_count);
             if (this.very_bad_rate != 0)
-                writer.writeInt32(13, this.very_bad_rate);
+                writer.writeDouble(13, this.very_bad_rate);
             if (this.bad_count != 0)
                 writer.writeInt32(14, this.bad_count);
             if (this.bad_rate != 0)
-                writer.writeInt32(15, this.bad_rate);
+                writer.writeDouble(15, this.bad_rate);
             if (this.normal_count != 0)
                 writer.writeInt32(16, this.normal_count);
             if (this.normal_rate != 0)
-                writer.writeInt32(17, this.normal_rate);
+                writer.writeDouble(17, this.normal_rate);
             if (this.excellent_count != 0)
                 writer.writeInt32(18, this.excellent_count);
             if (this.excellent_rate != 0)
-                writer.writeInt32(19, this.excellent_rate);
+                writer.writeDouble(19, this.excellent_rate);
             if (this.qualified_count != 0)
                 writer.writeInt32(20, this.qualified_count);
             if (this.qualified_rate != 0)
-                writer.writeInt32(21, this.qualified_rate);
+                writer.writeDouble(21, this.qualified_rate);
             if (this.total_check_duration.length)
                 writer.writeString(22, this.total_check_duration);
             if (this.Avg_check_duration.length)
@@ -2262,31 +2262,31 @@ export namespace api.core {
                         message.very_bad_count = reader.readInt32();
                         break;
                     case 13:
-                        message.very_bad_rate = reader.readInt32();
+                        message.very_bad_rate = reader.readDouble();
                         break;
                     case 14:
                         message.bad_count = reader.readInt32();
                         break;
                     case 15:
-                        message.bad_rate = reader.readInt32();
+                        message.bad_rate = reader.readDouble();
                         break;
                     case 16:
                         message.normal_count = reader.readInt32();
                         break;
                     case 17:
-                        message.normal_rate = reader.readInt32();
+                        message.normal_rate = reader.readDouble();
                         break;
                     case 18:
                         message.excellent_count = reader.readInt32();
                         break;
                     case 19:
-                        message.excellent_rate = reader.readInt32();
+                        message.excellent_rate = reader.readDouble();
                         break;
                     case 20:
                         message.qualified_count = reader.readInt32();
                         break;
                     case 21:
-                        message.qualified_rate = reader.readInt32();
+                        message.qualified_rate = reader.readDouble();
                         break;
                     case 22:
                         message.total_check_duration = reader.readString();

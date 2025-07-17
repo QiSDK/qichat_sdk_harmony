@@ -41,7 +41,12 @@ export namespace api.common {
         MST_SYSTEM_WORKER = 3,
         MST_SYSTEM_CUSTOMER = 4,
         MST_SYSTEM_TRANSFER = 5,
-        MST_SYSTEM_AUTO_TRANSFER = 6
+        MST_SYSTEM_AUTO_TRANSFER = 6,
+        MST_MASS_TRANSFER = 7,
+        MST_AI = 8,
+        MST_AI_TRANSFER = 9,
+        MST_AI_LINK_WORD = 10,
+        MST_AI_BEGIN = 11
     }
     export enum MessageOperate {
         MSG_OP_POST = 0,
@@ -1070,7 +1075,7 @@ export namespace api.common {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1090,14 +1095,14 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
         }
-        set msg_id(value: string) {
+        set msg_id(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
         }): MessageKey {
             const message = new MessageKey({});
             if (data.chat_id != null) {
@@ -1111,7 +1116,7 @@ export namespace api.common {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: string;
+                msg_id?: number;
             } = {};
             if (this.chat_id != null) {
                 data.chat_id = this.chat_id;
@@ -1127,8 +1132,8 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != "0")
-                writer.writeUint64String(2, this.msg_id);
+            if (this.msg_id != 0)
+                writer.writeInt64(2, this.msg_id);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1142,7 +1147,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readUint64String();
+                        message.msg_id = reader.readInt64();
                         break;
                     default: reader.skipField();
                 }
@@ -1455,10 +1460,10 @@ export namespace api.common {
         #one_of_decls: number[][] = [[100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110]];
         constructor(data?: any[] | ({
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
             msg_time?: dependency_1.google.protobuf.Timestamp;
             sender?: number;
-            reply_msg_id?: string;
+            reply_msg_id?: number;
             msg_op?: MessageOperate;
             worker?: number;
             auto_reply_flag?: MessageAutoReplyFlag;
@@ -1466,7 +1471,7 @@ export namespace api.common {
             consult_id?: number;
             with_auto_replies?: WithAutoReply[];
             msg_source_type?: MsgSourceType;
-            payload_id?: string;
+            payload_id?: number;
         } & (({
             content?: MessageContent;
             image?: never;
@@ -1684,9 +1689,9 @@ export namespace api.common {
             pb_1.Message.setField(this, 1, value);
         }
         get msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 2, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
         }
-        set msg_id(value: string) {
+        set msg_id(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
         get msg_time() {
@@ -1705,9 +1710,9 @@ export namespace api.common {
             pb_1.Message.setField(this, 4, value);
         }
         get reply_msg_id() {
-            return pb_1.Message.getFieldWithDefault(this, 5, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
-        set reply_msg_id(value: string) {
+        set reply_msg_id(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
         get msg_op() {
@@ -1756,9 +1761,9 @@ export namespace api.common {
             pb_1.Message.setField(this, 12, value);
         }
         get payload_id() {
-            return pb_1.Message.getFieldWithDefault(this, 99, "0") as string;
+            return pb_1.Message.getFieldWithDefault(this, 99, 0) as number;
         }
-        set payload_id(value: string) {
+        set payload_id(value: number) {
             pb_1.Message.setField(this, 99, value);
         }
         get content() {
@@ -1881,10 +1886,10 @@ export namespace api.common {
         }
         static fromObject(data: {
             chat_id?: number;
-            msg_id?: string;
+            msg_id?: number;
             msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
             sender?: number;
-            reply_msg_id?: string;
+            reply_msg_id?: number;
             msg_op?: MessageOperate;
             worker?: number;
             auto_reply_flag?: ReturnType<typeof MessageAutoReplyFlag.prototype.toObject>;
@@ -1892,7 +1897,7 @@ export namespace api.common {
             consult_id?: number;
             with_auto_replies?: ReturnType<typeof WithAutoReply.prototype.toObject>[];
             msg_source_type?: MsgSourceType;
-            payload_id?: string;
+            payload_id?: number;
             content?: ReturnType<typeof MessageContent.prototype.toObject>;
             image?: ReturnType<typeof MessageImage.prototype.toObject>;
             audio?: ReturnType<typeof MessageAudio.prototype.toObject>;
@@ -1983,10 +1988,10 @@ export namespace api.common {
         toObject() {
             const data: {
                 chat_id?: number;
-                msg_id?: string;
+                msg_id?: number;
                 msg_time?: ReturnType<typeof dependency_1.google.protobuf.Timestamp.prototype.toObject>;
                 sender?: number;
-                reply_msg_id?: string;
+                reply_msg_id?: number;
                 msg_op?: MessageOperate;
                 worker?: number;
                 auto_reply_flag?: ReturnType<typeof MessageAutoReplyFlag.prototype.toObject>;
@@ -1994,7 +1999,7 @@ export namespace api.common {
                 consult_id?: number;
                 with_auto_replies?: ReturnType<typeof WithAutoReply.prototype.toObject>[];
                 msg_source_type?: MsgSourceType;
-                payload_id?: string;
+                payload_id?: number;
                 content?: ReturnType<typeof MessageContent.prototype.toObject>;
                 image?: ReturnType<typeof MessageImage.prototype.toObject>;
                 audio?: ReturnType<typeof MessageAudio.prototype.toObject>;
@@ -2087,14 +2092,14 @@ export namespace api.common {
             const writer = w || new pb_1.BinaryWriter();
             if (this.chat_id != 0)
                 writer.writeInt64(1, this.chat_id);
-            if (this.msg_id != "0")
-                writer.writeUint64String(2, this.msg_id);
+            if (this.msg_id != 0)
+                writer.writeInt64(2, this.msg_id);
             if (this.has_msg_time)
                 writer.writeMessage(3, this.msg_time, () => this.msg_time.serialize(writer));
             if (this.sender != 0)
                 writer.writeInt64(4, this.sender);
-            if (this.reply_msg_id != "0")
-                writer.writeUint64String(5, this.reply_msg_id);
+            if (this.reply_msg_id != 0)
+                writer.writeInt64(5, this.reply_msg_id);
             if (this.msg_op != MessageOperate.MSG_OP_POST)
                 writer.writeEnum(6, this.msg_op);
             if (this.worker != 0)
@@ -2109,8 +2114,8 @@ export namespace api.common {
                 writer.writeRepeatedMessage(11, this.with_auto_replies, (item: WithAutoReply) => item.serialize(writer));
             if (this.msg_source_type != MsgSourceType.MST_DEFAULT)
                 writer.writeEnum(12, this.msg_source_type);
-            if (this.payload_id != "0")
-                writer.writeUint64String(99, this.payload_id);
+            if (this.payload_id != 0)
+                writer.writeInt64(99, this.payload_id);
             if (this.has_content)
                 writer.writeMessage(100, this.content, () => this.content.serialize(writer));
             if (this.has_image)
@@ -2146,7 +2151,7 @@ export namespace api.common {
                         message.chat_id = reader.readInt64();
                         break;
                     case 2:
-                        message.msg_id = reader.readUint64String();
+                        message.msg_id = reader.readInt64();
                         break;
                     case 3:
                         reader.readMessage(message.msg_time, () => message.msg_time = dependency_1.google.protobuf.Timestamp.deserialize(reader));
@@ -2155,7 +2160,7 @@ export namespace api.common {
                         message.sender = reader.readInt64();
                         break;
                     case 5:
-                        message.reply_msg_id = reader.readUint64String();
+                        message.reply_msg_id = reader.readInt64();
                         break;
                     case 6:
                         message.msg_op = reader.readEnum();
@@ -2179,7 +2184,7 @@ export namespace api.common {
                         message.msg_source_type = reader.readEnum();
                         break;
                     case 99:
-                        message.payload_id = reader.readUint64String();
+                        message.payload_id = reader.readInt64();
                         break;
                     case 100:
                         reader.readMessage(message.content, () => message.content = MessageContent.deserialize(reader));
