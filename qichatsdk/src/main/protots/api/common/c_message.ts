@@ -46,7 +46,8 @@ export namespace api.common {
         MST_AI = 8,
         MST_AI_TRANSFER = 9,
         MST_AI_LINK_WORD = 10,
-        MST_AI_BEGIN = 11
+        MST_AI_BEGIN = 11,
+        MST_EVALUATE = 12
     }
     export enum MessageOperate {
         MSG_OP_POST = 0,
